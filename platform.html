@@ -4,28 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Platform · Simply Silicon</title>
-<meta name="description" content="Simply Silicon's global urban AI network: Foundation in Calgary is online, with 15+ sites in the pipeline, 200+ MW planned and 12+ major cities.">
-<meta name="theme-color" content="#ffffff">
+<meta name="description" content="The internet was not built for inference. Simply Silicon is building a global urban AI network: secure metro sites that put compute, memory and power next to demand.">
+<meta name="theme-color" content="#0d2136">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Sora:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="stylesheet" href="assets/css/pages.css">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
 </head>
 <body data-page="platform" id="top">
 <header id="site-header"></header>
 
 <main>
-  <section class="page-head">
+  <section class="page-head page-head--sm">
     <div class="wrap">
-      <h1>Foundation is the first node in a global urban AI network.</h1>
-      <p class="lede">Tap a city. Tap Calgary to see Foundation and its private fiber in 3D.</p>
+      <h1>The internet was not built for inference.</h1>
+      <p class="lede">It was built to move information between people. Simply Silicon is building the network inference needs: secure metro sites that put compute, memory and power right next to demand.</p>
     </div>
   </section>
 
   <section style="padding-bottom: clamp(48px, 7vw, 88px)">
-    <div class="wrap">
-      <div class="net-stage" id="stage">
+    <div class="wrap wrap--map">
+      <div class="net-stage net-stage--lg" id="stage">
         <canvas id="dots" aria-hidden="true"></canvas>
         <svg id="world" role="img" aria-label="World map of Simply Silicon sites"></svg>
         <div class="net-legend">
@@ -48,62 +49,143 @@
 
   <section class="band band--white">
     <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="tag">Where we're going</span>
+          <h2>A global urban AI network</h2>
+        </div>
+        <p>Foundation in Calgary is the first node. Simply Silicon is securing and developing a pipeline of 15+ additional sites in major metros around North America and Europe.</p>
+      </div>
       <div class="big-stats">
-        <div class="card"><b class="num">15+</b><span>Site pipeline</span></div>
-        <div class="card"><b class="num">200<small>MW+</small></b><span>Capacity</span></div>
-        <div class="card"><b class="num">12+</b><span>Major cities</span></div>
+        <div class="card"><span class="plan">In the pipeline</span><b class="num">15+</b><span>Additional metro sites being secured and developed</span></div>
+        <div class="card"><span class="plan">Planned</span><b class="num">200<small>MW+</small></b><span>Of secure AI capacity across the network</span></div>
+        <div class="card"><span class="plan">Target</span><b class="num">12+</b><span>Major cities in North America and Europe</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--navy">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="tag tag--dark">The thesis</span>
+          <h2>Two different physical problems</h2>
+        </div>
+        <p>The internet was built to distribute information between humans. Inference infrastructure must produce intelligence between machines.</p>
+      </div>
+      <div class="vs">
+        <div class="vs-col">
+          <h3>The internet</h3>
+          <p class="vs-sub">Moves what we already know</p>
+          <ul>
+            <li>Web pages, files, email, search and video</li>
+            <li>Store it somewhere, request it, send it</li>
+            <li>Rewards reach, redundancy and scale</li>
+            <li>Tolerates distance as the price of all three</li>
+          </ul>
+        </div>
+        <div class="vs-mid" aria-hidden="true"><span>vs</span></div>
+        <div class="vs-col vs-col--hot">
+          <h3>Inference</h3>
+          <p class="vs-sub">Produces what we don't know yet</p>
+          <ul>
+            <li>Tokens generated one after another from huge model state</li>
+            <li>Every token depends on the ones before it</li>
+            <li>Rewards memory locality, bandwidth and thermal control</li>
+            <li>Punished by distance at every hop</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="band">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2>Every city, the same playbook.</h2>
-        <p>Latent utility infrastructure and own-use power, turned into bare metal inference compute faster than conventional developers.</p>
+    <div class="wrap split">
+      <div>
+        <span class="tag">Why distance matters</span>
+        <h2>Every hop is a tax</h2>
+        <p class="lede">Agentic AI turns one user action into hundreds of model calls, tool calls and checks. Latency doesn't just slow the answer. It compounds through the whole chain.</p>
+        <p class="note">A 50 ms penalty, repeated across a chain of machine-speed calls, becomes a real economic cost.</p>
       </div>
-      <div class="steps">
-        <div class="card"><span class="k">1</span><h3>Latent power</h3><p>A utility site already inside the city.</p></div>
-        <div class="card"><span class="k">2</span><h3>Bare metal</h3><p>GPU servers built in, phase by phase.</p></div>
-        <div class="card"><span class="k">3</span><h3>Private fiber</h3><p>Direct links to the buildings nearby.</p></div>
-        <div class="card"><span class="k">4</span><h3>One network</h3><p>Each site joins the next.</p></div>
-      </div>
+      <figure class="chart-card">
+        <figcaption>Added delay from a 50 ms penalty per call</figcaption>
+        <div class="bars" id="bars"></div>
+        <p class="chart-foot">Delay = calls × 50 ms. Bars use a log scale.</p>
+      </figure>
     </div>
   </section>
 
   <section class="band band--white">
     <div class="wrap">
       <div class="sec-head">
-        <h2>A second internet for AI.</h2>
+        <div>
+          <span class="tag">Locality</span>
+          <h2>The industry is already rebuilding around locality</h2>
+        </div>
+        <p>None of today's inference tricks exist to move state faster across distance. Every one of them exists to avoid moving it.</p>
+      </div>
+      <div class="tricks">
+        <div><b>FlashAttention</b><span>Fewer reads and writes to memory</span></div>
+        <div><b>Kernel fusion</b><span>Avoids round trips between memory and compute</span></div>
+        <div><b>Quantization</b><span>Shrinks how many bits have to move</span></div>
+        <div><b>Prefix caching</b><span>Reuses state instead of recomputing it</span></div>
+        <div><b>Cache-aware routing</b><span>Sends the request to where the state already lives</span></div>
+        <div><b>Disaggregation</b><span>Splits prefill and decode onto the hardware each needs</span></div>
+      </div>
+      <p class="big-quote">"The winning systems are not the biggest clusters. The systems that place memory, compute, routing, and power closest to the demand pattern will win."</p>
+    </div>
+  </section>
+
+  <section class="band band--navy">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="tag tag--dark">What we're building</span>
+          <h2>A second internet for AI</h2>
+        </div>
         <p>Our long term goal is to connect these sites into a second internet for superintelligent models so they don't break the internet humans need.</p>
       </div>
-      <div class="two-net">
-        <div class="card" style="background:var(--snow);box-shadow:none">
-          <h3>The internet today</h3>
-          <p>People and powerful AI share one public network.</p>
-          <svg viewBox="0 0 360 200" aria-hidden="true">
-            <g stroke="#c9d6e3" stroke-width="2" fill="none"><path d="M50 50 L180 100 L310 50 M50 150 L180 100 L310 150 M180 22 L180 178 M50 50 L50 150 M310 50 L310 150 M50 50 L180 22 L310 50 M50 150 L180 178 L310 150"/></g>
-            <g fill="#fff" stroke="#9fb1c6" stroke-width="2"><circle cx="50" cy="50" r="11"/><circle cx="310" cy="50" r="11"/><circle cx="50" cy="150" r="11"/><circle cx="310" cy="150" r="11"/><circle cx="180" cy="22" r="11"/><circle cx="180" cy="178" r="11"/></g>
-            <circle cx="180" cy="100" r="22" fill="#fdecea" stroke="#e8594a" stroke-width="2"/><text x="180" y="105" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="600" font-size="14" fill="#b3372c">AI</text>
-          </svg>
-        </div>
-        <div class="card" style="background:var(--ice);box-shadow:none">
-          <h3>With Simply Silicon</h3>
-          <p>Air-gapped city sites, physically separate.</p>
-          <svg viewBox="0 0 360 200" aria-hidden="true">
-            <g stroke="#c9d6e3" stroke-width="2" fill="none"><path d="M36 60 L110 36 L120 150 L40 160 Z M36 60 L120 150"/></g>
-            <g fill="#fff" stroke="#9fb1c6" stroke-width="2"><circle cx="36" cy="60" r="10"/><circle cx="110" cy="36" r="10"/><circle cx="40" cy="160" r="10"/><circle cx="120" cy="150" r="10"/></g>
-            <line x1="170" y1="18" x2="170" y2="182" stroke="#e8594a" stroke-width="2" stroke-dasharray="5 6"/>
-            <text x="170" y="198" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#b3372c">Air gap</text>
-            <g stroke="#4db2ef" stroke-width="3" fill="none" class="dg-flow sky"><path d="M230 50 L320 70 L300 160 L220 140 Z M230 50 L300 160"/></g>
-            <g fill="#4db2ef" stroke="#fff" stroke-width="3"><circle cx="230" cy="50" r="12"/><circle cx="320" cy="70" r="12"/><circle cx="300" cy="160" r="12"/><circle cx="220" cy="140" r="12"/></g>
-          </svg>
-        </div>
+      <figure class="layers">
+        <svg viewBox="0 0 1000 440" role="img" aria-label="Two separate networks: the public internet for people above, and Simply Silicon's air-gapped network of city sites below">
+          <defs>
+            <linearGradient id="lyTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".10"/><stop offset="1" stop-color="#ffffff" stop-opacity=".04"/></linearGradient>
+            <linearGradient id="lyBot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4db2ef" stop-opacity=".22"/><stop offset="1" stop-color="#4db2ef" stop-opacity=".06"/></linearGradient>
+          </defs>
+          <!-- public internet plane -->
+          <path d="M140 40 H940 L860 170 H60 Z" fill="url(#lyTop)" stroke="#ffffff33"/>
+          <g stroke="#ffffff40" stroke-width="1.5" fill="none"><path d="M210 80 L340 130 L470 70 L600 135 L730 80 L820 140 M340 130 L600 135 M210 80 L470 70 L730 80"/></g>
+          <g fill="#0d2136" stroke="#c9d8e6" stroke-width="2"><circle cx="210" cy="80" r="9"/><circle cx="340" cy="130" r="9"/><circle cx="470" cy="70" r="9"/><circle cx="600" cy="135" r="9"/><circle cx="730" cy="80" r="9"/><circle cx="820" cy="140" r="9"/></g>
+          <text x="80" y="30" font-family="DM Sans, sans-serif" font-size="15" font-weight="600" fill="#ffffff">Public internet</text>
+          <text x="80" y="198" font-family="DM Sans, sans-serif" font-size="13" fill="#a9c0d6">People: pages, files, video, search</text>
+          <!-- air gap -->
+          <g stroke="#e8594a" stroke-width="2" stroke-dasharray="6 8"><path d="M40 222 H960"/></g>
+          <rect x="430" y="208" width="140" height="28" rx="14" fill="#2a1a22" stroke="#e8594a"/><text x="500" y="227" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#f3a39a">Air gap</text>
+          <!-- Simply Silicon plane -->
+          <path d="M140 262 H940 L860 400 H60 Z" fill="url(#lyBot)" stroke="#4db2ef66"/>
+          <g stroke="#4db2ef" stroke-width="3" fill="none" class="dg-flow sky"><path d="M200 320 L360 290 L520 345 L680 300 L830 350 M360 290 L680 300 M200 320 L520 345"/></g>
+          <g><circle cx="200" cy="320" r="16" fill="#4db2ef33"/><circle cx="200" cy="320" r="9" fill="#4db2ef" stroke="#fff" stroke-width="2.5"/></g>
+          <g fill="#5b5bd6" stroke="#fff" stroke-width="2.5"><circle cx="360" cy="290" r="8"/><circle cx="520" cy="345" r="8"/><circle cx="680" cy="300" r="8"/></g>
+          <g fill="#0d2136" stroke="#8193a9" stroke-width="2.5"><circle cx="830" cy="350" r="8"/></g>
+          <g font-family="DM Sans, sans-serif" font-size="13" fill="#e2eefa"><text x="200" y="352" text-anchor="middle">Calgary</text><text x="360" y="275" text-anchor="middle">Montreal</text><text x="520" y="376" text-anchor="middle">Amsterdam</text><text x="680" y="285" text-anchor="middle">Paris</text><text x="830" y="381" text-anchor="middle">London</text></g>
+          <text x="80" y="428" font-family="DM Sans, sans-serif" font-size="15" font-weight="600" fill="#9fd8fb">Simply Silicon network: machines, private fiber between city sites</text>
+        </svg>
+      </figure>
+      <div class="feat-3">
+        <div class="feat"><h3>Separate by design</h3><p>Air-gapped sites and private fiber, physically apart from the public internet.</p></div>
+        <div class="feat"><h3>Next to demand</h3><p>Metro sites put compute where the requests come from, cutting hops.</p></div>
+        <div class="feat"><h3>Built for machines</h3><p>Made for machine-speed inference, not humans clicking and waiting.</p></div>
       </div>
     </div>
   </section>
 
-  
+  <section class="band">
+    <div class="wrap">
+      <blockquote class="closing">
+        <p>"The internet is not bad infrastructure. It is the defining architecture of one computational epoch, the era of moving what we already knew, running headlong into the demands of the next, the era of producing what we don't yet."</p>
+        <cite>From <i>The Internet Was Not Built for Inference</i>, Simply Silicon</cite>
+      </blockquote>
+    </div>
+  </section>
 </main>
 
 <footer id="site-footer"></footer>
@@ -112,6 +194,17 @@
 <script src="assets/js/calgary-data.js"></script>
 <script src="assets/js/calgary-buildings.js"></script>
 <script src="assets/js/network.js"></script>
-<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
+<script>
+  (function () {
+    var rows = [[1, 50], [10, 500], [100, 5000], [1000, 50000]], box = document.getElementById('bars');
+    var max = Math.log10(50000);
+    rows.forEach(function (r) {
+      var sec = r[1] / 1000, label = sec < 1 ? r[1] + ' ms' : sec + ' s';
+      var d = document.createElement('div'); d.className = 'bar-row';
+      d.innerHTML = '<span class="bl">' + r[0].toLocaleString() + ' call' + (r[0] > 1 ? 's' : '') + '</span><span class="bt"><i style="width:' + (Math.log10(r[1]) / max * 100).toFixed(1) + '%"></i></span><span class="bv">' + label + '</span>';
+      box.appendChild(d);
+    });
+  })();
+</script>
 </body>
 </html>

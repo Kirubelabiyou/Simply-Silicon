@@ -69,51 +69,46 @@
       var p = toPx(s.x, s.y), len = Math.hypot(p[0] - hp[0], p[1] - hp[1]);
       out += '<path class="arc arc--' + s.status + '" d="M' + hp[0].toFixed(1) + ' ' + hp[1].toFixed(1) + ' Q' + ((hp[0] + p[0]) / 2).toFixed(1) + ' ' + ((hp[1] + p[1]) / 2 - Math.min(160, len * .22)).toFixed(1) + ' ' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + '"/>';
     });
-    var groups = [];
-    SITES.forEach(function (s) {
-      var p = toPx(s.x, s.y), g = null;
-      groups.forEach(function (gr) { if (!g && Math.hypot(gr.x - p[0], gr.y - p[1]) < 34) g = gr; });
-      if (g) { g.m.push(s); g.x = (g.x * (g.m.length - 1) + p[0]) / g.m.length; g.y = (g.y * (g.m.length - 1) + p[1]) / g.m.length; }
-      else groups.push({ x: p[0], y: p[1], m: [s] });
-    });
-    var boxes = groups.map(function (g) { return { x: g.x - 10, y: g.y - 10, w: 20, h: 20 }; });
+    // every city is its own node; crowded ones (London, Amsterdam, Paris) get callout labels with leader lines
+    var pts = SITES.map(function (s) { var p = toPx(s.x, s.y); return { s: s, x: p[0], y: p[1] }; });
+    var CALL = { london: [-22, -42], amsterdam: [34, -34], paris: [34, 24] };
+    var boxes = pts.map(function (q) { return { x: q.x - 9, y: q.y - 9, w: 18, h: 18 }; });
     function place(x, y, w) {
-      var o = [[x + 14, y - 9], [x - 14 - w, y - 9], [x - w / 2, y + 13], [x - w / 2, y - 30]];
+      var o = [[x + 13, y - 9], [x - 13 - w, y - 9], [x - w / 2, y + 12], [x - w / 2, y - 29]];
       for (var i = 0; i < o.length; i++) {
-        var b = { x: o[i][0], y: o[i][1], w: w, h: 18 };
-        if (b.x < 4 || b.x + w > W - 4) continue;
-        if (!boxes.some(function (q) { return b.x < q.x + q.w + 4 && b.x + b.w + 4 > q.x && b.y < q.y + q.h && b.y + b.h > q.y; })) { boxes.push(b); return b; }
+        var bx = { x: o[i][0], y: o[i][1], w: w, h: 18 };
+        if (bx.x < 4 || bx.x + w > W - 4) continue;
+        if (!boxes.some(function (q) { return bx.x < q.x + q.w + 3 && bx.x + bx.w + 3 > q.x && bx.y < q.y + q.h && bx.y + bx.h > q.y; })) { boxes.push(bx); return bx; }
       }
       return null;
     }
-    var nodes = '';
-    groups.forEach(function (g, gi) {
-      if (g.x < -40 || g.x > W + 40 || g.y < -40 || g.y > H + 40) return;
-      if (g.m.length > 1) {
-        var name = g.m[0].region, b = place(g.x + 4, g.y, name.length * 7.4 + 6);
-        nodes += '<g class="node node--cluster" tabindex="0" role="button" data-g="' + gi + '" aria-label="' + name + ', ' + g.m.length + ' sites"><circle class="hit" cx="' + g.x + '" cy="' + g.y + '" r="24"/><circle class="core" cx="' + g.x + '" cy="' + g.y + '" r="14"/><text class="cn" x="' + g.x + '" y="' + (g.y + 4) + '" text-anchor="middle">' + g.m.length + '</text>' + (b ? '<text class="nl" x="' + b.x + '" y="' + (b.y + 14) + '">' + name + '</text>' : '') + '</g>';
-      } else {
-        var s = g.m[0], lb = place(g.x, g.y, s.city.length * 7.6 + 4), rr = s.status === 'online' ? 8.5 : 7;
-        nodes += '<g class="node node--' + s.status + (sel === s ? ' sel' : '') + '" tabindex="0" role="button" data-s="' + s.id + '" aria-label="' + s.city + ', ' + STATUS[s.status].label + '"><circle class="hit" cx="' + g.x + '" cy="' + g.y + '" r="22"/>' +
-          (s.status === 'online' ? '<circle class="halo" cx="' + g.x + '" cy="' + g.y + '" r="18"/>' : '') +
-          (s.status !== 'soon' ? '<circle class="pulse" cx="' + g.x + '" cy="' + g.y + '" r="' + rr + '"/>' : '') +
-          '<circle class="core" cx="' + g.x + '" cy="' + g.y + '" r="' + rr + '"/>' + (lb ? '<text class="nl" x="' + lb.x + '" y="' + (lb.y + 14) + '">' + s.city + '</text>' : '') + '</g>';
-      }
+    var leaders = '', nodes = '';
+    pts.forEach(function (q) {
+      var crowded = pts.some(function (o) { return o !== q && Math.hypot(o.x - q.x, o.y - q.y) < 44; });
+      q.call = crowded && CALL[q.s.id];
     });
+    pts.forEach(function (q) {
+      var s = q.s;
+      if (q.x < -40 || q.x > W + 40 || q.y < -40 || q.y > H + 40) return;
+      var rr = s.status === 'online' ? 8.5 : (q.call ? 5.5 : 7), w = s.city.length * 7.6 + 4, lb;
+      if (q.call) {
+        var ax = q.x + q.call[0], ay = q.y + q.call[1];
+        lb = { x: q.call[0] < 0 ? ax - w : ax + 4, y: ay - 9, w: w, h: 18 };
+        boxes.push(lb);
+        leaders += '<path class="leader" d="M' + q.x.toFixed(1) + ' ' + q.y.toFixed(1) + ' L' + ax.toFixed(1) + ' ' + ay.toFixed(1) + '"/><circle class="leader-end" cx="' + ax.toFixed(1) + '" cy="' + ay.toFixed(1) + '" r="2"/>';
+      } else lb = place(q.x, q.y, w);
+      nodes += '<g class="node node--' + s.status + (sel === s ? ' sel' : '') + '" tabindex="0" role="button" data-s="' + s.id + '" aria-label="' + s.city + ', ' + STATUS[s.status].label + '"><circle class="hit" cx="' + q.x + '" cy="' + q.y + '" r="' + (q.call ? 12 : 22) + '"/>' +
+        (s.status === 'online' ? '<circle class="halo" cx="' + q.x + '" cy="' + q.y + '" r="18"/>' : '') +
+        (s.status !== 'soon' ? '<circle class="pulse" cx="' + q.x + '" cy="' + q.y + '" r="' + rr + '"/>' : '') +
+        '<circle class="core" cx="' + q.x + '" cy="' + q.y + '" r="' + rr + '"/>' +
+        (lb ? (q.call ? '<rect class="hit" x="' + lb.x + '" y="' + lb.y + '" width="' + lb.w + '" height="18"/>' : '') + '<text class="nl" x="' + lb.x + '" y="' + (lb.y + 14) + '">' + s.city + '</text>' : '') + '</g>';
+    });
+    nodes = leaders + nodes;
     svg.innerHTML = out + nodes;
-    svg._groups = groups;
     if (sel && !pop.hidden) placePop();
   }
 
   function activate(n) {
-    if (n.hasAttribute('data-g')) {
-      var g = svg._groups[+n.getAttribute('data-g')];
-      var xs = g.m.map(function (s) { return s.x; }), ys = g.m.map(function (s) { return s.y; });
-      var cx = (Math.min.apply(0, xs) + Math.max.apply(0, xs)) / 2, cy = (Math.min.apply(0, ys) + Math.max.apply(0, ys)) / 2;
-      var spread = Math.max(Math.max.apply(0, xs) - Math.min.apply(0, xs), Math.max.apply(0, ys) - Math.min.apply(0, ys), 4);
-      closePop(); flyTo(around(cx, cy, Math.max(55, spread * (phone() ? 5 : 8))), 900);
-      return;
-    }
     var s = SITES.filter(function (x) { return x.id === n.getAttribute('data-s'); })[0];
     if (s.status === 'online') { openCalgary(s); return; }
     sel = s;
@@ -198,5 +193,7 @@
 
   resize();
   window.addEventListener('resize', resize);
+  // warm up the 3D view in the background so tapping Calgary opens it fast
+  (window.requestIdleCallback || function (f) { setTimeout(f, 1500); })(function () { import('./scene.js').catch(function () {}); });
   if ('ResizeObserver' in window) new ResizeObserver(resize).observe(stage);
 })();

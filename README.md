@@ -25,7 +25,8 @@ assets/js/calgary-data.js    Calgary fiber routes and connected buildings (from 
 assets/js/calgary-buildings.js Downtown Calgary footprints and heights (City of Calgary Open Data, 3D Buildings - Citywide)
 tools/build-buildings.mjs    Rebuilds calgary-buildings.js from tools/data
 assets/vendor/three/         Three.js r160 (MIT)
-assets/img/hero.jpg          Home hero background (add the photo here)
+assets/img/hero.webp         Home hero: Calgary District Heating plant
+assets/img/scene-poster-*    Instant preview shown while the 3D view loads
 ```
 
 ## Network map status

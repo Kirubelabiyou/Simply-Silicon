@@ -5,10 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Foundation · Simply Silicon</title>
 <meta name="description" content="Foundation brings 12 MW of secure AI capacity to downtown Calgary. See the plant and its private fiber network in 3D.">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#0d2136">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Sora:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@500&display=swap">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
+<link rel="modulepreload" href="assets/vendor/three/three.module.min.js">
+<link rel="modulepreload" href="assets/js/scene.js">
+<link rel="modulepreload" href="assets/vendor/three/addons/OrbitControls.js">
+<link rel="modulepreload" href="assets/vendor/three/addons/RoomEnvironment.js">
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="stylesheet" href="assets/css/pages.css">
 </head>
@@ -89,7 +94,6 @@
 <script src="assets/js/common.js"></script>
 <script src="assets/js/calgary-data.js"></script>
 <script src="assets/js/calgary-buildings.js"></script>
-<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
 <script type="module">
   import { mountScene } from './assets/js/scene.js';
   mountScene(document.getElementById('scene'), {});
