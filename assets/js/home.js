@@ -1,13 +1,36 @@
-/* Simply Silicon: How it works page */
+/* Simply Silicon: home page (GPU racks and the how-it-works explainer) */
 (function () {
   'use strict';
+
+  // Hero GPU racks
+  var racks = document.getElementById('racks');
+  if (racks) {
+    [['n','g','g','g','g','n','g','g','n'],['n','g','g','g','g','g','g','n','g','g'],['n','g','g','g','n','g','g','g','n']].forEach(function (units, r) {
+      var rack = document.createElement('div');
+      rack.className = 'rack';
+      rack.innerHTML = '<div class="rack-head"><span>R0' + (r + 1) + '</span><span>GPU</span></div>';
+      units.forEach(function (u) {
+        var el = document.createElement('div');
+        el.className = 'unit' + (u === 'g' ? ' gpu' : '');
+        for (var i = 0; i < (u === 'g' ? 3 : 2); i++) {
+          var led = document.createElement('i');
+          led.className = 'led ' + (i === 0 ? 'ok' : Math.random() > .25 ? 'on' : '');
+          led.style.setProperty('--d', (1.2 + Math.random() * 2.6).toFixed(2) + 's');
+          led.style.setProperty('--dl', (-Math.random() * 3).toFixed(2) + 's');
+          el.appendChild(led);
+        }
+        rack.appendChild(el);
+      });
+      racks.appendChild(rack);
+    });
+  }
 
   function cells() {
     // 12 MW drawn as 120 cells of 100 kW each. To scale.
     var s = '', i = 0;
     for (var r = 0; r < 10; r++) for (var c = 0; c < 12; c++) {
       var x = 24 + c * 26, y = 20 + r * 17;
-      var cls = i === 0 ? 'fill="#ff6b2c"' : i < 20 ? 'fill="#f3b64255" stroke="#f3b642" stroke-width="1"' : 'fill="none" stroke="#2c3a50" stroke-width="1"';
+      var cls = i === 0 ? 'fill="#4fb3f0"' : i < 20 ? 'fill="#fdf2de" stroke="#e79a17" stroke-width="1"' : 'fill="#f3f7fb" stroke="#c6d4e2" stroke-width="1"';
       s += '<rect x="' + x + '" y="' + y + '" width="22" height="13" ' + cls + (i === 0 ? ' class="dg-blink"' : '') + '/>';
       i++;
     }
@@ -37,9 +60,9 @@
           '<rect class="dg-box" x="10" y="20" width="96" height="40"/><text class="dg-t" x="22" y="38">Grid feed A</text><text class="dg-s" x="22" y="52">Utility</text>' +
           '<rect class="dg-box" x="10" y="105" width="96" height="40"/><text class="dg-t" x="22" y="123">Grid feed B</text><text class="dg-s" x="22" y="137">Utility</text>' +
           '<rect class="dg-box" x="10" y="190" width="96" height="40"/><text class="dg-t" x="22" y="208">On-site gen</text><text class="dg-s" x="22" y="222">Backup</text>' +
-          '<path class="dg-flow feed" d="M106 40 H150 V110 H190"/><path class="dg-flow feed" d="M106 125 H190"/><path class="dg-flow feed" d="M106 210 H150 V140 H190" style="opacity:.6"/>' +
-          '<rect class="dg-box heat" x="190" y="85" width="110" height="80"/><text class="dg-t" x="202" y="110">Base plant</text><text class="dg-s" x="202" y="126">14 MVA · n+1</text><text class="dg-s" x="202" y="142">District heating</text>' +
-          '<path class="dg-flow heat" d="M300 125 H350"/><text class="dg-s" x="300" y="182">→ GPUs</text>' +
+          '<path class="dg-flow sky" d="M106 40 H150 V110 H190"/><path class="dg-flow sky" d="M106 125 H190"/><path class="dg-flow sky" d="M106 210 H150 V140 H190" style="opacity:.6"/>' +
+          '<rect class="dg-box on" x="190" y="85" width="110" height="80"/><text class="dg-t" x="202" y="110">Base plant</text><text class="dg-s" x="202" y="126">14 MVA · n+1</text><text class="dg-s" x="202" y="142">District heating</text>' +
+          '<path class="dg-flow sky" d="M300 125 H350"/><text class="dg-s" x="300" y="182">→ GPUs</text>' +
           '</svg>';
       }
     },
@@ -58,7 +81,7 @@
         ['kW and MW', '1,000 kilowatts make 1 megawatt. Phase 1 is 100 kW. The full site is 12 MW, 120 times more.'],
         ['Phased build', 'The site grows in steps inside the same plant, so capacity comes online without waiting for the full build.']
       ],
-      cap: 'Each square is 100 kW. Orange: Phase 1, online. Amber: Phase 2 (2 MW). Outline: Phase 3 (12 MW).',
+      cap: 'Each square is 100 kW. Blue: Phase 1, online. Amber: Phase 2 (2 MW). Grey: Phase 3 (12 MW).',
       fig: function () { return '<svg viewBox="0 0 360 200" aria-hidden="true">' + cells() + '</svg>'; }
     },
     {
@@ -82,7 +105,7 @@
         var s = '<svg viewBox="0 0 360 250" aria-hidden="true">';
         b.forEach(function (p, i) { s += '<path class="dg-flow amber" style="animation-delay:-' + (i * .2) + 's" d="M180 125 L' + p[0] + ' ' + p[1] + '"/>'; });
         b.forEach(function (p) { s += '<rect class="dg-box" x="' + (p[0] - 12) + '" y="' + (p[1] - 12) + '" width="24" height="24"/>'; });
-        s += '<rect class="dg-box heat" x="146" y="103" width="68" height="44"/><text class="dg-t" x="154" y="122">Foundation</text><text class="dg-s" x="154" y="137">7 km fiber</text></svg>';
+        s += '<rect class="dg-box on" x="146" y="103" width="68" height="44"/><text class="dg-t" x="154" y="122">Foundation</text><text class="dg-s" x="154" y="137">7 km fiber</text></svg>';
         return s;
       }
     },
@@ -105,10 +128,10 @@
         return '<svg viewBox="0 0 360 230" aria-hidden="true">' +
           '<rect class="dg-box" x="10" y="60" width="120" height="110" stroke-dasharray="4 4"/><text class="dg-t" x="24" y="110">Public</text><text class="dg-t" x="24" y="126">internet</text>' +
           '<path class="dg-line" d="M130 115 H160"/><path class="dg-line" d="M196 115 H226"/>' +
-          '<path d="M165 100 L191 130 M191 100 L165 130" stroke="#ff6b2c" stroke-width="2"/><text class="dg-s" x="154" y="152">Air gap</text>' +
-          '<rect class="dg-box heat" x="226" y="40" width="124" height="150"/><text class="dg-t" x="238" y="62">Simply Silicon</text><text class="dg-s" x="238" y="77">Air-gapped</text>' +
+          '<path d="M165 100 L191 130 M191 100 L165 130" stroke="#e8513c" stroke-width="2.5"/><text class="dg-s" x="154" y="152">Air gap</text>' +
+          '<rect class="dg-box on" x="226" y="40" width="124" height="150"/><text class="dg-t" x="238" y="62">Simply Silicon</text><text class="dg-s" x="238" y="77">Air-gapped</text>' +
           '<rect class="dg-box" x="240" y="92" width="96" height="16"/><rect class="dg-box" x="240" y="114" width="96" height="16"/><rect class="dg-box" x="240" y="136" width="96" height="16"/>' +
-          '<circle class="dg-hot dg-blink" cx="326" cy="100" r="3"/><circle class="dg-hot dg-blink" cx="326" cy="122" r="3" style="animation-delay:-.6s"/><circle class="dg-hot dg-blink" cx="326" cy="144" r="3" style="animation-delay:-1.1s"/>' +
+          '<circle fill="#1673c8" class="dg-blink" cx="326" cy="100" r="3"/><circle fill="#1673c8" class="dg-blink" cx="326" cy="122" r="3" style="animation-delay:-.6s"/><circle fill="#1673c8" class="dg-blink" cx="326" cy="144" r="3" style="animation-delay:-1.1s"/>' +
           '<text class="dg-s" x="238" y="176">Private fiber in</text></svg>';
       }
     },
@@ -132,9 +155,9 @@
         var s = '<svg viewBox="0 0 360 240" aria-hidden="true">';
         for (var i = 1; i < n.length; i++) s += '<path class="' + (n[i][2] === 'dev' ? 'dg-flow amber' : 'dg-line') + '" ' + (n[i][2] === 'soon' ? 'stroke-dasharray="2 5"' : '') + ' d="M' + n[0][0] + ' ' + n[0][1] + ' L' + n[i][0] + ' ' + n[i][1] + '"/>';
         n.forEach(function (p, i) {
-          if (p[2] === 'on') s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="14" fill="#ff6b2c33"/><circle cx="' + p[0] + '" cy="' + p[1] + '" r="7" fill="#ffd2b0" stroke="#ff6b2c" stroke-width="2"/>';
-          else if (p[2] === 'dev') s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="6" class="dg-amber"/>';
-          else s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="6" fill="#06090f" stroke="#8093ad" stroke-width="1.5"/>';
+          if (p[2] === 'on') s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="14" fill="#4fb3f033"/><circle cx="' + p[0] + '" cy="' + p[1] + '" r="7" fill="#4fb3f0" stroke="#fff" stroke-width="2"/>';
+          else if (p[2] === 'dev') s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="6" fill="#e79a17"/>';
+          else s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="6" fill="#fff" stroke="#8fa2b8" stroke-width="1.5"/>';
         });
         s += '<text class="dg-t" x="40" y="102">Calgary</text><text class="dg-s" x="40" y="116">Node 01 · online</text></svg>';
         return s;
@@ -158,7 +181,7 @@
     l.setAttribute('class', 'spoke'); hub.appendChild(l); spokes.push(l);
   });
   var center = document.createElementNS(NS, 'g');
-  center.innerHTML = '<circle class="center-c" cx="' + cx + '" cy="' + cy + '" r="80"/>' +
+  center.innerHTML = '<circle class="center-c" cx="' + cx + '" cy="' + cy + '" r="82"/>' +
     '<text class="center-t" x="' + cx + '" y="' + (cy - 2) + '" text-anchor="middle">Simply</text>' +
     '<text class="center-t" x="' + cx + '" y="' + (cy + 22) + '" text-anchor="middle">Silicon</text>' +
     '<text class="center-s" x="' + cx + '" y="' + (cy + 44) + '" text-anchor="middle">5 core pieces</text>';
@@ -204,13 +227,13 @@
     document.getElementById('dNext').innerHTML = 'Next: ' + P[(cur + 1) % P.length].name + ' <span class="arrow" aria-hidden="true">→</span>';
     document.getElementById('dPrev').textContent = '← ' + P[(cur - 1 + P.length) % P.length].name;
     var tb = tabBtns[cur]; tabs.scrollLeft = tb.offsetLeft - (tabs.clientWidth - tb.offsetWidth) / 2;
-    if (scroll) document.getElementById('tabs').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    try { history.replaceState(null, '', '#' + p.id); } catch (e) {}
+    if (scroll) { var tt = document.getElementById('tabs').getBoundingClientRect().top + window.scrollY - 80; window.scrollTo({ top: tt, behavior: 'smooth' }); }
+    
   }
   document.getElementById('dNext').addEventListener('click', function () { show(cur + 1, true); });
   document.getElementById('dPrev').addEventListener('click', function () { show(cur - 1, true); });
 
   var start = 0;
-  P.forEach(function (p, i) { if (location.hash === '#' + p.id) start = i; });
+  
   show(start, false);
 })();

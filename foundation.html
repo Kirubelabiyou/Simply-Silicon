@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Foundation · Simply Silicon</title>
+<meta name="description" content="Foundation brings 12 MW of secure AI capacity to downtown Calgary. Explore the plant in 3D, phase by phase.">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body data-page="foundation" id="top">
+<header id="site-header"></header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Site 01 · 435 9 Ave SE · Calgary</p>
+      <h1>Foundation</h1>
+      <p class="lede">Foundation brings 12 MW of secure AI capacity to downtown Calgary. It lives inside an existing district heating plant, with dual redundant grid feeds, on-site generation and below-grade thermal conduit paths.</p>
+    </div>
+  </section>
+
+  <section class="fnd-view" id="fndView">
+    <div class="fnd-loading" id="fndLoading">Loading 3D model</div>
+    <div class="fnd-card" id="fndCard">
+      <div class="t"><b id="pTitle">Phase 1</b><span class="chip chip--live" id="pChip"><i class="dot dot--live"></i>Online</span></div>
+      <p id="pText">Ground floor. 100 kW of air-cooled GPU racks, running now.</p>
+    </div>
+    <div class="fnd-ui">
+      <div class="phase-tabs" role="group" aria-label="Build phase">
+        <button type="button" data-phase="1" aria-pressed="true">Phase 1</button>
+        <button type="button" data-phase="2" aria-pressed="false">Phase 2</button>
+        <button type="button" data-phase="3" aria-pressed="false">Phase 3</button>
+      </div>
+      <span class="fnd-hint">Drag to rotate · pinch or scroll to zoom</span>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><b class="num">12<small>MW</small></b><span>AI capacity at full build</span></div>
+        <div class="stat"><b class="num">14<small>MVA</small></b><span>Base plant power, n+1</span></div>
+        <div class="stat"><b class="num">7<small>km</small></b><span>Private fiber</span></div>
+        <div class="stat"><b class="num">25+</b><span>Connected buildings</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--white">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Build phases</p>
+          <h2>Grows inside the same plant.</h2>
+        </div>
+        <p>Each phase adds capacity without a new building. Bars are drawn to scale against the full 12 MW.</p>
+      </div>
+      <div class="phase-grid">
+        <div class="card phase-card">
+          <div class="top"><h3>Phase 1</h3><span class="chip chip--live"><i class="dot dot--live"></i>Online</span></div>
+          <div class="mw">100 kW</div>
+          <div class="bar"><i style="width:0.83%"></i></div><div class="bar-cap"><span>0</span><span>12 MW</span></div>
+          <p>Air-cooled GPU racks on the ground floor of the plant. Running today.</p>
+        </div>
+        <div class="card phase-card">
+          <div class="top"><h3>Phase 2</h3><span class="chip chip--dev"><i class="dot dot--dev"></i>Feb 2027</span></div>
+          <div class="mw">2 MW</div>
+          <div class="bar"><i style="width:16.7%;background:var(--amber)"></i></div><div class="bar-cap"><span>0</span><span>12 MW</span></div>
+          <p>Liquid-cooled racks in the basement, with a heat exchanger tied to the plant's heating systems.</p>
+        </div>
+        <div class="card phase-card">
+          <div class="top"><h3>Phase 3</h3><span class="chip chip--soon"><i class="dot dot--soon"></i>Full build</span></div>
+          <div class="mw">12 MW</div>
+          <div class="bar"><i style="width:100%;background:#9fb1c6"></i></div><div class="bar-cap"><span>0</span><span>12 MW</span></div>
+          <p>The full site. Rooftop dry coolers and more liquid-cooled racks across the plant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">The site</p>
+          <h2>Built on what was already there.</h2>
+        </div>
+        <p>Foundation reuses a working utility plant in the middle of downtown. The hard parts, power and a secure building, already exist.</p>
+      </div>
+      <div class="spec-list">
+        <div class="card"><span class="val">District heating</span><h3>Base plant</h3><p>An existing plant that heats downtown buildings through a network of underground pipes.</p></div>
+        <div class="card"><span class="val">14 MVA · n+1</span><h3>Power</h3><p>Dual redundant grid feeds plus on-site generation. Any single part can fail and the site keeps running.</p></div>
+        <div class="card"><span class="val">Utility-grade</span><h3>Stack</h3><p>The plant's own utility-grade stack and mechanical systems, built for continuous operation.</p></div>
+        <div class="card"><span class="val">Below grade</span><h3>Conduits</h3><p>Thermal conduit paths under the street carry power, fiber and heat in and out of the plant.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <p class="eyebrow">Connected</p>
+          <h2>See the fiber under downtown.</h2>
+        </div>
+        <div class="btns"><a class="btn btn--primary" href="network.html#calgary">Open the Calgary fiber map <span class="arrow" aria-hidden="true">→</span></a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<script src="assets/js/common.js"></script>
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
+<script type="module" src="assets/js/foundation3d.js"></script>
+</body>
+</html>

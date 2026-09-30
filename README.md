@@ -6,19 +6,24 @@ Built as a pitch. Facts and numbers come from [gosimply.ai](https://gosimply.ai)
 
 ## Pages
 
-- `index.html` – Home: hero, world network map with glowing site nodes, Foundation 3D view, what we do, who it's for, growth.
-- `about.html` – How it works: five core pieces (Power, Compute, Fiber, Security, Engineering), each explained in layers.
+- `index.html` – Home: hero, how it works (five core pieces), request journey
+- `foundation.html` – Foundation: 3D plant model by phase, specs
+- `network.html` – Network: world map of sites, Calgary private fiber map (`#calgary`)
+- `workloads.html` – Workloads: who it serves and why
+- `platform.html` – Platform: pipeline and long-term vision
 
 ## Structure
 
 ```
-assets/css/site.css          Styles and design tokens
-assets/js/site.js            Home page: racks, map, Foundation overlay
+assets/css/site.css          Theme tokens, header, menu, footer
+assets/css/pages.css         Page components
+assets/js/common.js          Shared header, phone menu and footer
+assets/js/home.js            GPU racks and the explainer
+assets/js/network.js         World map and Calgary fiber map
 assets/js/map-data.js        Dotted world map (Natural Earth 1:50m land)
+assets/js/calgary-data.js    Calgary buildings and fiber routes (from gosimply.ai)
 assets/js/foundation3d.js    Foundation 3D model (Three.js)
-assets/js/about.js           How it works explainer
 assets/vendor/three/         Three.js r160 (MIT)
-assets/img/                  Real site photos go here (e.g. phase1.jpeg)
 ```
 
 ## Network map status
@@ -29,7 +34,7 @@ assets/img/                  Real site photos go here (e.g. phase1.jpeg)
 | In development | Montreal, Bogotá, Amsterdam, Paris |
 | Coming soon | London, Addis Ababa, Mumbai, Sydney, Buenos Aires |
 
-Edit the `SITES` list in `assets/js/site.js` to change cities or status.
+Edit the `SITES` list in `assets/js/network.js` to change cities or status.
 
 ## Run locally
 
