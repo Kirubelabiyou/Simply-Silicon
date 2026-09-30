@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Platform · Simply Silicon</title>
-<meta name="description" content="Foundation is the first node in a global urban AI network: 15+ sites in the pipeline, 200+ MW of planned capacity, 12+ major cities.">
+<meta name="description" content="Simply Silicon's global urban AI network: Foundation in Calgary is online, with 15+ sites in the pipeline, 200+ MW planned and 12+ major cities.">
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Sora:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="stylesheet" href="assets/css/pages.css">
 </head>
@@ -18,18 +18,55 @@
 <main>
   <section class="page-head">
     <div class="wrap">
-      <p class="eyebrow">Platform</p>
-      <h1>The first node of a global urban AI network.</h1>
-      <p class="lede">Simply Silicon turns latent utility infrastructure and own-use power into bare metal inference compute, faster than conventional developers. Foundation in Calgary is the first site. The rest link in.</p>
+      <h1>One network, built city by city.</h1>
+      <p class="lede">Foundation in Calgary is the first node. Each new city site links in, until they form one private network for AI.</p>
     </div>
   </section>
 
-  <section class="band" style="padding-top:0">
+  <section style="padding-bottom: clamp(48px, 7vw, 88px)">
+    <div class="wrap">
+      <div class="net-stage" id="stage">
+        <canvas id="dots" aria-hidden="true"></canvas>
+        <svg id="world" role="img" aria-label="World map of Simply Silicon sites"></svg>
+        <div class="net-legend">
+          <span><i class="dot dot--live"></i>Online</span>
+          <span><i class="dot dot--dev"></i>In development</span>
+          <span><i class="dot dot--soon"></i>Coming soon</span>
+        </div>
+        <div class="zoom" id="zoom">
+          <button type="button" data-z="1.6" aria-label="Zoom in">+</button>
+          <button type="button" data-z="0.625" aria-label="Zoom out">−</button>
+        </div>
+        <div class="pop" id="pop" hidden aria-live="polite"></div>
+        <div class="net-3d" id="net3d" hidden>
+          <div class="scene" id="calScene"></div>
+          <div class="net-back"><button class="btn btn--sm" type="button" id="back3d">← World map</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--white">
     <div class="wrap">
       <div class="big-stats">
         <div class="card"><b class="num">15+</b><span>Sites in the pipeline</span></div>
-        <div class="card"><b class="num">200+<span style="display:inline;font-size:.4em;margin:0 0 0 6px;color:var(--sky-deep)">MW</span></b><span>Planned capacity</span></div>
+        <div class="card"><b class="num">200+<small>MW</small></b><span>Planned capacity</span></div>
         <div class="card"><b class="num">12+</b><span>Major cities, starting in North America and Europe</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>How each city site is built.</h2>
+        <p>We turn latent utility infrastructure and own-use power into bare metal inference compute, faster than conventional developers. Every site follows the same four steps.</p>
+      </div>
+      <div class="steps">
+        <div class="card"><span class="k">1</span><h3>Find latent power</h3><p>A utility site inside the city that already has large power connections and space to spare.</p></div>
+        <div class="card"><span class="k">2</span><h3>Convert in phases</h3><p>Install bare metal GPU servers inside the existing building, starting small and growing phase by phase.</p></div>
+        <div class="card"><span class="k">3</span><h3>Run private fiber</h3><p>Lay private fiber from the site to the buildings nearby, kept apart from the public internet.</p></div>
+        <div class="card"><span class="k">4</span><h3>Join the network</h3><p>Link the new site to the others, adding one more node to the private network.</p></div>
       </div>
     </div>
   </section>
@@ -37,82 +74,46 @@
   <section class="band band--white">
     <div class="wrap">
       <div class="sec-head">
-        <div>
-          <p class="eyebrow">How a site gets built</p>
-          <h2>Four steps, city by city.</h2>
-        </div>
-        <p>The same playbook that built Foundation, repeated in each new city.</p>
-      </div>
-      <div class="steps">
-        <div class="card"><span class="k">01 · Find</span><h3>Find latent power</h3><p>A utility site inside the city that already has large power connections and space to spare.</p></div>
-        <div class="card"><span class="k">02 · Convert</span><h3>Convert in phases</h3><p>Install bare metal GPU servers inside the existing building, starting small and growing phase by phase.</p></div>
-        <div class="card"><span class="k">03 · Connect</span><h3>Run private fiber</h3><p>Lay private fiber from the site to the buildings nearby, kept apart from the public internet.</p></div>
-        <div class="card"><span class="k">04 · Link</span><h3>Join the network</h3><p>Link the new site to the others, adding one more node to a private network for AI.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <p class="eyebrow">The long-term goal</p>
-          <h2>A second internet for AI.</h2>
-        </div>
+        <h2>A second internet for AI.</h2>
         <p>Our long-term goal is to connect these sites into a second internet for superintelligent models, so they don't break the internet humans need.</p>
       </div>
       <div class="two-net">
-        <div class="card">
+        <div class="card" style="background:var(--snow);box-shadow:none">
           <h3>The internet today</h3>
-          <p class="muted" style="margin:8px 0 0;font-size:15px">People, apps and powerful AI all share the same public network.</p>
-          <svg viewBox="0 0 320 170" aria-hidden="true">
-            <g stroke="#c6d4e2" stroke-width="1.6" fill="none"><path d="M40 40 L160 85 L280 40 M40 130 L160 85 L280 130 M160 20 L160 150 M40 40 L40 130 M280 40 L280 130"/></g>
-            <g fill="#fff" stroke="#8fa2b8" stroke-width="2"><circle cx="40" cy="40" r="9"/><circle cx="280" cy="40" r="9"/><circle cx="40" cy="130" r="9"/><circle cx="280" cy="130" r="9"/><circle cx="160" cy="20" r="9"/><circle cx="160" cy="150" r="9"/></g>
-            <circle cx="160" cy="85" r="16" fill="#e8513c22" stroke="#e8513c" stroke-width="2"/><text x="160" y="89" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#b73a28">AI</text>
+          <p>People, apps and powerful AI all share one public network.</p>
+          <svg viewBox="0 0 360 200" aria-hidden="true">
+            <g stroke="#c9d6e3" stroke-width="2" fill="none"><path d="M50 50 L180 100 L310 50 M50 150 L180 100 L310 150 M180 22 L180 178 M50 50 L50 150 M310 50 L310 150 M50 50 L180 22 L310 50 M50 150 L180 178 L310 150"/></g>
+            <g fill="#fff" stroke="#9fb1c6" stroke-width="2"><circle cx="50" cy="50" r="11"/><circle cx="310" cy="50" r="11"/><circle cx="50" cy="150" r="11"/><circle cx="310" cy="150" r="11"/><circle cx="180" cy="22" r="11"/><circle cx="180" cy="178" r="11"/></g>
+            <circle cx="180" cy="100" r="22" fill="#fdecea" stroke="#e8594a" stroke-width="2"/><text x="180" y="105" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="600" font-size="14" fill="#b3372c">AI</text>
           </svg>
         </div>
-        <div class="card">
+        <div class="card" style="background:var(--ice);box-shadow:none">
           <h3>With Simply Silicon</h3>
-          <p class="muted" style="margin:8px 0 0;font-size:15px">AI runs on its own private network of city sites, physically apart.</p>
-          <svg viewBox="0 0 320 170" aria-hidden="true">
-            <g stroke="#c6d4e2" stroke-width="1.6" fill="none"><path d="M30 50 L110 30 L110 140 L30 120 Z M30 50 L110 140 M110 30 L30 120"/></g>
-            <g fill="#fff" stroke="#8fa2b8" stroke-width="2"><circle cx="30" cy="50" r="8"/><circle cx="110" cy="30" r="8"/><circle cx="30" cy="120" r="8"/><circle cx="110" cy="140" r="8"/></g>
-            <path d="M150 20 V150" stroke="#e8513c" stroke-width="2" stroke-dasharray="4 5"/>
-            <g stroke="#4fb3f0" stroke-width="2.4" fill="none" class="dg-flow sky"><path d="M200 40 L290 60 L260 140 L190 120 Z M200 40 L260 140"/></g>
-            <g fill="#4fb3f0" stroke="#fff" stroke-width="2"><circle cx="200" cy="40" r="9"/><circle cx="290" cy="60" r="9"/><circle cx="260" cy="140" r="9"/><circle cx="190" cy="120" r="9"/></g>
-            <text x="150" y="166" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#6a7b90">AIR GAP</text>
+          <p>AI runs on its own private network of city sites, physically apart.</p>
+          <svg viewBox="0 0 360 200" aria-hidden="true">
+            <g stroke="#c9d6e3" stroke-width="2" fill="none"><path d="M36 60 L110 36 L120 150 L40 160 Z M36 60 L120 150"/></g>
+            <g fill="#fff" stroke="#9fb1c6" stroke-width="2"><circle cx="36" cy="60" r="10"/><circle cx="110" cy="36" r="10"/><circle cx="40" cy="160" r="10"/><circle cx="120" cy="150" r="10"/></g>
+            <line x1="170" y1="18" x2="170" y2="182" stroke="#e8594a" stroke-width="2" stroke-dasharray="5 6"/>
+            <text x="170" y="198" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#b3372c">Air gap</text>
+            <g stroke="#4db2ef" stroke-width="3" fill="none" class="dg-flow sky"><path d="M230 50 L320 70 L300 160 L220 140 Z M230 50 L300 160"/></g>
+            <g fill="#4db2ef" stroke="#fff" stroke-width="3"><circle cx="230" cy="50" r="12"/><circle cx="320" cy="70" r="12"/><circle cx="300" cy="160" r="12"/><circle cx="220" cy="140" r="12"/></g>
           </svg>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="band band--tint">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <p class="eyebrow">Why cities</p>
-          <h2>Built where the users are.</h2>
-        </div>
-        <p>We are rethinking the physical data centre and its networking from the ground up.</p>
-      </div>
-      <div class="spec-list">
-        <div class="card"><span class="val">Speed to market</span><h3>Power that already exists</h3><p>Using existing plants avoids the long wait for new grid connections that slows conventional builds.</p></div>
-        <div class="card"><span class="val">Latency</span><h3>Close to users</h3><p>Downtown sites sit a short fiber run from the companies they serve.</p></div>
-        <div class="card"><span class="val">Security</span><h3>Physically separate</h3><p>Each site and its fiber are kept apart from the public internet.</p></div>
-        <div class="card"><span class="val">Scale</span><h3>One network</h3><p>Sites are designed from day one to link together into a single private network.</p></div>
       </div>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap">
-      <div class="cta">
-        <div>
-          <p class="eyebrow">Explore</p>
-          <h2>See where the network is going.</h2>
-        </div>
-        <div class="btns"><a class="btn btn--primary" href="network.html">Open the network map <span class="arrow" aria-hidden="true">→</span></a><a class="btn" href="https://www.linkedin.com/company/simply-silicon/" target="_blank" rel="noopener">Connect</a></div>
+      <div class="sec-head">
+        <h2>Built where the users are.</h2>
+        <p>We are rethinking the physical data centre and its networking from the ground up.</p>
+      </div>
+      <div class="spec-list">
+        <div class="card"><span class="val">Speed</span><h3>Power that already exists</h3><p>Using existing plants avoids the long wait for new grid connections that slows conventional builds.</p></div>
+        <div class="card"><span class="val">Latency</span><h3>Close to users</h3><p>Downtown sites sit a short fiber run from the companies they serve.</p></div>
+        <div class="card"><span class="val">Security</span><h3>Physically separate</h3><p>Each site and its fiber are kept apart from the public internet.</p></div>
+        <div class="card"><span class="val">Scale</span><h3>One network</h3><p>Sites are designed from day one to link together into a single private network.</p></div>
       </div>
     </div>
   </section>
@@ -120,5 +121,9 @@
 
 <footer id="site-footer"></footer>
 <script src="assets/js/common.js"></script>
+<script src="assets/js/map-data.js"></script>
+<script src="assets/js/calgary-data.js"></script>
+<script src="assets/js/network.js"></script>
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
 </body>
 </html>

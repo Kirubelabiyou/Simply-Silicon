@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Simply Silicon</title>
-<meta name="description" content="Simply Silicon owns and operates air-gapped AI infrastructure in major cities. Foundation, our first site, brings 12 MW of secure AI capacity to downtown Calgary.">
+<meta name="description" content="Simply Silicon owns and operates air-gapped AI infrastructure in major cities. Secure, localized compute at scale.">
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Sora:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="stylesheet" href="assets/css/pages.css">
 </head>
@@ -17,52 +17,33 @@
 
 <main>
   <section class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="wrap hero-main">
-      <div>
-        <p class="eyebrow">Air-gapped AI infrastructure · Calgary</p>
-        <h1><span class="l">Secure,</span><span class="l">localized</span><span class="l l--sky">compute</span><span class="l">at scale.</span></h1>
-        <p class="lede">We turn power plants and utility sites that already sit inside cities into private computers for AI. Our first site, Foundation, is running in downtown Calgary today.</p>
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="wrap wrap--wide hero-main">
+      <div class="hero-copy">
+        <h1>Secure, localized <span class="sky">compute</span> at scale.</h1>
+        <p class="lede">Simply Silicon turns power plants and utility sites that already sit inside cities into private, air-gapped computers for AI. Our first site, Foundation, is running in downtown Calgary today.</p>
         <div class="hero-ctas">
-          <a class="btn btn--primary" href="network.html">See the network <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--primary" href="platform.html">See the platform <span class="arrow" aria-hidden="true">→</span></a>
           <a class="btn" href="#how">How it works</a>
         </div>
       </div>
       <div class="racks-wrap" aria-hidden="true">
         <div class="racks" id="racks"></div>
-        <p class="rack-caption"><i class="dot dot--live"></i>Bare metal GPU servers · Phase 1 online</p>
-      </div>
-    </div>
-    <div class="wrap hero-stats">
-      <div class="stats">
-        <div class="stat"><b class="num">12<small>MW</small></b><span>Secure AI capacity planned at Foundation</span></div>
-        <div class="stat"><b>n+1</b><span>Redundant power, so one failure never stops the site</span></div>
-        <div class="stat"><b class="num">7<small>km</small></b><span>Private fiber under downtown Calgary</span></div>
-        <div class="stat"><b class="num">25+</b><span>Buildings connected to that fiber</span></div>
       </div>
     </div>
   </section>
 
-  <section class="band" id="how">
+  <section class="band band--white" id="how">
     <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <p class="eyebrow">How it works</p>
-          <h2>Simply Silicon, explained.</h2>
-        </div>
-        <p>We are rethinking the physical data centre and its networking from the ground up. Five pieces make it work. Pick one. Each opens in layers: the idea in one line, how it works, then the technical terms in plain words.</p>
-      </div>
+      <h2 class="how-title">How it works</h2>
       <div class="hub-wrap">
-        <svg class="hub" id="hub" viewBox="0 0 640 440" role="group" aria-label="The five core pieces of Simply Silicon"></svg>
-        <p class="hub-hint">Tap a piece to open it</p>
+        <svg class="hub" id="hub" viewBox="0 0 760 470" role="group" aria-label="The core pieces of Simply Silicon"></svg>
       </div>
-      <div class="tabs" role="tablist" id="tabs" aria-label="Core pieces"></div>
-      <div class="detail" aria-live="polite">
+      <div class="detail" id="detail" hidden aria-live="polite">
         <div>
-          <span class="kicker" id="dKicker"></span>
           <p class="oneline" id="dOne"></p>
           <div class="level"><h3>How it works</h3><div id="dHow"></div></div>
-          <div class="level"><h3>Go deeper: the terms</h3><div class="terms" id="dTerms"></div></div>
+          <div class="level"><h3>The terms, in plain words</h3><div class="terms" id="dTerms"></div></div>
           <div class="detail-nav">
             <button class="btn" type="button" id="dPrev">← Previous</button>
             <button class="btn btn--primary" type="button" id="dNext">Next <span class="arrow" aria-hidden="true">→</span></button>
@@ -73,51 +54,13 @@
     </div>
   </section>
 
-  <section class="band band--white">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <p class="eyebrow">Put together</p>
-          <h2>One request, start to finish.</h2>
-        </div>
-        <p>Here is what happens when a company downtown asks its AI a question on Simply Silicon.</p>
-      </div>
-      <div class="journey">
-        <div class="jstep"><span class="k">01</span><h3>The question</h3><p>An app in an office tower sends a request to its AI model.</p><div class="jbar" style="--jd:0s"></div></div>
-        <div class="jstep"><span class="k">02</span><h3>Private fiber</h3><p>It travels under the street on our own fiber. No public internet.</p><div class="jbar" style="--jd:.5s"></div></div>
-        <div class="jstep"><span class="k">03</span><h3>Air-gapped network</h3><p>It enters a network with no connection to the outside world.</p><div class="jbar" style="--jd:1s"></div></div>
-        <div class="jstep"><span class="k">04</span><h3>GPU server</h3><p>A bare metal GPU server at Foundation runs the model on n+1 power.</p><div class="jbar" style="--jd:1.5s"></div></div>
-        <div class="jstep"><span class="k">05</span><h3>The answer</h3><p>The answer takes the same short, private path back. Fast and contained.</p><div class="jbar" style="--jd:2s"></div></div>
-      </div>
-    </div>
-  </section>
-
   <section class="band">
     <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <p class="eyebrow">Explore</p>
-          <h2>Go deeper.</h2>
-        </div>
-        <p>Each part of Simply Silicon has its own page.</p>
-      </div>
+      <h2 class="how-title">Explore</h2>
       <div class="go-grid">
-        <a class="go" href="foundation.html"><span class="k">Site 01</span><h3>Foundation</h3><p>Walk through the Calgary plant in 3D, phase by phase.</p><span class="more">Open Foundation →</span></a>
-        <a class="go" href="network.html"><span class="k">Global</span><h3>Network</h3><p>The world map of sites, and the fiber under downtown Calgary.</p><span class="more">Open the map →</span></a>
-        <a class="go" href="workloads.html"><span class="k">Customers</span><h3>Workloads</h3><p>Who needs AI that can't sit on the public internet, and why.</p><span class="more">See workloads →</span></a>
-        <a class="go" href="platform.html"><span class="k">Vision</span><h3>Platform</h3><p>How city sites link into a second internet for AI.</p><span class="more">See the platform →</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="band" style="padding-top:0">
-    <div class="wrap">
-      <div class="cta">
-        <div>
-          <p class="eyebrow">Work with us</p>
-          <h2>Need secure AI compute in the city?</h2>
-        </div>
-        <div class="btns"><a class="btn btn--primary" href="https://www.linkedin.com/company/simply-silicon/" target="_blank" rel="noopener">Connect on LinkedIn</a><a class="btn" href="foundation.html">Tour Foundation</a></div>
+        <a class="go" href="foundation.html"><h3>Foundation</h3><p>Our first site. See the plant and its private fiber across downtown Calgary in 3D.</p><span class="more">Open Foundation →</span></a>
+        <a class="go" href="workloads.html"><h3>Workloads</h3><p>Who needs AI that can't sit on the public internet, and why.</p><span class="more">See workloads →</span></a>
+        <a class="go" href="platform.html"><h3>Platform</h3><p>The global network of city sites, and where it is going.</p><span class="more">See the platform →</span></a>
       </div>
     </div>
   </section>

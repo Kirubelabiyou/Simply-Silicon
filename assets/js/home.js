@@ -1,14 +1,21 @@
-/* Simply Silicon: home page (GPU racks and the how-it-works explainer) */
+/* Simply Silicon: home page (hero racks and How it works) */
 (function () {
   'use strict';
+  var NS = 'http://www.w3.org/2000/svg';
 
-  // Hero GPU racks
+  /* ---------- Hero GPU racks ---------- */
   var racks = document.getElementById('racks');
   if (racks) {
-    [['n','g','g','g','g','n','g','g','n'],['n','g','g','g','g','g','g','n','g','g'],['n','g','g','g','n','g','g','g','n']].forEach(function (units, r) {
+    var plans = [
+      ['n', 'g', 'g', 'g', 'n', 'g', 'g', 'g', 'n'],
+      ['n', 'g', 'g', 'g', 'g', 'n', 'g', 'g', 'g', 'n'],
+      ['n', 'g', 'g', 'g', 'g', 'g', 'n', 'g', 'g', 'g', 'n'],
+      ['n', 'g', 'g', 'g', 'n', 'g', 'g', 'g', 'g', 'n']
+    ];
+    plans.forEach(function (units, r) {
       var rack = document.createElement('div');
       rack.className = 'rack';
-      rack.innerHTML = '<div class="rack-head"><span>R0' + (r + 1) + '</span><span>GPU</span></div>';
+      rack.innerHTML = '<div class="rack-head"><span>R0' + (r + 1) + '</span><span class="rack-led"></span></div>';
       units.forEach(function (u) {
         var el = document.createElement('div');
         el.className = 'unit' + (u === 'g' ? ' gpu' : '');
@@ -25,192 +32,243 @@
     });
   }
 
-  function cells() {
-    // 12 MW drawn as 120 cells of 100 kW each. To scale.
-    var s = '', i = 0;
-    for (var r = 0; r < 10; r++) for (var c = 0; c < 12; c++) {
-      var x = 24 + c * 26, y = 20 + r * 17;
-      var cls = i === 0 ? 'fill="#4fb3f0"' : i < 20 ? 'fill="#fdf2de" stroke="#e79a17" stroke-width="1"' : 'fill="#f3f7fb" stroke="#c6d4e2" stroke-width="1"';
-      s += '<rect x="' + x + '" y="' + y + '" width="22" height="13" ' + cls + (i === 0 ? ' class="dg-blink"' : '') + '/>';
-      i++;
+  /* ---------- Figures ---------- */
+  function box(x, y, w, h, cls, t, s) {
+    return '<rect class="dg-box ' + (cls || '') + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="10"/>' +
+      (t ? '<text class="dg-t" x="' + (x + w / 2) + '" y="' + (y + h / 2 + (s ? -3 : 5)) + '" text-anchor="middle">' + t + '</text>' : '') +
+      (s ? '<text class="dg-s" x="' + (x + w / 2) + '" y="' + (y + h / 2 + 15) + '" text-anchor="middle">' + s + '</text>' : '');
+  }
+  var ARROW = '<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#4db2ef"/></marker>' +
+    '<marker id="ahh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#e8594a"/></marker></defs>';
+
+  var FIG = {
+    power: function () {
+      return '<svg viewBox="0 0 480 270" aria-hidden="true">' + ARROW +
+        box(12, 18, 150, 54, '', 'Grid feed A', 'Utility') +
+        box(12, 108, 150, 54, '', 'Grid feed B', 'Utility') +
+        box(12, 198, 150, 54, '', 'On-site power', 'Backup generation') +
+        '<path class="dg-flow sky" d="M162 45 C200 45 200 115 232 118" marker-end="url(#ah)"/>' +
+        '<path class="dg-flow sky" d="M162 135 H232" marker-end="url(#ah)"/>' +
+        '<path class="dg-flow sky" d="M162 225 C200 225 200 155 232 152" marker-end="url(#ah)" style="opacity:.55"/>' +
+        box(236, 92, 124, 86, 'on', 'Utility site', 'Already in the city') +
+        '<path class="dg-flow sky" d="M360 135 H392" marker-end="url(#ah)"/>' +
+        box(396, 108, 72, 54, 'dark', 'GPUs') +
+        '<g transform="translate(236 196)"><rect x="0" y="0" width="124" height="30" rx="15" fill="#e8f4fc"/><text class="dg-s" x="62" y="19" text-anchor="middle" style="fill:#1b6fb8;font-weight:600">n+1 redundant</text></g>' +
+        '</svg>';
+    },
+    compute: function () {
+      var s = '<svg viewBox="0 0 480 280" aria-hidden="true">';
+      s += '<text class="dg-h" x="110" y="26" text-anchor="middle">Shared cloud</text><text class="dg-h" x="370" y="26" text-anchor="middle" style="fill:#1b6fb8">Bare metal</text>';
+      s += '<line x1="240" y1="14" x2="240" y2="266" stroke="#e2eaf2" stroke-width="2"/>';
+      // shared: three tenants over a virtualization layer
+      [['A', 22], ['B', 84], ['C', 146]].forEach(function (t) { s += box(t[1], 48, 52, 40, '', 'User ' + t[0]).replace('dg-t', 'dg-t sm'); });
+      s += box(22, 100, 176, 36, 'warn', 'Virtual layer');
+      s += '<g transform="translate(22 148)">' + rackSvg(176, 110, '#9fb1c6') + '</g>';
+      // bare metal: one model straight on the hardware
+      s += box(282, 48, 176, 88, 'on', 'Your AI model', 'Direct access');
+      s += '<g transform="translate(282 148)">' + rackSvg(176, 110, '#4db2ef') + '</g>';
+      return s + '</svg>';
+    },
+    fiber: function () {
+      var s = '<svg viewBox="0 0 480 300" aria-hidden="true">';
+      // street grid
+      var X = [40, 150, 260, 370], Y = [50, 150, 250];
+      X.forEach(function (x) { s += '<line x1="' + x + '" y1="20" x2="' + x + '" y2="280" class="dg-street"/>'; });
+      Y.forEach(function (y) { s += '<line x1="20" y1="' + y + '" x2="400" y2="' + y + '" class="dg-street"/>'; });
+      // fiber runs on the streets from the site
+      var runs = ['M260 150 H150 V50 H96', 'M260 150 V50 H316', 'M260 150 H370 V206', 'M260 150 V250 H206', 'M260 150 H150 V250 H96', 'M260 150 H370 V94'];
+      runs.forEach(function (d, i) { s += '<path class="dg-fiber" d="' + d + '"/><path class="dg-flow sky" style="animation-delay:-' + (i * .25) + 's" d="' + d + '"/>'; });
+      [[96, 50], [316, 50], [370, 206], [206, 250], [96, 250], [370, 94]].forEach(function (p) {
+        s += '<rect x="' + (p[0] - 16) + '" y="' + (p[1] - 16) + '" width="32" height="32" rx="7" class="dg-bldg"/><circle cx="' + p[0] + '" cy="' + p[1] + '" r="5" fill="#1b6fb8"/>';
+      });
+      s += '<rect x="234" y="124" width="52" height="52" rx="10" fill="#0d2136"/><text x="260" y="155" text-anchor="middle" class="dg-t" style="fill:#fff">Site</text>';
+      // public internet, not connected
+      s += '<g transform="translate(430 150)"><circle r="34" fill="#f6fafd" stroke="#c9d6e3" stroke-width="1.5" stroke-dasharray="4 4"/><text class="dg-s" y="-4" text-anchor="middle">Public</text><text class="dg-s" y="10" text-anchor="middle">internet</text></g>';
+      s += '<line x1="372" y1="150" x2="394" y2="150" stroke="#e8594a" stroke-width="2" stroke-dasharray="3 4"/><path d="M378 142 L388 158 M388 142 L378 158" stroke="#e8594a" stroke-width="2.4"/>';
+      return s + '</svg>';
+    },
+    security: function () {
+      var s = '<svg viewBox="0 0 480 270" aria-hidden="true">';
+      s += '<rect x="12" y="30" width="170" height="210" rx="14" fill="#f6fafd" stroke="#c9d6e3" stroke-dasharray="5 5"/>';
+      s += '<text class="dg-h" x="97" y="58" text-anchor="middle">Public internet</text>';
+      s += '<g transform="translate(97 140)" fill="none" stroke="#9fb1c6" stroke-width="2"><circle r="42"/><ellipse rx="18" ry="42"/><path d="M-42 0 H42 M-37 -20 H37 M-37 20 H37"/></g>';
+      s += '<rect x="298" y="30" width="170" height="210" rx="14" fill="#e8f4fc" stroke="#4db2ef" stroke-width="1.5"/>';
+      s += '<text class="dg-h" x="383" y="58" text-anchor="middle" style="fill:#1b6fb8">Private network</text>';
+      for (var i = 0; i < 4; i++) s += '<rect x="322" y="' + (82 + i * 34) + '" width="122" height="24" rx="5" fill="#0d2136"/><circle cx="432" cy="' + (94 + i * 34) + '" r="3.5" fill="#4db2ef" class="dg-blink" style="animation-delay:-' + (i * .4) + 's"/><rect x="334" y="' + (91 + i * 34) + '" width="60" height="6" rx="3" fill="#2a4460"/>';
+      s += '<path d="M182 135 H214" stroke="#c9d6e3" stroke-width="2"/><path d="M266 135 H298" stroke="#4db2ef" stroke-width="2"/>';
+      s += '<g transform="translate(240 135)"><circle r="22" fill="#fff" stroke="#e8594a" stroke-width="2"/><path d="M-8 -8 L8 8 M8 -8 L-8 8" stroke="#e8594a" stroke-width="2.6" stroke-linecap="round"/></g>';
+      s += '<text class="dg-s" x="240" y="180" text-anchor="middle" style="fill:#c2413a;font-weight:600">Air gap</text><text class="dg-s" x="240" y="196" text-anchor="middle">No cable, no path in</text>';
+      return s + '</svg>';
+    },
+    engineering: function () {
+      var s = '<svg viewBox="0 0 480 300" aria-hidden="true">' + ARROW;
+      s += box(12, 40, 110, 60, '', 'Power in', 'Electricity');
+      s += '<path class="dg-flow sky" d="M122 70 H170" marker-end="url(#ah)"/>';
+      s += '<g transform="translate(176 20)"><rect width="128" height="100" rx="12" fill="#0d2136"/>';
+      for (var i = 0; i < 4; i++) s += '<rect x="16" y="' + (16 + i * 18) + '" width="96" height="11" rx="3" fill="#1d3a5a"/><circle cx="102" cy="' + (21.5 + i * 18) + '" r="3" fill="#4db2ef" class="dg-blink" style="animation-delay:-' + (i * .3) + 's"/>';
+      s += '</g><text class="dg-t" x="240" y="140" text-anchor="middle">GPU racks</text><text class="dg-s" x="240" y="156" text-anchor="middle">Useful AI work</text>';
+      s += '<path class="dg-flow heat" d="M304 70 H352" marker-end="url(#ahh)"/>';
+      s += box(358, 40, 110, 60, 'heat', 'Heat', 'Captured') ;
+      s += '<path class="dg-flow heat" d="M413 100 V200 H330" marker-end="url(#ahh)"/>';
+      s += '<g transform="translate(150 178)"><rect width="176" height="48" rx="24" fill="#fdecea"/><text class="dg-t" x="88" y="22" text-anchor="middle" style="fill:#b3372c">Heating loop</text><text class="dg-s" x="88" y="37" text-anchor="middle">Warms nearby buildings</text></g>';
+      s += '<path class="dg-flow heat" d="M150 202 H70 V250" style="opacity:.6"/>';
+      [[30, 250], [70, 238], [110, 250]].forEach(function (b, k) { s += '<rect x="' + (b[0] + 12) + '" y="' + b[1] + '" width="30" height="' + (290 - b[1]) + '" rx="4" fill="#e2eaf2"/>'; });
+      s += '<text class="dg-s" x="300" y="268" text-anchor="middle">Calgary: Foundation sits inside a</text><text class="dg-s" x="300" y="284" text-anchor="middle">district heating plant</text>';
+      return s + '</svg>';
     }
+  };
+  function rackSvg(w, h, led) {
+    var s = '<rect width="' + w + '" height="' + h + '" rx="10" fill="#0d2136"/>';
+    for (var i = 0; i < 5; i++) s += '<rect x="14" y="' + (12 + i * 19) + '" width="' + (w - 28) + '" height="12" rx="3" fill="#1d3a5a"/><circle cx="' + (w - 24) + '" cy="' + (18 + i * 19) + '" r="3" fill="' + led + '"/>';
     return s;
   }
 
+  /* ---------- Pieces ---------- */
   var P = [
     {
-      id: 'power', name: 'Power', icon: 'M13 2 4 14h7l-1 8 9-12h-7z',
+      id: 'power', name: 'Power',
+      icon: '<path d="M12 2.5v2.5M8.5 5h7M9.6 5 7 21.5M14.4 5 17 21.5M8.3 13h7.4M7.6 17.5h8.8M9.2 9h5.6M4.5 5h4M15.5 5h4"/>',
       one: 'We start where big power already exists: inside the city.',
       how: [
-        'Most new data centres wait years for a grid connection. We skip that wait by using sites that already have one.',
-        'Foundation sits in an existing <b>district heating plant</b> in downtown Calgary. It already has <b>14 MVA</b> of power, <b>two separate grid feeds</b> and <b>on-site generation</b>. If one source fails, another takes over.',
-        'Using power that is already there is faster and wastes less than building a new plant. The site is also tied into a <b>district heating loop</b>, a network of pipes built to move heat around downtown. Heat is what GPUs make most.'
+        'Most new data centres wait years for a grid connection. We skip that wait by using utility sites that already have one.',
+        'These sites have <b>large power connections</b>, <b>more than one grid feed</b> and <b>on-site generation</b>. If one source fails, another takes over.',
+        'Using power that is already in place is faster and wastes less than building a new plant far away.'
       ],
       terms: [
-        ['MW (megawatt)', 'A measure of how much power a site can use at once. Foundation is planned for 12 MW of AI capacity.'],
-        ['MVA', 'The size of an electrical connection. Foundation\'s base plant has 14 MVA.'],
+        ['MW (megawatt)', 'How much power a site can use at once. One megawatt is one million watts.'],
         ['n+1 redundancy', 'One more of every critical part than you need. Any single part can fail and the site keeps running.'],
-        ['Dual redundant grid feeds', 'Two separate power lines from the grid. If one goes down, the other still delivers power.'],
-        ['Own-use power', 'Power a site already has for its own use. We turn it into compute instead of leaving it idle.'],
-        ['District heating', 'One central plant heats many buildings through underground pipes.']
+        ['Redundant grid feeds', 'Two separate power lines from the grid. If one goes down, the other still delivers power.'],
+        ['Own-use power', 'Power a site already holds for itself. We turn it into compute instead of leaving it idle.']
       ],
-      cap: 'Two grid feeds and on-site generation feed the plant. n+1 means one spare of everything.',
-      fig: function () {
-        return '<svg viewBox="0 0 360 250" aria-hidden="true">' +
-          '<rect class="dg-box" x="10" y="20" width="96" height="40"/><text class="dg-t" x="22" y="38">Grid feed A</text><text class="dg-s" x="22" y="52">Utility</text>' +
-          '<rect class="dg-box" x="10" y="105" width="96" height="40"/><text class="dg-t" x="22" y="123">Grid feed B</text><text class="dg-s" x="22" y="137">Utility</text>' +
-          '<rect class="dg-box" x="10" y="190" width="96" height="40"/><text class="dg-t" x="22" y="208">On-site gen</text><text class="dg-s" x="22" y="222">Backup</text>' +
-          '<path class="dg-flow sky" d="M106 40 H150 V110 H190"/><path class="dg-flow sky" d="M106 125 H190"/><path class="dg-flow sky" d="M106 210 H150 V140 H190" style="opacity:.6"/>' +
-          '<rect class="dg-box on" x="190" y="85" width="110" height="80"/><text class="dg-t" x="202" y="110">Base plant</text><text class="dg-s" x="202" y="126">14 MVA · n+1</text><text class="dg-s" x="202" y="142">District heating</text>' +
-          '<path class="dg-flow sky" d="M300 125 H350"/><text class="dg-s" x="300" y="182">→ GPUs</text>' +
-          '</svg>';
-      }
+      cap: 'Two grid feeds and on-site power feed one site. n+1 means there is always a spare.'
     },
     {
-      id: 'compute', name: 'Compute', icon: 'M4 5h16v14H4zM8 9h8M8 13h8M8 17h4',
-      one: 'Rooms of GPU servers that run AI and answer in real time.',
+      id: 'compute', name: 'Compute',
+      icon: '<rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><path d="M9.5 3.5V7M12 3.5V7M14.5 3.5V7M9.5 17v3.5M12 17v3.5M14.5 17v3.5M3.5 9.5H7M3.5 12H7M3.5 14.5H7M17 9.5h3.5M17 12h3.5M17 14.5h3.5"/>',
+      one: 'Dedicated GPU servers that run AI and answer in real time.',
       how: [
         '<b>GPUs</b> are chips that do many calculations at the same time. That is exactly what AI models need.',
-        'We run them <b>bare metal</b>. The customer gets the physical machine itself, not a slice shared with strangers through a cloud layer.',
-        'Foundation is built for <b>inference</b>: the moment an AI model is used to answer a question, write something or make a decision. <b>Phase 1 runs 100 kW today.</b> Phase 2 adds 2 MW in February 2027, and the plant can hold 12 MW in total.'
+        'We run them <b>bare metal</b>. The customer gets the physical machine itself, not a slice shared with strangers through a virtual layer.',
+        'Our sites are built for <b>inference</b>: the moment an AI model is used to answer a question, write something or make a decision.'
       ],
       terms: [
-        ['GPU', 'Graphics processing unit. A chip that handles thousands of small calculations at once, which makes it the workhorse of AI.'],
-        ['Inference', 'Using a trained AI model to produce an answer. Training builds the model. Inference is what users feel every time they ask it something.'],
-        ['Bare metal', 'A physical server dedicated to one customer, with no shared layer in between. More control, more predictable speed.'],
-        ['kW and MW', '1,000 kilowatts make 1 megawatt. Phase 1 is 100 kW. The full site is 12 MW, 120 times more.'],
-        ['Phased build', 'The site grows in steps inside the same plant, so capacity comes online without waiting for the full build.']
+        ['GPU', 'Graphics processing unit. A chip that handles thousands of small calculations at once, the workhorse of AI.'],
+        ['Inference', 'Using a trained AI model to produce an answer. It is what people feel every time they ask an AI something.'],
+        ['Bare metal', 'A physical server dedicated to one customer, with no shared layer in between. More control and steadier speed.'],
+        ['Rack', 'A tall steel frame that holds a stack of servers, with shared power and cooling.']
       ],
-      cap: 'Each square is 100 kW. Blue: Phase 1, online. Amber: Phase 2 (2 MW). Grey: Phase 3 (12 MW).',
-      fig: function () { return '<svg viewBox="0 0 360 200" aria-hidden="true">' + cells() + '</svg>'; }
+      cap: 'Shared cloud splits one machine between users. Bare metal gives your model the whole machine.'
     },
     {
-      id: 'fiber', name: 'Fiber', icon: 'M3 12c4-6 8 6 12 0s4-4 6-2M3 18c4-6 8 6 12 0',
-      one: 'Our own cables, under the street, to the buildings that use us.',
+      id: 'fiber', name: 'Fiber',
+      icon: '<path d="M3 7.5c5 0 6 9 11 9h7M3 12c5 0 6 4.5 11 4.5M3 16.5c5 0 6-9 11-9h7"/><circle cx="21" cy="7.5" r="1"/><circle cx="21" cy="16.5" r="1"/>',
+      one: 'Private cables from our sites to the buildings that use them.',
       how: [
-        'Foundation connects to <b>25+ downtown buildings</b> over <b>7 km of private fiber</b>.',
-        'Data does not cross the shared public internet or <b>common carrier networks</b> to reach the servers. It stays on our own glass.',
-        'Short, direct paths mean <b>low latency</b>. Answers arrive fast, and just as important, they arrive at a steady, predictable speed.'
+        'Each site connects to the buildings around it over <b>private fiber</b> that runs under the streets.',
+        'Data does not cross the shared public internet or <b>common carrier networks</b> to reach the servers.',
+        'Short, direct paths mean <b>low latency</b>. Answers arrive fast, and they arrive at a steady, predictable speed.'
       ],
       terms: [
         ['Fiber optic cable', 'Thin strands of glass that carry data as light. The fastest way to move data between buildings.'],
-        ['Private fiber', 'Fiber used only by us and our customers, not shared with the public.'],
-        ['Latency', 'The delay between asking and getting an answer. Lower is better, and it matters most for live, real-time AI.'],
-        ['Latency SLA', 'A written promise on the maximum delay a customer will see.'],
-        ['Common carrier network', 'The shared telecom networks everyone else uses. We keep sensitive traffic off them.']
+        ['Private fiber', 'Fiber used only by us and our customers, never shared with the public.'],
+        ['Latency', 'The delay between asking and getting an answer. Lower is better, most of all for live AI.'],
+        ['Common carrier network', 'The shared telecom networks everyone else uses.']
       ],
-      cap: '7 km of private fiber from Foundation to 25+ connected buildings.',
-      fig: function () {
-        var b = [[40, 40], [150, 24], [290, 36], [320, 130], [290, 214], [170, 226], [40, 210], [18, 124]];
-        var s = '<svg viewBox="0 0 360 250" aria-hidden="true">';
-        b.forEach(function (p, i) { s += '<path class="dg-flow amber" style="animation-delay:-' + (i * .2) + 's" d="M180 125 L' + p[0] + ' ' + p[1] + '"/>'; });
-        b.forEach(function (p) { s += '<rect class="dg-box" x="' + (p[0] - 12) + '" y="' + (p[1] - 12) + '" width="24" height="24"/>'; });
-        s += '<rect class="dg-box on" x="146" y="103" width="68" height="44"/><text class="dg-t" x="154" y="122">Foundation</text><text class="dg-s" x="154" y="137">7 km fiber</text></svg>';
-        return s;
-      }
+      cap: 'Fiber runs along the streets from the site to each connected building. The public internet is not connected.'
     },
     {
-      id: 'security', name: 'Security', icon: 'M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6z',
+      id: 'security', name: 'Security',
+      icon: '<path d="M12 3 19 6v5.5c0 4.6-3 8.2-7 9.5-4-1.3-7-4.9-7-9.5V6z"/><rect x="9.25" y="11.5" width="5.5" height="4.5" rx="1"/><path d="M10.5 11.5V10a1.5 1.5 0 0 1 3 0v1.5"/>',
       one: 'Physically separate from the public internet.',
       how: [
         'An <b>air-gapped network</b> has no connection to the public internet. There is no route in for someone outside.',
-        'This is <b>physical separation</b>, not just software rules. A firewall can be misconfigured. A missing cable cannot be hacked.',
-        'It suits <b>regulated enterprise</b> like banks, utilities and energy companies, <b>high-security workloads</b>, and AI models too capable for the open internet.'
+        'This is <b>physical separation</b>, not just software rules. A setting can be changed by mistake. A missing cable cannot be hacked.',
+        'It suits <b>regulated enterprise</b>, <b>high-security workloads</b>, and AI models too capable for the open internet.'
       ],
       terms: [
         ['Air gap', 'A network with no physical link to outside networks. Data can only move where cables actually run.'],
         ['Physical separation', 'Security that comes from how things are wired and where they sit, not only from software.'],
-        ['Regulated enterprise', 'Companies bound by strict rules on data, like banks, utilities and energy producers.'],
-        ['High-security workload', 'Computing work where a leak or intrusion would be unacceptable.']
+        ['Regulated enterprise', 'Companies bound by strict rules on data, like banks, utilities and energy producers.']
       ],
-      cap: 'No cable, no path. The air gap keeps the public internet out.',
-      fig: function () {
-        return '<svg viewBox="0 0 360 230" aria-hidden="true">' +
-          '<rect class="dg-box" x="10" y="60" width="120" height="110" stroke-dasharray="4 4"/><text class="dg-t" x="24" y="110">Public</text><text class="dg-t" x="24" y="126">internet</text>' +
-          '<path class="dg-line" d="M130 115 H160"/><path class="dg-line" d="M196 115 H226"/>' +
-          '<path d="M165 100 L191 130 M191 100 L165 130" stroke="#e8513c" stroke-width="2.5"/><text class="dg-s" x="154" y="152">Air gap</text>' +
-          '<rect class="dg-box on" x="226" y="40" width="124" height="150"/><text class="dg-t" x="238" y="62">Simply Silicon</text><text class="dg-s" x="238" y="77">Air-gapped</text>' +
-          '<rect class="dg-box" x="240" y="92" width="96" height="16"/><rect class="dg-box" x="240" y="114" width="96" height="16"/><rect class="dg-box" x="240" y="136" width="96" height="16"/>' +
-          '<circle fill="#1673c8" class="dg-blink" cx="326" cy="100" r="3"/><circle fill="#1673c8" class="dg-blink" cx="326" cy="122" r="3" style="animation-delay:-.6s"/><circle fill="#1673c8" class="dg-blink" cx="326" cy="144" r="3" style="animation-delay:-1.1s"/>' +
-          '<text class="dg-s" x="238" y="176">Private fiber in</text></svg>';
-      }
+      cap: 'The private network and the public internet never touch.'
     },
     {
-      id: 'engineering', name: 'Engineering', icon: 'M4 20h16M6 20V10l6-5 6 5v10M10 20v-5h4v5',
-      one: 'We rebuilt the data centre and its network from the ground up.',
+      id: 'engineering', name: 'Engineering',
+      icon: '<path d="M4 17.5a8 8 0 1 1 16 0"/><path d="M12 17.5l4.2-5.2"/><circle cx="12" cy="17.5" r="1.3"/><path d="M6.6 11.8l1 .9M12 9v1.3M17.4 11.8l-1 .9"/>',
+      one: 'More useful AI from every megawatt.',
       how: [
-        'Instead of a huge new campus far from users, we convert <b>latent utility infrastructure</b> in the city into compute. That is faster than conventional developers.',
-        'We build <b>one phase at a time</b> inside existing plants, and design the network and the building together, not as separate projects.',
-        'Every site is built to link to the next. Foundation is the <b>first node</b> in a global urban AI network: <b>15+ sites</b> in the pipeline, <b>200+ MW</b> planned, across <b>12+ major cities</b>.'
+        'We design the building, the cooling and the network together, so power goes into AI work, not overhead.',
+        'GPUs turn power into heat. We <b>capture that heat</b> instead of wasting it. In Calgary, Foundation sits inside a <b>district heating plant</b>, and its liquid-cooled racks feed a <b>heat exchanger</b> tied to the plant.',
+        'We build <b>in phases</b>, so capacity grows with demand. Foundation runs 100 kW today, adds 2 MW in February 2027, and can reach 12 MW.'
       ],
       terms: [
-        ['Latent infrastructure', 'Power, buildings and pipes that already exist but are underused.'],
-        ['Metro site', 'A data centre inside a city, close to the people and companies using it.'],
-        ['Node', 'One site in the network. Foundation in Calgary is node one.'],
-        ['Pipeline', 'Sites being evaluated or prepared to join the network.']
+        ['Liquid cooling', 'Cooling servers with liquid instead of air. It removes heat faster and makes the heat easier to reuse.'],
+        ['Heat exchanger', 'A set of metal plates that moves heat from one liquid loop to another without mixing them.'],
+        ['District heating', 'One central plant heating many buildings through underground pipes.'],
+        ['Phased build', 'Adding capacity in steps inside the same site, only as it is needed.']
       ],
-      cap: 'Foundation is node one. More city sites link in over time.',
-      fig: function () {
-        var n = [[60, 70, 'on'], [150, 50, 'dev'], [250, 80, 'dev'], [310, 160, 'soon'], [200, 190, 'soon'], [90, 180, 'soon']];
-        var s = '<svg viewBox="0 0 360 240" aria-hidden="true">';
-        for (var i = 1; i < n.length; i++) s += '<path class="' + (n[i][2] === 'dev' ? 'dg-flow amber' : 'dg-line') + '" ' + (n[i][2] === 'soon' ? 'stroke-dasharray="2 5"' : '') + ' d="M' + n[0][0] + ' ' + n[0][1] + ' L' + n[i][0] + ' ' + n[i][1] + '"/>';
-        n.forEach(function (p, i) {
-          if (p[2] === 'on') s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="14" fill="#4fb3f033"/><circle cx="' + p[0] + '" cy="' + p[1] + '" r="7" fill="#4fb3f0" stroke="#fff" stroke-width="2"/>';
-          else if (p[2] === 'dev') s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="6" fill="#e79a17"/>';
-          else s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="6" fill="#fff" stroke="#8fa2b8" stroke-width="1.5"/>';
-        });
-        s += '<text class="dg-t" x="40" y="102">Calgary</text><text class="dg-s" x="40" y="116">Node 01 · online</text></svg>';
-        return s;
-      }
+      cap: 'Power becomes AI work. The heat left over goes into a heating loop instead of the air.'
     }
   ];
 
-  var cur = 0;
-  var NS = 'http://www.w3.org/2000/svg';
+  /* ---------- Hub ---------- */
   var hub = document.getElementById('hub');
-  var tabs = document.getElementById('tabs');
-
-  // Hub diagram
-  var cx = 320, cy = 220, rx = 240, ry = 160;
-  var spokes = [], pills = [], tabBtns = [];
+  var cx = 380, cy = 235, rx = 280, ry = 168, CW = 176, CH = 64;
+  var nodes = [], links = [];
   P.forEach(function (p, i) {
     var a = (-90 + i * 72) * Math.PI / 180;
     p.x = cx + rx * Math.cos(a); p.y = cy + ry * Math.sin(a);
-    var l = document.createElementNS(NS, 'line');
-    l.setAttribute('x1', cx); l.setAttribute('y1', cy); l.setAttribute('x2', p.x); l.setAttribute('y2', p.y);
-    l.setAttribute('class', 'spoke'); hub.appendChild(l); spokes.push(l);
+  });
+  var defs = '<defs><linearGradient id="hubg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16395e"/><stop offset="1" stop-color="#0d2136"/></linearGradient>' +
+    '<filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0d2136" flood-opacity=".12"/></filter></defs>';
+  var ring = '<ellipse cx="' + cx + '" cy="' + cy + '" rx="' + rx + '" ry="' + ry + '" fill="none" stroke="#e2eaf2" stroke-width="1.5" stroke-dasharray="2 8"/>';
+  hub.innerHTML = defs + ring;
+  P.forEach(function (p) {
+    var l = document.createElementNS(NS, 'path');
+    l.setAttribute('d', 'M' + cx + ' ' + cy + ' L' + p.x + ' ' + p.y);
+    l.setAttribute('class', 'spoke'); hub.appendChild(l); links.push(l);
   });
   var center = document.createElementNS(NS, 'g');
-  center.innerHTML = '<circle class="center-c" cx="' + cx + '" cy="' + cy + '" r="82"/>' +
-    '<text class="center-t" x="' + cx + '" y="' + (cy - 2) + '" text-anchor="middle">Simply</text>' +
-    '<text class="center-t" x="' + cx + '" y="' + (cy + 22) + '" text-anchor="middle">Silicon</text>' +
-    '<text class="center-s" x="' + cx + '" y="' + (cy + 44) + '" text-anchor="middle">5 core pieces</text>';
+  center.innerHTML = '<rect x="' + (cx - 104) + '" y="' + (cy - 44) + '" width="208" height="88" rx="22" fill="url(#hubg)" filter="url(#sh)"/>' +
+    '<text class="center-t" x="' + cx + '" y="' + (cy + 9) + '" text-anchor="middle">simply silicon.</text>';
   hub.appendChild(center);
   P.forEach(function (p, i) {
     var g = document.createElementNS(NS, 'g');
     g.setAttribute('class', 'pillar'); g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button');
-    g.setAttribute('aria-label', 'Open ' + p.name);
-    g.innerHTML = '<circle class="bg" cx="' + p.x + '" cy="' + p.y + '" r="54"/>' +
-      '<g transform="translate(' + (p.x - 12) + ' ' + (p.y - 30) + ')"><path class="ic" d="' + p.icon + '"/></g>' +
-      '<text class="pt" x="' + p.x + '" y="' + (p.y + 14) + '" text-anchor="middle">' + p.name + '</text>' +
-      '<text class="pn" x="' + p.x + '" y="' + (p.y + 32) + '" text-anchor="middle">0' + (i + 1) + '</text>';
+    g.setAttribute('aria-label', 'Open ' + p.name); g.setAttribute('aria-expanded', 'false');
+    var x = p.x - CW / 2, y = p.y - CH / 2;
+    g.innerHTML = '<rect class="bg" x="' + x + '" y="' + y + '" width="' + CW + '" height="' + CH + '" rx="16" filter="url(#sh)"/>' +
+      '<circle class="ic-bg" cx="' + (x + 34) + '" cy="' + p.y + '" r="20"/>' +
+      '<g class="ic" transform="translate(' + (x + 22) + ' ' + (p.y - 12) + ')">' + p.icon + '</g>' +
+      '<text class="pt" x="' + (x + 64) + '" y="' + (p.y + 6) + '">' + p.name + '</text>';
     g.addEventListener('click', function () { show(i, true); });
     g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(i, true); } });
-    hub.appendChild(g); pills.push(g);
-
-    var t = document.createElement('button');
-    t.type = 'button'; t.setAttribute('role', 'tab'); t.textContent = '0' + (i + 1) + ' ' + p.name;
-    t.addEventListener('click', function () { show(i, false); });
-    tabs.appendChild(t); tabBtns.push(t);
+    hub.appendChild(g); nodes.push(g);
   });
 
+  // phone: the same pieces as a simple grid of buttons
+  var grid = document.createElement('div');
+  grid.className = 'pill-grid';
+  P.forEach(function (p, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('aria-expanded', 'false');
+    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + p.icon + '</svg><span>' + p.name + '</span>';
+    b.addEventListener('click', function () { show(i, true); });
+    grid.appendChild(b);
+  });
+  hub.parentNode.appendChild(grid);
+  var gridBtns = grid.querySelectorAll('button');
+
+  /* ---------- Detail (closed until a piece is picked) ---------- */
+  var detail = document.getElementById('detail');
+  var cur = -1;
   function show(i, scroll) {
     cur = (i + P.length) % P.length;
     var p = P[cur];
-    pills.forEach(function (g, k) { g.classList.toggle('on', k === cur); });
-    spokes.forEach(function (l, k) { l.classList.toggle('on', k === cur); });
-    tabBtns.forEach(function (t, k) { t.setAttribute('aria-selected', String(k === cur)); });
-    document.getElementById('dKicker').textContent = '0' + (cur + 1) + ' · ' + p.name;
+    detail.hidden = false;
+    nodes.forEach(function (g, k) { g.classList.toggle('on', k === cur); g.setAttribute('aria-expanded', String(k === cur)); });
+    links.forEach(function (l, k) { l.classList.toggle('on', k === cur); });
+    gridBtns.forEach(function (b, k) { b.classList.toggle('on', k === cur); b.setAttribute('aria-expanded', String(k === cur)); });
     document.getElementById('dOne').textContent = p.one;
     document.getElementById('dHow').innerHTML = p.how.map(function (h) { return '<p>' + h + '</p>'; }).join('');
     var terms = document.getElementById('dTerms');
@@ -223,17 +281,14 @@
       b.addEventListener('click', function () { var o = b.getAttribute('aria-expanded') === 'true'; b.setAttribute('aria-expanded', String(!o)); body.hidden = o; });
       terms.appendChild(d);
     });
-    document.getElementById('dFig').innerHTML = p.fig() + '<figcaption>' + p.cap + '</figcaption>';
+    document.getElementById('dFig').innerHTML = FIG[p.id]() + '<figcaption>' + p.cap + '</figcaption>';
     document.getElementById('dNext').innerHTML = 'Next: ' + P[(cur + 1) % P.length].name + ' <span class="arrow" aria-hidden="true">→</span>';
     document.getElementById('dPrev').textContent = '← ' + P[(cur - 1 + P.length) % P.length].name;
-    var tb = tabBtns[cur]; tabs.scrollLeft = tb.offsetLeft - (tabs.clientWidth - tb.offsetWidth) / 2;
-    if (scroll) { var tt = document.getElementById('tabs').getBoundingClientRect().top + window.scrollY - 80; window.scrollTo({ top: tt, behavior: 'smooth' }); }
-    
+    if (scroll) {
+      var top = detail.getBoundingClientRect().top + window.scrollY - 90;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
   }
   document.getElementById('dNext').addEventListener('click', function () { show(cur + 1, true); });
   document.getElementById('dPrev').addEventListener('click', function () { show(cur - 1, true); });
-
-  var start = 0;
-  
-  show(start, false);
 })();
