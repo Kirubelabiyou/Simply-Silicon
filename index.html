@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simply Silicon</title>
+<meta name="description" content="Simply Silicon owns and operates air-gapped AI infrastructure in major cities. Foundation, our first site, brings 12 MW of secure AI capacity to downtown Calgary.">
+<meta name="theme-color" content="#06090f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="Simply Silicon home">
+      <svg viewBox="0 0 26 26" aria-hidden="true"><rect x="1" y="1" width="24" height="24" rx="2" fill="none" stroke="#e9eef5" stroke-width="1.6"/><rect x="6" y="6" width="14" height="3" fill="#e9eef5"/><rect x="6" y="11.5" width="14" height="3" fill="#e9eef5"/><rect x="6" y="17" width="9" height="3" fill="#ff6b2c"/></svg>
+      Simply Silicon
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a class="hide-sm" href="#network">Network</a>
+      <a class="hide-sm" href="#foundation" data-open-foundation>Foundation</a>
+      <a href="about.html">How it works</a>
+      <a class="btn" href="https://www.linkedin.com/company/simply-silicon/" target="_blank" rel="noopener">Connect</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-grid-bg" aria-hidden="true"></div>
+    <div class="wrap hero-main">
+      <div>
+        <p class="eyebrow">Air-gapped AI infrastructure · Calgary</p>
+        <h1><span class="line">Secure,</span><span class="line">localized</span><span class="line line--heat">compute</span><span class="line">at scale.</span></h1>
+        <p class="lede">We turn power plants and utility sites that already sit inside cities into private computers for AI. Our first site, Foundation, is running in downtown Calgary today.</p>
+        <div class="hero-ctas">
+          <a class="btn btn--heat" href="#network">Explore the network <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="about.html">How it works</a>
+        </div>
+      </div>
+      <div class="racks-wrap" aria-hidden="true">
+        <div class="racks" id="racks"><div class="heat-haze"></div></div>
+        <p class="rack-caption">Bare metal GPU servers · Phase 1 online</p>
+      </div>
+    </div>
+    <div class="wrap" style="padding-block: 0">
+      <div class="stats">
+        <div class="stat"><b class="num">12<small>MW</small></b><span>Secure AI capacity planned at Foundation</span></div>
+        <div class="stat"><b>n+1</b><span>Redundant power, so one failure never stops the site</span></div>
+        <div class="stat"><b class="num">7<small>km</small></b><span>Private fiber under downtown Calgary</span></div>
+        <div class="stat"><b class="num">25+</b><span>Buildings connected to that fiber</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Network map -->
+  <section class="band" id="network">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">The network</p>
+          <h2>One network, built city by city.</h2>
+        </div>
+        <p>Foundation in Calgary is the first node. Each new site links in, until the sites form a separate, private network for AI. Tap a city to go there.</p>
+      </div>
+
+      <div class="map-shell" id="mapShell">
+        <svg id="map" viewBox="0 20 1000 470" role="img" aria-label="World map of Simply Silicon sites"></svg>
+        <div class="map-hud"><span id="hudLeft">Global network</span><span id="hudRight" class="num"></span></div>
+        <div class="map-back" id="mapBack" hidden><button class="btn" type="button">← World view</button></div>
+        <div class="city-card" id="cityCard" hidden></div>
+      </div>
+
+      <div class="legend">
+        <span><i class="sw sw--online"></i>Online</span>
+        <span><i class="sw sw--dev"></i>In development</span>
+        <span><i class="sw sw--soon"></i>Coming soon</span>
+      </div>
+      <ul class="node-list" id="nodeList"></ul>
+    </div>
+  </section>
+
+  <!-- What we do -->
+  <section class="band band--raised">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">What we do</p>
+          <h2>Three moves. That's the whole idea.</h2>
+        </div>
+        <p>We are rethinking the physical data centre and its networking from the ground up. In plain terms, it comes down to this.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="k">01 · Power</span>
+          <h3>Find power that's already in the city.</h3>
+          <p>Utility sites like heating plants already have big grid connections and backup generation. We use that instead of waiting years to build new.</p>
+          <svg viewBox="0 0 300 88" aria-hidden="true"><path d="M0 60 H90 L110 30 L130 70 L150 20 L170 60 H300" fill="none" stroke="#ff6b2c" stroke-width="2"/><path d="M0 76 H300" stroke="#1f2a3a"/></svg>
+        </div>
+        <div class="step">
+          <span class="k">02 · Compute</span>
+          <h3>Fill it with GPU servers.</h3>
+          <p>We install bare metal servers built for inference, the part of AI that answers questions in real time. No shared cloud layer on top.</p>
+          <svg viewBox="0 0 300 88" aria-hidden="true"><g fill="none" stroke="#8093ad"><rect x="20" y="10" width="60" height="70"/><rect x="120" y="10" width="60" height="70"/><rect x="220" y="10" width="60" height="70"/></g><g fill="#ff6b2c"><rect x="28" y="20" width="44" height="6"/><rect x="28" y="32" width="44" height="6"/><rect x="128" y="20" width="44" height="6"/><rect x="128" y="32" width="44" height="6"/><rect x="128" y="44" width="44" height="6"/><rect x="228" y="20" width="44" height="6"/></g></svg>
+        </div>
+        <div class="step">
+          <span class="k">03 · Network</span>
+          <h3>Link sites on private fiber.</h3>
+          <p>Private fiber, kept physically apart from the public internet, connects our sites and the buildings around them. That keeps it fast and secure.</p>
+          <svg viewBox="0 0 300 88" aria-hidden="true"><g stroke="#f3b642" stroke-width="1.5" fill="none"><path d="M30 60 C90 10 140 10 150 44"/><path d="M150 44 C170 80 230 80 270 30"/></g><g fill="#e9eef5"><circle cx="30" cy="60" r="5"/><circle cx="150" cy="44" r="5"/><circle cx="270" cy="30" r="5"/></g></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workloads -->
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Who it's for</p>
+          <h2>For AI that can't sit on the public internet.</h2>
+        </div>
+        <p>Physical separation for safety and latency sensitive AI. These are the customers who need it most.</p>
+      </div>
+      <div class="work">
+        <article><span class="tag">Banks · Utilities · Energy</span><h3>Regulated enterprise</h3><p>Companies with strict rules on where their data lives. Their AI runs in a known building, in their city, on their own servers.</p></article>
+        <article><span class="tag">Physically separate</span><h3>High-security workloads</h3><p>Work that should never touch shared networks. An air-gapped network means there is no path in from the public internet.</p></article>
+        <article><span class="tag">Always on</span><h3>Critical AI services</h3><p>AI that people depend on, backed by n+1 power and on-site generation so a single failure doesn't take it down.</p></article>
+        <article><span class="tag">Low latency</span><h3>Live real-time AI</h3><p>Answers that need to arrive instantly. The servers are downtown, a few kilometres of private fiber from the users.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Growth -->
+  <section class="band band--raised" id="growth">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Growth at Foundation</p>
+          <h2>From 100 kW to 12 MW.</h2>
+        </div>
+        <p>Foundation grows in phases inside the same plant. The bars are drawn to scale, which is why Phase 1 is a sliver. That's the room left to grow.</p>
+      </div>
+      <div class="phases" id="phases">
+        <div class="phase phase--live"><div class="pl">Phase 1<small>Online now</small></div><div class="track"><div class="fill" data-mw="0.1"></div></div><div class="pv">100 kW</div></div>
+        <div class="phase"><div class="pl">Phase 2<small>Feb 2027</small></div><div class="track"><div class="fill" data-mw="2"></div></div><div class="pv">2 MW</div></div>
+        <div class="phase phase--plan"><div class="pl">Phase 3<small>Full build</small></div><div class="track"><div class="fill" data-mw="12"></div></div><div class="pv">12 MW</div></div>
+        <div class="phase-scale"><span class="pad"></span><div><span>0</span><span>3</span><span>6</span><span>9</span><span>12 MW</span></div><span></span></div>
+      </div>
+      <div class="pipeline">
+        <div><b class="num">15+</b><span>Sites in the pipeline</span></div>
+        <div><b class="num">200+ MW</b><span>Planned capacity</span></div>
+        <div><b class="num">12+</b><span>Major cities</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="band">
+    <div class="wrap cta-band">
+      <div>
+        <p class="eyebrow">Go deeper</p>
+        <h2>See how each piece works.</h2>
+        <p class="lede">Power, compute, fiber, security and engineering, explained in plain words.</p>
+      </div>
+      <a class="btn btn--heat" href="about.html">How it works <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Simply Silicon · Air-gapped AI infrastructure in major cities.</span>
+    <span>Calgary, Alberta</span>
+  </div>
+</footer>
+
+<!-- Foundation 3D view -->
+<div class="fnd" id="foundation" hidden role="dialog" aria-modal="true" aria-labelledby="fndTitle">
+  <div class="fnd-stage" id="fndStage">
+    <div class="fnd-top">
+      <button class="btn" type="button" id="fndClose">← Back to map</button>
+      <span class="badge badge--online"><i class="sw sw--online" style="width:7px;height:7px"></i>Online</span>
+    </div>
+    <div class="fnd-layers" id="fndLayers"></div>
+    <div class="fnd-hint">Drag to rotate · pinch or scroll to zoom</div>
+  </div>
+  <aside class="fnd-side">
+    <p class="addr">Site 01 · 9 Ave SE · Downtown Calgary</p>
+    <h2 id="fndTitle">Foundation</h2>
+    <p>Foundation brings 12 MW of secure AI capacity to downtown Calgary. It sits inside an existing district heating plant, with dual redundant grid feeds, on-site generation and below-grade thermal conduit paths.</p>
+    <div class="spec">
+      <div><b class="num">12 MW</b><span>AI capacity at full build</span></div>
+      <div><b class="num">14 MVA</b><span>Base plant power, n+1</span></div>
+      <div><b class="num">7 km</b><span>Private fiber</span></div>
+      <div><b class="num">25+</b><span>Connected buildings</span></div>
+    </div>
+    <h4>Build phases</h4>
+    <ul class="plist">
+      <li><span class="pn">Phase 1</span><span class="pw">100 kW</span><span class="ps live">● Online</span></li>
+      <li><span class="pn">Phase 2</span><span class="pw">2 MW</span><span class="ps">February 2027</span></li>
+      <li><span class="pn">Phase 3</span><span class="pw">12 MW</span><span class="ps">Full build</span></li>
+    </ul>
+    <h4>The site</h4>
+    <ul class="plist">
+      <li><span class="pn">Base plant</span><span class="pw" style="font-size:14px">District heating</span></li>
+      <li><span class="pn">Power</span><span class="pw" style="font-size:14px">14 MVA n+1</span></li>
+      <li><span class="pn">Stack</span><span class="pw" style="font-size:14px">Utility-grade</span></li>
+      <li><span class="pn">Heating</span><span class="pw" style="font-size:14px">District loop</span></li>
+    </ul>
+    <div class="photos" id="fndPhotos" hidden></div>
+    <p class="fnd-note">3D view is an illustrative model built from published site details. Not to scale.</p>
+  </aside>
+</div>
+
+<script src="assets/js/map-data.js"></script>
+<script src="assets/js/site.js"></script>
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
+<script type="module" src="assets/js/foundation3d.js"></script>
+</body>
+</html>

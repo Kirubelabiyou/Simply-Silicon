@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How Simply Silicon Works</title>
+<meta name="description" content="Power, compute, fiber, security and engineering: how Simply Silicon builds secure, localized AI compute, explained in plain words.">
+<meta name="theme-color" content="#06090f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="Simply Silicon home">
+      <svg viewBox="0 0 26 26" aria-hidden="true"><rect x="1" y="1" width="24" height="24" rx="2" fill="none" stroke="#e9eef5" stroke-width="1.6"/><rect x="6" y="6" width="14" height="3" fill="#e9eef5"/><rect x="6" y="11.5" width="14" height="3" fill="#e9eef5"/><rect x="6" y="17" width="9" height="3" fill="#ff6b2c"/></svg>
+      Simply Silicon
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a class="hide-sm" href="./#network">Network</a>
+      <a class="hide-sm" href="./#foundation">Foundation</a>
+      <a href="about.html" aria-current="page">How it works</a>
+      <a class="btn" href="https://www.linkedin.com/company/simply-silicon/" target="_blank" rel="noopener">Connect</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="about-hero">
+    <div class="wrap">
+      <p class="eyebrow">How it works</p>
+      <h1>Simply Silicon, explained.</h1>
+      <p class="lede">Five pieces make the whole thing work. Pick one to start. Each opens up in layers: the idea in one line, how it works, then the technical terms in plain words.</p>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top: 8px" id="explore">
+    <div class="wrap">
+      <div class="hub-wrap">
+        <svg class="hub" id="hub" viewBox="0 0 640 440" role="group" aria-label="The five core pieces of Simply Silicon"></svg>
+        <p class="hub-hint">Tap a piece to open it</p>
+      </div>
+      <div class="tabs" role="tablist" id="tabs" aria-label="Core pieces"></div>
+
+      <div class="detail" id="detail" aria-live="polite">
+        <div>
+          <span class="kicker" id="dKicker"></span>
+          <p class="oneline" id="dOne"></p>
+          <div class="level">
+            <h3>How it works</h3>
+            <div id="dHow"></div>
+          </div>
+          <div class="level">
+            <h3>Go deeper: the terms</h3>
+            <div class="terms" id="dTerms"></div>
+          </div>
+          <div class="detail-nav">
+            <button class="btn" type="button" id="dPrev">← Previous</button>
+            <button class="btn btn--heat" type="button" id="dNext">Next <span class="arrow" aria-hidden="true">→</span></button>
+          </div>
+        </div>
+        <figure class="detail-fig" id="dFig"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--raised">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Put together</p>
+          <h2>One request, start to finish.</h2>
+        </div>
+        <p>Here is what happens when a bank downtown asks its AI a question on Simply Silicon.</p>
+      </div>
+      <div class="journey">
+        <div class="jstep"><span class="k">01</span><h3>The question</h3><p>An app in an office tower sends a request to its AI model.</p><div class="jbar" style="--jd:0s"></div></div>
+        <div class="jstep"><span class="k">02</span><h3>Private fiber</h3><p>It travels a few kilometres under the street on our own fiber. No public internet.</p><div class="jbar" style="--jd:.5s"></div></div>
+        <div class="jstep"><span class="k">03</span><h3>Air-gapped network</h3><p>It enters a network with no connection to the outside world.</p><div class="jbar" style="--jd:1s"></div></div>
+        <div class="jstep"><span class="k">04</span><h3>GPU server</h3><p>A bare metal GPU server at Foundation runs the model, on n+1 power from the plant.</p><div class="jbar" style="--jd:1.5s"></div></div>
+        <div class="jstep"><span class="k">05</span><h3>The answer</h3><p>The answer takes the same short, private path back. Fast and contained.</p><div class="jbar" style="--jd:2s"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap cta-band">
+      <div>
+        <p class="eyebrow">The bigger picture</p>
+        <h2>A second internet for AI.</h2>
+        <p class="lede">The long-term goal is to connect these city sites into their own network for the most capable AI models, so they don't break the internet humans need.</p>
+      </div>
+      <a class="btn btn--heat" href="./#network">See the network <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Simply Silicon · Air-gapped AI infrastructure in major cities.</span>
+    <span>Calgary, Alberta</span>
+  </div>
+</footer>
+
+<script src="assets/js/about.js"></script>
+</body>
+</html>
