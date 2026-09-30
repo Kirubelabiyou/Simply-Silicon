@@ -10,7 +10,6 @@
   ];
   var LINKEDIN = 'https://www.linkedin.com/company/simply-silicon/';
   var current = document.body.getAttribute('data-page') || 'home';
-  var MARK = '<svg viewBox="0 0 28 28" aria-hidden="true"><rect x="1" y="1" width="26" height="26" rx="7" fill="#4fb3f0"/><rect x="7" y="7.5" width="14" height="3" rx="1.5" fill="#fff"/><rect x="7" y="12.5" width="14" height="3" rx="1.5" fill="#fff"/><rect x="7" y="17.5" width="8" height="3" rx="1.5" fill="#0b1b2e"/></svg>';
   var LI = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.44 0h4.37v1.92h.06c.61-1.15 2.1-2.37 4.32-2.37 4.62 0 5.47 3.04 5.47 7v7.45h-4.56v-6.6c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.53 1.72-2.53 3.49V22H7.66V8z"/></svg>';
 
   function cur(p) { return p.key === current ? ' aria-current="page"' : ''; }
@@ -22,7 +21,7 @@
     hdr.innerHTML =
       '<div class="wrap">' +
       '<button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-drawer"><span></span></button>' +
-      '<a class="brand" href="./" aria-label="Simply Silicon home">' + MARK + '<span>Simply <b>Silicon</b></span></a>' +
+      '<a class="brand" href="./" aria-label="Simply Silicon home">Simply Silicon</a>' +
       '<nav class="menu" aria-label="Main">' + PAGES.map(function (p) { return '<a href="' + p.href + '"' + cur(p) + '>' + p.name + '</a>'; }).join('') + '</nav>' +
       '<a class="btn btn--primary btn--sm hdr-cta" href="' + LINKEDIN + '" target="_blank" rel="noopener">Connect</a>' +
       '</div>';
@@ -35,9 +34,9 @@
   drawer.innerHTML =
     '<div class="drawer-scrim"></div>' +
     '<div class="drawer-panel">' +
-    '<div class="drawer-top"><a class="brand" href="./">' + MARK + '<span>Simply <b>Silicon</b></span></a><button class="drawer-close" type="button" aria-label="Close menu">×</button></div>' +
+    '<div class="drawer-top"><a class="brand" href="./">Simply Silicon</a><button class="drawer-close" type="button" aria-label="Close menu">×</button></div>' +
     '<nav aria-label="Main">' + PAGES.map(function (p) { return '<a href="' + p.href + '"' + cur(p) + '>' + p.name + '<small>' + p.note + '</small></a>'; }).join('') + '</nav>' +
-    '<div class="drawer-foot"><a class="btn btn--primary" href="' + LINKEDIN + '" target="_blank" rel="noopener">Connect on LinkedIn</a><span>435 9 Ave SE · Calgary, Alberta</span></div>' +
+    '<div class="drawer-foot"><span class="brand">Simply Silicon</span><span>435 9 Ave SE<br>Calgary, Alberta, Canada</span><small>Air-gapped AI infrastructure in major cities.</small></div>' +
     '</div>';
   document.body.appendChild(drawer);
   var burger = hdr && hdr.querySelector('.burger');
@@ -56,7 +55,7 @@
     ftr.innerHTML =
       '<div class="wrap">' +
       '<div class="ftr-top">' +
-      '<div class="ftr-about"><a class="brand" href="./">' + MARK + '<span>Simply <b>Silicon</b></span></a>' +
+      '<div class="ftr-about"><a class="brand" href="./">Simply Silicon</a>' +
       '<p>Air-gapped AI infrastructure in major cities. Secure, localized compute at scale.</p>' +
       '<div class="social"><a href="' + LINKEDIN + '" target="_blank" rel="noopener" aria-label="Simply Silicon on LinkedIn">' + LI + '</a></div></div>' +
       '<div><h4>Company</h4><ul><li><a href="./">Home</a></li><li><a href="platform.html">Platform</a></li><li><a href="workloads.html">Workloads</a></li></ul></div>' +
