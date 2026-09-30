@@ -6,12 +6,8 @@
   /* ---------- Hero GPU racks ---------- */
   var racks = document.getElementById('racks');
   if (racks) {
-    var plans = [
-      ['n', 'g', 'g', 'g', 'n', 'g', 'g', 'g', 'n'],
-      ['n', 'g', 'g', 'g', 'g', 'n', 'g', 'g', 'g', 'n'],
-      ['n', 'g', 'g', 'g', 'g', 'g', 'n', 'g', 'g', 'g', 'n'],
-      ['n', 'g', 'g', 'g', 'n', 'g', 'g', 'g', 'g', 'n']
-    ];
+    var plan = ['n', 'g', 'g', 'g', 'g', 'n', 'g', 'g', 'g', 'g', 'n'];
+    var plans = [plan, plan, plan, plan];
     plans.forEach(function (units, r) {
       var rack = document.createElement('div');
       rack.className = 'rack';
@@ -271,16 +267,6 @@
     gridBtns.forEach(function (b, k) { b.classList.toggle('on', k === cur); b.setAttribute('aria-expanded', String(k === cur)); });
     document.getElementById('dOne').textContent = p.one;
     document.getElementById('dHow').innerHTML = p.how.map(function (h) { return '<p>' + h + '</p>'; }).join('');
-    var terms = document.getElementById('dTerms');
-    terms.innerHTML = '';
-    p.terms.forEach(function (t, k) {
-      var d = document.createElement('div'); d.className = 'term';
-      var id = 'term-' + p.id + '-' + k;
-      d.innerHTML = '<button type="button" aria-expanded="false" aria-controls="' + id + '"><span class="tn">' + t[0] + '</span><span class="tx" aria-hidden="true">+</span></button><p class="td" id="' + id + '" hidden>' + t[1] + '</p>';
-      var b = d.querySelector('button'), body = d.querySelector('.td');
-      b.addEventListener('click', function () { var o = b.getAttribute('aria-expanded') === 'true'; b.setAttribute('aria-expanded', String(!o)); body.hidden = o; });
-      terms.appendChild(d);
-    });
     document.getElementById('dFig').innerHTML = FIG[p.id]() + '<figcaption>' + p.cap + '</figcaption>';
     document.getElementById('dNext').innerHTML = 'Next: ' + P[(cur + 1) % P.length].name + ' <span class="arrow" aria-hidden="true">→</span>';
     document.getElementById('dPrev').textContent = '← ' + P[(cur - 1 + P.length) % P.length].name;

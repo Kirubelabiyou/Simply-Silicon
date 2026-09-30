@@ -18,78 +18,34 @@
 <main>
   <section class="page-head">
     <div class="wrap">
-      <h1>For AI that can't compromise.</h1>
-      <p class="lede">A physically secure inference network for applications that cannot compromise. Physical separation for safety and latency sensitive AI.</p>
+      <h1>Physical separation for safety- and latency-sensitive AI.</h1>
+      <p class="lede">A physically-secure inference network for applications that cannot compromise.</p>
     </div>
   </section>
 
-  <section class="band band--white" style="padding-block: clamp(20px, 3vw, 40px)">
+  <section class="band" style="padding-top: clamp(12px, 2vw, 24px)">
     <div class="wrap">
-      <article class="wl">
-        <div><span class="n">01</span><h2>Regulated enterprise</h2></div>
-        <div>
-          <p>Banks, utilities and energy companies live under strict rules about where their data goes and who can touch it.</p>
-          <p>On Simply Silicon their AI runs in a known building in their own city, on bare metal servers that are theirs alone. They can point to exactly where the data is.</p>
-          <ul><li class="chip">Banks</li><li class="chip">Utilities</li><li class="chip">Energy companies</li></ul>
-        </div>
-      </article>
-      <article class="wl">
-        <div><span class="n">02</span><h2>High-security workloads</h2></div>
-        <div>
-          <p>Some work should never touch a shared network. An air-gapped network has no link to the public internet, so there is no route in from outside.</p>
-          <p>That protection comes from how the cables run, not only from software settings.</p>
-          <ul><li class="chip">Air-gapped network</li><li class="chip">Physical separation</li></ul>
-        </div>
-      </article>
-      <article class="wl">
-        <div><span class="n">03</span><h2>Critical AI services</h2></div>
-        <div>
-          <p>AI that people and systems depend on needs to stay up. Foundation runs on n+1 power with dual redundant grid feeds and on-site generation.</p>
-          <p>If any single part fails, the site keeps running.</p>
-          <ul><li class="chip">n+1 redundancy</li><li class="chip">On-site generation</li></ul>
-        </div>
-      </article>
-      <article class="wl">
-        <div><span class="n">04</span><h2>Live real-time AI</h2></div>
-        <div>
-          <p>Some AI answers have to arrive instantly. Every kilometre between the user and the server adds delay.</p>
-          <p>Our servers sit downtown, a short run of private fiber from the buildings they serve. That keeps latency low and steady.</p>
-          <ul><li class="chip">Low latency</li><li class="chip">Private fiber</li><li class="chip">Metro site</li></ul>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <h2>Why not the public cloud?</h2>
-        </div>
-        <p>A plain comparison of where AI usually runs and where it runs with us.</p>
-      </div>
-      <div class="table-wrap">
-        <table class="compare">
-          <thead><tr><th scope="col"></th><th scope="col">Typical cloud AI</th><th scope="col">Simply Silicon</th></tr></thead>
-          <tbody>
-            <tr><th scope="row">Network</th><td>Shared, reached over the public internet</td><td class="us">Air-gapped, physically separate</td></tr>
-            <tr><th scope="row">Servers</th><td>Virtual slices shared with other customers</td><td class="us">Bare metal, dedicated</td></tr>
-            <tr><th scope="row">Location</th><td>Large campuses, often far from users</td><td class="us">Inside the city, near the users</td></tr>
-            <tr><th scope="row">Path to users</th><td>Common carrier networks</td><td class="us">Private fiber to connected buildings</td></tr>
-            <tr><th scope="row">Built for</th><td>General use</td><td class="us">AI inference</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <section class="band" style="padding-top:0">
-    <div class="wrap">
-      <div class="cta">
-        <div>
-          <h2>Have a workload that fits?</h2>
-        </div>
-        <div class="btns"><a class="btn btn--primary" href="https://www.linkedin.com/company/simply-silicon/" target="_blank" rel="noopener">Connect on LinkedIn</a><a class="btn" href="foundation.html">See Foundation</a></div>
+      <div class="wl-grid">
+        <article class="card wl-card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10 12 4l9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg>
+          <h2>Regulated enterprise</h2>
+          <p>Data stays in a known building, in the same city, on dedicated bare metal.</p>
+        </article>
+        <article class="card wl-card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5.5c0 4.6-3 8.2-7 9.5-4-1.3-7-4.9-7-9.5V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          <h2>High-security workloads</h2>
+          <p>An air-gapped network. No path in from the public internet.</p>
+        </article>
+        <article class="card wl-card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+          <h2>Critical AI services</h2>
+          <p>n+1 redundant power, dual grid feeds and on-site generation.</p>
+        </article>
+        <article class="card wl-card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 13V9M12 2v3M9 2h6"/></svg>
+          <h2>Live real-time AI</h2>
+          <p>Inference downtown, a short private fiber run from the buildings it serves.</p>
+        </article>
       </div>
     </div>
   </section>

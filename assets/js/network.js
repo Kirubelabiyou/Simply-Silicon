@@ -28,7 +28,6 @@
     soon: { label: 'Coming soon', chip: 'chip--soon', dot: 'dot--soon', text: 'Planned for a future wave as the network grows.' }
   };
   SITES.forEach(function (s) { s.x = window.SS_CITY_XY[s.id][0]; s.y = window.SS_CITY_XY[s.id][1]; });
-  var DOTS = window.SS_MAP.dots.split(' ').map(function (p) { var a = p.split(','); return [+a[0], +a[1]]; });
 
   var W = 1, H = 1, dpr = 1, vb = { x: 0, y: 0, w: 1000 };
   function upp() { return vb.w / W; }
@@ -36,7 +35,7 @@
   function phone() { return W < 700; }
   function fit() {
     var a = H / W;
-    if (phone()) { var w = 800; return { x: 560 - w / 2, y: 250 - w * a / 2, w: w }; }
+    if (phone()) { var w = 820; return { x: 525 - w / 2, y: 262 - w * a / 2, w: w }; }
     var w2 = Math.max(1000, 460 / a) * 1.04;
     return { x: 500 - w2 / 2, y: 252 - w2 * a / 2, w: w2 };
   }
@@ -52,19 +51,18 @@
   }
 
   var sel = null;
+  var WORLD = window.SS_WORLD, LAND = new Path2D(WORLD.land), BORD = new Path2D(WORLD.borders), GRAT = new Path2D(WORLD.grat), SPH = new Path2D(WORLD.sphere);
   function draw() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
-    var k = W / vb.w, r = Math.max(.9, Math.min(4.5, 2.0 * k));
-    ctx.fillStyle = '#c3d3e2';
-    ctx.beginPath();
-    var x0 = vb.x - 6, x1 = vb.x + vb.w + 6, y0 = vb.y - 6, y1 = vb.y + H * upp() + 6;
-    for (var i = 0; i < DOTS.length; i++) {
-      var d = DOTS[i]; if (d[0] < x0 || d[0] > x1 || d[1] < y0 || d[1] > y1) continue;
-      var px = (d[0] - vb.x) * k, py = (d[1] - vb.y) * k;
-      ctx.moveTo(px + r, py); ctx.arc(px, py, r, 0, 6.2832);
-    }
-    ctx.fill();
+    var k = W / vb.w;
+    ctx.setTransform(k * dpr, 0, 0, k * dpr, -vb.x * k * dpr, -vb.y * k * dpr);
+    ctx.lineWidth = .6 / k; ctx.strokeStyle = 'rgba(27,111,184,.10)'; ctx.stroke(GRAT);
+    ctx.save(); ctx.shadowColor = 'rgba(13,33,54,.18)'; ctx.shadowBlur = 14 * dpr; ctx.shadowOffsetY = 3 * dpr;
+    ctx.fillStyle = '#fbfdff'; ctx.fill(LAND); ctx.restore();
+    ctx.lineWidth = .7 / k; ctx.strokeStyle = '#d3e0ec'; ctx.stroke(BORD);
+    ctx.lineWidth = 1 / k; ctx.strokeStyle = '#c3d4e4'; ctx.stroke(LAND);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     var hp = toPx(SITES[0].x, SITES[0].y), out = '';
     SITES.slice(1).forEach(function (s) {
@@ -145,7 +143,7 @@
     flyTo(around(s.x, s.y, 14), reduce ? 1 : 900, function () {
       net3d.hidden = false;
       import('./scene.js').then(function (m) {
-        if (!scene) scene = m.mountScene(document.getElementById('calScene'), { link: 'foundation.html' });
+        if (!scene) scene = m.mountScene(document.getElementById('calScene'), {});
         else scene.setView('net');
       }).catch(function (err) { console.error(err); document.getElementById('calScene').innerHTML = '<div class="scene-loading">The 3D view could not load. Open the Foundation page instead.</div>'; });
     });

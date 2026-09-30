@@ -19,7 +19,7 @@
   <section class="page-head">
     <div class="wrap">
       <h1>Foundation</h1>
-      <p class="lede">Our first site brings 12 MW of secure AI capacity to downtown Calgary. It lives inside an existing district heating plant at 435 9 Ave SE, with dual redundant grid feeds, on-site generation and below-grade thermal conduit paths.</p>
+      <p class="lede">Foundation brings 12 MW of secure AI capacity to downtown Calgary. Existing district heating plant, dual redundant grid feeds, on-site generation, and below-grade thermal conduit paths.</p>
     </div>
   </section>
 
@@ -32,10 +32,10 @@
   <section class="band band--white">
     <div class="wrap">
       <div class="stats">
-        <div class="stat"><b class="num">12<small>MW</small></b><span>AI capacity at full build</span></div>
-        <div class="stat"><b class="num">14<small>MVA</small></b><span>Base plant power, n+1</span></div>
+        <div class="stat"><b class="num">12<small>MW</small></b><span>n+1 redundant power</span></div>
         <div class="stat"><b class="num">7<small>km</small></b><span>Private fiber</span></div>
         <div class="stat"><b class="num">25+</b><span>Connected buildings</span></div>
+        <div class="stat"><b>Phase 1</b><span>Now online</span></div>
       </div>
     </div>
   </section>
@@ -43,27 +43,27 @@
   <section class="band">
     <div class="wrap">
       <div class="sec-head">
-        <h2>Grows inside the same plant.</h2>
-        <p>Each phase adds capacity without a new building. Bars are drawn to scale against the full 12 MW.</p>
+        <h2>Three phases, one plant.</h2>
+        <p>Bars drawn to scale against 12 MW.</p>
       </div>
       <div class="phase-grid">
         <div class="card phase-card">
           <div class="top"><h3>Phase 1</h3><span class="chip chip--live"><i class="dot dot--live"></i>Online</span></div>
           <div class="mw">100 kW</div>
           <div class="bar"><i style="width:0.83%"></i></div><div class="bar-cap"><span>0</span><span>12 MW</span></div>
-          <p>Air-cooled GPU racks on the ground floor of the plant. Running today.</p>
+          <p>Online on the ground floor.</p>
         </div>
         <div class="card phase-card">
           <div class="top"><h3>Phase 2</h3><span class="chip chip--dev"><i class="dot dot--dev"></i>Feb 2027</span></div>
           <div class="mw">2 MW</div>
           <div class="bar"><i style="width:16.7%;background:var(--amber)"></i></div><div class="bar-cap"><span>0</span><span>12 MW</span></div>
-          <p>Liquid-cooled racks in the basement, with a heat exchanger tied to the plant's heating systems.</p>
+          <p>February 2027, in the basement.</p>
         </div>
         <div class="card phase-card">
           <div class="top"><h3>Phase 3</h3><span class="chip chip--soon"><i class="dot dot--soon"></i>Full build</span></div>
           <div class="mw">12 MW</div>
           <div class="bar"><i style="width:100%;background:#9fb1c6"></i></div><div class="bar-cap"><span>0</span><span>12 MW</span></div>
-          <p>The full site. Rooftop dry coolers and more liquid-cooled racks across the plant.</p>
+          <p>The full Foundation build.</p>
         </div>
       </div>
     </div>
@@ -72,14 +72,14 @@
   <section class="band band--white">
     <div class="wrap">
       <div class="sec-head">
-        <h2>Built on what was already there.</h2>
-        <p>Foundation reuses a working utility plant in the middle of downtown. The hard parts, power and a secure building, already exist.</p>
+        <h2>The site</h2>
+        <p>We are rethinking the physical data centre and its networking from the ground up.</p>
       </div>
-      <div class="spec-list">
-        <div class="card"><span class="val">District heating</span><h3>Base plant</h3><p>An existing plant that heats downtown buildings through a network of underground pipes.</p></div>
-        <div class="card"><span class="val">14 MVA · n+1</span><h3>Power</h3><p>Dual redundant grid feeds plus on-site generation. Any single part can fail and the site keeps running.</p></div>
-        <div class="card"><span class="val">7 km · 25+ buildings</span><h3>Private fiber</h3><p>Fiber runs from the plant under downtown streets to the buildings it serves, apart from the public internet.</p></div>
-        <div class="card"><span class="val">Below grade</span><h3>Conduits</h3><p>Thermal conduit paths under the street carry power, fiber and heat in and out of the plant.</p></div>
+      <div class="spec-list spec-4">
+        <div class="card"><span class="val">Base plant</span><h3>District heating</h3></div>
+        <div class="card"><span class="val">Power</span><h3>14 MVA n+1</h3></div>
+        <div class="card"><span class="val">Stack</span><h3>Utility-grade</h3></div>
+        <div class="card"><span class="val">Heating</span><h3>District loop</h3></div>
       </div>
     </div>
   </section>
@@ -88,6 +88,7 @@
 <footer id="site-footer"></footer>
 <script src="assets/js/common.js"></script>
 <script src="assets/js/calgary-data.js"></script>
+<script src="assets/js/calgary-buildings.js"></script>
 <script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
 <script type="module">
   import { mountScene } from './assets/js/scene.js';

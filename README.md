@@ -20,8 +20,10 @@ assets/js/common.js          Shared header, phone menu and footer
 assets/js/home.js            GPU racks and How it works
 assets/js/network.js         World map (Platform)
 assets/js/scene.js           3D scene: Calgary streets, fiber, plant (Three.js)
-assets/js/map-data.js        Dotted world map (Natural Earth 1:50m land)
-assets/js/calgary-data.js    Calgary buildings and fiber routes (from gosimply.ai)
+assets/js/map-data.js        World map paths (Natural Earth 1:50m, simplified)
+assets/js/calgary-data.js    Calgary fiber routes and connected buildings (from gosimply.ai)
+assets/js/calgary-buildings.js Downtown Calgary footprints and heights (City of Calgary Open Data, 3D Buildings - Citywide)
+tools/build-buildings.mjs    Rebuilds calgary-buildings.js from tools/data
 assets/vendor/three/         Three.js r160 (MIT)
 assets/img/hero.jpg          Home hero background (add the photo here)
 ```
