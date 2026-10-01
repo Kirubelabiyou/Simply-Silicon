@@ -82,6 +82,16 @@ export function mountScene(host, opts = {}) {
   const mats = {};
   const mat = (k, color, o = {}) => (mats[k] = mats[k] || new THREE.MeshStandardMaterial({ color, roughness: .8, metalness: .05, ...o }));
   let rs = 7; const rnd = () => (rs = (rs * 16807) % 2147483647) / 2147483647;
+  // tileable surface textures (near white, so the material colour sets the hue)
+  const surf = (size, draw) => { const c = document.createElement('canvas'); c.width = c.height = size; const g = c.getContext('2d'); draw(g, size); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy()); return t; };
+  const speck = (g, n, size, lo, hi, a, w = 1.4) => { for (let i = 0; i < n; i++) { const v = Math.round(lo + rnd() * (hi - lo)); g.fillStyle = `rgba(${v},${v},${v},${a})`; g.fillRect(rnd() * size, rnd() * size, w, w); } };
+  const TEX = {
+    asphalt: surf(256, (g, n) => { g.fillStyle = '#f2f2f2'; g.fillRect(0, 0, n, n); speck(g, 5200, n, 120, 255, .22); speck(g, 900, n, 40, 90, .25, 1); for (let i = 0; i < 9; i++) { g.fillStyle = 'rgba(0,0,0,.05)'; g.beginPath(); g.ellipse(rnd() * n, rnd() * n, 10 + rnd() * 30, 6 + rnd() * 18, rnd() * 3, 0, 7); g.fill(); } }),
+    slab: surf(256, (g, n) => { g.fillStyle = '#f4f3f0'; g.fillRect(0, 0, n, n); speck(g, 2600, n, 150, 255, .18); g.fillStyle = 'rgba(70,70,70,.32)'; for (let k = 0; k <= 4; k++) { g.fillRect(k * n / 4 - 1, 0, 2, n); g.fillRect(0, k * n / 4 - 1, n, 2); } for (let i = 0; i < 6; i++) { g.fillStyle = `rgba(0,0,0,${(rnd() * .06).toFixed(3)})`; g.fillRect(Math.floor(rnd() * 4) * n / 4, Math.floor(rnd() * 4) * n / 4, n / 4, n / 4); } }),
+    ground: surf(256, (g, n) => { g.fillStyle = '#f0f0f0'; g.fillRect(0, 0, n, n); speck(g, 4200, n, 110, 255, .16, 1.8); for (let i = 0; i < 26; i++) { const v = rnd() > .5 ? 255 : 0; g.fillStyle = `rgba(${v},${v},${v},.05)`; g.beginPath(); g.arc(rnd() * n, rnd() * n, 8 + rnd() * 28, 0, 7); g.fill(); } }),
+    grass: surf(256, (g, n) => { g.fillStyle = '#eef2ea'; g.fillRect(0, 0, n, n); for (let i = 0; i < 7000; i++) { const v = 150 + rnd() * 105; g.fillStyle = `rgba(${v * .85},${v},${v * .7},.22)`; g.fillRect(rnd() * n, rnd() * n, 1, 2.5); } for (let i = 0; i < 18; i++) { g.fillStyle = `rgba(${rnd() > .5 ? '255,255,230' : '40,60,20'},.06)`; g.beginPath(); g.arc(rnd() * n, rnd() * n, 12 + rnd() * 30, 0, 7); g.fill(); } })
+  };
+  const planarUV = (g, tile) => { const p = g.attributes.position, uv = new Float32Array(p.count * 2); for (let i = 0; i < p.count; i++) { uv[i * 2] = p.getX(i) / tile; uv[i * 2 + 1] = p.getZ(i) / tile; } g.setAttribute('uv', new THREE.BufferAttribute(uv, 2)); return g; };
 
   /* ---------- projection: metres from Foundation, x = east, z = south ---------- */
   const LNG0 = CAL.foundation.coordinate[0], LAT0 = CAL.foundation.coordinate[1];
@@ -151,13 +161,6 @@ export function mountScene(host, opts = {}) {
   const city = new THREE.Group(); scene.add(city);
   const groundMats = [];
   const flatMat = (k, color, order) => { const m = mat(k, color, { roughness: .95, envMapIntensity: .45, side: THREE.DoubleSide, transparent: true, opacity: .965, depthWrite: false }); m.userData.order = order; groundMats.push(m); return m; };
-  {
-    const gs = new THREE.Shape(); gs.moveTo(-9000, -9000); gs.lineTo(9000, -9000); gs.lineTo(9000, 9000); gs.lineTo(-9000, 9000); gs.lineTo(-9000, -9000); // reaches past the fog, so the edge is never seen
-    const hole = new THREE.Path(); const hb = { x0: -4.5 * S, x1: 6.85 * S, z0: -2.85 * S, z1: 2.85 * S };
-    hole.moveTo(hb.x0, hb.z0); hole.lineTo(hb.x0, hb.z1); hole.lineTo(hb.x1, hb.z1); hole.lineTo(hb.x1, hb.z0); hole.lineTo(hb.x0, hb.z0); gs.holes.push(hole);
-    const ground = new THREE.Mesh(new THREE.ShapeGeometry(gs).rotateX(Math.PI / 2), flatMat('ground', COL.ground, 1));
-    ground.receiveShadow = true; city.add(ground);
-  }
   // Bow River and its park banks, from the street lines on each side
   const RC = (STR.r || []).slice();
   if (RC.length) { const a = RC[0], b = RC[RC.length - 1]; RC.unshift([a[0] - 900, a[1], a[2], a[3], a[4]]); RC.push([b[0] + 900, b[1] + 120, b[2] + 120, b[3] + 120, b[4] + 120]); }
@@ -168,7 +171,7 @@ export function mountScene(host, opts = {}) {
   }
   if (RC.length) {
     const band = (ka, kb) => { const s = new THREE.Shape(); RC.forEach((c, i) => i ? s.lineTo(c[0], -c[ka]) : s.moveTo(c[0], -c[ka])); RC.slice().reverse().forEach(c => s.lineTo(c[0], -c[kb])); return new THREE.ShapeGeometry(s).rotateX(-Math.PI / 2); };
-    const grass = new THREE.Mesh(band(3, 4), mat('grass', COL.grass, { roughness: 1 })); grass.position.y = .06; grass.receiveShadow = true; city.add(grass);
+    const grass = new THREE.Mesh(planarUV(band(3, 4), 14), mat('grass', COL.grass, { roughness: 1, map: TEX.grass })); grass.position.y = .06; grass.receiveShadow = true; city.add(grass);
     const water = new THREE.Mesh(band(1, 2), mat('water', COL.water, { roughness: .1, metalness: .15, envMapIntensity: 1.1 })); water.position.y = .12; water.receiveShadow = true; city.add(water);
   }
   const inWater = (x, z) => { const r = riverAt(x); return r && z > r[0] - 2 && z < r[1] + 2; };
@@ -209,16 +212,89 @@ export function mountScene(host, opts = {}) {
     return path.length > 4 ? path : null;
   })();
   if (ctrain) ribbon(ribbons.bed, ctrain, 4.6, .3);
-  const flat = (arr, m) => {
+  const flat = (arr, m, tile) => {
     if (!arr.length) return null;
     const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(arr, 3));
     const n = new Float32Array(arr.length); for (let i = 1; i < n.length; i += 3) n[i] = 1; g.setAttribute('normal', new THREE.BufferAttribute(n, 3));
+    if (tile) planarUV(g, tile);
     const mesh = new THREE.Mesh(g, m); mesh.receiveShadow = true; city.add(mesh); return mesh;
   };
-  flat(ribbons.walk, flatMat('walk', COL.sidewalk, 2));
-  flat(ribbons.alley, flatMat('alley', COL.alley, 3));
-  flat(ribbons.road, flatMat('road', COL.road, 3));
-  flat(ribbons.bed, flatMat('bed', COL.bed, 4));
+  const texMat = (k, color, order, map) => { const m = flatMat(k, color, order); m.map = map; return m; };
+  flat(ribbons.walk, texMat('walk', COL.sidewalk, 2, TEX.slab), 6);
+  flat(ribbons.alley, texMat('alley', COL.alley, 3, TEX.asphalt), 12);
+  flat(ribbons.road, texMat('road', COL.road, 3, TEX.asphalt), 12);
+  flat(ribbons.bed, texMat('bed', COL.bed, 4, TEX.asphalt), 12);
+
+  /* ---------- ground cover: lawns, river grass, plazas and surface parking ---------- */
+  // A road mask (4 m cells) keeps parking lots and trees off the streets.
+  const RM = { x0: -2600, z0: -1700, c: 4, w: 1050, h: 700 }; RM.a = new Uint8Array(RM.w * RM.h);
+  const rmIdx = (x, z) => { const i = Math.floor((x - RM.x0) / RM.c), j = Math.floor((z - RM.z0) / RM.c); return i < 0 || j < 0 || i >= RM.w || j >= RM.h ? -1 : j * RM.w + i; };
+  roads.forEach(r => {
+    const hw = WR[r.c] / 2 + WS[r.c] + 1, rc = Math.ceil(hw / RM.c);
+    for (let i = 1; i < r.pts.length; i++) {
+      const [ax, az] = r.pts[i - 1], [bx, bz] = r.pts[i], L = Math.hypot(bx - ax, bz - az);
+      for (let d = 0; d <= L; d += 2) {
+        const x = ax + (bx - ax) * d / (L || 1), z = az + (bz - az) * d / (L || 1), ci = Math.floor((x - RM.x0) / RM.c), cj = Math.floor((z - RM.z0) / RM.c);
+        for (let u = -rc; u <= rc; u++) for (let v = -rc; v <= rc; v++) { const ii = ci + u, jj = cj + v; if (ii >= 0 && jj >= 0 && ii < RM.w && jj < RM.h && (u * u + v * v) * RM.c * RM.c <= hw * hw) RM.a[jj * RM.w + ii] = 1; }
+      }
+    }
+  });
+  const onRoad = (x, z) => { const k = rmIdx(x, z); return k >= 0 && RM.a[k] === 1; };
+  // Parks from City of Calgary open data, when present (same compact encoding as buildings)
+  const PARKS = decodeBuildings(window.SS_PARKS || []).map(p => { let x0 = 1e9, x1 = -1e9, z0 = 1e9, z1 = -1e9; p.p.forEach(([x, z]) => { x0 = Math.min(x0, x); x1 = Math.max(x1, x); z0 = Math.min(z0, z); z1 = Math.max(z1, z); }); return { p: p.p, paved: p.h > .5, bb: [x0, x1, z0, z1] }; });
+  const parkAt = (x, z) => PARKS.find(k => x >= k.bb[0] && x <= k.bb[1] && z >= k.bb[2] && z <= k.bb[3] && inPoly(x, z, k.p));
+  const inPark = (x, z) => { const k = parkAt(x, z); return !!k && !k.paved; };
+  // the parks themselves, with crisp edges: lawn for green parks, light pavers for plazas
+  if (PARKS.length) {
+    const green = [], paved = [];
+    PARKS.forEach(k => { const shp = new THREE.Shape(k.p.map(([x, z]) => new THREE.Vector2(x, -z))); const g = new THREE.ShapeGeometry(shp).rotateX(-Math.PI / 2); (k.paved ? paved : green).push([g, null]); });
+    const lay = (list, m, y) => { if (!list.length) return; const g = planarUV(mergeGeos(list), 14); const mesh = new THREE.Mesh(g, m); mesh.position.y = y; mesh.receiveShadow = true; city.add(mesh); };
+    lay(green, mat('parkGrass', 0x6f9a4e, { roughness: 1, map: TEX.grass }), .13); // above the water, so Prince's and St. Patrick's islands show
+    lay(paved, mat('plaza', 0xc9c3b8, { roughness: .9, map: TEX.slab }), .13);
+  }
+  const C = { lawn: [[.4, .52, .27], [.46, .57, .3], [.36, .48, .25], [.5, .55, .33]], park: [.36, .53, .25], conc: [.6, .59, .56], plaza: [.67, .65, .61], asph: [.33, .34, .36] };
+  // where the City's building data has no buildings at all, open ground is unknown rather than parking
+  const COV = new Set(); blds.forEach(b => COV.add(Math.floor(b.cx / 100) + ',' + Math.floor(b.cz / 100)));
+  const covered = (x, z) => { const i = Math.floor(x / 100), j = Math.floor(z / 100); for (let a = -1; a <= 1; a++) for (let b = -1; b <= 1; b++) if (COV.has((i + a) + ',' + (j + b))) return true; return false; };
+  const DIRS = [[1, 0], [.7, .7], [0, 1], [-.7, .7], [-1, 0], [-.7, -.7], [0, -1], [.7, -.7]];
+  const lawnAt = [];
+  function cover(x, z) { // returns [r, g, b, kind]
+    const h = hash(Math.round(x * 3.1 + z * 7.7) & 0xffff), lawn = C.lawn[Math.floor(h * 4) % 4];
+    if (inPark(x, z)) return [...C.park, 'park'];
+    const r = riverAt(x);
+    if (r && z < r[2] - 4) return [...lawn, 'lawn']; // north of the Bow: Bridgeland, Crescent Heights, Sunnyside (lawns and trees)
+    if (r && z < r[3] + 55) return [...lawn.map(c => c * 1.02), 'bank']; // riverwalk and Eau Claire promenade
+    const core = x > -1900 && x < 950 && z < 760 && covered(x, z);
+    // open ground downtown with no building nearby is almost always surface parking
+    let near = 0; for (const [dx, dz] of DIRS) { if (bldAt(x + dx * 11, z + dz * 11) >= 0) near++; if (bldAt(x + dx * 24, z + dz * 24) >= 0) near++; }
+    if (!onRoad(x, z) && near <= 1) return core ? [...C.asph, 'parking'] : [...lawn.map((c, i) => c * .7 + C.conc[i] * .3), 'lawn'];
+    if (!core) return [...lawn.map((c, i) => c * .45 + C.conc[i] * .55), 'mixed'];
+    return near > 6 ? [...C.plaza, 'plaza'] : [...C.conc, 'conc'];
+  }
+  {
+    const hb = { x0: -4.5 * S, x1: 6.85 * S, z0: -2.85 * S, z1: 2.85 * S }, G = { x0: -2400, x1: 1400, z0: -1500, z1: 1000, c: 20 };
+    const axis = (a, b, c, e) => { const v = []; for (let t = a; t <= b; t += c) v.push(t); e.forEach(q => v.push(q)); return [...new Set(v)].sort((p, q) => p - q); };
+    const xs = axis(G.x0, G.x1, G.c, [hb.x0, hb.x1]), zs = axis(G.z0, G.z1, G.c, [hb.z0, hb.z1]);
+    const pos = [], col = [], idx = [], NX = xs.length;
+    zs.forEach(z => xs.forEach(x => {
+      const c = cover(x, z), j = .94 + hash(Math.round(x * 13 + z * 3) & 0xffff) * .1;
+      pos.push(x, 0, z); col.push(Math.pow(c[0] * j, 2.2), Math.pow(c[1] * j, 2.2), Math.pow(c[2] * j, 2.2)); // sRGB to linear
+      if (c[3] === 'lawn' || c[3] === 'park' || c[3] === 'bank') lawnAt.push([x, z, c[3]]);
+    }));
+    for (let j = 0; j < zs.length - 1; j++) for (let i = 0; i < NX - 1; i++) {
+      const cx = (xs[i] + xs[i + 1]) / 2, cz = (zs[j] + zs[j + 1]) / 2;
+      if (cx > hb.x0 && cx < hb.x1 && cz > hb.z0 && cz < hb.z1) continue; // the plant's basement opening
+      const a = j * NX + i, b = a + 1, c = a + NX, d = c + 1; idx.push(a, c, b, b, c, d);
+    }
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3)); g.setIndex(idx);
+    const n = new Float32Array(pos.length); for (let i = 1; i < n.length; i += 3) n[i] = 1; g.setAttribute('normal', new THREE.BufferAttribute(n, 3)); planarUV(g, 22);
+    const gm = flatMat('ground', 0xffffff, 1); gm.vertexColors = true; gm.map = TEX.ground;
+    const ground = new THREE.Mesh(g, gm); ground.receiveShadow = true; city.add(ground);
+    // beyond the mapped area: a soft mix of lawn and pavement that fades into the haze
+    const fs = new THREE.Shape(); fs.moveTo(-9000, -9000); fs.lineTo(9000, -9000); fs.lineTo(9000, 9000); fs.lineTo(-9000, 9000); fs.lineTo(-9000, -9000);
+    const fh = new THREE.Path(); fh.moveTo(G.x0, G.z0); fh.lineTo(G.x0, G.z1); fh.lineTo(G.x1, G.z1); fh.lineTo(G.x1, G.z0); fh.lineTo(G.x0, G.z0); fs.holes.push(fh);
+    const far = new THREE.Mesh(planarUV(new THREE.ShapeGeometry(fs).rotateX(Math.PI / 2), 22), texMat('groundFar', 0x8d9877, 1, TEX.ground)); far.receiveShadow = true; city.add(far);
+  }
 
   PROF('ribbons');
   // intersections (for crosswalks and to keep trees off corners)
@@ -477,7 +553,7 @@ export function mountScene(host, opts = {}) {
     const MAXT = PHONE ? 600 : 1300;
     const trunkG = new THREE.CylinderGeometry(.25, .35, 3, 4, 1, true); trunkG.translate(0, 1.5, 0);
     const crownG = new THREE.SphereGeometry(2.6, 7, 5); crownG.translate(0, 4.6, 0);
-    const trunks = new THREE.InstancedMesh(trunkG, mat('trunk', 0x7b6a58), MAXT), crowns = new THREE.InstancedMesh(crownG, mat('crown', 0xffffff, { roughness: .9 }), MAXT);
+    const trunks = new THREE.InstancedMesh(trunkG, mat('trunk', 0x7b6a58), MAXT), crowns = new THREE.InstancedMesh(crownG, mat('crown', 0x5f7f42, { roughness: .9 }), MAXT);
     let n = 0; const m4 = new THREE.Matrix4(), col = new THREE.Color(), v = new THREE.Vector3(), sv = new THREE.Vector3(), q = new THREE.Quaternion();
     roads.forEach((r, ri) => {
       if (r.c < 1 || r.c > 6 || n >= MAXT) return;
@@ -493,7 +569,7 @@ export function mountScene(host, opts = {}) {
             if (!CORE(x, z) || nearNode(x, z, 13) || bldAt(x, z) >= 0 || inPlant(x, z, 6) || inWater(x, z)) return;
             const s = .8 + hash(n * 17) * .5;
             m4.compose(v.set(x, 0, z), q, sv.set(s, s, s)); trunks.setMatrixAt(n, m4); crowns.setMatrixAt(n, m4);
-            crowns.setColorAt(n, col.setHSL(.25 + hash(n) * .07, .3, .42 + hash(n * 3) * .1)); n++;
+            crowns.setColorAt(n, col.setRGB(.8 + hash(n) * .4, .85 + hash(n * 3) * .3, .75 + hash(n * 5) * .3)); n++;
           });
         }
         carry = (carry - L) % 13; if (carry < 0) carry += 13;
@@ -503,6 +579,33 @@ export function mountScene(host, opts = {}) {
   }
 
   PROF('trees');
+  // trees across the lawns, parks and riverbanks: a mix of spruce and leafy trees, as in Calgary's older neighbourhoods
+  {
+    const MAXL = PHONE ? 700 : 1800;
+    const leafG = new THREE.SphereGeometry(3, 6, 4); leafG.translate(0, 5.6, 0);
+    const spruceG = new THREE.ConeGeometry(2.6, 9, 7); spruceG.translate(0, 6.2, 0);
+    const stemG = new THREE.CylinderGeometry(.28, .4, 3.4, 4, 1, true); stemG.translate(0, 1.7, 0);
+    const leaf = new THREE.InstancedMesh(leafG, mat('leaf', 0x5a7a3e, { roughness: .92 }), MAXL);
+    const spruce = new THREE.InstancedMesh(spruceG, mat('spruce', 0x2f4a2c, { roughness: .95 }), MAXL);
+    const stems = new THREE.InstancedMesh(stemG, mat('trunk', 0x7b6a58), MAXL * 2);
+    let nl = 0, ns = 0, nt = 0; const m4 = new THREE.Matrix4(), v = new THREE.Vector3(), sv = new THREE.Vector3(), q = new THREE.Quaternion(), col = new THREE.Color();
+    const density = { lawn: .55, park: .85, bank: .5 };
+    lawnAt.forEach(([gx, gz, kind], i) => {
+      const tries = kind === 'park' ? 4 : 2;
+      for (let t = 0; t < tries; t++) {
+        if (nl + ns >= MAXL || hash(i * 7 + t * 131) > density[kind]) continue;
+        const x = gx + (hash(i * 31 + t * 17) - .5) * 19, z = gz + (hash(i * 53 + t * 29) - .5) * 19;
+        if (onRoad(x, z) || bldAt(x, z) >= 0 || inWater(x, z) || inPlant(x, z, 8)) continue;
+        const sc = .75 + hash(i * 11 + t) * .6;
+        m4.compose(v.set(x, 0, z), q.setFromAxisAngle(sv.set(0, 1, 0), hash(i + t) * 6.28), sv.set(sc, sc * (.9 + hash(i * 3 + t) * .3), sc));
+        if (hash(i * 97 + t * 5) < .28) { spruce.setMatrixAt(ns, m4); spruce.setColorAt(ns, col.setRGB(.85 + hash(i) * .25, .85 + hash(i * 5) * .25, .85 + hash(i * 9) * .2)); ns++; }
+        else { leaf.setMatrixAt(nl, m4); leaf.setColorAt(nl, col.setRGB(.8 + hash(i * 7) * .45, .82 + hash(i * 13) * .3, .7 + hash(i * 3) * .3)); nl++; }
+        stems.setMatrixAt(nt++, m4);
+      }
+    });
+    leaf.count = nl; spruce.count = ns; stems.count = nt;
+    leaf.castShadow = spruce.castShadow = true; city.add(leaf, spruce, stems);
+  }
   /* ---------- fiber: underground conduits, seen through the street, with light travelling through them ---------- */
   const fiber = new THREE.Group(); scene.add(fiber);
   const DEPTH = -3.2;
@@ -568,8 +671,8 @@ export function mountScene(host, opts = {}) {
     const haloTex = radial('rgba(255,255,255,1)', 'rgba(120,200,255,0)');
     const hpos = new Float32Array(ringTops.length * 3); ringTops.forEach(([x, y, z], i) => { hpos[i * 3] = x; hpos[i * 3 + 1] = y + 1.5; hpos[i * 3 + 2] = z; });
     const hg = new THREE.BufferGeometry(); hg.setAttribute('position', new THREE.BufferAttribute(hpos, 3));
-    const halo = new THREE.Points(hg, new THREE.PointsMaterial({ map: haloTex, color: 0x9fdcff, size: 46, sizeAttenuation: false, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
-    halo.userData.px = 46; pulseClouds.push(halo); fiber.add(halo);
+    const halo = new THREE.Points(hg, new THREE.PointsMaterial({ map: haloTex, color: 0x9fdcff, size: PHONE ? 24 : 46, sizeAttenuation: false, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+    halo.userData.px = PHONE ? 24 : 46; pulseClouds.push(halo); fiber.add(halo);
     if (!reduce) tick.push(t => { setRings(t); rings.instanceMatrix.needsUpdate = true; rings.instanceColor.needsUpdate = true; halo.material.opacity = .75 + Math.sin(t * 2.4) * .25; });
   }
   // draw the fiber after the street so its glow reads through it; buildings still hide it
@@ -635,7 +738,7 @@ export function mountScene(host, opts = {}) {
     renderer.shadowMap.needsUpdate = true;
   } catch (err) { console.error('street names', err); } };
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(paintNames, paintNames); else paintNames();
-  const tmp = new THREE.Vector3(), lastCam = new THREE.Matrix4();
+  const tmp = new THREE.Vector3(), fwd = new THREE.Vector3(), lastCam = new THREE.Matrix4();
   let cardBox = null, labelsDirty = true;
   function placeLabels() {
     camera.updateMatrixWorld();
@@ -648,6 +751,7 @@ export function mountScene(host, opts = {}) {
     order.forEach(l => {
       const hide = () => { if (l.vis) { l.vis = false; l.d.style.opacity = 0; l.d.style.pointerEvents = 'none'; } };
       if (!l.modes.includes(mode)) return hide();
+      camera.getWorldDirection(fwd); if (fwd.dot(tmp.copy(l.pos).sub(camera.position)) <= 0) return hide(); // behind the camera
       tmp.copy(l.pos).project(camera);
       const x = (tmp.x + 1) / 2 * W, y = (1 - tmp.y) / 2 * H;
       if (!l.w) { l.w = l.d.offsetWidth || 80; l.h = l.d.offsetHeight || 24; }

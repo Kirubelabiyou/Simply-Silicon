@@ -26,6 +26,8 @@ assets/js/calgary-buildings.js Downtown Calgary footprints and heights (City of 
 assets/js/calgary-streets.js Downtown street centrelines and the Bow River banks (City of Calgary Open Data, Street Centreline)
 tools/build-buildings.mjs    Rebuilds calgary-buildings.js from tools/data
 tools/build-streets.mjs      Rebuilds calgary-streets.js from tools/data/v2
+assets/js/calgary-parks.js   Downtown parks and plazas (City of Calgary Open Data, Parks Sites)
+tools/build-parks.mjs        Rebuilds calgary-parks.js from tools/data/v2/parks_*.txt
 assets/vendor/three/         Three.js r160 (MIT)
 assets/fonts/                Archivo, Instrument Sans, Martian Mono, Quicksand (SIL OFL, self-hosted)
 assets/img/hero.webp         Home hero: Calgary District Heating plant
