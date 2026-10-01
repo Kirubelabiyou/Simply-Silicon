@@ -24,28 +24,12 @@
 
   <section class="band" style="padding-top: clamp(12px, 2vw, 24px)">
     <div class="wrap">
-      <div class="wl-grid">
-        <article class="card wl-card">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10 12 4l9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg>
-          <h2>Regulated enterprise</h2>
-          <p>Banks, utilities, and energy companies operating under strict regulatory requirements.</p>
-        </article>
-        <article class="card wl-card">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5.5c0 4.6-3 8.2-7 9.5-4-1.3-7-4.9-7-9.5V6z"/><path d="M9 12l2 2 4-4"/></svg>
-          <h2>High-security workloads</h2>
-          <p>Superintelligent models, defence systems, and government environments where network exposure matters.</p>
-        </article>
-        <article class="card wl-card">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
-          <h2>Critical AI services</h2>
-          <p>Emergency response, public safety, security, and other services with no tolerance for unreliable inference.</p>
-        </article>
-        <article class="card wl-card">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 13V9M12 2v3M9 2h6"/></svg>
-          <h2>Live real-time AI</h2>
-          <p>Real-time video and low-latency inference that need dependable physical proximity.</p>
-        </article>
-      </div>
+      <ol class="rows rows--wide">
+        <li><span class="rows-n">01</span><h2>Regulated enterprise</h2><p>Banks, utilities, and energy companies operating under strict regulatory requirements.</p></li>
+        <li><span class="rows-n">02</span><h2>High-security workloads</h2><p>Superintelligent models, defence systems, and government environments where network exposure matters.</p></li>
+        <li><span class="rows-n">03</span><h2>Critical AI services</h2><p>Emergency response, public safety, security, and other services with no tolerance for unreliable inference.</p></li>
+        <li><span class="rows-n">04</span><h2>Live real-time AI</h2><p>Real-time video and low-latency inference that need dependable physical proximity.</p></li>
+      </ol>
     </div>
   </section>
 
@@ -82,15 +66,13 @@
         <h2>Bare metal or API</h2>
         <p>High-density GPU compute for bare metal or API applications.</p>
       </div>
-      <div class="two-up">
-        <div class="card mode">
-          <span class="val">Bare metal</span>
-          <h3>Dedicated machines</h3>
+      <div class="columns">
+        <div>
+          <h3>Bare metal</h3>
           <p>Whole GPU servers for one customer, with no shared layer in between.</p>
         </div>
-        <div class="card mode">
-          <span class="val">API</span>
-          <h3>Inference as a service</h3>
+        <div>
+          <h3>API</h3>
           <p>Models served from the same secure, local infrastructure.</p>
         </div>
       </div>
@@ -103,14 +85,14 @@
         <h2>What every workload gets</h2>
         <p>From Foundation, our first site in downtown Calgary.</p>
       </div>
-      <ul class="gets">
-        <li><b>n+1</b><span>Redundant power and cooling</span></li>
-        <li><b>Air-gapped</b><span>Private fiber network, no common carrier exposure</span></li>
-        <li><b>SLAs</b><span>Latency reliability for inference that can't be late</span></li>
-        <li><b>Local</b><span>Deterministic local routing across 25+ connected buildings</span></li>
-        <li><b>n+1</b><span>Public internet connectivity when it's needed</span></li>
-        <li><b>12 MW</b><span>High-density GPU capacity at full build</span></li>
-      </ul>
+      <dl class="terms">
+        <div><dt>Redundant power and cooling</dt><dd>n+1 across the site.</dd></div>
+        <div><dt>Air-gapped</dt><dd>Private fiber network, no common carrier exposure.</dd></div>
+        <div><dt>Latency SLAs</dt><dd>Reliability for inference that can't be late.</dd></div>
+        <div><dt>Local routing</dt><dd>Deterministic, across 25+ connected buildings.</dd></div>
+        <div><dt>Public internet</dt><dd>n+1 connectivity when it's needed.</dd></div>
+        <div><dt>12 MW</dt><dd>High-density GPU capacity at full build.</dd></div>
+      </dl>
     </div>
   </section>
 </main>

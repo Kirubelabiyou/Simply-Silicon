@@ -11,25 +11,25 @@
 @font-face { font-family: "Quicksand"; src: url("../fonts/quicksand-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
 
 :root {
-  --white: #f9fbfd;
-  --snow: #dbe5ee;         /* page ground: drafting paper */
-  --ice: #cadeee;          /* light blue band */
-  --ice-2: #bcd5ea;
-  --line: #bfd0df;
-  --navy: #0a1c2e;         /* headings, dark bands */
-  --navy-2: #102a44;
-  --ink: #0a1c2e;
-  --ink-2: #33475d;
-  --muted: #5f748d;
+  --white: #ffffff;
+  --snow: #f2f3f4;         /* page ground: neutral paper */
+  --ice: #e8eaed;          /* quiet band */
+  --ice-2: #d7dbe0;
+  --line: #d9dde2;
+  --navy: #050a12;         /* headings, dark bands: gosimply.ai's near-black */
+  --navy-2: #111a26;
+  --ink: #0b1119;
+  --ink-2: #3e4651;
+  --muted: #6a737f;
   --sky: #4db2ef;          /* logo blue */
-  --sky-deep: #13609c;     /* text and buttons on white */
+  --sky-deep: #0f6cb0;     /* text and links on white */
   --sky-glow: #9fd8fb;
   --heat: #ff6a2b;         /* the sharp accent: heat from the plant */
   --heat-deep: #c2410c;
   --amber: #f07a2e;        /* in development */
   --soon: #8193a9;         /* coming soon */
-  --grid: rgba(19, 96, 156, .07);
-  --grid-dark: rgba(77, 178, 239, .07);
+  --grid: rgba(5, 10, 18, .045);
+  --grid-dark: rgba(255, 255, 255, .035);
   --logo: "Quicksand", "Nunito", "Varela Round", Arial, sans-serif;
   --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
@@ -166,7 +166,7 @@ h3 { font-weight: 650; font-stretch: 104%; font-size: clamp(18px, 1.7vw, 21px); 
 .card:hover { border-color: var(--ice-2); }
 
 .chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 9px; border-radius: 3px; font: 500 10.5px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; background: var(--snow); color: var(--ink-2); }
-.chip--live { background: #dcefff; color: var(--sky-deep); }
+.chip--live { background: #e3f1fb; color: var(--sky-deep); }
 .chip--dev { background: #ffe8d9; color: #a8400c; }
 .chip--soon { background: #e8eef4; color: var(--muted); }
 .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }

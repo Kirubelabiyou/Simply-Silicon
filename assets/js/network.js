@@ -51,17 +51,31 @@
   }
 
   var sel = null;
+  // map colours come from CSS, so the dark Platform theme can restyle the map
+  var cs = getComputedStyle(stage), cv = function (n, d) { var v = cs.getPropertyValue(n).trim(); return v || d; };
+  var MAP = { land: cv('--map-land', '#fbfdff'), border: cv('--map-border', '#d3e0ec'), coast: cv('--map-coast', '#c3d4e4'), grat: cv('--map-grat', 'rgba(27,111,184,.10)'), shadow: cv('--map-shadow', 'rgba(13,33,54,.18)'), dark: document.body.classList.contains('theme-dark') };
   var WORLD = window.SS_WORLD, LAND = new Path2D(WORLD.land), BORD = new Path2D(WORLD.borders), GRAT = new Path2D(WORLD.grat), SPH = new Path2D(WORLD.sphere);
   function draw() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
     var k = W / vb.w;
     ctx.setTransform(k * dpr, 0, 0, k * dpr, -vb.x * k * dpr, -vb.y * k * dpr);
-    ctx.lineWidth = .6 / k; ctx.strokeStyle = 'rgba(27,111,184,.10)'; ctx.stroke(GRAT);
-    ctx.save(); ctx.shadowColor = 'rgba(13,33,54,.18)'; ctx.shadowBlur = 14 * dpr; ctx.shadowOffsetY = 3 * dpr;
-    ctx.fillStyle = '#fbfdff'; ctx.fill(LAND); ctx.restore();
-    ctx.lineWidth = .7 / k; ctx.strokeStyle = '#d3e0ec'; ctx.stroke(BORD);
-    ctx.lineWidth = 1 / k; ctx.strokeStyle = '#c3d4e4'; ctx.stroke(LAND);
+    ctx.lineWidth = .6 / k; ctx.strokeStyle = MAP.grat; ctx.stroke(GRAT);
+    ctx.save(); ctx.shadowColor = MAP.shadow; ctx.shadowBlur = 14 * dpr; ctx.shadowOffsetY = 3 * dpr;
+    ctx.fillStyle = MAP.land; ctx.fill(LAND); ctx.restore();
+    ctx.lineWidth = .7 / k; ctx.strokeStyle = MAP.border; ctx.stroke(BORD);
+    ctx.lineWidth = 1 / k; ctx.strokeStyle = MAP.coast; ctx.stroke(LAND);
+    // on the dark map, each live or planned site throws light onto the land around it
+    if (MAP.dark) {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.globalCompositeOperation = 'lighter';
+      SITES.forEach(function (st) {
+        if (st.status === 'soon') return;
+        var q = toPx(st.x, st.y), r = st.status === 'online' ? 70 : 42, c = st.status === 'online' ? '77,178,239' : '240,122,46';
+        var g = ctx.createRadialGradient(q[0], q[1], 0, q[0], q[1], r); g.addColorStop(0, 'rgba(' + c + ',.55)'); g.addColorStop(.35, 'rgba(' + c + ',.18)'); g.addColorStop(1, 'rgba(' + c + ',0)');
+        ctx.fillStyle = g; ctx.fillRect(q[0] - r, q[1] - r, r * 2, r * 2);
+      });
+      ctx.globalCompositeOperation = 'source-over';
+    }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     var hp = toPx(SITES[0].x, SITES[0].y), out = '';

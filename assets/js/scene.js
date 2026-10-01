@@ -52,7 +52,7 @@ export function mountScene(host, opts = {}) {
   const labelLayer = el('div', 'scene-labels'); host.appendChild(labelLayer);
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0xdfe8f1, 3200, 7600);
+  scene.fog = new THREE.Fog(0xe3e9ef, 2600, 7000);
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
 
@@ -152,7 +152,7 @@ export function mountScene(host, opts = {}) {
   const groundMats = [];
   const flatMat = (k, color, order) => { const m = mat(k, color, { roughness: .95, envMapIntensity: .45, side: THREE.DoubleSide, transparent: true, opacity: .965, depthWrite: false }); m.userData.order = order; groundMats.push(m); return m; };
   {
-    const gs = new THREE.Shape(); gs.moveTo(-4500, -4500); gs.lineTo(4500, -4500); gs.lineTo(4500, 4500); gs.lineTo(-4500, 4500); gs.lineTo(-4500, -4500);
+    const gs = new THREE.Shape(); gs.moveTo(-9000, -9000); gs.lineTo(9000, -9000); gs.lineTo(9000, 9000); gs.lineTo(-9000, 9000); gs.lineTo(-9000, -9000); // reaches past the fog, so the edge is never seen
     const hole = new THREE.Path(); const hb = { x0: -4.5 * S, x1: 6.85 * S, z0: -2.85 * S, z1: 2.85 * S };
     hole.moveTo(hb.x0, hb.z0); hole.lineTo(hb.x0, hb.z1); hole.lineTo(hb.x1, hb.z1); hole.lineTo(hb.x1, hb.z0); hole.lineTo(hb.x0, hb.z0); gs.holes.push(hole);
     const ground = new THREE.Mesh(new THREE.ShapeGeometry(gs).rotateX(Math.PI / 2), flatMat('ground', COL.ground, 1));
@@ -507,8 +507,8 @@ export function mountScene(host, opts = {}) {
   const fiber = new THREE.Group(); scene.add(fiber);
   const DEPTH = -3.2;
   {
-    const coreM = new THREE.MeshBasicMaterial({ color: 0x1f93ec, transparent: true, opacity: 1, depthWrite: false });
-    const trunkCoreM = new THREE.MeshBasicMaterial({ color: 0x0f7fd8, transparent: true, opacity: 1, depthWrite: false });
+    const coreM = new THREE.MeshBasicMaterial({ color: 0x2aa8ff, transparent: true, opacity: 1, depthWrite: false });
+    const trunkCoreM = new THREE.MeshBasicMaterial({ color: 0x1a96f5, transparent: true, opacity: 1, depthWrite: false });
     const sleeveM = new THREE.MeshBasicMaterial({ color: 0x4db2ef, transparent: true, opacity: .26, depthWrite: false });
     const tubes = { core: [], trunk: [], sleeve: [] }, ends = [], pulses = { trunk: [], branch: [] };
     CAL.routes.forEach(r => {
@@ -556,13 +556,21 @@ export function mountScene(host, opts = {}) {
       caps.push([capG, new THREE.Matrix4().makeTranslation(e.p[0], top + .4, e.p[1])]);
       ringTops.push([e.p[0], top + .6, e.p[1], hash(e.id.length * 9 + Math.round(e.p[0]))]);
     });
-    fiber.add(new THREE.Mesh(mergeGeos(beams), new THREE.MeshBasicMaterial({ color: COL.fiber, transparent: true, opacity: .6, depthWrite: false })));
+    // bright core beam plus a soft outer glow, both additive so they read as light
+    fiber.add(new THREE.Mesh(mergeGeos(beams), new THREE.MeshBasicMaterial({ color: 0x7fd4ff, transparent: true, opacity: .95, blending: THREE.AdditiveBlending, depthWrite: false })));
+    fiber.add(new THREE.Mesh(mergeGeos(beams.map(([g, mm]) => [new THREE.CylinderGeometry(1.7, 1.7, 1, 12, 1, true), mm])), new THREE.MeshBasicMaterial({ color: 0x2aa3f5, transparent: true, opacity: .32, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide })));
     fiber.add(new THREE.Mesh(mergeGeos(caps), new THREE.MeshBasicMaterial({ color: 0xffffff })));
-    const rings = new THREE.InstancedMesh(new THREE.RingGeometry(3.2, 4.6, 32).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, blending: THREE.AdditiveBlending, side: THREE.DoubleSide, depthWrite: false }), ringTops.length);
-    const rc = new THREE.Color(COL.fiber), c2 = new THREE.Color(), v = new THREE.Vector3(), sv = new THREE.Vector3(), q = new THREE.Quaternion();
-    const setRings = t => ringTops.forEach(([x, y, z, ph], i) => { const f = reduce ? 0 : (t * .6 + ph) % 1, s = 1 + f * .9; m4.compose(v.set(x, y, z), q, sv.set(s, 1, s)); rings.setMatrixAt(i, m4); rings.setColorAt(i, c2.copy(rc).multiplyScalar(1.4 * (1 - f))); });
+    const rings = new THREE.InstancedMesh(new THREE.RingGeometry(3.6, 6.2, 40).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, blending: THREE.AdditiveBlending, side: THREE.DoubleSide, depthWrite: false }), ringTops.length);
+    const rc = new THREE.Color(0x4fc0ff), c2 = new THREE.Color(), v = new THREE.Vector3(), sv = new THREE.Vector3(), q = new THREE.Quaternion();
+    const setRings = t => ringTops.forEach(([x, y, z, ph], i) => { const f = reduce ? 0 : (t * .6 + ph) % 1, s = 1 + f * 1.6; m4.compose(v.set(x, y, z), q, sv.set(s, 1, s)); rings.setMatrixAt(i, m4); rings.setColorAt(i, c2.copy(rc).multiplyScalar(2.6 * (1 - f))); });
     setRings(0); fiber.add(rings);
-    if (!reduce) tick.push(t => { setRings(t); rings.instanceMatrix.needsUpdate = true; rings.instanceColor.needsUpdate = true; });
+    // a halo of light on every connected roof
+    const haloTex = radial('rgba(255,255,255,1)', 'rgba(120,200,255,0)');
+    const hpos = new Float32Array(ringTops.length * 3); ringTops.forEach(([x, y, z], i) => { hpos[i * 3] = x; hpos[i * 3 + 1] = y + 1.5; hpos[i * 3 + 2] = z; });
+    const hg = new THREE.BufferGeometry(); hg.setAttribute('position', new THREE.BufferAttribute(hpos, 3));
+    const halo = new THREE.Points(hg, new THREE.PointsMaterial({ map: haloTex, color: 0x9fdcff, size: 46, sizeAttenuation: false, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+    halo.userData.px = 46; pulseClouds.push(halo); fiber.add(halo);
+    if (!reduce) tick.push(t => { setRings(t); rings.instanceMatrix.needsUpdate = true; rings.instanceColor.needsUpdate = true; halo.material.opacity = .75 + Math.sin(t * 2.4) * .25; });
   }
   // draw the fiber after the street so its glow reads through it; buildings still hide it
   fiber.traverse(o => { o.renderOrder = 6; });
@@ -577,20 +585,56 @@ export function mountScene(host, opts = {}) {
   PROF('plant');
   /* ---------- labels (screen space, never overlapping) ---------- */
   const labels = [];
-  function addLabel(text, pos, cls, modes, onClick) {
+  function addLabel(text, pos, cls, modes, onClick, own = -2) {
     const d = el('div', 's-lbl ' + (cls || ''), text); labelLayer.appendChild(d);
     if (onClick) { d.classList.add('click'); d.setAttribute('role', 'button'); d.tabIndex = 0; d.addEventListener('click', onClick); d.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } }); }
-    labels.push({ d, pos: new THREE.Vector3(...pos), modes, w: 0, h: 0, vis: false, x: 0, y: 0 });
+    labels.push({ d, pos: new THREE.Vector3(...pos), modes, own, w: 0, h: 0, vis: false, x: 0, y: 0 });
   }
   addLabel('Foundation', [0, 34, 0], 'main', ['net'], () => setView(1));
-  eps.forEach(e => { if (!e.generic) addLabel(e.name, [e.p[0], Math.max(8, e.top) + 6, e.p[1]], '', ['net']); });
-  // street names from the City data, placed on the point of each street nearest the core
+  eps.forEach(e => { if (!e.generic) addLabel(e.name, [e.p[0], Math.max(8, e.top) + 6, e.p[1]], '', ['net'], null, e.b); });
+  // a name tag hides when another building stands between the camera and the building it names
+  const occ = new THREE.Vector3();
+  function occluded(l) {
+    const c = camera.position, d = c.distanceTo(l.pos), n = Math.min(160, Math.ceil(d / 7));
+    for (let i = 1; i < n; i++) {
+      occ.lerpVectors(c, l.pos, i / n); if (occ.y > 260 || occ.y < 0) continue;
+      const k = bldAt(occ.x, occ.z); if (k >= 0 && k !== l.own && occ.y < blds[k].h) return true;
+    }
+    return false;
+  }
+  // street names are painted on the street itself, so buildings hide them and they never float over rooftops
   const pretty = n => n.replace(/\bAV\b/, 'Ave').replace(/\bST\b/, 'St').replace(/\bTR\b/, 'Tr').replace(/\bDR\b/, 'Dr').replace(/\b([A-Z])([A-Z]+)\b/g, (m, a, b) => /^(SE|SW|NE|NW)$/.test(m) ? m : a + b.toLowerCase());
-  [['5 AV SW', [-700, -300]], ['7 AV SW', [-760, -200]], ['9 AV SE', [-160, 0]], ['11 AV SE', [-160, 210]], ['CENTRE ST S', [-620, 60]], ['MACLEOD TR SE', [-290, 120]], ['4 ST SE', [100, 120]], ['1 ST SW', [-830, 60]], ['RIVERFRONT AV SE', [-300, -560]], ['MEMORIAL DR NE', [-200, -780]]].forEach(([name, ref]) => {
-    let best = null, bd = 1e9; roads.forEach(r => { if (r.name !== name) return; r.pts.forEach(p => { const d = Math.hypot(p[0] - ref[0], p[1] - ref[1]); if (d < bd) { bd = d; best = p; } }); });
-    if (best && bd < 400) addLabel(pretty(name), [best[0], 1, best[1]], 'street', ['net']);
-  });
-  { const r = riverAt(-650); if (r) addLabel('Bow River', [-650, 1, (r[0] + r[1]) / 2], 'street', ['net']); }
+  const maxAniso = renderer.capabilities.getMaxAnisotropy();
+  function groundLabel(text, x, z, dx, dz, h, y, alpha) {
+    const L = Math.hypot(dx, dz) || 1;
+    if (dx < -.2 * L || (Math.abs(dx) <= .2 * L && dz > 0)) { dx = -dx; dz = -dz; } // read west to east, or south to north
+    const c = document.createElement('canvas'), g = c.getContext('2d'), F = 96;
+    const font = '600 ' + F + 'px "Instrument Sans", "Helvetica Neue", Arial, sans-serif';
+    g.font = font; const w = Math.ceil(g.measureText(text).width) + 48;
+    c.width = w; c.height = 128; g.font = font; g.textBaseline = 'middle'; g.textAlign = 'center';
+    g.fillStyle = 'rgba(255,255,255,' + alpha + ')'; g.fillText(text, w / 2, 66);
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = maxAniso;
+    const ph = h * 128 / F * .78, pw = ph * w / 128;
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(pw, ph).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ map: t, transparent: true, depthWrite: false, toneMapped: false }));
+    m.position.set(x, y, z); m.rotation.y = -Math.atan2(dz, dx); m.renderOrder = 5; city.add(m);
+  }
+  const STREET_LABELS = [['4 AV SW', [-900, -400]], ['5 AV SW', [-760, -300]], ['6 AV SW', [-900, -240]], ['7 AV SW', [-980, -180]], ['8 AV SW', [-900, -110]], ['9 AV SE', [-170, 0]], ['10 AV SW', [-760, 90]], ['11 AV SE', [-150, 210]], ['12 AV SE', [-450, 300]],
+    ['CENTRE ST S', [-620, 150]], ['1 ST SW', [-830, 150]], ['2 ST SW', [-990, 150]], ['4 ST SW', [-1235, 150]], ['1 ST SE', [-460, 150]], ['MACLEOD TR SE', [-290, 150]], ['4 ST SE', [110, 150]], ['RIVERFRONT AV SE', [-300, -560]], ['MEMORIAL DR NE', [-150, -790]]];
+  const paintNames = () => { try {
+    // up to three labels per street, on open road (not under a building), mid-block, spaced well apart
+    STREET_LABELS.forEach(([name, ref]) => {
+      const cand = [];
+      roads.forEach(r => { if (r.name !== name) return; for (let i = 1; i < r.pts.length; i++) { const a = r.pts[i - 1], b = r.pts[i], L = Math.hypot(b[0] - a[0], b[1] - a[1]); if (L < 34) continue; const mx = (a[0] + b[0]) / 2, mz = (a[1] + b[1]) / 2; if (!CORE(mx, mz) || bldAt(mx, mz) >= 0 || nearNode(mx, mz, 18)) continue; cand.push([mx, mz, b[0] - a[0], b[1] - a[1], Math.hypot(mx - ref[0], mz - ref[1])]); } });
+      cand.sort((a, b) => a[4] - b[4]);
+      const chosen = [];
+      cand.forEach(c => { if (chosen.length < 3 && c[4] < 900 && chosen.every(o => Math.hypot(o[0] - c[0], o[1] - c[1]) > 380)) chosen.push(c); });
+      chosen.forEach(c => groundLabel(pretty(name), c[0], c[1], c[2], c[3], 6.5, .36, .9));
+    });
+    const at = -650, r = riverAt(at), r2 = riverAt(at + 60);
+    if (r && r2) groundLabel('Bow River', at, (r[0] + r[1]) / 2, 60, (r2[0] + r2[1]) / 2 - (r[0] + r[1]) / 2, 22, .2, .7);
+    renderer.shadowMap.needsUpdate = true;
+  } catch (err) { console.error('street names', err); } };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(paintNames, paintNames); else paintNames();
   const tmp = new THREE.Vector3(), lastCam = new THREE.Matrix4();
   let cardBox = null, labelsDirty = true;
   function placeLabels() {
@@ -612,7 +656,7 @@ export function mountScene(host, opts = {}) {
       const off = tmp.z > 1 || bx.x < 4 || bx.x + w > W - 4 || bx.y < 4 || bx.y + h > H - 60;
       const hit = boxes.some(o => bx.x < o.x + o.w + 4 && bx.x + bx.w + 4 > o.x && bx.y < o.y + o.h + 3 && bx.y + bx.h + 3 > o.y);
       const far = !street && !l.d.classList.contains('main') && camera.position.distanceTo(l.pos) > 2300;
-      if (off || hit || far) return hide();
+      if (off || hit || far || (l.own > -2 && occluded(l))) return hide();
       boxes.push(bx);
       if (!l.vis) { l.vis = true; l.d.style.opacity = 1; l.d.style.pointerEvents = l.d.classList.contains('click') ? 'auto' : 'none'; }
       if (Math.abs(bx.x - l.x) > .3 || Math.abs(bx.y - l.y) > .3) { l.x = bx.x; l.y = bx.y; l.d.style.transform = 'translate(' + bx.x.toFixed(1) + 'px,' + bx.y.toFixed(1) + 'px)'; }
@@ -690,6 +734,7 @@ export function mountScene(host, opts = {}) {
   const reveal = () => { loading.remove(); host.classList.add('scene--ready'); };
 
   // expose a small debug hook for profiling
+  window.__sscam = (cp, tp) => { camAnim = null; camera.position.set(...cp); controls.target.set(...tp); controls.update(); lastMove = performance.now(); };
   window.__ssinfo = () => ({ calls: renderer.info.render.calls, tris: renderer.info.render.triangles, geos: renderer.info.memory.geometries, tex: renderer.info.memory.textures, programs: renderer.info.programs.length, pr: renderer.getPixelRatio() });
 
   PROF('ui');

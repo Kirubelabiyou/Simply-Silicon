@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="assets/css/pages.css">
 <script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
 </head>
-<body data-page="platform" id="top">
+<body data-page="platform" class="theme-dark" id="top">
 <header id="site-header"></header>
 
 <main>
@@ -54,10 +54,10 @@
         </div>
         <p>Foundation in Calgary is the first node. Simply Silicon is securing and developing a pipeline of 15+ additional sites in major metros around North America and Europe.</p>
       </div>
-      <div class="big-stats">
-        <div class="card"><span class="plan">In the pipeline</span><b class="num">15+</b><span>Additional metro sites being secured and developed</span></div>
-        <div class="card"><span class="plan">Planned</span><b class="num">200<small>MW+</small></b><span>Of secure AI capacity across the network</span></div>
-        <div class="card"><span class="plan">Target</span><b class="num">12+</b><span>Major cities in North America and Europe</span></div>
+      <div class="figures figures--3">
+        <div><em>In the pipeline</em><b class="num">15+</b><span>Additional metro sites being secured and developed</span></div>
+        <div><em>Planned</em><b class="num">200<small>MW+</small></b><span>Of secure AI capacity across the network</span></div>
+        <div><em>Target</em><b class="num">12+</b><span>Major cities in North America and Europe</span></div>
       </div>
     </div>
   </section>
@@ -70,27 +70,14 @@
         </div>
         <p>The internet was built to distribute information between humans. Inference infrastructure must produce intelligence between machines.</p>
       </div>
-      <div class="vs">
-        <div class="vs-col">
-          <h3>The internet</h3>
-          <p class="vs-sub">Moves what we already know</p>
-          <ul>
-            <li>Web pages, files, email, search and video</li>
-            <li>Store it somewhere, request it, send it</li>
-            <li>Rewards reach, redundancy and scale</li>
-            <li>Tolerates distance as the price of all three</li>
-          </ul>
+      <div class="columns columns--rule">
+        <div>
+          <h3>The internet moves what we already know.</h3>
+          <p>Web pages, files, email, search and video are stored somewhere, requested and sent. The network rewards reach, redundancy and scale, and it tolerates distance as the price of all three.</p>
         </div>
-        <div class="vs-mid" aria-hidden="true"><span>vs</span></div>
-        <div class="vs-col vs-col--hot">
-          <h3>Inference</h3>
-          <p class="vs-sub">Produces what we don't know yet</p>
-          <ul>
-            <li>Tokens generated one after another from huge model state</li>
-            <li>Every token depends on the ones before it</li>
-            <li>Rewards memory locality, bandwidth and thermal control</li>
-            <li>Punished by distance at every hop</li>
-          </ul>
+        <div>
+          <h3>Inference produces what we don't know yet.</h3>
+          <p>Tokens are generated one after another from huge model state, and every token depends on the ones before it. It rewards memory locality, bandwidth and thermal control, and it is punished by distance at every hop.</p>
         </div>
       </div>
     </div>
@@ -103,7 +90,7 @@
         <p class="lede">Agentic AI turns one user action into hundreds of model calls, tool calls and checks. Latency doesn't just slow the answer. It compounds through the whole chain.</p>
         <p class="note">A 50 ms penalty, repeated across a chain of machine-speed calls, becomes a real economic cost.</p>
       </div>
-      <figure class="chart-card">
+      <figure class="chart">
         <figcaption>Added delay from a 50 ms penalty per call</figcaption>
         <div class="bars" id="bars"></div>
         <p class="chart-foot">Delay = calls × 50 ms. Bars use a log scale.</p>
@@ -119,14 +106,14 @@
         </div>
         <p>None of today's inference tricks exist to move state faster across distance. Every one of them exists to avoid moving it.</p>
       </div>
-      <div class="tricks">
-        <div><b>FlashAttention</b><span>Fewer reads and writes to memory</span></div>
-        <div><b>Kernel fusion</b><span>Avoids round trips between memory and compute</span></div>
-        <div><b>Quantization</b><span>Shrinks how many bits have to move</span></div>
-        <div><b>Prefix caching</b><span>Reuses state instead of recomputing it</span></div>
-        <div><b>Cache-aware routing</b><span>Sends the request to where the state already lives</span></div>
-        <div><b>Disaggregation</b><span>Splits prefill and decode onto the hardware each needs</span></div>
-      </div>
+      <dl class="terms">
+        <div><dt>FlashAttention</dt><dd>Fewer reads and writes to memory.</dd></div>
+        <div><dt>Kernel fusion</dt><dd>Avoids round trips between memory and compute.</dd></div>
+        <div><dt>Quantization</dt><dd>Shrinks how many bits have to move.</dd></div>
+        <div><dt>Prefix caching</dt><dd>Reuses state instead of recomputing it.</dd></div>
+        <div><dt>Cache-aware routing</dt><dd>Sends the request to where the state already lives.</dd></div>
+        <div><dt>Disaggregation</dt><dd>Splits prefill and decode onto the hardware each needs.</dd></div>
+      </dl>
       <p class="big-quote">"The winning systems are not the biggest clusters. The systems that place memory, compute, routing, and power closest to the demand pattern will win."</p>
     </div>
   </section>
@@ -148,27 +135,27 @@
           <!-- public internet plane -->
           <path d="M140 40 H940 L860 170 H60 Z" fill="url(#lyTop)" stroke="#ffffff33"/>
           <g stroke="#ffffff40" stroke-width="1.5" fill="none"><path d="M210 80 L340 130 L470 70 L600 135 L730 80 L820 140 M340 130 L600 135 M210 80 L470 70 L730 80"/></g>
-          <g fill="#0d2136" stroke="#c9d8e6" stroke-width="2"><circle cx="210" cy="80" r="9"/><circle cx="340" cy="130" r="9"/><circle cx="470" cy="70" r="9"/><circle cx="600" cy="135" r="9"/><circle cx="730" cy="80" r="9"/><circle cx="820" cy="140" r="9"/></g>
-          <text x="80" y="30" font-family="DM Sans, sans-serif" font-size="15" font-weight="600" fill="#ffffff">Public internet</text>
-          <text x="80" y="198" font-family="DM Sans, sans-serif" font-size="13" fill="#a9c0d6">People: pages, files, video, search</text>
+          <g fill="#02060d" stroke="#c9d8e6" stroke-width="2"><circle cx="210" cy="80" r="9"/><circle cx="340" cy="130" r="9"/><circle cx="470" cy="70" r="9"/><circle cx="600" cy="135" r="9"/><circle cx="730" cy="80" r="9"/><circle cx="820" cy="140" r="9"/></g>
+          <text x="80" y="30" font-size="15" font-weight="600" fill="#ffffff">Public internet</text>
+          <text x="80" y="198" font-size="13" fill="#a9c0d6">People: pages, files, video, search</text>
           <!-- air gap -->
           <g stroke="#e8594a" stroke-width="2" stroke-dasharray="6 8"><path d="M40 222 H960"/></g>
-          <rect x="430" y="208" width="140" height="28" rx="14" fill="#2a1a22" stroke="#e8594a"/><text x="500" y="227" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#f3a39a">Air gap</text>
+          <rect x="430" y="208" width="140" height="28" rx="14" fill="#2a1a22" stroke="#e8594a"/><text x="500" y="227" text-anchor="middle" font-size="13" font-weight="600" fill="#f3a39a">Air gap</text>
           <!-- Simply Silicon plane -->
           <path d="M140 262 H940 L860 400 H60 Z" fill="url(#lyBot)" stroke="#4db2ef66"/>
           <g stroke="#4db2ef" stroke-width="3" fill="none" class="dg-flow sky"><path d="M200 320 L360 290 L520 345 L680 300 L830 350 M360 290 L680 300 M200 320 L520 345"/></g>
           <g><circle cx="200" cy="320" r="16" fill="#4db2ef33"/><circle cx="200" cy="320" r="9" fill="#4db2ef" stroke="#fff" stroke-width="2.5"/></g>
           <g fill="#f07a2e" stroke="#fff" stroke-width="2.5"><circle cx="360" cy="290" r="8"/><circle cx="520" cy="345" r="8"/><circle cx="680" cy="300" r="8"/></g>
-          <g fill="#0d2136" stroke="#8193a9" stroke-width="2.5"><circle cx="830" cy="350" r="8"/></g>
-          <g font-family="DM Sans, sans-serif" font-size="13" fill="#e2eefa"><text x="200" y="352" text-anchor="middle">Calgary</text><text x="360" y="275" text-anchor="middle">Montreal</text><text x="520" y="376" text-anchor="middle">Amsterdam</text><text x="680" y="285" text-anchor="middle">Paris</text><text x="830" y="381" text-anchor="middle">London</text></g>
-          <text x="80" y="428" font-family="DM Sans, sans-serif" font-size="15" font-weight="600" fill="#9fd8fb">Simply Silicon network: machines, private fiber between city sites</text>
+          <g fill="#02060d" stroke="#8193a9" stroke-width="2.5"><circle cx="830" cy="350" r="8"/></g>
+          <g font-size="13" fill="#e2eefa"><text x="200" y="352" text-anchor="middle">Calgary</text><text x="360" y="275" text-anchor="middle">Montreal</text><text x="520" y="376" text-anchor="middle">Amsterdam</text><text x="680" y="285" text-anchor="middle">Paris</text><text x="830" y="381" text-anchor="middle">London</text></g>
+          <text x="80" y="428" font-size="15" font-weight="600" fill="#9fd8fb">Simply Silicon network: machines, private fiber between city sites</text>
         </svg>
       </figure>
-      <div class="feat-3">
-        <div class="feat"><h3>Separate by design</h3><p>Air-gapped sites and private fiber, physically apart from the public internet.</p></div>
-        <div class="feat"><h3>Next to demand</h3><p>Metro sites put compute where the requests come from, cutting hops.</p></div>
-        <div class="feat"><h3>Built for machines</h3><p>Made for machine-speed inference, not humans clicking and waiting.</p></div>
-      </div>
+      <ol class="rows">
+        <li><span class="rows-n">01</span><h3>Separate by design</h3><p>Air-gapped sites and private fiber, physically apart from the public internet.</p></li>
+        <li><span class="rows-n">02</span><h3>Next to demand</h3><p>Metro sites put compute where the requests come from, cutting hops.</p></li>
+        <li><span class="rows-n">03</span><h3>Built for machines</h3><p>Made for machine-speed inference, not humans clicking and waiting.</p></li>
+      </ol>
     </div>
   </section>
 

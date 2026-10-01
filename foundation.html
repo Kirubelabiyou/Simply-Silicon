@@ -35,11 +35,11 @@
 
   <section class="band band--white">
     <div class="wrap">
-      <div class="stats">
-        <div class="stat"><b class="num">12<small>MW</small></b><span>n+1 redundant power</span></div>
-        <div class="stat"><b class="num">7<small>km</small></b><span>Private fiber</span></div>
-        <div class="stat"><b class="num">25+</b><span>Connected buildings</span></div>
-        <div class="stat"><b>Phase 1</b><span>Now online</span></div>
+      <div class="figures">
+        <div><b class="num">12<small>MW</small></b><span>n+1 redundant power</span></div>
+        <div><b class="num">7<small>km</small></b><span>Private fiber</span></div>
+        <div><b class="num">25+</b><span>Connected buildings</span></div>
+        <div><b>Phase 1</b><span>Now online</span></div>
       </div>
     </div>
   </section>
@@ -48,28 +48,17 @@
     <div class="wrap">
       <div class="sec-head">
         <h2>Three phases, one plant.</h2>
-        <p>Bars drawn to scale against 12 MW.</p>
+        <p>Each phase builds on the one before, inside the same plant.</p>
       </div>
-      <div class="phase-grid">
-        <div class="card phase-card">
-          <div class="top"><h3>Phase 1</h3><span class="chip chip--live"><i class="dot dot--live"></i>Online</span></div>
-          <div class="mw">100 kW</div>
-          <div class="bar"><i style="width:0.83%"></i></div><div class="bar-cap"><span>0</span><span>12 MW</span></div>
-          <p>Online on the ground floor.</p>
-        </div>
-        <div class="card phase-card">
-          <div class="top"><h3>Phase 2</h3><span class="chip chip--dev"><i class="dot dot--dev"></i>Feb 2027</span></div>
-          <div class="mw">2 MW</div>
-          <div class="bar"><i style="width:16.7%;background:var(--amber)"></i></div><div class="bar-cap"><span>0</span><span>12 MW</span></div>
-          <p>February 2027, in the basement.</p>
-        </div>
-        <div class="card phase-card">
-          <div class="top"><h3>Phase 3</h3><span class="chip chip--soon"><i class="dot dot--soon"></i>Full build</span></div>
-          <div class="mw">12 MW</div>
-          <div class="bar"><i style="width:100%;background:#9fb1c6"></i></div><div class="bar-cap"><span>0</span><span>12 MW</span></div>
-          <p>The full Foundation build.</p>
-        </div>
+      <ol class="timeline">
+        <li class="is-live"><span class="chip chip--live"><i class="dot dot--live"></i>Online</span><b class="num">100 kW</b><h3>Phase 1</h3><p>Online on the ground floor.</p></li>
+        <li class="is-dev"><span class="chip chip--dev"><i class="dot dot--dev"></i>Feb 2027</span><b class="num">2 MW</b><h3>Phase 2</h3><p>February 2027, in the basement.</p></li>
+        <li><span class="chip chip--soon"><i class="dot dot--soon"></i>Full build</span><b class="num">12 MW</b><h3>Phase 3</h3><p>The full Foundation build.</p></li>
+      </ol>
+      <div class="scale" aria-label="Phase capacity drawn to scale against 12 MW">
+        <i style="width:100%"></i><i style="width:16.7%"></i><i style="width:.83%"></i>
       </div>
+      <p class="scale-cap">Drawn to scale against 12 MW.</p>
     </div>
   </section>
 
@@ -79,12 +68,12 @@
         <h2>The site</h2>
         <p>We are rethinking the physical data centre and its networking from the ground up.</p>
       </div>
-      <div class="spec-list spec-4">
-        <div class="card"><span class="val">Base plant</span><h3>District heating</h3></div>
-        <div class="card"><span class="val">Power</span><h3>14 MVA n+1</h3></div>
-        <div class="card"><span class="val">Stack</span><h3>Utility-grade</h3></div>
-        <div class="card"><span class="val">Heating</span><h3>District loop</h3></div>
-      </div>
+      <dl class="facts">
+        <div><dt>Base plant</dt><dd>District heating</dd></div>
+        <div><dt>Power</dt><dd>14 MVA n+1</dd></div>
+        <div><dt>Stack</dt><dd>Utility-grade</dd></div>
+        <div><dt>Heating</dt><dd>District loop</dd></div>
+      </dl>
     </div>
   </section>
 </main>
