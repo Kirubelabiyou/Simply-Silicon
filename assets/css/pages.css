@@ -722,3 +722,12 @@
 .backers .backers-h { color: #aab6c3; }
 /* investor logos in each company's own colours (the supplied files are their on-dark versions) */
 .marquee-track img, .marquee-track li.logo-tone img, .marquee-track li.logo-tone--soft img { filter: none; opacity: 1; }
+
+/* zoom buttons in the 3D view */
+.scene-zoom { position: absolute; right: 14px; bottom: 64px; z-index: 3; display: flex; flex-direction: column; border-radius: 4px; overflow: hidden; background: #ffffffe6; box-shadow: 0 6px 18px -10px #0a1c2e66; }
+.scene-zoom button { width: 40px; height: 40px; border: 0; background: none; cursor: pointer; font-size: 21px; line-height: 1; color: var(--navy); }
+.scene-zoom button + button { border-top: 1px solid var(--line); }
+.theme-dark .scene-zoom { background: #0a111be8; box-shadow: 0 0 0 1px #ffffff14, 0 8px 24px -12px #000; }
+.theme-dark .scene-zoom button { color: #e8eef4; }
+.theme-dark .scene-zoom button:hover { background: #ffffff10; }
+@media (max-width: 700px) { .scene-zoom { bottom: 70px; right: 10px; } }

@@ -62,6 +62,8 @@ export function mountScene(host, opts = {}) {
   controls.minDistance = 22; controls.maxDistance = 3200;
   controls.maxPolarAngle = Math.PI * .46;
   controls.screenSpacePanning = false;
+  controls.zoomSpeed = 2.4;        // each scroll step or pinch moves noticeably
+  controls.zoomToCursor = true;     // zoom toward what is under the pointer
 
   scene.add(new THREE.HemisphereLight(0xeaf3ff, 0xa9b4bf, .62));
   const sun = new THREE.DirectionalLight(0xfff1dc, 2.6);
@@ -787,6 +789,15 @@ export function mountScene(host, opts = {}) {
   const ui = el('div', 'scene-ui'); host.appendChild(ui);
   const seg = el('div', 'seg'); seg.setAttribute('role', 'group'); seg.setAttribute('aria-label', 'View'); ui.appendChild(seg);
   const hint = el('span', 'scene-hint', 'Drag to rotate · pinch or scroll to zoom · tap Foundation to go inside'); ui.appendChild(hint);
+  const zoomBox = el('div', 'scene-zoom'); host.appendChild(zoomBox);
+  [['+', 'Zoom in', .45], ['−', 'Zoom out', 2.2]].forEach(([t, label, f]) => {
+    const b = el('button', '', t); b.type = 'button'; b.setAttribute('aria-label', label);
+    b.addEventListener('click', () => {
+      const off = camera.position.clone().sub(controls.target), d = Math.max(controls.minDistance, Math.min(controls.maxDistance, off.length() * f));
+      camAnim = { t0: performance.now(), fp: camera.position.clone(), ft: controls.target.clone(), cp: controls.target.clone().add(off.setLength(d)), tp: controls.target.clone(), ms: 450 };
+    });
+    zoomBox.appendChild(b);
+  });
   const VIEWS = {
     net: { name: 'Network', title: 'Foundation', sub: 'Calgary, Alberta', chip: ['chip--live', 'dot--live', 'Online'],
       text: 'Foundation brings 12 MW of secure AI capacity to downtown Calgary.',

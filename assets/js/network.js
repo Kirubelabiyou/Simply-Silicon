@@ -185,9 +185,32 @@
     if (!(e.ctrlKey || e.metaKey) || !net3d.hidden) return;
     e.preventDefault();
     var r = stage.getBoundingClientRect(), px = e.clientX - r.left, py = e.clientY - r.top;
-    var nw = Math.max(40, Math.min(1500, vb.w * Math.exp(e.deltaY * .0025))), ux = vb.x + px * upp(), uy = vb.y + py * upp(), k = nw / vb.w;
+    // trackpad pinch arrives as small ctrl+wheel steps, so it gets a stronger factor than a mouse wheel notch
+    var f = Math.abs(e.deltaY) < 40 ? .02 : .006, nw = Math.max(40, Math.min(1500, vb.w * Math.exp(Math.max(-120, Math.min(120, e.deltaY)) * f))), ux = vb.x + px * upp(), uy = vb.y + py * upp(), k = nw / vb.w;
     vb.x = ux - (ux - vb.x) * k; vb.y = uy - (uy - vb.y) * k; vb.w = nw; draw();
   }, { passive: false });
+  // double-click (or double-tap) zooms in on that spot
+  stage.addEventListener('dblclick', function (e) {
+    if (!net3d.hidden || e.target.closest('.pop, .zoom, .net-legend, .node')) return;
+    var r = stage.getBoundingClientRect(), ux = vb.x + (e.clientX - r.left) * upp(), uy = vb.y + (e.clientY - r.top) * upp();
+    flyTo(around(ux, uy, Math.max(40, vb.w / 2.5)), 400);
+  });
+  // two-finger pinch on phones and tablets
+  var pinch = null;
+  stage.addEventListener('touchstart', function (e) {
+    if (!net3d.hidden || e.touches.length !== 2) return;
+    var a = e.touches[0], c = e.touches[1], r = stage.getBoundingClientRect();
+    pinch = { d: Math.hypot(a.clientX - c.clientX, a.clientY - c.clientY), w: vb.w, mx: (a.clientX + c.clientX) / 2 - r.left, my: (a.clientY + c.clientY) / 2 - r.top, vx: vb.x, vy: vb.y };
+    drag = null;
+  }, { passive: true });
+  stage.addEventListener('touchmove', function (e) {
+    if (!pinch || e.touches.length !== 2) return;
+    e.preventDefault();
+    var a = e.touches[0], c = e.touches[1], d = Math.hypot(a.clientX - c.clientX, a.clientY - c.clientY);
+    var nw = Math.max(40, Math.min(1500, pinch.w * pinch.d / d)), ux = pinch.vx + pinch.mx * pinch.w / W, uy = pinch.vy + pinch.my * pinch.w / W;
+    vb.w = nw; vb.x = ux - pinch.mx * nw / W; vb.y = uy - pinch.my * nw / W; draw();
+  }, { passive: false });
+  stage.addEventListener('touchend', function (e) { if (e.touches.length < 2) pinch = null; });
   var drag = null, moved = false;
   stage.addEventListener('pointerdown', function (e) {
     if (!net3d.hidden || e.target.closest('.pop, .zoom, .net-legend')) return;
