@@ -663,3 +663,55 @@
 /* emblems with interior detail keep their shapes in greyscale instead of a flat white */
 .marquee-track li.logo-tone img { filter: grayscale(1) brightness(2.1) contrast(.85); }
 .marquee-track li.logo-tone--soft img { filter: grayscale(1) brightness(1.05) contrast(1.25); }
+
+/* ================= Dark theme across the whole site: controls that sit on light surfaces ================= */
+/* 3D view: glass panels, buttons and name tags stay readable on the dark theme */
+.theme-dark .scene-card { background: #0a111bf0; color: var(--ink); box-shadow: 0 0 0 1px #ffffff14, 0 20px 50px -20px #000; }
+.theme-dark .scene-card p { color: #aab6c3; }
+.theme-dark .seg { background: #0a111be8; box-shadow: 0 0 0 1px #ffffff14, 0 8px 24px -12px #000; }
+.theme-dark .seg button { color: #aab6c3; }
+.theme-dark .seg button:hover { color: #fff; }
+.theme-dark .seg button[aria-pressed="true"] { background: #fff; color: #02060d; }
+.theme-dark .scene-hint { background: #0a111bd9; color: #aab6c3; }
+.theme-dark .s-lbl { background: #0a111bee; color: #e8eef4; box-shadow: 0 0 0 1px #ffffff1a, 0 4px 12px -4px #000c; }
+.theme-dark .s-lbl.main { background: #fff; color: #02060d; box-shadow: inset 3px 0 0 var(--heat), 0 4px 14px -4px #000c; }
+.theme-dark .s-lbl.click:hover { background: var(--sky); color: #02060d; }
+.theme-dark .scene-loading { color: #fff; text-shadow: 0 1px 8px #000; }
+/* how it works */
+.theme-dark .hub-wrap { border-color: var(--line); background: radial-gradient(ellipse at 50% 50%, #0d1a2a 0%, #070d16 70%), linear-gradient(#ffffff08 1px, transparent 1px) 0 0 / 16px 16px, linear-gradient(90deg, #ffffff08 1px, transparent 1px) 0 0 / 16px 16px, #050b14; }
+.theme-dark .hub .spoke { stroke: #1f3247; } .theme-dark .hub .spoke.on { stroke: var(--sky); }
+.theme-dark .pillar .bg { stroke: #24364a; }
+.theme-dark .pillar:hover .bg, .theme-dark .pillar:focus-visible .bg { stroke: var(--sky); }
+.theme-dark .pillar.on .bg { fill: #0f6cb0; stroke: var(--sky); }
+.theme-dark .pillar.on .ic-bg { fill: #0a4f86; }
+.theme-dark .pillar .ic { stroke: #8fd2fa; }
+.theme-dark .pill-grid button { background: #0a111b; border-color: var(--line); color: var(--ink); box-shadow: none; }
+.theme-dark .pill-grid button.on { background: #0f6cb0; border-color: var(--sky); color: #fff; }
+.theme-dark .pill-grid svg { background: #10233a; stroke: #8fd2fa; }
+.theme-dark .detail-fig { background: #070d16; border-color: var(--line); }
+.theme-dark .dg-box { stroke: #2a3a4e; }
+.theme-dark .dg-box.on { fill: #0d2a48; stroke: var(--sky); }
+.theme-dark .dg-box.dark { fill: #13609c; stroke: #13609c; }
+.theme-dark .dg-box.warn { fill: #2e2410; stroke: #a5802a; }
+.theme-dark .dg-box.heat { fill: #32191a; stroke: #c0574c; }
+.theme-dark .dg-street { stroke: #1b2633; }
+.theme-dark .dg-bldg { stroke: #2a3a4e; }
+.theme-dark .dg-fiber { stroke: #4db2ef; }
+/* first site card and other surfaces that used the heading colour as a fill */
+.theme-dark .first-site { background: #0a111b; box-shadow: 0 0 0 1px #ffffff14, 0 30px 70px -30px #000; }
+.theme-dark .first-site-copy h2 { color: #fff; }
+.theme-dark .drawer-close { color: #fff; }
+.theme-dark .modal-x { color: #fff; }
+.theme-dark .f-row select { color-scheme: dark; }
+/* while the 3D city is open over the world map, the map stops drawing behind it */
+.net-stage.is-3d > canvas, .net-stage.is-3d > svg, .net-stage.is-3d .net-legend, .net-stage.is-3d .zoom { visibility: hidden; }
+.net-stage.is-3d .node .pulse, .net-stage.is-3d .arc { animation: none; }
+.theme-dark .btn--light, .theme-dark .btn--light:hover { color: #02060d; }
+/* light fills baked into the How it works diagrams, toned for the dark theme */
+.theme-dark .detail-fig [fill="#f6fafd"] { fill: #0b1622; }
+.theme-dark .detail-fig [fill="#e8f4fc"] { fill: #0d2a48; }
+.theme-dark .detail-fig [fill="#e2eaf2"] { fill: #1f2d3d; }
+.theme-dark .detail-fig [fill="#fdecea"] { fill: #3a1d1c; }
+.theme-dark .detail-fig [stroke="#c9d6e3"] { stroke: #2a3a4e; }
+.theme-dark .detail-fig text[style*="1b6fb8"] { fill: #8fd2fa !important; }
+.theme-dark .detail-fig text[style*="b3372c"] { fill: #f3a39a !important; }

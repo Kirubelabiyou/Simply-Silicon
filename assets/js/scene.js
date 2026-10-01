@@ -30,7 +30,7 @@ export function mountScene(host, opts = {}) {
   const BLD = decodeBuildings(window.SS_BLD || []);
   const STR = window.SS_STREETS || { n: [], s: [], r: [] };
   const phoneNow = () => host.clientWidth < 700;
-  const PHONE = phoneNow();
+  const PHONE = opts.phone != null ? !!opts.phone : phoneNow();
   host.innerHTML = '';
   host.classList.add('scene--live');
   const loading = el('div', 'scene-loading', 'Loading 3D view');
@@ -39,7 +39,7 @@ export function mountScene(host, opts = {}) {
   /* ---------- renderer, camera, light ---------- */
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
   const DPR = window.devicePixelRatio || 1;
-  let pixelRatio = Math.min(DPR, PHONE ? 1.5 : 1.6);
+  let pixelRatio = Math.min(DPR, PHONE ? 1.5 : 1.6), tuned = 0;
   renderer.setPixelRatio(pixelRatio);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -708,18 +708,33 @@ export function mountScene(host, opts = {}) {
   // street names are painted on the street itself, so buildings hide them and they never float over rooftops
   const pretty = n => n.replace(/\bAV\b/, 'Ave').replace(/\bST\b/, 'St').replace(/\bTR\b/, 'Tr').replace(/\bDR\b/, 'Dr').replace(/\b([A-Z])([A-Z]+)\b/g, (m, a, b) => /^(SE|SW|NE|NW)$/.test(m) ? m : a + b.toLowerCase());
   const maxAniso = renderer.capabilities.getMaxAnisotropy();
+  // all street names share one texture atlas and one mesh: a single draw call and a single upload
+  const labelQ = [];
   function groundLabel(text, x, z, dx, dz, h, y, alpha) {
     const L = Math.hypot(dx, dz) || 1;
     if (dx < -.2 * L || (Math.abs(dx) <= .2 * L && dz > 0)) { dx = -dx; dz = -dz; } // read west to east, or south to north
-    const c = document.createElement('canvas'), g = c.getContext('2d'), F = 96;
-    const font = '600 ' + F + 'px "Instrument Sans", "Helvetica Neue", Arial, sans-serif';
-    g.font = font; const w = Math.ceil(g.measureText(text).width) + 48;
-    c.width = w; c.height = 128; g.font = font; g.textBaseline = 'middle'; g.textAlign = 'center';
-    g.fillStyle = 'rgba(255,255,255,' + alpha + ')'; g.fillText(text, w / 2, 66);
+    labelQ.push({ text, x, z, a: Math.atan2(dz, dx), h, y, alpha });
+  }
+  function flushLabels() {
+    if (!labelQ.length) return;
+    const F = 96, RH = 128, AW = 2048, font = '600 ' + F + 'px "Instrument Sans", "Helvetica Neue", Arial, sans-serif';
+    const c = document.createElement('canvas'), g = c.getContext('2d'); g.font = font;
+    let cx = 0, cy = 0; labelQ.forEach(l => { l.w = Math.ceil(g.measureText(l.text).width) + 48; if (cx + l.w > AW) { cx = 0; cy += RH; } l.u = cx; l.v = cy; cx += l.w; });
+    c.width = AW; c.height = Math.pow(2, Math.ceil(Math.log2(cy + RH)));
+    g.font = font; g.textBaseline = 'middle'; g.textAlign = 'center';
+    labelQ.forEach(l => { g.fillStyle = 'rgba(255,255,255,' + l.alpha + ')'; g.fillText(l.text, l.u + l.w / 2, l.v + 66); });
     const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = maxAniso;
-    const ph = h * 128 / F * .78, pw = ph * w / 128;
-    const m = new THREE.Mesh(new THREE.PlaneGeometry(pw, ph).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ map: t, transparent: true, depthWrite: false, toneMapped: false }));
-    m.position.set(x, y, z); m.rotation.y = -Math.atan2(dz, dx); m.renderOrder = 5; city.add(m);
+    const pos = [], uv = [], H = c.height;
+    labelQ.forEach(l => {
+      const ph = l.h * RH / F * .78, pw = ph * l.w / RH, ca = Math.cos(l.a), sa = Math.sin(l.a);
+      const corner = (px, pz) => [l.x + px * ca - pz * sa, l.y, l.z + px * sa + pz * ca]; // px along the street, pz across (negative = left of reading direction)
+      const p0 = corner(-pw / 2, ph / 2), p1 = corner(pw / 2, ph / 2), p2 = corner(pw / 2, -ph / 2), p3 = corner(-pw / 2, -ph / 2);
+      const u0 = l.u / AW, u1 = (l.u + l.w) / AW, v0 = 1 - (l.v + RH) / H, v1 = 1 - l.v / H;
+      pos.push(...p0, ...p1, ...p2, ...p0, ...p2, ...p3); uv.push(u0, v0, u1, v0, u1, v1, u0, v0, u1, v1, u0, v1);
+    });
+    const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); geo.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+    const m = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: t, transparent: true, depthWrite: false, toneMapped: false, side: THREE.DoubleSide }));
+    m.renderOrder = 5; city.add(m); labelQ.length = 0;
   }
   const STREET_LABELS = [['4 AV SW', [-900, -400]], ['5 AV SW', [-760, -300]], ['6 AV SW', [-900, -240]], ['7 AV SW', [-980, -180]], ['8 AV SW', [-900, -110]], ['9 AV SE', [-170, 0]], ['10 AV SW', [-760, 90]], ['11 AV SE', [-150, 210]], ['12 AV SE', [-450, 300]],
     ['CENTRE ST S', [-620, 150]], ['1 ST SW', [-830, 150]], ['2 ST SW', [-990, 150]], ['4 ST SW', [-1235, 150]], ['1 ST SE', [-460, 150]], ['MACLEOD TR SE', [-290, 150]], ['4 ST SE', [110, 150]], ['RIVERFRONT AV SE', [-300, -560]], ['MEMORIAL DR NE', [-150, -790]]];
@@ -735,7 +750,7 @@ export function mountScene(host, opts = {}) {
     });
     const at = -650, r = riverAt(at), r2 = riverAt(at + 60);
     if (r && r2) groundLabel('Bow River', at, (r[0] + r[1]) / 2, 60, (r2[0] + r2[1]) / 2 - (r[0] + r[1]) / 2, 22, .2, .7);
-    renderer.shadowMap.needsUpdate = true;
+    flushLabels();
   } catch (err) { console.error('street names', err); } };
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(paintNames, paintNames); else paintNames();
   const tmp = new THREE.Vector3(), fwd = new THREE.Vector3(), lastCam = new THREE.Matrix4();
@@ -827,6 +842,8 @@ export function mountScene(host, opts = {}) {
 
   function size() {
     const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return;
+    // big canvases (like the full-width map stage) start at a lower resolution so the first frames stay smooth
+    if (!tuned) { const cap = PHONE ? 1.5 : (w * h > 1.1e6 ? 1.2 : 1.6); if (Math.abs(Math.min(DPR, cap) - pixelRatio) > .01) { pixelRatio = Math.min(DPR, cap); renderer.setPixelRatio(pixelRatio); } }
     renderer.setSize(w, h, false);
     camera.aspect = w / h; camera.fov = w < 700 ? 50 : 38; camera.updateProjectionMatrix();
     cardBox = null; labelsDirty = true; labels.forEach(l => { l.w = 0; });
@@ -849,7 +866,7 @@ export function mountScene(host, opts = {}) {
   if (io) io.observe(host);
   const clock = new THREE.Clock();
   // adaptive resolution: if frames are slow on this device, step the pixel ratio down
-  const ft = []; let lastT = 0, tuned = 0;
+  const ft = []; let lastT = 0;
   function adapt(now) {
     if (lastT) ft.push(now - lastT); lastT = now;
     if (ft.length < 50) return;

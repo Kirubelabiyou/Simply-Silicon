@@ -150,14 +150,14 @@
   function openCalgary(s) {
     closePop();
     flyTo(around(s.x, s.y, 14), reduce ? 1 : 900, function () {
-      net3d.hidden = false;
+      net3d.hidden = false; stage.classList.add('is-3d');
       import('./scene.js').then(function (m) {
-        if (!scene) scene = m.mountScene(document.getElementById('calScene'), {});
+        if (!scene) scene = m.mountScene(document.getElementById('calScene'), { phone: phone() });
         else scene.setView('net');
       }).catch(function (err) { console.error(err); document.getElementById('calScene').innerHTML = '<div class="scene-loading">The 3D view could not load. Open the Foundation page instead.</div>'; });
     });
   }
-  document.getElementById('back3d').addEventListener('click', function () { net3d.hidden = true; flyTo(fit(), 1000); });
+  document.getElementById('back3d').addEventListener('click', function () { net3d.hidden = true; stage.classList.remove('is-3d'); flyTo(fit(), 1000); });
 
   /* ---------- motion, zoom and pan ---------- */
   var anim = null;
@@ -208,6 +208,11 @@
   resize();
   window.addEventListener('resize', resize);
   // warm up the 3D view in the background so tapping Calgary opens it fast
-  (window.requestIdleCallback || function (f) { setTimeout(f, 1500); })(function () { import('./scene.js').catch(function () {}); });
+  (window.requestIdleCallback || function (f) { setTimeout(f, 1500); })(function () {
+    import('./scene.js').then(function (m) {
+      // on larger screens, build the Calgary scene in the background (it does not draw until it is shown)
+      if (!scene && !phone() && (navigator.hardwareConcurrency || 4) >= 4) setTimeout(function () { if (!scene) scene = m.mountScene(document.getElementById('calScene'), { phone: false }); }, 1200);
+    }).catch(function () {});
+  }, { timeout: 4000 });
   if ('ResizeObserver' in window) new ResizeObserver(resize).observe(stage);
 })();
