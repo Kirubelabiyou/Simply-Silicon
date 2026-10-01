@@ -731,3 +731,16 @@
 .theme-dark .scene-zoom button { color: #e8eef4; }
 .theme-dark .scene-zoom button:hover { background: #ffffff10; }
 @media (max-width: 700px) { .scene-zoom { bottom: 70px; right: 10px; } }
+
+/* Phone: the How it works ring, drawn tall (replaces the old grid of buttons) */
+@media (max-width: 700px) {
+  .hub { display: block; max-height: none; }
+  .hub-wrap { padding: 6px 0; }
+  .theme-dark .hub-wrap { background: radial-gradient(ellipse at 50% 50%, #0d1a2a 0%, #070d16 70%), linear-gradient(#ffffff08 1px, transparent 1px) 0 0 / 16px 16px, linear-gradient(90deg, #ffffff08 1px, transparent 1px) 0 0 / 16px 16px, #050b14; }
+  .hub--m .center-t { font-size: 25px; }
+  .hub--m .pillar .pt { font-size: 14px; }
+}
+.theme-dark .hub .ring { stroke: #1f3247; }
+
+/* Header stays pinned to the top with a solid bar, so page content never shows through it */
+.theme-dark .hdr { background: #02060d; backdrop-filter: none; -webkit-backdrop-filter: none; }

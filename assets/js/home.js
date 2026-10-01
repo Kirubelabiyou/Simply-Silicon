@@ -208,63 +208,70 @@
   ];
 
   /* ---------- Hub ---------- */
+  // desktop: a wide ring of five cards. phone: the same ring, drawn taller and narrower so it fits the screen
   var hub = document.getElementById('hub');
-  var cx = 380, cy = 235, rx = 280, ry = 168, CW = 176, CH = 64;
-  var nodes = [], links = [];
-  P.forEach(function (p, i) {
-    var a = (-90 + i * 72) * Math.PI / 180;
-    p.x = cx + rx * Math.cos(a); p.y = cy + ry * Math.sin(a);
-  });
-  var defs = '<defs><linearGradient id="hubg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16395e"/><stop offset="1" stop-color="#0d2136"/></linearGradient>' +
-    '<filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0d2136" flood-opacity=".12"/></filter></defs>';
-  var ring = '<ellipse cx="' + cx + '" cy="' + cy + '" rx="' + rx + '" ry="' + ry + '" fill="none" stroke="#e2eaf2" stroke-width="1.5" stroke-dasharray="2 8"/>';
-  hub.innerHTML = defs + ring;
-  P.forEach(function (p) {
-    var l = document.createElementNS(NS, 'path');
-    l.setAttribute('d', 'M' + cx + ' ' + cy + ' L' + p.x + ' ' + p.y);
-    l.setAttribute('class', 'spoke'); hub.appendChild(l); links.push(l);
-  });
-  var center = document.createElementNS(NS, 'g');
-  center.innerHTML = '<rect x="' + (cx - 104) + '" y="' + (cy - 44) + '" width="208" height="88" rx="6" fill="url(#hubg)" filter="url(#sh)"/>' +
-    '<text class="center-t" x="' + cx + '" y="' + (cy + 9) + '" text-anchor="middle">simply silicon.</text>';
-  hub.appendChild(center);
-  P.forEach(function (p, i) {
-    var g = document.createElementNS(NS, 'g');
-    g.setAttribute('class', 'pillar'); g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button');
-    g.setAttribute('aria-label', 'Open ' + p.name); g.setAttribute('aria-expanded', 'false');
-    var x = p.x - CW / 2, y = p.y - CH / 2;
-    g.innerHTML = '<rect class="bg" x="' + x + '" y="' + y + '" width="' + CW + '" height="' + CH + '" rx="5" filter="url(#sh)"/>' +
-      '<rect class="ic-bg" x="' + (x + 14) + '" y="' + (p.y - 20) + '" width="40" height="40" rx="4"/>' +
-      '<g class="ic" transform="translate(' + (x + 22) + ' ' + (p.y - 12) + ')">' + p.icon + '</g>' +
-      '<text class="pt" x="' + (x + 64) + '" y="' + (p.y + 6) + '">' + p.name + '</text>';
-    g.addEventListener('click', function () { show(i, true); });
-    g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(i, true); } });
-    hub.appendChild(g); nodes.push(g);
-  });
-
-  // phone: the same pieces as a simple grid of buttons
-  var grid = document.createElement('div');
-  grid.className = 'pill-grid';
-  P.forEach(function (p, i) {
-    var b = document.createElement('button');
-    b.type = 'button'; b.setAttribute('aria-expanded', 'false');
-    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + p.icon + '</svg><span>' + p.name + '</span>';
-    b.addEventListener('click', function () { show(i, true); });
-    grid.appendChild(b);
-  });
-  hub.parentNode.appendChild(grid);
-  var gridBtns = grid.querySelectorAll('button');
+  var nodes = [], links = [], cur = -1;
+  var mq = window.matchMedia('(max-width: 700px)');
+  function buildHub() {
+    var m = mq.matches;
+    var VW = m ? 360 : 760, VH = m ? 422 : 470, cx = VW / 2, cy = m ? 222 : 235, rx = m ? 130 : 280, ry = m ? 168 : 168;
+    var CW = m ? 104 : 176, CH = m ? 80 : 64;
+    hub.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH);
+    hub.classList.toggle('hub--m', m);
+    P.forEach(function (p, i) {
+      var a = (-90 + i * 72) * Math.PI / 180;
+      p.x = cx + rx * Math.cos(a); p.y = cy + ry * Math.sin(a);
+    });
+    var defs = '<defs><linearGradient id="hubg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16395e"/><stop offset="1" stop-color="#0d2136"/></linearGradient>' +
+      '<filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0d2136" flood-opacity=".12"/></filter></defs>';
+    hub.innerHTML = defs + '<ellipse class="ring" cx="' + cx + '" cy="' + cy + '" rx="' + rx + '" ry="' + ry + '" fill="none" stroke="#e2eaf2" stroke-width="1.5" stroke-dasharray="2 8"/>';
+    nodes = []; links = [];
+    P.forEach(function (p) {
+      var l = document.createElementNS(NS, 'path');
+      l.setAttribute('d', 'M' + cx + ' ' + cy + ' L' + p.x + ' ' + p.y);
+      l.setAttribute('class', 'spoke'); hub.appendChild(l); links.push(l);
+    });
+    var center = document.createElementNS(NS, 'g');
+    center.innerHTML = m
+      ? '<rect x="' + (cx - 70) + '" y="' + (cy - 40) + '" width="140" height="80" rx="6" fill="url(#hubg)" filter="url(#sh)"/>' +
+        '<text class="center-t" x="' + cx + '" y="' + (cy - 5) + '" text-anchor="middle">simply</text><text class="center-t" x="' + cx + '" y="' + (cy + 22) + '" text-anchor="middle">silicon.</text>'
+      : '<rect x="' + (cx - 104) + '" y="' + (cy - 44) + '" width="208" height="88" rx="6" fill="url(#hubg)" filter="url(#sh)"/>' +
+        '<text class="center-t" x="' + cx + '" y="' + (cy + 9) + '" text-anchor="middle">simply silicon.</text>';
+    hub.appendChild(center);
+    P.forEach(function (p, i) {
+      var g = document.createElementNS(NS, 'g');
+      g.setAttribute('class', 'pillar'); g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button');
+      g.setAttribute('aria-label', 'Open ' + p.name); g.setAttribute('aria-expanded', 'false');
+      var x = p.x - CW / 2, y = p.y - CH / 2;
+      g.innerHTML = m
+        ? '<rect class="bg" x="' + x + '" y="' + y + '" width="' + CW + '" height="' + CH + '" rx="5" filter="url(#sh)"/>' +
+          '<rect class="ic-bg" x="' + (p.x - 18) + '" y="' + (y + 10) + '" width="36" height="36" rx="4"/>' +
+          '<g class="ic" transform="translate(' + (p.x - 12) + ' ' + (y + 16) + ')">' + p.icon + '</g>' +
+          '<text class="pt" x="' + p.x + '" y="' + (y + CH - 13) + '" text-anchor="middle">' + p.name + '</text>'
+        : '<rect class="bg" x="' + x + '" y="' + y + '" width="' + CW + '" height="' + CH + '" rx="5" filter="url(#sh)"/>' +
+          '<rect class="ic-bg" x="' + (x + 14) + '" y="' + (p.y - 20) + '" width="40" height="40" rx="4"/>' +
+          '<g class="ic" transform="translate(' + (x + 22) + ' ' + (p.y - 12) + ')">' + p.icon + '</g>' +
+          '<text class="pt" x="' + (x + 64) + '" y="' + (p.y + 6) + '">' + p.name + '</text>';
+      g.addEventListener('click', function () { show(i, true); });
+      g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(i, true); } });
+      hub.appendChild(g); nodes.push(g);
+    });
+    mark();
+  }
+  function mark() {
+    nodes.forEach(function (g, k) { g.classList.toggle('on', k === cur); g.setAttribute('aria-expanded', String(k === cur)); });
+    links.forEach(function (l, k) { l.classList.toggle('on', k === cur); });
+  }
+  buildHub();
+  if (mq.addEventListener) mq.addEventListener('change', buildHub); else if (mq.addListener) mq.addListener(buildHub);
 
   /* ---------- Detail (closed until a piece is picked) ---------- */
   var detail = document.getElementById('detail');
-  var cur = -1;
   function show(i, scroll) {
     cur = (i + P.length) % P.length;
     var p = P[cur];
     detail.hidden = false;
-    nodes.forEach(function (g, k) { g.classList.toggle('on', k === cur); g.setAttribute('aria-expanded', String(k === cur)); });
-    links.forEach(function (l, k) { l.classList.toggle('on', k === cur); });
-    gridBtns.forEach(function (b, k) { b.classList.toggle('on', k === cur); b.setAttribute('aria-expanded', String(k === cur)); });
+    mark();
     document.getElementById('dOne').textContent = p.one;
     document.getElementById('dHow').innerHTML = p.how.map(function (h) { return '<p>' + h + '</p>'; }).join('');
     document.getElementById('dFig').innerHTML = FIG[p.id]() + '<figcaption>' + p.cap + '</figcaption>';
