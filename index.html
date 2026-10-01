@@ -6,9 +6,8 @@
 <title>Simply Silicon</title>
 <meta name="description" content="Simply Silicon owns and operates air-gapped AI infrastructure in major cities. Metro bare metal for AI inference.">
 <meta name="theme-color" content="#0d2136">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Sora:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="assets/img/hero.webp" type="image/webp">
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="stylesheet" href="assets/css/pages.css">
@@ -19,10 +18,11 @@
 <main>
   <section class="hero hero--photo">
     <div class="hero-photo" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
     <div class="wrap wrap--wide hero-main">
       <div class="hero-copy">
         <p class="hero-kicker">Metro bare metal for AI inference</p>
-        <h1>Secure, localized compute at scale.</h1>
+        <h1>Secure, localized compute at scale<span class="stop">.</span></h1>
         <p class="lede">Air-gapped AI infrastructure in major cities. Our first site, Foundation, is running in downtown Calgary today.</p>
         <div class="hero-ctas">
           <a class="btn btn--light" href="platform.html">See the platform <span class="arrow" aria-hidden="true">→</span></a>
@@ -34,7 +34,7 @@
 
   <section class="band band--white">
     <div class="wrap statement">
-      <h2>Simply Silicon turns latent utility infrastructure and own-use power into bare metal inference compute faster than conventional developers.</h2>
+      <h2>Simply Silicon turns latent utility infrastructure and own-use power into <em class="hl">bare metal inference compute</em> faster than conventional developers.</h2>
       <p>Our long term goal is to connect these sites into a second internet for superintelligent models so they don't break the internet humans need.</p>
     </div>
   </section>

@@ -128,3 +128,29 @@
       '</div>';
   }
 })();
+
+/* Scroll reveals: sections rise in once as they enter view, staggered by position. Skipped for reduced motion. */
+(function () {
+  'use strict';
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var SEL = '.sec-head, .statement, .card, .feat, .demand-item, .go, .first-site, .stats, .gets, .chart-card, .tricks > div, .vs-col, .vs-mid, .closing, .big-quote, .layers, .hub-wrap, .contain, .how-title, .scene, .note';
+  var els = [].slice.call(document.querySelectorAll(SEL)).filter(function (el) {
+    return !el.closest('.hero, .page-head, .modal, .net-stage, .scene-ui') && !el.parentNode.closest('.rv-skip');
+  });
+  els = els.filter(function (el) { return !els.some(function (o) { return o !== el && o.contains(el); }); });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var el = e.target; io.unobserve(el);
+      el.classList.add('in');
+      // hand the element back to its own transitions once it has arrived
+      setTimeout(function () { el.classList.remove('rv', 'in'); el.style.removeProperty('--rv'); }, 900 + (+el.style.getPropertyValue('--rv') || 0) * 80);
+    });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+  els.forEach(function (el) {
+    var sib = [].filter.call(el.parentNode.children, function (c) { return c.matches(SEL); });
+    el.style.setProperty('--rv', Math.min(sib.indexOf(el), 5));
+    el.classList.add('rv');
+    io.observe(el);
+  });
+})();

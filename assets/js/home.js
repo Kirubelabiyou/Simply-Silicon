@@ -30,7 +30,7 @@
 
   /* ---------- Figures ---------- */
   function box(x, y, w, h, cls, t, s) {
-    return '<rect class="dg-box ' + (cls || '') + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="10"/>' +
+    return '<rect class="dg-box ' + (cls || '') + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="5"/>' +
       (t ? '<text class="dg-t" x="' + (x + w / 2) + '" y="' + (y + h / 2 + (s ? -3 : 5)) + '" text-anchor="middle">' + t + '</text>' : '') +
       (s ? '<text class="dg-s" x="' + (x + w / 2) + '" y="' + (y + h / 2 + 15) + '" text-anchor="middle">' + s + '</text>' : '');
   }
@@ -75,9 +75,9 @@
       var runs = ['M260 150 H150 V50 H96', 'M260 150 V50 H316', 'M260 150 H370 V206', 'M260 150 V250 H206', 'M260 150 H150 V250 H96', 'M260 150 H370 V94'];
       runs.forEach(function (d, i) { s += '<path class="dg-fiber" d="' + d + '"/><path class="dg-flow sky" style="animation-delay:-' + (i * .25) + 's" d="' + d + '"/>'; });
       [[96, 50], [316, 50], [370, 206], [206, 250], [96, 250], [370, 94]].forEach(function (p) {
-        s += '<rect x="' + (p[0] - 16) + '" y="' + (p[1] - 16) + '" width="32" height="32" rx="7" class="dg-bldg"/><circle cx="' + p[0] + '" cy="' + p[1] + '" r="5" fill="#1b6fb8"/>';
+        s += '<rect x="' + (p[0] - 16) + '" y="' + (p[1] - 16) + '" width="32" height="32" rx="4" class="dg-bldg"/><circle cx="' + p[0] + '" cy="' + p[1] + '" r="5" fill="#1b6fb8"/>';
       });
-      s += '<rect x="234" y="124" width="52" height="52" rx="10" fill="#0d2136"/><text x="260" y="155" text-anchor="middle" class="dg-t" style="fill:#fff">Site</text>';
+      s += '<rect x="234" y="124" width="52" height="52" rx="5" fill="#0d2136"/><text x="260" y="155" text-anchor="middle" class="dg-t" style="fill:#fff">Site</text>';
       // public internet, not connected
       s += '<g transform="translate(430 150)"><circle r="34" fill="#f6fafd" stroke="#c9d6e3" stroke-width="1.5" stroke-dasharray="4 4"/><text class="dg-s" y="-4" text-anchor="middle">Public</text><text class="dg-s" y="10" text-anchor="middle">internet</text></g>';
       s += '<line x1="372" y1="150" x2="394" y2="150" stroke="#e8594a" stroke-width="2" stroke-dasharray="3 4"/><path d="M378 142 L388 158 M388 142 L378 158" stroke="#e8594a" stroke-width="2.4"/>';
@@ -85,10 +85,10 @@
     },
     security: function () {
       var s = '<svg viewBox="0 0 480 270" aria-hidden="true">';
-      s += '<rect x="12" y="30" width="170" height="210" rx="14" fill="#f6fafd" stroke="#c9d6e3" stroke-dasharray="5 5"/>';
+      s += '<rect x="12" y="30" width="170" height="210" rx="6" fill="#f6fafd" stroke="#c9d6e3" stroke-dasharray="5 5"/>';
       s += '<text class="dg-h" x="97" y="58" text-anchor="middle">Public internet</text>';
       s += '<g transform="translate(97 140)" fill="none" stroke="#9fb1c6" stroke-width="2"><circle r="42"/><ellipse rx="18" ry="42"/><path d="M-42 0 H42 M-37 -20 H37 M-37 20 H37"/></g>';
-      s += '<rect x="298" y="30" width="170" height="210" rx="14" fill="#e8f4fc" stroke="#4db2ef" stroke-width="1.5"/>';
+      s += '<rect x="298" y="30" width="170" height="210" rx="6" fill="#e8f4fc" stroke="#4db2ef" stroke-width="1.5"/>';
       s += '<text class="dg-h" x="383" y="58" text-anchor="middle" style="fill:#1b6fb8">Private network</text>';
       for (var i = 0; i < 4; i++) s += '<rect x="322" y="' + (82 + i * 34) + '" width="122" height="24" rx="5" fill="#0d2136"/><circle cx="432" cy="' + (94 + i * 34) + '" r="3.5" fill="#4db2ef" class="dg-blink" style="animation-delay:-' + (i * .4) + 's"/><rect x="334" y="' + (91 + i * 34) + '" width="60" height="6" rx="3" fill="#2a4460"/>';
       s += '<path d="M182 135 H214" stroke="#c9d6e3" stroke-width="2"/><path d="M266 135 H298" stroke="#4db2ef" stroke-width="2"/>';
@@ -100,7 +100,7 @@
       var s = '<svg viewBox="0 0 480 300" aria-hidden="true">' + ARROW;
       s += box(12, 40, 110, 60, '', 'Power in', 'Electricity');
       s += '<path class="dg-flow sky" d="M122 70 H170" marker-end="url(#ah)"/>';
-      s += '<g transform="translate(176 20)"><rect width="128" height="100" rx="12" fill="#0d2136"/>';
+      s += '<g transform="translate(176 20)"><rect width="128" height="100" rx="5" fill="#0d2136"/>';
       for (var i = 0; i < 4; i++) s += '<rect x="16" y="' + (16 + i * 18) + '" width="96" height="11" rx="3" fill="#1d3a5a"/><circle cx="102" cy="' + (21.5 + i * 18) + '" r="3" fill="#4db2ef" class="dg-blink" style="animation-delay:-' + (i * .3) + 's"/>';
       s += '</g><text class="dg-t" x="240" y="140" text-anchor="middle">GPU racks</text><text class="dg-s" x="240" y="156" text-anchor="middle">Useful AI work</text>';
       s += '<path class="dg-flow heat" d="M304 70 H352" marker-end="url(#ahh)"/>';
@@ -114,7 +114,7 @@
     }
   };
   function rackSvg(w, h, led) {
-    var s = '<rect width="' + w + '" height="' + h + '" rx="10" fill="#0d2136"/>';
+    var s = '<rect width="' + w + '" height="' + h + '" rx="5" fill="#0d2136"/>';
     for (var i = 0; i < 5; i++) s += '<rect x="14" y="' + (12 + i * 19) + '" width="' + (w - 28) + '" height="12" rx="3" fill="#1d3a5a"/><circle cx="' + (w - 24) + '" cy="' + (18 + i * 19) + '" r="3" fill="' + led + '"/>';
     return s;
   }
@@ -225,7 +225,7 @@
     l.setAttribute('class', 'spoke'); hub.appendChild(l); links.push(l);
   });
   var center = document.createElementNS(NS, 'g');
-  center.innerHTML = '<rect x="' + (cx - 104) + '" y="' + (cy - 44) + '" width="208" height="88" rx="22" fill="url(#hubg)" filter="url(#sh)"/>' +
+  center.innerHTML = '<rect x="' + (cx - 104) + '" y="' + (cy - 44) + '" width="208" height="88" rx="6" fill="url(#hubg)" filter="url(#sh)"/>' +
     '<text class="center-t" x="' + cx + '" y="' + (cy + 9) + '" text-anchor="middle">simply silicon.</text>';
   hub.appendChild(center);
   P.forEach(function (p, i) {
@@ -233,8 +233,8 @@
     g.setAttribute('class', 'pillar'); g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button');
     g.setAttribute('aria-label', 'Open ' + p.name); g.setAttribute('aria-expanded', 'false');
     var x = p.x - CW / 2, y = p.y - CH / 2;
-    g.innerHTML = '<rect class="bg" x="' + x + '" y="' + y + '" width="' + CW + '" height="' + CH + '" rx="16" filter="url(#sh)"/>' +
-      '<circle class="ic-bg" cx="' + (x + 34) + '" cy="' + p.y + '" r="20"/>' +
+    g.innerHTML = '<rect class="bg" x="' + x + '" y="' + y + '" width="' + CW + '" height="' + CH + '" rx="5" filter="url(#sh)"/>' +
+      '<rect class="ic-bg" x="' + (x + 14) + '" y="' + (p.y - 20) + '" width="40" height="40" rx="4"/>' +
       '<g class="ic" transform="translate(' + (x + 22) + ' ' + (p.y - 12) + ')">' + p.icon + '</g>' +
       '<text class="pt" x="' + (x + 64) + '" y="' + (p.y + 6) + '">' + p.name + '</text>';
     g.addEventListener('click', function () { show(i, true); });
