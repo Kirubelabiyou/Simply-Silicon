@@ -720,3 +720,5 @@
 .marquee-track li.logo-tone img { filter: grayscale(1) brightness(2.6) contrast(.9); opacity: 1; }
 .marquee-track li.logo-tone--soft img { filter: grayscale(1) brightness(1.3) contrast(1.15); opacity: 1; }
 .backers .backers-h { color: #aab6c3; }
+/* investor logos in each company's own colours (the supplied files are their on-dark versions) */
+.marquee-track img, .marquee-track li.logo-tone img, .marquee-track li.logo-tone--soft img { filter: none; opacity: 1; }
