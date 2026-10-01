@@ -23,12 +23,18 @@ assets/js/scene.js           3D scene: Calgary streets, fiber, plant (Three.js)
 assets/js/map-data.js        World map paths (Natural Earth 1:50m, simplified)
 assets/js/calgary-data.js    Calgary fiber routes and connected buildings (from gosimply.ai)
 assets/js/calgary-buildings.js Downtown Calgary footprints and heights (City of Calgary Open Data, 3D Buildings - Citywide)
+assets/js/calgary-streets.js Downtown street centrelines and the Bow River banks (City of Calgary Open Data, Street Centreline)
 tools/build-buildings.mjs    Rebuilds calgary-buildings.js from tools/data
+tools/build-streets.mjs      Rebuilds calgary-streets.js from tools/data/v2
 assets/vendor/three/         Three.js r160 (MIT)
 assets/fonts/                Archivo, Instrument Sans, Martian Mono, Quicksand (SIL OFL, self-hosted)
 assets/img/hero.webp         Home hero: Calgary District Heating plant
 assets/img/scene-poster-*    Instant preview shown while the 3D view loads
 ```
+
+## 3D scene
+
+Built from City of Calgary open data: real footprints and rooftop heights, the real street network (with widths by road class, sidewalks, lane markings and crosswalks), the Bow River between the streets on each bank, and the CTrain on 7 Ave. Shadows are drawn once per view rather than every frame, static parts are merged into a few draw calls, and resolution steps down on slower devices.
 
 ## Look
 
