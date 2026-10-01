@@ -650,6 +650,16 @@
 
 /* logos: drop files into assets/img/backers/<name>.svg (or .png); the name shows until a logo exists */
 .marquee-track li { display: flex; align-items: center; min-height: 56px; }
-.marquee-track img { height: clamp(26px, 2.6vw, 36px); width: auto; max-width: 190px; object-fit: contain; filter: grayscale(1); opacity: .75; transition: filter .3s, opacity .3s; }
-.marquee-track li:hover img { filter: none; opacity: 1; }
+.marquee-track img { height: var(--h, 30px); width: auto; display: block; filter: brightness(0) invert(1); opacity: .72; transition: opacity .3s; }
+.marquee-track li:hover img { opacity: 1; }
+@media (max-width: 700px) { .marquee-track img { height: calc(var(--h, 30px) * .8); } }
 .marquee-track li.has-logo span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* the investor strip sits on gosimply.ai's near-black, logos in uniform white */
+.backers.band--white { background: #02060d; }
+.backers .backers-h { color: #8592a1; }
+.backers .marquee-track li { border-left-color: #ffffff1a; color: #c9d3dd; min-height: 72px; }
+
+/* emblems with interior detail keep their shapes in greyscale instead of a flat white */
+.marquee-track li.logo-tone img { filter: grayscale(1) brightness(2.1) contrast(.85); }
+.marquee-track li.logo-tone--soft img { filter: grayscale(1) brightness(1.05) contrast(1.25); }
