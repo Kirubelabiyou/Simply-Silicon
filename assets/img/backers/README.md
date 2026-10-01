@@ -1,0 +1,15 @@
+Investor logos for the home page strip. Name each file exactly as below (.svg preferred, .png works):
+
+- augur-vc.svg  (Augur VC)
+- palisade-capital-management.svg  (Palisade Capital Management)
+- garagecapital.svg  (GarageCapital)
+- openai.svg  (OpenAI)
+- google.svg  (Google)
+- microsoft.svg  (Microsoft)
+- heartland-generation.svg  (Heartland Generation)
+- cenovus.svg  (Cenovus)
+- vermilion-energy.svg  (Vermilion Energy)
+- greengate.svg  (Greengate)
+- aslan-renewables.svg  (Aslan Renewables)
+- bluearth-renewables.svg  (BluEarth Renewables)
+- deming-sky-capital.svg  (Deming Sky Capital)

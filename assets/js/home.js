@@ -278,3 +278,18 @@
   document.getElementById('dNext').addEventListener('click', function () { show(cur + 1, true); });
   document.getElementById('dPrev').addEventListener('click', function () { show(cur - 1, true); });
 })();
+
+/* Investor logos: show a logo only once its file exists in assets/img/backers (svg, then png); otherwise keep the name */
+(function () {
+  document.querySelectorAll('.marquee-track li[data-logo]').forEach(function (li) {
+    var slug = li.getAttribute('data-logo'), name = li.textContent, hidden = li.parentNode.hasAttribute('aria-hidden');
+    var tryLoad = function (exts) {
+      if (!exts.length) return;
+      var img = new Image();
+      img.onload = function () { img.alt = hidden ? '' : name; li.insertBefore(img, li.firstChild); li.classList.add('has-logo'); };
+      img.onerror = function () { tryLoad(exts.slice(1)); };
+      img.src = 'assets/img/backers/' + slug + exts[0];
+    };
+    tryLoad(['.svg', '.png']);
+  });
+})();

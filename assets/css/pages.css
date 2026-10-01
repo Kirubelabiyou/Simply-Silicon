@@ -647,3 +647,9 @@
   .marquee { width: auto; animation: none; -webkit-mask-image: none; mask-image: none; padding-inline: var(--gut); max-width: var(--col); margin-inline: auto; }
   .marquee-track { flex-wrap: wrap; row-gap: 14px; } .marquee-track[aria-hidden] { display: none; }
 }
+
+/* logos: drop files into assets/img/backers/<name>.svg (or .png); the name shows until a logo exists */
+.marquee-track li { display: flex; align-items: center; min-height: 56px; }
+.marquee-track img { height: clamp(26px, 2.6vw, 36px); width: auto; max-width: 190px; object-fit: contain; filter: grayscale(1); opacity: .75; transition: filter .3s, opacity .3s; }
+.marquee-track li:hover img { filter: none; opacity: 1; }
+.marquee-track li.has-logo span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
