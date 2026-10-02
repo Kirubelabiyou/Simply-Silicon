@@ -315,7 +315,7 @@
     if (!drag) {
       var target = hover ? 0 : -speed;
       // after a flick the strip coasts with light friction (like a scroll), then settles back into its normal flow
-      vel += (target - vel) * Math.min(1, dt * (Math.abs(vel - target) > speed * 2 ? 1.6 : 3));
+      vel += (target - vel) * Math.min(1, dt * (Math.abs(vel - target) > speed * 2 ? 1.05 : 3));
       x += vel * dt;
     }
     wrap();
@@ -333,7 +333,7 @@
   mq.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hover = false; });
   mq.addEventListener('pointerdown', function (e) {
     if (e.button !== 0) return;
-    drag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, lx: e.clientX, lt: performance.now(), moved: false, v: 0, type: e.pointerType };
+    drag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, lx: e.clientX, lt: performance.now(), moved: false, v: 0, type: e.pointerType, pts: [] };
   });
   mq.addEventListener('pointermove', function (e) {
     if (!drag || e.pointerId !== drag.id) return;
@@ -348,10 +348,11 @@
     x += step;
     drag.v = drag.v * .6 + (step / Math.max(1, now - drag.lt) * 1000) * .4;
     drag.lx = e.clientX; drag.lt = now;
+    drag.pts.push([now, e.clientX]); while (drag.pts.length > 2 && now - drag.pts[0][0] > 100) drag.pts.shift();
   });
   function end(e) {
     if (!drag || (e && e.pointerId !== drag.id)) return;
-    if (drag.moved) { suppress = true; setTimeout(function () { suppress = false; }, 0); vel = Math.max(-7000, Math.min(7000, drag.v * .8)); if (performance.now() - drag.lt > 120) vel = 0; }
+    if (drag.moved) { suppress = true; setTimeout(function () { suppress = false; }, 0); var p0 = drag.pts[0], p1 = drag.pts[drag.pts.length - 1], fv = p0 && p1[0] > p0[0] ? (p1[1] - p0[1]) / (p1[0] - p0[0]) * 1000 : drag.v; vel = Math.max(-9000, Math.min(9000, fv * 1.5)); if (performance.now() - drag.lt > 150) vel = 0; }
     mq.classList.remove('is-dragging');
     drag = null;
   }
