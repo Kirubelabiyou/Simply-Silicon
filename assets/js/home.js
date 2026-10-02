@@ -293,7 +293,7 @@
     var tryLoad = function (exts) {
       if (!exts.length) return;
       var img = new Image();
-      img.onload = function () { img.alt = hidden ? '' : name; li.insertBefore(img, li.firstChild); li.classList.add('has-logo'); };
+      img.onload = function () { img.alt = hidden ? '' : name; var host = li.querySelector('a') || li; host.insertBefore(img, host.firstChild); li.classList.add('has-logo'); };
       img.onerror = function () { tryLoad(exts.slice(1)); };
       img.src = 'assets/img/backers/' + exts[0];
     };
