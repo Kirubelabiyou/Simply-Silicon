@@ -300,3 +300,69 @@
     tryLoad([file]);
   });
 })();
+
+/* Investor strip: flows on its own, can be dragged or flicked by hand (mouse, finger or trackpad), then eases back to its normal flow */
+(function () {
+  var mq = document.querySelector('.backers .marquee');
+  if (!mq || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  mq.classList.add('is-js');
+  mq.querySelectorAll('a, img').forEach(function (n) { n.setAttribute('draggable', 'false'); });
+  var x = 0, vel = 0, half = 1, speed = 30, hover = false, drag = null, suppress = false, visible = true, last = performance.now();
+  function measure() { half = mq.scrollWidth / 2 || 1; speed = half / 60; }
+  function wrap() { x = x % half; if (x > 0) x -= half; }
+  function frame(now) {
+    var dt = Math.min(.05, (now - last) / 1000); last = now;
+    if (!drag) {
+      var target = hover ? 0 : -speed;
+      vel += (target - vel) * Math.min(1, dt * (Math.abs(vel) > speed * 3 ? 2.2 : 3.5));
+      x += vel * dt;
+    }
+    wrap();
+    mq.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+    if (visible) requestAnimationFrame(frame); else raf = 0;
+  }
+  var raf = 0;
+  function start() { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+  measure(); vel = -speed; start();
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; if (visible) start(); }).observe(mq);
+
+  mq.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hover = true; });
+  mq.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hover = false; });
+  mq.addEventListener('pointerdown', function (e) {
+    if (e.button !== 0) return;
+    drag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, lx: e.clientX, lt: performance.now(), moved: false, v: 0, type: e.pointerType };
+  });
+  mq.addEventListener('pointermove', function (e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    var dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+    if (!drag.moved) {
+      if (Math.abs(dx) < 6) return;
+      if (drag.type === 'touch' && Math.abs(dy) > Math.abs(dx)) { drag = null; return; }   // vertical swipe: let the page scroll
+      drag.moved = true; mq.classList.add('is-dragging');
+      try { mq.setPointerCapture(e.pointerId); } catch (_) {}
+    }
+    var now = performance.now(), step = e.clientX - drag.lx;
+    x += step;
+    drag.v = drag.v * .6 + (step / Math.max(1, now - drag.lt) * 1000) * .4;
+    drag.lx = e.clientX; drag.lt = now;
+  });
+  function end(e) {
+    if (!drag || (e && e.pointerId !== drag.id)) return;
+    if (drag.moved) { suppress = true; setTimeout(function () { suppress = false; }, 0); vel = Math.max(-2500, Math.min(2500, drag.v)); if (performance.now() - drag.lt > 120) vel = 0; }
+    mq.classList.remove('is-dragging');
+    drag = null;
+  }
+  mq.addEventListener('pointerup', end);
+  mq.addEventListener('pointercancel', end);
+  mq.addEventListener('lostpointercapture', end);
+  // a drag should never open a logo's link
+  mq.addEventListener('click', function (e) { if (suppress) { e.preventDefault(); e.stopPropagation(); } }, true);
+  mq.addEventListener('dragstart', function (e) { e.preventDefault(); });
+  // sideways trackpad swipes move the strip too
+  mq.addEventListener('wheel', function (e) {
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    e.preventDefault(); x -= e.deltaX; vel = 0;
+  }, { passive: false });
+})();
