@@ -11,6 +11,20 @@
     { href: 'platform.html', key: 'platform', name: 'Platform' }
   ];
   var current = document.body.getAttribute('data-page') || 'home';
+
+  /* ---------- open every page at the top when arriving from a link ---------- */
+  // Some browsers and previews carry the old scroll position over to the next page. Back and forward keep theirs.
+  (function () {
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    if (location.hash || (nav && nav.type === 'back_forward')) return;
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    var top = function () { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); };
+    top();
+    document.addEventListener('DOMContentLoaded', top);
+    window.addEventListener('load', function () { if (window.scrollY > 0 && !userScrolled) top(); setTimeout(function () { if ('scrollRestoration' in history) history.scrollRestoration = 'auto'; }, 0); });
+    var userScrolled = false;
+    ['wheel', 'touchstart', 'keydown'].forEach(function (ev) { window.addEventListener(ev, function () { userScrolled = true; }, { once: true, passive: true }); });
+  })();
   var LOGO = 'simply silicon.';
   var LI = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.44 0h4.37v1.92h.06c.61-1.15 2.1-2.37 4.32-2.37 4.62 0 5.47 3.04 5.47 7v7.45h-4.56v-6.6c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.53 1.72-2.53 3.49V22H7.66V8z"/></svg>';
   function cur(p) { return p.key === current ? ' aria-current="page"' : ''; }
