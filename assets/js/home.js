@@ -314,7 +314,8 @@
     var dt = Math.min(.05, (now - last) / 1000); last = now;
     if (!drag) {
       var target = hover ? 0 : -speed;
-      vel += (target - vel) * Math.min(1, dt * (Math.abs(vel) > speed * 3 ? 2.2 : 3.5));
+      // after a flick the strip coasts with light friction (like a scroll), then settles back into its normal flow
+      vel += (target - vel) * Math.min(1, dt * (Math.abs(vel - target) > speed * 2 ? 1.6 : 3));
       x += vel * dt;
     }
     wrap();
@@ -350,7 +351,7 @@
   });
   function end(e) {
     if (!drag || (e && e.pointerId !== drag.id)) return;
-    if (drag.moved) { suppress = true; setTimeout(function () { suppress = false; }, 0); vel = Math.max(-2500, Math.min(2500, drag.v)); if (performance.now() - drag.lt > 120) vel = 0; }
+    if (drag.moved) { suppress = true; setTimeout(function () { suppress = false; }, 0); vel = Math.max(-7000, Math.min(7000, drag.v * .8)); if (performance.now() - drag.lt > 120) vel = 0; }
     mq.classList.remove('is-dragging');
     drag = null;
   }
