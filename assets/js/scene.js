@@ -31,6 +31,7 @@ export function mountScene(host, opts = {}) {
   const STR = window.SS_STREETS || { n: [], s: [], r: [] };
   const phoneNow = () => host.clientWidth < 700;
   const PHONE = opts.phone != null ? !!opts.phone : phoneNow();
+  const CINE = !!opts.cinematic; // home hero: no controls on screen, a slow orbit, the page keeps scrolling
   host.innerHTML = '';
   host.classList.add('scene--live');
   const loading = el('div', 'scene-loading', 'Loading 3D view');
@@ -64,6 +65,13 @@ export function mountScene(host, opts = {}) {
   controls.screenSpacePanning = false;
   controls.zoomSpeed = 2.4;        // each scroll step or pinch moves noticeably
   controls.zoomToCursor = true;     // zoom toward what is under the pointer
+  if (CINE) {
+    host.classList.add('scene--cinematic');
+    controls.enableZoom = false; controls.enablePan = false;           // scrolling stays with the page
+    controls.autoRotate = !reduce; controls.autoRotateSpeed = .28;      // one slow revolution every few minutes
+    controls.minPolarAngle = Math.PI * .22; controls.maxPolarAngle = Math.PI * .4;
+    if (PHONE) { controls.enabled = false; renderer.domElement.style.touchAction = 'pan-y'; }
+  }
 
   scene.add(new THREE.HemisphereLight(0xeaf3ff, 0xa9b4bf, .62));
   const sun = new THREE.DirectionalLight(0xfff1dc, 2.6);
@@ -673,9 +681,9 @@ export function mountScene(host, opts = {}) {
     const haloTex = radial('rgba(255,255,255,1)', 'rgba(120,200,255,0)');
     const hpos = new Float32Array(ringTops.length * 3); ringTops.forEach(([x, y, z], i) => { hpos[i * 3] = x; hpos[i * 3 + 1] = y + 1.5; hpos[i * 3 + 2] = z; });
     const hg = new THREE.BufferGeometry(); hg.setAttribute('position', new THREE.BufferAttribute(hpos, 3));
-    const halo = new THREE.Points(hg, new THREE.PointsMaterial({ map: haloTex, color: 0x9fdcff, size: PHONE ? 24 : 46, sizeAttenuation: false, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
-    halo.userData.px = PHONE ? 24 : 46; pulseClouds.push(halo); fiber.add(halo);
-    if (!reduce) tick.push(t => { setRings(t); rings.instanceMatrix.needsUpdate = true; rings.instanceColor.needsUpdate = true; halo.material.opacity = .75 + Math.sin(t * 2.4) * .25; });
+    const halo = new THREE.Points(hg, new THREE.PointsMaterial({ map: haloTex, color: 0x9fdcff, size: PHONE ? 18 : 30, sizeAttenuation: false, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+    halo.userData.px = PHONE ? 18 : 30; pulseClouds.push(halo); fiber.add(halo);
+    if (!reduce) tick.push(t => { setRings(t); rings.instanceMatrix.needsUpdate = true; rings.instanceColor.needsUpdate = true; halo.material.opacity = .7; });
   }
   // draw the fiber after the street so its glow reads through it; buildings still hide it
   fiber.traverse(o => { o.renderOrder = 6; });
@@ -794,7 +802,7 @@ export function mountScene(host, opts = {}) {
     const b = el('button', '', t); b.type = 'button'; b.setAttribute('aria-label', label);
     b.addEventListener('click', () => {
       const off = camera.position.clone().sub(controls.target), d = Math.max(controls.minDistance, Math.min(controls.maxDistance, off.length() * f));
-      camAnim = { t0: performance.now(), fp: camera.position.clone(), ft: controls.target.clone(), cp: controls.target.clone().add(off.setLength(d)), tp: controls.target.clone(), ms: 450 };
+      camAnim = { t0: performance.now(), fp: camera.position.clone(), ft: controls.target.clone(), cp: controls.target.clone().add(off.setLength(d)), tp: controls.target.clone(), ms: 650, ease: 'out' };
     });
     zoomBox.appendChild(b);
   });
@@ -829,7 +837,7 @@ export function mountScene(host, opts = {}) {
     const tp = new THREE.Vector3(...V.tgt), cp = new THREE.Vector3(...V.cam).sub(tp).multiplyScalar(s).add(tp);
     lastMove = performance.now();
     if (instant || reduce) { camera.position.copy(cp); controls.target.copy(tp); controls.update(); return; }
-    camAnim = { t0: performance.now(), fp: camera.position.clone(), ft: controls.target.clone(), cp, tp, ms: 1700 };
+    camAnim = { t0: performance.now(), fp: camera.position.clone(), ft: controls.target.clone(), cp, tp, ms: 2100 };
   }
   controls.addEventListener('start', () => { camAnim = null; });
   controls.addEventListener('change', () => { lastMove = performance.now(); });
@@ -840,9 +848,9 @@ export function mountScene(host, opts = {}) {
   renderer.domElement.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
   renderer.domElement.addEventListener('pointerup', e => {
     if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return;
-    if (mode === 'net' && pickPlant(e)) setView(1);
+    if (!CINE && mode === 'net' && pickPlant(e)) setView(1);
   });
-  renderer.domElement.addEventListener('pointermove', e => { if (mode !== 'net' || e.buttons || e.pointerType === 'touch') return; hoverQueued = e; });
+  renderer.domElement.addEventListener('pointermove', e => { if (CINE || mode !== 'net' || e.buttons || e.pointerType === 'touch') return; hoverQueued = e; });
   function pickPlant(e) {
     const r = renderer.domElement.getBoundingClientRect();
     ptr.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
@@ -856,14 +864,26 @@ export function mountScene(host, opts = {}) {
     // big canvases (like the full-width map stage) start at a lower resolution so the first frames stay smooth
     if (!tuned) { const cap = PHONE ? 1.5 : (w * h > 1.1e6 ? 1.2 : 1.6); if (Math.abs(Math.min(DPR, cap) - pixelRatio) > .01) { pixelRatio = Math.min(DPR, cap); renderer.setPixelRatio(pixelRatio); } }
     renderer.setSize(w, h, false);
-    camera.aspect = w / h; camera.fov = w < 700 ? 50 : 38; camera.updateProjectionMatrix();
+    camera.aspect = w / h; camera.fov = w < 700 ? 50 : 38;
+    // cinematic on wide screens: shift the frame so the city sits to the right of the headline
+    if (CINE && w >= 900) camera.setViewOffset(w, h, -w * .17, 0, w, h); else camera.clearViewOffset();
+    camera.updateProjectionMatrix();
     cardBox = null; labelsDirty = true; labels.forEach(l => { l.w = 0; });
   }
   const ro = 'ResizeObserver' in window ? new ResizeObserver(size) : null;
   if (ro) ro.observe(host); else window.addEventListener('resize', size);
   size();
   setView(opts.view || 'net', true);
-  const reveal = () => { loading.remove(); host.classList.add('scene--ready'); };
+  const reveal = () => {
+    loading.remove(); host.classList.add('scene--ready');
+    // cinematic: a slow push in from high above, easing to rest
+    if (CINE && !reduce) {
+      const tp = controls.target.clone(), cp = camera.position.clone();
+      const fp = cp.clone().sub(tp).multiplyScalar(1.55).add(tp); fp.y *= 1.2;
+      camera.position.copy(fp); controls.update();
+      camAnim = { t0: performance.now(), fp, ft: tp.clone(), cp, tp, ms: 5200, ease: 'out' };
+    }
+  };
 
   // expose a small debug hook for profiling
   window.__sscam = (cp, tp) => { camAnim = null; camera.position.set(...cp); controls.target.set(...tp); controls.update(); lastMove = performance.now(); };
@@ -891,7 +911,7 @@ export function mountScene(host, opts = {}) {
     frame++;
     const t = clock.getElapsedTime();
     if (camAnim) {
-      const u = Math.min(1, (performance.now() - camAnim.t0) / camAnim.ms), e = u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2;
+      const u = Math.min(1, (performance.now() - camAnim.t0) / camAnim.ms), e = camAnim.ease === 'out' ? 1 - Math.pow(1 - u, 4) : (u < .5 ? 8 * u * u * u * u : 1 - Math.pow(-2 * u + 2, 4) / 2);
       camera.position.lerpVectors(camAnim.fp, camAnim.cp, e);
       controls.target.lerpVectors(camAnim.ft, camAnim.tp, e);
       if (u >= 1) camAnim = null;
@@ -899,7 +919,7 @@ export function mountScene(host, opts = {}) {
     }
     controls.update();
     // when nobody is moving the camera, the ambient animation runs at half rate to save battery
-    const idle = !camAnim && performance.now() - lastMove > 1200;
+    const idle = CINE ? !camAnim : !camAnim && performance.now() - lastMove > 1200; // the slow orbit is smooth at half rate
     if (idle && frame % 2) return;
     if (hoverQueued) { renderer.domElement.style.cursor = pickPlant(hoverQueued) ? 'pointer' : ''; hoverQueued = null; }
     if (!reduce) tick.forEach(f => f(t));

@@ -5,27 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Platform · Simply Silicon</title>
 <meta name="description" content="The internet was not built for inference. Simply Silicon is building a global urban AI network: secure metro sites that put compute, memory and power next to demand.">
-<meta name="theme-color" content="#02060d">
+<meta name="theme-color" content="#09090b">
 <link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
-<link rel="stylesheet" href="assets/css/pages.css">
 <script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
 </head>
-<body data-page="platform" class="theme-dark" id="top">
+<body data-page="platform" id="top">
 <header id="site-header"></header>
 
 <main>
-  <section class="page-head page-head--sm">
+  <section class="page-head">
     <div class="wrap">
       <h1>The internet was not built for inference<span class="stop">.</span></h1>
       <p class="lede">It was built to move information between people. Simply Silicon is building the network inference needs: secure metro sites that put compute, memory and power right next to demand.</p>
     </div>
   </section>
 
-  <section style="padding-bottom: clamp(48px, 7vw, 88px)">
-    <div class="wrap wrap--map">
-      <div class="net-stage net-stage--lg" id="stage">
+  <section aria-label="World map of Simply Silicon sites">
+    <div class="map-wrap">
+      <div class="net-stage" id="stage">
         <canvas id="dots" aria-hidden="true"></canvas>
         <svg id="world" role="img" aria-label="World map of Simply Silicon sites"></svg>
         <div class="net-legend">
@@ -44,53 +43,46 @@
         </div>
       </div>
     </div>
+    <div class="wrap"><p style="margin-top:20px;font-size:14px;color:var(--text-3)">Select a city for its status. Select Calgary to fly into Foundation in 3D.</p></div>
   </section>
 
-  <section class="band band--white">
+  <section class="sec">
     <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <h2>A global urban AI network</h2>
-        </div>
-        <p>Foundation in Calgary is the first node. Simply Silicon is securing and developing a pipeline of 15+ additional sites in major metros around North America and Europe.</p>
+      <div class="sec-intro">
+        <h2 data-rv>A global urban AI network<span class="stop">.</span></h2>
+        <p data-rv="2">Foundation in Calgary is the first node. Simply Silicon is securing and developing a pipeline of 15+ additional sites in major metros around North America and Europe.</p>
       </div>
-      <div class="figures figures--3">
-        <div><em>In the pipeline</em><b class="num">15+</b><span>Additional metro sites being secured and developed</span></div>
-        <div><em>Planned</em><b class="num">200<small>MW+</small></b><span>Of secure AI capacity across the network</span></div>
-        <div><em>Target</em><b class="num">12+</b><span>Major cities in North America and Europe</span></div>
+      <div class="metrics" style="--n:3" data-rv>
+        <div><b>15+</b><span>Additional metro sites being secured and developed</span></div>
+        <div><b>200<small>MW+</small></b><span>Of secure AI capacity planned across the network</span></div>
+        <div><b>12+</b><span>Major cities targeted in North America and Europe</span></div>
       </div>
     </div>
   </section>
 
-  <section class="band band--navy">
+  <section class="sec sec--alt">
     <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <h2>Two different physical problems</h2>
-        </div>
-        <p>The internet was built to distribute information between humans. Inference infrastructure must produce intelligence between machines.</p>
+      <div class="sec-intro">
+        <h2 data-rv>Two different physical problems<span class="stop">.</span></h2>
+        <p data-rv="2">The internet was built to distribute information between humans. Inference infrastructure must produce intelligence between machines.</p>
       </div>
-      <div class="columns columns--rule">
-        <div>
-          <h3>The internet moves what we already know.</h3>
-          <p>Web pages, files, email, search and video are stored somewhere, requested and sent. The network rewards reach, redundancy and scale, and it tolerates distance as the price of all three.</p>
-        </div>
-        <div>
-          <h3>Inference produces what we don't know yet.</h3>
-          <p>Tokens are generated one after another from huge model state, and every token depends on the ones before it. It rewards memory locality, bandwidth and thermal control, and it is punished by distance at every hop.</p>
-        </div>
+      <div class="cols" style="--n:2">
+        <div data-rv><h3>The internet moves what we already know.</h3><p>Web pages, files, email, search and video are stored somewhere, requested and sent. The network rewards reach, redundancy and scale, and it tolerates distance as the price of all three.</p></div>
+        <div data-rv="1"><h3>Inference produces what we don't know yet.</h3><p>Tokens are generated one after another from huge model state, and every token depends on the ones before it. It rewards memory locality, bandwidth and thermal control, and it is punished by distance at every hop.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="band">
+  <section class="sec">
     <div class="wrap split">
       <div>
-        <h2>Every hop is a tax</h2>
-        <p class="lede">Agentic AI turns one user action into hundreds of model calls, tool calls and checks. Latency doesn't just slow the answer. It compounds through the whole chain.</p>
-        <p class="note">A 50 ms penalty, repeated across a chain of machine-speed calls, becomes a real economic cost.</p>
+        <h2 data-rv>Every hop is a tax<span class="stop">.</span></h2>
+        <div style="margin-top:32px" data-rv="1">
+          <p>Agentic AI turns one user action into hundreds of model calls, tool calls and checks. Latency doesn't just slow the answer. It compounds through the whole chain.</p>
+          <p>A 50 ms penalty, repeated across a chain of machine-speed calls, becomes a real economic cost.</p>
+        </div>
       </div>
-      <figure class="chart">
+      <figure class="chart" data-rv="2">
         <figcaption>Added delay from a 50 ms penalty per call</figcaption>
         <div class="bars" id="bars"></div>
         <p class="chart-foot">Delay = calls × 50 ms. Bars use a log scale.</p>
@@ -98,15 +90,13 @@
     </div>
   </section>
 
-  <section class="band band--white">
+  <section class="sec sec--alt">
     <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <h2>The industry is already rebuilding around locality</h2>
-        </div>
-        <p>None of today's inference tricks exist to move state faster across distance. Every one of them exists to avoid moving it.</p>
+      <div class="sec-intro">
+        <h2 data-rv>The industry is already rebuilding around locality<span class="stop">.</span></h2>
+        <p data-rv="2">None of today's inference techniques exist to move state faster across distance. Every one of them exists to avoid moving it.</p>
       </div>
-      <dl class="terms">
+      <dl class="defs" data-rv>
         <div><dt>FlashAttention</dt><dd>Fewer reads and writes to memory.</dd></div>
         <div><dt>Kernel fusion</dt><dd>Avoids round trips between memory and compute.</dd></div>
         <div><dt>Quantization</dt><dd>Shrinks how many bits have to move.</dd></div>
@@ -114,57 +104,61 @@
         <div><dt>Cache-aware routing</dt><dd>Sends the request to where the state already lives.</dd></div>
         <div><dt>Disaggregation</dt><dd>Splits prefill and decode onto the hardware each needs.</dd></div>
       </dl>
-      <p class="big-quote">"The winning systems are not the biggest clusters. The systems that place memory, compute, routing, and power closest to the demand pattern will win."</p>
+      <blockquote class="quote" style="margin-top:clamp(72px,9vw,128px)" data-rv>
+        <p>“The winning systems are not the biggest clusters. The systems that place memory, compute, routing, and power closest to the demand pattern will win.”</p>
+      </blockquote>
     </div>
   </section>
 
-  <section class="band band--navy">
+  <section class="sec">
     <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <h2>A second internet for AI</h2>
-        </div>
-        <p>Our long term goal is to connect these sites into a second internet for superintelligent models so they don't break the internet humans need.</p>
+      <div class="sec-intro">
+        <h2 data-rv>A second internet for AI<span class="stop">.</span></h2>
+        <p data-rv="2">Our long term goal is to connect these sites into a second internet for superintelligent models, so they don't break the internet humans need.</p>
       </div>
-      <figure class="layers">
+      <figure class="fig" data-rv>
         <svg viewBox="0 0 1000 440" role="img" aria-label="Two separate networks: the public internet for people above, and Simply Silicon's air-gapped network of city sites below">
-          <defs>
-            <linearGradient id="lyTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".10"/><stop offset="1" stop-color="#ffffff" stop-opacity=".04"/></linearGradient>
-            <linearGradient id="lyBot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4db2ef" stop-opacity=".22"/><stop offset="1" stop-color="#4db2ef" stop-opacity=".06"/></linearGradient>
-          </defs>
-          <!-- public internet plane -->
-          <path d="M140 40 H940 L860 170 H60 Z" fill="url(#lyTop)" stroke="#ffffff33"/>
-          <g stroke="#ffffff40" stroke-width="1.5" fill="none"><path d="M210 80 L340 130 L470 70 L600 135 L730 80 L820 140 M340 130 L600 135 M210 80 L470 70 L730 80"/></g>
-          <g fill="#02060d" stroke="#c9d8e6" stroke-width="2"><circle cx="210" cy="80" r="9"/><circle cx="340" cy="130" r="9"/><circle cx="470" cy="70" r="9"/><circle cx="600" cy="135" r="9"/><circle cx="730" cy="80" r="9"/><circle cx="820" cy="140" r="9"/></g>
-          <text x="80" y="30" font-size="15" font-weight="600" fill="#ffffff">Public internet</text>
-          <text x="80" y="198" font-size="13" fill="#a9c0d6">People: pages, files, video, search</text>
-          <!-- air gap -->
-          <g stroke="#e8594a" stroke-width="2" stroke-dasharray="6 8"><path d="M40 222 H960"/></g>
-          <rect x="430" y="208" width="140" height="28" rx="14" fill="#2a1a22" stroke="#e8594a"/><text x="500" y="227" text-anchor="middle" font-size="13" font-weight="600" fill="#f3a39a">Air gap</text>
-          <!-- Simply Silicon plane -->
-          <path d="M140 262 H940 L860 400 H60 Z" fill="url(#lyBot)" stroke="#4db2ef66"/>
-          <g stroke="#4db2ef" stroke-width="3" fill="none" class="dg-flow sky"><path d="M200 320 L360 290 L520 345 L680 300 L830 350 M360 290 L680 300 M200 320 L520 345"/></g>
-          <g><circle cx="200" cy="320" r="16" fill="#4db2ef33"/><circle cx="200" cy="320" r="9" fill="#4db2ef" stroke="#fff" stroke-width="2.5"/></g>
-          <g fill="#f07a2e" stroke="#fff" stroke-width="2.5"><circle cx="360" cy="290" r="8"/><circle cx="520" cy="345" r="8"/><circle cx="680" cy="300" r="8"/></g>
-          <g fill="#02060d" stroke="#8193a9" stroke-width="2.5"><circle cx="830" cy="350" r="8"/></g>
-          <g font-size="13" fill="#e2eefa"><text x="200" y="352" text-anchor="middle">Calgary</text><text x="360" y="275" text-anchor="middle">Montreal</text><text x="520" y="376" text-anchor="middle">Amsterdam</text><text x="680" y="285" text-anchor="middle">Paris</text><text x="830" y="381" text-anchor="middle">London</text></g>
-          <text x="80" y="428" font-size="15" font-weight="600" fill="#9fd8fb">Simply Silicon network: machines, private fiber between city sites</text>
+          <path d="M140 40 H940 L860 170 H60 Z" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.14)"/>
+          <path class="f-line" d="M210 80 L340 130 L470 70 L600 135 L730 80 L820 140 M340 130 L600 135 M210 80 L470 70 L730 80"/>
+          <g class="f-box f-box--solid"><circle cx="210" cy="80" r="8"/><circle cx="340" cy="130" r="8"/><circle cx="470" cy="70" r="8"/><circle cx="600" cy="135" r="8"/><circle cx="730" cy="80" r="8"/><circle cx="820" cy="140" r="8"/></g>
+          <text x="80" y="28" class="f-t" style="font-size:15px">Public internet</text>
+          <text x="80" y="196" class="f-s" style="font-size:13px">People: pages, files, video, search</text>
+          <path class="f-warn" d="M40 222 H960" stroke-dasharray="5 8" style="stroke-width:1.25"/>
+          <rect x="436" y="209" width="128" height="26" rx="13" fill="#09090b" stroke="rgba(217,119,106,.6)"/><text x="500" y="226" text-anchor="middle" class="f-s f-red" style="font-size:12.5px;font-weight:600">Air gap</text>
+          <path d="M140 262 H940 L860 400 H60 Z" fill="rgba(77,178,239,.05)" stroke="rgba(77,178,239,.35)"/>
+          <path class="f-flow" d="M200 320 L360 290 L520 345 L680 300 L830 350 M360 290 L680 300 M200 320 L520 345"/>
+          <circle cx="200" cy="320" r="15" fill="rgba(77,178,239,.16)"/><circle cx="200" cy="320" r="7" fill="#4db2ef"/>
+          <g fill="#d9a273"><circle cx="360" cy="290" r="6"/><circle cx="520" cy="345" r="6"/><circle cx="680" cy="300" r="6"/></g>
+          <circle cx="830" cy="350" r="6" fill="#09090b" stroke="#8a8a93" stroke-width="1.6"/>
+          <g class="f-s" style="font-size:13px;fill:#d4d4d8"><text x="200" y="352" text-anchor="middle">Calgary</text><text x="360" y="274" text-anchor="middle">Montreal</text><text x="520" y="376" text-anchor="middle">Amsterdam</text><text x="680" y="284" text-anchor="middle">Paris</text><text x="830" y="381" text-anchor="middle">London</text></g>
+          <text x="80" y="428" class="f-t f-acc" style="font-size:14px">Simply Silicon network: machines, private fiber between city sites</text>
         </svg>
       </figure>
-      <ol class="rows">
-        <li><span class="rows-n">01</span><h3>Separate by design</h3><p>Air-gapped sites and private fiber, physically apart from the public internet.</p></li>
-        <li><span class="rows-n">02</span><h3>Next to demand</h3><p>Metro sites put compute where the requests come from, cutting hops.</p></li>
-        <li><span class="rows-n">03</span><h3>Built for machines</h3><p>Made for machine-speed inference, not humans clicking and waiting.</p></li>
-      </ol>
+      <div class="cols" style="--n:3;margin-top:clamp(56px,7vw,96px)">
+        <div data-rv><span class="idx">01</span><h3>Separate by design</h3><p>Air-gapped sites and private fiber, physically apart from the public internet.</p></div>
+        <div data-rv="1"><span class="idx">02</span><h3>Next to demand</h3><p>Metro sites put compute where the requests come from, cutting hops.</p></div>
+        <div data-rv="2"><span class="idx">03</span><h3>Built for machines</h3><p>Made for machine-speed inference, not people clicking and waiting.</p></div>
+      </div>
     </div>
   </section>
 
-  <section class="band">
+  <section class="sec sec--alt">
     <div class="wrap">
-      <blockquote class="closing">
-        <p>"The internet is not bad infrastructure. It is the defining architecture of one computational epoch, the era of moving what we already knew, running headlong into the demands of the next, the era of producing what we don't yet."</p>
+      <blockquote class="quote" data-rv>
+        <p>“The internet is not bad infrastructure. It is the defining architecture of one computational epoch, the era of moving what we already knew, running headlong into the demands of the next, the era of producing what we don’t yet.”</p>
         <cite>From <i>The Internet Was Not Built for Inference</i>, Simply Silicon</cite>
       </blockquote>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2 data-rv>Build the next network with us<span class="stop">.</span></h2>
+      <p data-rv="1">We are securing sites in major metros across North America and Europe. Talk to us about a site partnership, capacity or investment.</p>
+      <div class="hero-ctas" data-rv="2">
+        <button class="btn btn--primary" type="button" data-contact>Get in touch <span class="arrow" aria-hidden="true">→</span></button>
+        <a class="btn" href="foundation.html">Explore Foundation</a>
+      </div>
     </div>
   </section>
 </main>

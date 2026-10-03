@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Foundation · Simply Silicon</title>
-<meta name="description" content="Foundation brings 12 MW of secure AI capacity to downtown Calgary. See the plant and its private fiber network in 3D.">
-<meta name="theme-color" content="#02060d">
+<meta name="description" content="Foundation brings 12 MW of secure AI capacity to downtown Calgary, inside an existing district heating plant. Explore the plant and its private fiber network in 3D.">
+<meta name="theme-color" content="#09090b">
 <link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
 <script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
@@ -14,66 +14,89 @@
 <link rel="modulepreload" href="assets/vendor/three/addons/OrbitControls.js">
 <link rel="modulepreload" href="assets/vendor/three/addons/RoomEnvironment.js">
 <link rel="stylesheet" href="assets/css/site.css">
-<link rel="stylesheet" href="assets/css/pages.css">
 </head>
-<body data-page="foundation" class="theme-dark" id="top">
+<body data-page="foundation" id="top">
 <header id="site-header"></header>
 
 <main>
   <section class="page-head">
     <div class="wrap">
-      <h1>Foundation</h1>
-      <p class="lede">Foundation brings 12 MW of secure AI capacity to downtown Calgary. Existing district heating plant, dual redundant grid feeds, on-site generation, and below-grade thermal conduit paths.</p>
+      <h1>Foundation<span class="stop">.</span></h1>
+      <p class="lede">Foundation brings 12 MW of secure AI capacity to downtown Calgary. An existing district heating plant, dual redundant grid feeds, on-site generation, and below-grade thermal conduit paths.</p>
     </div>
   </section>
 
-  <section style="padding-bottom: clamp(40px, 6vw, 72px)">
-    <div class="wrap">
-      <div class="scene" id="scene"></div>
-    </div>
+  <section class="stage" aria-label="Foundation and its fiber network in 3D">
+    <div class="scene" id="scene"></div>
   </section>
 
-  <section class="band band--white">
+  <section class="sec">
     <div class="wrap">
-      <div class="figures">
-        <div><b class="num">12<small>MW</small></b><span>n+1 redundant power</span></div>
-        <div><b class="num">7<small>km</small></b><span>Private fiber</span></div>
-        <div><b class="num">25+</b><span>Connected buildings</span></div>
-        <div><b>Phase 1</b><span>Now online</span></div>
+      <div class="metrics" data-rv>
+        <div><b>12<small>MW</small></b><span>n+1 redundant power at full build</span></div>
+        <div><b>7<small>km</small></b><span>Private fiber under downtown streets</span></div>
+        <div><b>25+</b><span>Connected buildings</span></div>
+        <div><b>100<small>kW</small></b><span>Phase 1, online today</span></div>
       </div>
     </div>
   </section>
 
-  <section class="band">
+  <section class="sec sec--alt">
     <div class="wrap">
-      <div class="sec-head">
-        <h2>Three phases, one plant.</h2>
-        <p>Each phase builds on the one before, inside the same plant.</p>
+      <div class="sec-intro">
+        <h2 data-rv>Three phases, one plant<span class="stop">.</span></h2>
+        <p data-rv="2">Each phase builds on the one before, inside the same plant. Capacity grows with demand instead of being built all at once and left waiting.</p>
       </div>
-      <ol class="timeline">
-        <li class="is-live"><span class="chip chip--live"><i class="dot dot--live"></i>Online</span><b class="num">100 kW</b><h3>Phase 1</h3><p>Online on the ground floor.</p></li>
-        <li class="is-dev"><span class="chip chip--dev"><i class="dot dot--dev"></i>Feb 2027</span><b class="num">2 MW</b><h3>Phase 2</h3><p>February 2027, in the basement.</p></li>
-        <li><span class="chip chip--soon"><i class="dot dot--soon"></i>Full build</span><b class="num">12 MW</b><h3>Phase 3</h3><p>The full Foundation build.</p></li>
-      </ol>
-      <div class="scale" aria-label="Phase capacity drawn to scale against 12 MW">
-        <i style="width:100%"></i><i style="width:16.7%"></i><i style="width:.83%"></i>
+      <div class="phases" style="margin-top:0" data-rv>
+        <div class="phases-bar" aria-hidden="true"><i style="width:.83%"></i></div>
+        <ol class="phases-list">
+          <li class="is-live"><span class="when">Phase 1 · Online now</span><b>100 kW</b><p>Air-cooled GPU racks on the ground floor, running today.</p></li>
+          <li class="is-dev"><span class="when">Phase 2 · February 2027</span><b>2 MW</b><p>Liquid-cooled racks in the basement, with a plate heat exchanger tied to the plant.</p></li>
+          <li><span class="when">Phase 3 · Full build</span><b>12 MW</b><p>Rooftop dry coolers and liquid-cooled racks across the plant.</p></li>
+        </ol>
       </div>
-      <p class="scale-cap">Drawn to scale against 12 MW.</p>
+      <p style="margin-top:40px;font-size:14px;color:var(--text-3)" data-rv>The bar is drawn to scale: Phase 1 is under one percent of the full 12 MW build.</p>
     </div>
   </section>
 
-  <section class="band band--white">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2>The site</h2>
-        <p>We are rethinking the physical data centre and its networking from the ground up.</p>
+  <section class="sec">
+    <div class="wrap split split--top">
+      <div>
+        <h2 data-rv>Inside a district heating plant<span class="stop">.</span></h2>
       </div>
-      <dl class="facts">
+      <div data-rv="2">
+        <p>We are rethinking the physical data centre and its networking from the ground up. Foundation does not start from an empty field. It starts inside a plant that already heats downtown buildings through underground pipes.</p>
+        <p>That plant brings what a new data centre waits years for: large power connections, redundant grid feeds and on-site generation. It also gives the heat from our GPUs somewhere useful to go. Liquid-cooled racks feed a heat exchanger tied to the plant, and the heat moves into the district loop instead of the air.</p>
+        <p>From the plant, private fiber runs under the streets to more than 25 connected buildings, physically separate from the public internet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--alt">
+    <div class="wrap">
+      <div class="sec-intro">
+        <h2 data-rv>The site<span class="stop">.</span></h2>
+        <p data-rv="2">Utility-grade infrastructure, already in the middle of the city.</p>
+      </div>
+      <dl class="defs" data-rv>
         <div><dt>Base plant</dt><dd>District heating</dd></div>
         <div><dt>Power</dt><dd>14 MVA n+1</dd></div>
         <div><dt>Stack</dt><dd>Utility-grade</dd></div>
         <div><dt>Heating</dt><dd>District loop</dd></div>
+        <div><dt>Network</dt><dd>7 km private fiber, 25+ buildings</dd></div>
+        <div><dt>Address</dt><dd>435 9 Ave SE, Calgary, Alberta</dd></div>
       </dl>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2 data-rv>Reserve capacity at Foundation<span class="stop">.</span></h2>
+      <p data-rv="1">High-density GPU compute for bare metal or API applications, on private fiber in downtown Calgary.</p>
+      <div class="hero-ctas" data-rv="2">
+        <button class="btn btn--primary" type="button" data-contact>Get in touch <span class="arrow" aria-hidden="true">→</span></button>
+        <a class="btn" href="workloads.html">See workloads</a>
+      </div>
     </div>
   </section>
 </main>

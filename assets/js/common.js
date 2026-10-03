@@ -130,7 +130,7 @@
     ftr.innerHTML =
       '<div class="wrap">' +
       '<div class="ftr-top">' +
-      '<div class="ftr-brand"><a class="logo" href="./">' + LOGO + '</a><p>Secure, localized compute at scale.</p>' +
+      '<div class="ftr-brand"><a class="logo" href="./">' + LOGO + '</a><p>Air-gapped AI infrastructure in major cities. Secure, localized compute at scale.</p>' +
       '<div class="social"><a href="' + LINKEDIN + '" target="_blank" rel="noopener" aria-label="Simply Silicon on LinkedIn">' + LI + '</a></div></div>' +
       '<div class="ftr-cols">' +
       '<div><h4>Company</h4><ul><li><a href="./">Home</a></li><li><a href="./#how">How it works</a></li><li><a href="platform.html">Our vision</a></li></ul></div>' +
@@ -143,28 +143,14 @@
   }
 })();
 
-/* Scroll reveals: sections rise in once as they enter view, staggered by position. Skipped for reduced motion. */
+/* Scroll reveals: anything marked data-rv drifts up and fades in once, slowly. data-rv="2" delays it a little. */
 (function () {
   'use strict';
-  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var SEL = '.sec-head, .statement, .card, .feat, .demand-item, .go, .first-site, .stats, .gets, .chart-card, .tricks > div, .vs-col, .vs-mid, .closing, .big-quote, .layers, .hub-wrap, .contain, .how-title, .scene, .note';
-  var els = [].slice.call(document.querySelectorAll(SEL)).filter(function (el) {
-    return !el.closest('.hero, .page-head, .modal, .net-stage, .scene-ui') && !el.parentNode.closest('.rv-skip');
-  });
-  els = els.filter(function (el) { return !els.some(function (o) { return o !== el && o.contains(el); }); });
+  var els = [].slice.call(document.querySelectorAll('[data-rv]'));
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { document.documentElement.classList.add('no-motion'); return; }
+  els.forEach(function (el) { var d = el.getAttribute('data-rv'); if (d) el.style.setProperty('--d', d); });
   var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      var el = e.target; io.unobserve(el);
-      el.classList.add('in');
-      // hand the element back to its own transitions once it has arrived
-      setTimeout(function () { el.classList.remove('rv', 'in'); el.style.removeProperty('--rv'); }, 900 + (+el.style.getPropertyValue('--rv') || 0) * 80);
-    });
-  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
-  els.forEach(function (el) {
-    var sib = [].filter.call(el.parentNode.children, function (c) { return c.matches(SEL); });
-    el.style.setProperty('--rv', Math.min(sib.indexOf(el), 5));
-    el.classList.add('rv');
-    io.observe(el);
-  });
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  els.forEach(function (el) { io.observe(el); });
 })();
