@@ -22,75 +22,28 @@
     </div>
   </section>
 
-  <section aria-label="World map of Simply Silicon sites">
-    <div class="map-wrap">
-      <div class="net-stage" id="stage">
-        <canvas id="dots" aria-hidden="true"></canvas>
-        <svg id="world" role="img" aria-label="World map of Simply Silicon sites"></svg>
-        <div class="net-legend">
-          <span><i class="dot dot--live"></i>Online</span>
-          <span><i class="dot dot--dev"></i>In development</span>
-          <span><i class="dot dot--soon"></i>Coming soon</span>
-        </div>
-        <div class="zoom" id="zoom">
-          <button type="button" data-z="2.5" aria-label="Zoom in">+</button>
-          <button type="button" data-z="0.4" aria-label="Zoom out">−</button>
-        </div>
-        <div class="pop" id="pop" hidden aria-live="polite"></div>
-        <div class="net-3d" id="net3d" hidden>
-          <div class="scene" id="calScene"></div>
-          <div class="net-back"><button class="btn btn--sm" type="button" id="back3d">← Map</button></div>
-        </div>
-      </div>
-    </div>
-    <div class="wrap"><p style="margin-top:20px;font-size:14px;color:var(--text-3)">Select a city for its status. Select Calgary to fly into Foundation in 3D.</p></div>
-  </section>
-
-  <section class="sec">
-    <div class="wrap">
-      <div class="sec-intro">
-        <h2 data-rv>A global urban AI network<span class="stop">.</span></h2>
-        <p data-rv="2">Foundation is the first node in a global urban AI network. Simply Silicon is securing and developing a pipeline of 15+ additional sites in major metros around North America and Europe.</p>
-      </div>
-      <div class="metrics" style="--n:3" data-rv>
-        <div><b>15+</b><span>Site pipeline</span></div>
-        <div><b>200<small>MW+</small></b><span>Capacity</span></div>
-        <div><b>12+</b><span>Major cities</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec sec--alt">
+  <section class="sec sec--light">
     <div class="wrap">
       <div class="sec-intro">
         <h2 data-rv>Two different physical problems<span class="stop">.</span></h2>
         <p data-rv="2">The internet was built to distribute information between humans. Inference infrastructure must produce intelligence between machines.</p>
       </div>
-      <div class="cols" style="--n:2">
-        <div data-rv><h3>The internet moves what we already know.</h3><p>Web pages, files, email, search queries and streaming video are stored somewhere, requested by a user, sent across a network, and consumed with tolerable latency. It rewards reach, redundancy, and scale, and tolerates distance as the price of all three.</p></div>
-        <div data-rv="1"><h3>Inference produces what we don't know yet.</h3><p>A large language model generates tokens through repeated transformations of enormous state, and every token depends on the tokens before it. It rewards memory locality, bandwidth density, low-latency interconnect, and thermal control, and is punished by distance at every hop.</p></div>
-      </div>
+      <table class="compare" data-rv>
+        <thead><tr><th scope="col"><span class="sr">Topic</span></th><th scope="col">The internet</th><th scope="col" class="is-inf">Inference</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Built for</th><td>Asynchronous human-scale workloads: web pages, files, email, search queries, streaming video</td><td>Continuous machine cognition: tokens generated from enormous state</td></tr>
+          <tr><th scope="row">Main work</th><td>Store information, request it, transmit it, consume it with tolerable latency</td><td>Repeated transformations of model weights, activations, attention maps, and KV cache</td></tr>
+          <tr><th scope="row">Rewards</th><td>Reach, redundancy, and scale</td><td>Memory locality, bandwidth density, low-latency interconnect, and thermal control</td></tr>
+          <tr><th scope="row">Distance</th><td>Tolerated as the price of all three</td><td>Punished at every hop</td></tr>
+        </tbody>
+      </table>
+      <blockquote class="pull" data-rv>
+        <p>“Moving inference state across a physical distance is destructive when machines are recursively producing intelligence at high frequency.”</p>
+        <cite>The Internet Was Not Built for Inference, Simply Silicon and Augur</cite>
+      </blockquote>
     </div>
   </section>
-
   <section class="sec">
-    <div class="wrap split">
-      <div>
-        <h2 data-rv>Every hop is a tax<span class="stop">.</span></h2>
-        <div style="margin-top:32px" data-rv="1">
-          <p>An agentic application can trigger chains of model calls, tool calls, retrieval steps, code execution and verification passes. One user action can become hundreds or thousands of inference events. Latency does not merely affect user experience. It compounds through the reasoning graph.</p>
-          <p>A 50 ms penalty repeated across a long chain of machine-speed operations becomes a real economic tax.</p>
-        </div>
-      </div>
-      <figure class="chart" data-rv="2">
-        <figcaption>Added delay from a 50 ms penalty per call</figcaption>
-        <div class="bars" id="bars"></div>
-        <p class="chart-foot">Delay = calls × 50 ms. Bars use a log scale.</p>
-      </figure>
-    </div>
-  </section>
-
-  <section class="sec sec--alt">
     <div class="wrap">
       <div class="sec-intro">
         <h2 data-rv>The industry is already rebuilding around locality<span class="stop">.</span></h2>
@@ -110,7 +63,22 @@
       </blockquote>
     </div>
   </section>
-
+  <section class="sec sec--light">
+    <div class="wrap split">
+      <div>
+        <h2 data-rv>Every hop is a tax<span class="stop">.</span></h2>
+        <div style="margin-top:32px" data-rv="1">
+          <p>An agentic application can trigger chains of model calls, tool calls, retrieval steps, code execution and verification passes. One user action can become hundreds or thousands of inference events. Latency does not merely affect user experience. It compounds through the reasoning graph.</p>
+          <p>A 50 ms penalty repeated across a long chain of machine-speed operations becomes a real economic tax.</p>
+        </div>
+      </div>
+      <figure class="chart" data-rv="2">
+        <figcaption>Added delay from a 50 ms penalty per call</figcaption>
+        <div class="bars" id="bars"></div>
+        <p class="chart-foot">Delay = calls × 50 ms. Bars use a log scale.</p>
+      </figure>
+    </div>
+  </section>
   <section class="sec">
     <div class="wrap">
       <div class="sec-intro">
@@ -129,9 +97,8 @@
           <path d="M140 262 H940 L860 400 H60 Z" fill="rgba(77,178,239,.05)" stroke="rgba(77,178,239,.35)"/>
           <path class="f-flow" d="M200 320 L360 290 L520 345 L680 300 L830 350 M360 290 L680 300 M200 320 L520 345"/>
           <circle cx="200" cy="320" r="15" fill="rgba(77,178,239,.16)"/><circle cx="200" cy="320" r="7" fill="#4db2ef"/>
-          <g fill="#d9a273"><circle cx="360" cy="290" r="6"/><circle cx="520" cy="345" r="6"/><circle cx="680" cy="300" r="6"/></g>
-          <circle cx="830" cy="350" r="6" fill="#09090b" stroke="#8a8a93" stroke-width="1.6"/>
-          <g class="f-s" style="font-size:13px;fill:#d4d4d8"><text x="200" y="352" text-anchor="middle">Calgary</text><text x="360" y="274" text-anchor="middle">Montreal</text><text x="520" y="376" text-anchor="middle">Amsterdam</text><text x="680" y="284" text-anchor="middle">Paris</text><text x="830" y="381" text-anchor="middle">London</text></g>
+          <g fill="#09090b" stroke="#8fd0f6" stroke-width="1.6"><circle cx="360" cy="290" r="6"/><circle cx="520" cy="345" r="6"/><circle cx="680" cy="300" r="6"/><circle cx="830" cy="350" r="6"/></g>
+          <g class="f-s" style="font-size:13px;fill:#d4d4d8"><text x="200" y="352" text-anchor="middle">Calgary</text><text x="520" y="376" text-anchor="middle">Pipeline sites</text></g>
           <text x="80" y="428" class="f-t f-acc" style="font-size:14px">Simply Silicon network: machines, private fiber between city sites</text>
         </svg>
       </figure>
@@ -142,16 +109,51 @@
       </div>
     </div>
   </section>
-
-  <section class="sec sec--alt">
+  <section class="sec sec--light">
+    <div class="wrap">
+      <div class="sec-intro">
+        <h2 data-rv>Metro platform<span class="stop">.</span></h2>
+        <p data-rv="2">Foundation is the first node in a global urban AI network. Simply Silicon is securing and developing a pipeline of 15+ additional sites in major metros around North America and Europe.</p>
+      </div>
+      <div class="metrics" style="--n:3;margin-bottom:clamp(40px,5vw,64px)" data-rv>
+        <div><b>15+</b><span>Site pipeline</span></div>
+        <div><b>200<small>MW+</small></b><span>Capacity</span></div>
+        <div><b>12+</b><span>Major cities</span></div>
+      </div>
+    </div>
+    <div class="map-wrap">
+      <div class="net-stage" id="stage">
+        <canvas id="dots" aria-hidden="true"></canvas>
+        <svg id="world" role="img" aria-label="World map of Simply Silicon sites"></svg>
+        <div class="net-legend">
+          <span><i class="dot dot--live"></i>Online</span>
+          <span><i class="region-key"></i>Pipeline regions</span>
+        </div>
+        <div class="zoom" id="zoom">
+          <button type="button" data-z="2.5" aria-label="Zoom in">+</button>
+          <button type="button" data-z="0.4" aria-label="Zoom out">−</button>
+        </div>
+        <div class="pop" id="pop" hidden aria-live="polite"></div>
+        <div class="net-3d" id="net3d" hidden>
+          <div class="scene" id="calScene"></div>
+          <div class="net-back"><button class="btn btn--sm" type="button" id="back3d">← Map</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wrap"><p style="margin-top:20px;font-size:14px;color:var(--text-3)">Select Calgary to fly into downtown Calgary and Foundation in 3D.</p></div>
+    </section>
+  <section class="sec">
     <div class="wrap">
       <blockquote class="quote" data-rv>
         <p>“The internet is not bad infrastructure. It is the defining architecture of one computational epoch, the era of moving what we already knew, running headlong into the demands of the next, the era of producing what we don’t yet.”</p>
         <cite>From <i>The Internet Was Not Built for Inference</i>, Simply Silicon and Augur</cite>
       </blockquote>
+      <a class="doc-link" style="margin-top:clamp(48px,6vw,72px)" href="assets/docs/the-internet-was-not-built-for-inference.pdf" target="_blank" rel="noopener" data-rv>
+        <span class="doc-ico">PDF</span>
+        <span><b>Read the essay: The Internet Was Not Built for Inference</b><span>Simply Silicon and Augur · 3 pages</span></span>
+      </a>
     </div>
   </section>
-
   <section class="cta">
     <div class="wrap">
       <h2 data-rv>Build the next network with us<span class="stop">.</span></h2>

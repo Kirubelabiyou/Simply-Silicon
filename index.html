@@ -5,139 +5,133 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Simply Silicon</title>
 <meta name="description" content="Simply Silicon owns and operates air-gapped AI infrastructure for superintelligent models too capable for the public internet, regulated enterprise, and high-security workloads.">
-<meta name="theme-color" content="#09090b">
+<meta name="theme-color" content="#05070b">
 <link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="assets/img/hero.webp" type="image/webp">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body data-page="home" id="top">
 <header id="site-header"></header>
 
 <main>
-  <!-- 1. Hero -->
-  <section class="hero hero--photo">
-    <div class="hero-main">
-      <div class="wrap wrap--wide hero-grid">
-        <div class="hero-copy">
-          <h1>Metro bare metal for AI inference<span class="stop">.</span></h1>
-          <p class="lede">Simply Silicon turns latent utility infrastructure and own-use power into bare metal inference compute faster than conventional developers. Our long term goal is to connect these sites into a second internet for superintelligent models so they don't break the internet humans need.</p>
-          <div class="hero-ctas">
-            <a class="btn btn--primary" href="#how">How it works <span class="arrow" aria-hidden="true">↓</span></a>
-            <button class="btn" type="button" data-contact>Talk to us</button>
-          </div>
+  <!-- 1. Hero (dark) -->
+  <section class="hero-full">
+    <div class="hero-bg" aria-hidden="true"><img src="assets/img/hero.webp" width="580" height="727" alt=""></div>
+    <div class="wrap wrap--wide">
+      <div class="hero-copy">
+        <h1>Secure, localized compute at scale<span class="stop">.</span></h1>
+        <p class="lede">Simply Silicon turns latent utility infrastructure and own-use power into bare metal inference compute faster than conventional developers. Our long term goal is to connect these sites into a second internet for superintelligent models so they don't break the internet humans need.</p>
+        <div class="hero-ctas">
+          <a class="btn btn--primary" href="#how">How it works <span class="arrow" aria-hidden="true">↓</span></a>
+          <button class="btn" type="button" data-contact>Talk to us</button>
         </div>
-        <figure class="hero-photo">
-          <img src="assets/img/hero.webp" width="580" height="727" alt="The four stainless steel stacks and the Calgary district heating sign on the plant roof">
-        </figure>
-      </div>
-    </div>
-    <div class="hero-foot">
-      <div class="wrap">
-        <div class="site"><b>Air-gapped AI infrastructure in major cities.</b><span>Simply Silicon</span></div>
-        <div><b class="num">15+</b><span>Site pipeline</span></div>
-        <div><b class="num">200 MW+</b><span>Capacity</span></div>
-        <div><b class="num">12+</b><span>Major cities</span></div>
       </div>
     </div>
   </section>
 
-  <!-- 2. Why -->
-  <section class="sec">
+  <!-- 2. The problem (light) -->
+  <section class="sec sec--light">
     <div class="wrap">
-      <div class="manifesto">
-        <h2 data-rv>Traditional data centres and networks were not built for inference, <em>let alone superintelligent models too capable for the public internet.</em></h2>
-        <div class="manifesto-body" data-rv="2">
-          <p>The modern internet was designed to move information, not to produce intelligence. It was built around human-scale workloads: web pages, files, email, search queries and streaming video.</p>
-          <p>Inference is a computational production workload. A large language model generates tokens through repeated transformations of enormous state, and every token depends on the tokens that came before it. Inference is punished by every extra hop, because every hop increases the physical cost of maintaining state.</p>
-          <p>Agentic systems make this even sharper. One user action can become hundreds or thousands of inference events, and latency compounds through the whole chain.</p>
-          <p>We are rethinking the physical data centre and its networking from the ground up.</p>
-        </div>
+      <div class="sec-intro">
+        <h2 data-rv>The internet was not built for inference<span class="stop">.</span></h2>
+        <p data-rv="2">The internet moves information that already exists. Inference has to produce new intelligence, one token at a time. The essay calls them two different physical problems.</p>
       </div>
+      <table class="compare" data-rv>
+        <thead><tr><th scope="col"><span class="sr">Topic</span></th><th scope="col">The internet</th><th scope="col" class="is-inf">Inference</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Built to</th><td>Distribute information between humans</td><td>Produce intelligence between machines</td></tr>
+          <tr><th scope="row">Unit of work</th><td>The webpage, the video segment, the API response</td><td>The token</td></tr>
+          <tr><th scope="row">Rewards</th><td>Reach, redundancy, and scale</td><td>Memory locality, bandwidth density, low-latency interconnect, and thermal control</td></tr>
+          <tr><th scope="row">Distance</th><td>Tolerated as the price of all three</td><td>Punished at every hop</td></tr>
+          <tr><th scope="row">Designed for</th><td>Humans clicking, reading, watching, downloading, and waiting</td><td>Persistent machine-speed cognitive recursion</td></tr>
+        </tbody>
+      </table>
+      <blockquote class="pull" data-rv>
+        <p>“Inference is punished by every extra hop because every hop increases the physical cost of maintaining state.”</p>
+        <cite>The Internet Was Not Built for Inference, Simply Silicon and Augur</cite>
+      </blockquote>
+      <blockquote class="pull pull--sm" data-rv>
+        <p>“Traditional data centres and networks were not built for inference, let alone superintelligent models too capable for the public internet.”</p>
+        <cite>gosimply.ai</cite>
+      </blockquote>
     </div>
   </section>
 
-  <!-- 3. How it works -->
-  <section class="sec sec--alt" id="how">
+  <!-- 3. How it works (dark, pinned diagram) -->
+  <section class="sec" id="how">
     <div class="wrap">
       <div class="sec-intro">
         <h2 data-rv>How it works<span class="stop">.</span></h2>
         <p data-rv="2">Simply Silicon integrates low lead time urban power capacity, dense connectivity, and high performance inference racks into one physical platform.</p>
       </div>
-      <div class="arch">
-        <article class="arch-row">
-          <div class="arch-copy" data-rv>
+      <div class="pin">
+        <div class="pin-steps">
+          <div class="pin-step" data-step="0">
+            <span class="n">01</span>
             <h3>Power</h3>
-            <p class="arch-lead">Low lead time urban power capacity.</p>
-            <div class="arch-text">
-              <p>We turn latent utility infrastructure and own-use power into bare metal inference compute, faster than conventional developers.</p>
-              <p>Our first site sits in an existing district heating plant with <b>dual redundant grid feeds</b>, <b>on-site generation</b> and <b>14 MVA n+1</b> of power: utility-grade infrastructure to leverage.</p>
-            </div>
-            <dl class="terms-mini">
-              <div><dt>n+1 redundancy</dt><dd>One more of every critical component than the load needs, so any single one can fail without an outage.</dd></div>
-              <div><dt>Redundant grid feeds</dt><dd>Two separate connections to the electricity grid.</dd></div>
-            </dl>
+            <p class="lead">Low lead time urban power capacity.</p>
+            <p>Simply Silicon builds on latent utility infrastructure and own-use power that already exists in the city.</p>
+            <p class="src">At our first site: dual redundant grid feeds, on-site generation, and 14 MVA n+1.</p>
           </div>
-          <figure class="fig" data-fig="power" data-rv="2"><figcaption>Two grid feeds and on-site generation supply one site, with n+1 redundancy.</figcaption></figure>
-        </article>
-
-        <article class="arch-row">
-          <div class="arch-copy" data-rv>
+          <div class="pin-step" data-step="1">
+            <span class="n">02</span>
+            <h3>Connectivity</h3>
+            <p class="lead">Dense connectivity on private, air-gapped fiber.</p>
+            <p>Private fiber physically eliminates the security threats posed by common carrier networks, while latency reliability SLAs support applications where delayed inference is a service failure.</p>
+            <p class="src">Private circuits remove common carrier exposure for high-security workloads and superintelligent models.</p>
+          </div>
+          <div class="pin-step" data-step="2">
+            <span class="n">03</span>
             <h3>Compute</h3>
-            <p class="arch-lead">High performance inference racks.</p>
-            <div class="arch-text">
-              <p>High-density GPU compute for <b>bare metal</b> or <b>API</b> applications.</p>
-              <p>Metro bare metal for AI inference: the hardware sits inside the city, next to the demand it serves.</p>
-            </div>
-            <dl class="terms-mini">
-              <div><dt>Inference</dt><dd>Using a trained AI model to produce an answer, one token at a time.</dd></div>
-              <div><dt>Bare metal</dt><dd>A physical server dedicated to one customer, with no shared virtual layer in between.</dd></div>
-            </dl>
+            <p class="lead">High performance inference racks.</p>
+            <p>High-density GPU compute for bare metal or API applications, inside the city it serves.</p>
+            <p class="src">Highly redundant infrastructure coupled with deterministic local routing supports latency-sensitive workloads and critical AI services.</p>
           </div>
-          <figure class="fig" data-fig="compute" data-rv="2"><figcaption>Shared cloud splits one machine between users. Bare metal gives one model the whole machine.</figcaption></figure>
-        </article>
-
-        <article class="arch-row">
-          <div class="arch-copy" data-rv>
-            <h3>Air-gapped network</h3>
-            <p class="arch-lead">Physical separation for safety- and latency-sensitive AI.</p>
-            <div class="arch-text">
-              <p>Private fiber physically eliminates the security threats posed by common carrier networks, while latency reliability SLAs support applications where delayed inference is a service failure.</p>
-              <p><b>High assurance network topology.</b> Private circuits remove common carrier exposure for high-security workloads and superintelligent models.</p>
-            </div>
-            <dl class="terms-mini">
-              <div><dt>Common carrier network</dt><dd>The shared telecom networks that everyone else uses.</dd></div>
-              <div><dt>Latency</dt><dd>The delay between a request and its answer.</dd></div>
-            </dl>
-          </div>
-          <figure class="fig" data-fig="fiber" data-rv="2"><figcaption>Private fiber links the site to connected buildings, physically separate from the public internet.</figcaption></figure>
-        </article>
-
-        <article class="arch-row">
-          <div class="arch-copy" data-rv>
-            <h3>Utility-grade reliability</h3>
-            <p class="arch-lead">For workloads too capable or too critical for the public internet.</p>
-            <div class="arch-text">
-              <p>Highly redundant infrastructure coupled with deterministic local routing supports latency-sensitive workloads and critical AI services.</p>
-              <p>Simply Silicon owns and operates air-gapped AI infrastructure for superintelligent models too capable for the public internet, regulated enterprise, and high-security workloads.</p>
-            </div>
-            <dl class="terms-mini">
-              <div><dt>Air gap</dt><dd>A network with no physical link to outside networks.</dd></div>
-              <div><dt>Regulated enterprise</dt><dd>Banks, utilities, and energy companies operating under strict regulatory requirements.</dd></div>
-            </dl>
-          </div>
-          <figure class="fig" data-fig="security" data-rv="2"><figcaption>The air-gapped network and the public internet are physically separate.</figcaption></figure>
-        </article>
+        </div>
+        <div class="pin-fig">
+          <figure class="fig">
+            <svg viewBox="0 0 520 360" role="img" aria-label="Power from two grid feeds and on-site generation feeds a Simply Silicon site in the city. Its inference racks connect to nearby buildings over private fiber, physically separate from the public internet.">
+              <g class="g-part" data-k="0">
+                <rect class="f-box" x="8" y="34" width="132" height="52" rx="6"/><text class="f-t" x="74" y="58" text-anchor="middle">Grid feed A</text><text class="f-s" x="74" y="74" text-anchor="middle">Utility</text>
+                <rect class="f-box" x="8" y="154" width="132" height="52" rx="6"/><text class="f-t" x="74" y="178" text-anchor="middle">Grid feed B</text><text class="f-s" x="74" y="194" text-anchor="middle">Utility</text>
+                <rect class="f-box f-box--ghost" x="8" y="274" width="132" height="52" rx="6"/><text class="f-t" x="74" y="298" text-anchor="middle">On-site</text><text class="f-s" x="74" y="314" text-anchor="middle">generation</text>
+                <path class="f-flow" d="M140 60 C170 60 168 140 196 146"/><path class="f-flow" d="M140 180 H196"/><path class="f-flow" d="M140 300 C170 300 168 220 196 214" stroke-dasharray="3 5"/>
+                <text class="f-s f-acc" x="168" y="128" text-anchor="middle">n+1</text>
+              </g>
+              <g class="g-base">
+                <rect class="f-box f-box--on" x="196" y="96" width="150" height="168" rx="8"/>
+                <text class="f-t" x="271" y="88" text-anchor="middle">Simply Silicon site</text>
+              </g>
+              <g class="g-part" data-k="2">
+                <rect class="f-box f-box--solid" x="212" y="112" width="36" height="136" rx="3"/><rect class="f-box f-box--solid" x="253" y="112" width="36" height="136" rx="3"/><rect class="f-box f-box--solid" x="294" y="112" width="36" height="136" rx="3"/>
+                <g class="f-led"><circle cx="240" cy="124" r="2.2"/><circle cx="240" cy="140" r="2.2"/><circle cx="240" cy="156" r="2.2"/><circle cx="240" cy="172" r="2.2"/><circle cx="240" cy="188" r="2.2"/><circle cx="240" cy="204" r="2.2"/><circle cx="240" cy="220" r="2.2"/><circle cx="240" cy="236" r="2.2"/><circle cx="281" cy="124" r="2.2"/><circle cx="281" cy="140" r="2.2"/><circle cx="281" cy="156" r="2.2"/><circle cx="281" cy="172" r="2.2"/><circle cx="281" cy="188" r="2.2"/><circle cx="281" cy="204" r="2.2"/><circle cx="281" cy="220" r="2.2"/><circle cx="281" cy="236" r="2.2"/><circle cx="322" cy="124" r="2.2"/><circle cx="322" cy="140" r="2.2"/><circle cx="322" cy="156" r="2.2"/><circle cx="322" cy="172" r="2.2"/><circle cx="322" cy="188" r="2.2"/><circle cx="322" cy="204" r="2.2"/><circle cx="322" cy="220" r="2.2"/><circle cx="322" cy="236" r="2.2"/></g>
+                <text class="f-s f-acc" x="271" y="282" text-anchor="middle">GPU racks: bare metal or API</text>
+              </g>
+              <g class="g-part" data-k="1">
+                <path class="f-flow" d="M346 130 C380 130 384 52 420 52"/><path class="f-flow" d="M346 160 C384 160 388 126 420 126"/><path class="f-flow" d="M346 200 C384 200 388 200 420 200"/>
+                <rect class="f-box f-box--solid" x="420" y="34" width="36" height="36" rx="4"/><rect class="f-box f-box--solid" x="420" y="108" width="36" height="36" rx="4"/><rect class="f-box f-box--solid" x="420" y="182" width="36" height="36" rx="4"/>
+                <text class="f-s" x="466" y="56">Connected</text><text class="f-s" x="466" y="70">buildings</text>
+                <text class="f-s f-acc" x="383" y="112" text-anchor="middle" transform="rotate(-62 383 112)">private fiber</text>
+                <g transform="translate(456 300)"><circle r="30" class="f-box f-box--ghost"/><text class="f-s" y="-2" text-anchor="middle">Public</text><text class="f-s" y="12" text-anchor="middle">internet</text></g>
+                <path class="f-warn" d="M346 240 C380 250 396 286 420 296" stroke-dasharray="2 5"/><path class="f-warn" d="M392 262 l10 12 M402 262 l-10 12"/>
+                <text class="f-s f-red" x="368" y="300" text-anchor="middle">air gap</text>
+              </g>
+            </svg>
+            <figcaption>Power, connectivity and compute in one physical platform. The private fiber network is physically separate from the public internet.</figcaption>
+          </figure>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 4. Critical demand -->
-  <section class="sec">
+  <!-- 4. Built for critical demand (light) -->
+  <section class="sec sec--light">
     <div class="wrap">
       <div class="sec-intro">
         <h2 data-rv>Built for critical demand<span class="stop">.</span></h2>
-        <p data-rv="2">A physically-secure inference network for applications that cannot compromise.</p>
+        <p data-rv="2">A physically-secure inference network for applications that cannot compromise. Simply Silicon owns and operates air-gapped AI infrastructure for superintelligent models too capable for the public internet, regulated enterprise, and high-security workloads.</p>
       </div>
       <div class="cols" style="--n:4">
         <div data-rv><span class="idx">01</span><h3>Regulated enterprise</h3><p>Banks, utilities, and energy companies operating under strict regulatory requirements.</p></div>
@@ -149,31 +143,34 @@
     </div>
   </section>
 
-  <!-- 5. Metro platform -->
-  <section class="sec sec--alt">
+  <!-- 5. Metro platform (dark) -->
+  <section class="sec">
     <div class="wrap">
       <div class="sec-intro">
-        <h2 data-rv>Metro platform<span class="stop">.</span></h2>
-        <p data-rv="2">A global urban AI network. Simply Silicon is securing and developing a pipeline of 15+ additional sites in major metros around North America and Europe.</p>
+        <h2 data-rv>A global urban AI network<span class="stop">.</span></h2>
+        <p data-rv="2">Simply Silicon is securing and developing a pipeline of 15+ additional sites in major metros around North America and Europe.</p>
       </div>
       <div class="metrics" style="--n:3" data-rv>
         <div><b>15+</b><span>Site pipeline</span></div>
         <div><b>200<small>MW+</small></b><span>Capacity</span></div>
         <div><b>12+</b><span>Major cities</span></div>
       </div>
-      <p style="margin-top:56px" data-rv><a class="link" href="platform.html">See the platform <span class="arrow" aria-hidden="true">→</span></a></p>
+      <div class="map-strip" id="mapStrip" data-rv aria-label="Calgary, the first site, and the North America and Europe pipeline regions">
+        <div class="ms-cap"><span><i class="dot dot--live" style="width:8px;height:8px;border-radius:50%"></i>Online: Calgary</span><span><i></i>Pipeline regions</span></div>
+      </div>
+      <p style="margin-top:40px" data-rv><a class="link" href="platform.html">See the platform <span class="arrow" aria-hidden="true">→</span></a></p>
     </div>
   </section>
 
-  <!-- 6. Explore Foundation -->
-  <section class="sec">
+  <!-- 6. Explore Foundation (light, live 3D) -->
+  <section class="sec sec--light">
     <div class="wrap">
-      <a class="feature" href="foundation.html" data-rv>
-        <div class="feature-img"><img src="assets/img/foundation-poster.webp" width="1728" height="891" alt="Foundation and its private fiber network in downtown Calgary, in 3D" loading="lazy"></div>
+      <a class="feature feature--live" href="foundation.html" data-rv>
+        <div class="feature-img"><div class="scene" id="loopScene" aria-hidden="true"></div></div>
         <div class="feature-copy">
           <span class="status"><i class="dot dot--live"></i>Online</span>
           <h2>Explore Foundation, our first site, online in Calgary<span class="stop">.</span></h2>
-          <p>Foundation brings 12 MW of secure AI capacity to downtown Calgary. It is the first node in a global urban AI network.</p>
+          <p>Foundation brings 12 MW of secure AI capacity to downtown Calgary. Foundation is the first node in a global urban AI network.</p>
           <dl class="feature-kv">
             <div><dt>12 MW</dt><dd>n+1 redundant power</dd></div>
             <div><dt>7 km</dt><dd>Private fiber</dd></div>
@@ -186,32 +183,18 @@
     </div>
   </section>
 
-  <!-- 7. Call to action -->
-  <section class="cta">
+  <!-- 7. Investors (dark), right before the footer -->
+  <section class="sec" aria-labelledby="backers-h">
     <div class="wrap">
-      <h2 data-rv>Inference belongs next to demand<span class="stop">.</span></h2>
-      <p data-rv="1">Talk to us about compute capacity, a site partnership, or investment.</p>
-      <div class="hero-ctas" data-rv="2">
-        <button class="btn btn--primary" type="button" data-contact>Get in touch <span class="arrow" aria-hidden="true">→</span></button>
-        <a class="btn" href="platform.html">See the platform</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. Backers, right before the footer -->
-  <section class="backers" aria-labelledby="backers-h">
-    <div class="wrap"><h2 id="backers-h" class="backers-h" data-rv>Backed by investors and angels from</h2></div>
-    <div class="marquee-wrap">
-      <div class="marquee">
-        <ul class="marquee-track"><li data-logo="augur-vc.webp" style="--h:36px"><a href="https://augurvc.com/" target="_blank" rel="noopener"><span>Augur VC</span></a></li><li data-logo="palisade-capital-management.webp" style="--h:39px"><a href="https://www.palisade.ca/" target="_blank" rel="noopener"><span>Palisade Capital Management</span></a></li><li data-logo="garagecapital.webp" style="--h:40px"><a href="https://www.garage.vc/" target="_blank" rel="noopener"><span>GarageCapital</span></a></li><li data-logo="openai.webp" style="--h:36px"><a href="https://openai.com/" target="_blank" rel="noopener"><span>OpenAI</span></a></li><li data-logo="google.svg" style="--h:39px"><a href="https://www.google.com/" target="_blank" rel="noopener"><span>Google</span></a></li><li data-logo="microsoft.svg" style="--h:31px"><a href="https://www.microsoft.com/" target="_blank" rel="noopener"><span>Microsoft</span></a></li><li class="logo-tone logo-tone--soft" data-logo="heartland-generation.webp" style="--h:37px"><a href="https://www.heartlandgeneration.com/" target="_blank" rel="noopener"><span>Heartland Generation</span></a></li><li data-logo="cenovus.webp" style="--h:33px"><a href="https://www.cenovus.com/" target="_blank" rel="noopener"><span>Cenovus</span></a></li><li data-logo="vermilion-energy.webp" style="--h:46px"><a href="https://www.vermilionenergy.com/" target="_blank" rel="noopener"><span>Vermilion Energy</span></a></li><li data-logo="greengate.webp" style="--h:29px"><a href="https://greengatepower.com/" target="_blank" rel="noopener"><span>Greengate</span></a></li><li data-logo="aslan-renewables.webp" style="--h:31px"><a href="https://aslanrenewables.com/" target="_blank" rel="noopener"><span>Aslan Renewables</span></a></li><li class="logo-tone" data-logo="bluearth-renewables.webp" style="--h:36px"><a href="https://www.bluearthrenewables.com/" target="_blank" rel="noopener"><span>BluEarth Renewables</span></a></li><li data-logo="deming-sky-capital.webp" style="--h:48px"><a href="https://demingsky.com/" target="_blank" rel="noopener"><span>Deming Sky Capital</span></a></li></ul>
-      <ul class="marquee-track" aria-hidden="true"><li data-logo="augur-vc.webp" style="--h:36px"><a href="https://augurvc.com/" target="_blank" rel="noopener" tabindex="-1"><span>Augur VC</span></a></li><li data-logo="palisade-capital-management.webp" style="--h:39px"><a href="https://www.palisade.ca/" target="_blank" rel="noopener" tabindex="-1"><span>Palisade Capital Management</span></a></li><li data-logo="garagecapital.webp" style="--h:40px"><a href="https://www.garage.vc/" target="_blank" rel="noopener" tabindex="-1"><span>GarageCapital</span></a></li><li data-logo="openai.webp" style="--h:36px"><a href="https://openai.com/" target="_blank" rel="noopener" tabindex="-1"><span>OpenAI</span></a></li><li data-logo="google.svg" style="--h:39px"><a href="https://www.google.com/" target="_blank" rel="noopener" tabindex="-1"><span>Google</span></a></li><li data-logo="microsoft.svg" style="--h:31px"><a href="https://www.microsoft.com/" target="_blank" rel="noopener" tabindex="-1"><span>Microsoft</span></a></li><li class="logo-tone logo-tone--soft" data-logo="heartland-generation.webp" style="--h:37px"><a href="https://www.heartlandgeneration.com/" target="_blank" rel="noopener" tabindex="-1"><span>Heartland Generation</span></a></li><li data-logo="cenovus.webp" style="--h:33px"><a href="https://www.cenovus.com/" target="_blank" rel="noopener" tabindex="-1"><span>Cenovus</span></a></li><li data-logo="vermilion-energy.webp" style="--h:46px"><a href="https://www.vermilionenergy.com/" target="_blank" rel="noopener" tabindex="-1"><span>Vermilion Energy</span></a></li><li data-logo="greengate.webp" style="--h:29px"><a href="https://greengatepower.com/" target="_blank" rel="noopener" tabindex="-1"><span>Greengate</span></a></li><li data-logo="aslan-renewables.webp" style="--h:31px"><a href="https://aslanrenewables.com/" target="_blank" rel="noopener" tabindex="-1"><span>Aslan Renewables</span></a></li><li class="logo-tone" data-logo="bluearth-renewables.webp" style="--h:36px"><a href="https://www.bluearthrenewables.com/" target="_blank" rel="noopener" tabindex="-1"><span>BluEarth Renewables</span></a></li><li data-logo="deming-sky-capital.webp" style="--h:48px"><a href="https://demingsky.com/" target="_blank" rel="noopener" tabindex="-1"><span>Deming Sky Capital</span></a></li></ul>
-      </div>
+      <h2 id="backers-h" class="backers-wall-h" data-rv>Backed by investors and angels from</h2>
+      <ul class="logo-wall"><li data-logo="augur-vc.webp" style="--h:36px"><a href="https://augurvc.com/" target="_blank" rel="noopener"><span>Augur VC</span></a></li><li data-logo="palisade-capital-management.webp" style="--h:39px"><a href="https://www.palisade.ca/" target="_blank" rel="noopener"><span>Palisade Capital Management</span></a></li><li data-logo="garagecapital.webp" style="--h:40px"><a href="https://www.garage.vc/" target="_blank" rel="noopener"><span>GarageCapital</span></a></li><li data-logo="openai.webp" style="--h:36px"><a href="https://openai.com/" target="_blank" rel="noopener"><span>OpenAI</span></a></li><li data-logo="google.svg" style="--h:39px"><a href="https://www.google.com/" target="_blank" rel="noopener"><span>Google</span></a></li><li data-logo="microsoft.svg" style="--h:31px"><a href="https://www.microsoft.com/" target="_blank" rel="noopener"><span>Microsoft</span></a></li><li class="logo-tone logo-tone--soft" data-logo="heartland-generation.webp" style="--h:37px"><a href="https://www.heartlandgeneration.com/" target="_blank" rel="noopener"><span>Heartland Generation</span></a></li><li data-logo="cenovus.webp" style="--h:33px"><a href="https://www.cenovus.com/" target="_blank" rel="noopener"><span>Cenovus</span></a></li><li data-logo="vermilion-energy.webp" style="--h:46px"><a href="https://www.vermilionenergy.com/" target="_blank" rel="noopener"><span>Vermilion Energy</span></a></li><li data-logo="greengate.webp" style="--h:29px"><a href="https://greengatepower.com/" target="_blank" rel="noopener"><span>Greengate</span></a></li><li data-logo="aslan-renewables.webp" style="--h:31px"><a href="https://aslanrenewables.com/" target="_blank" rel="noopener"><span>Aslan Renewables</span></a></li><li class="logo-tone" data-logo="bluearth-renewables.webp" style="--h:36px"><a href="https://www.bluearthrenewables.com/" target="_blank" rel="noopener"><span>BluEarth Renewables</span></a></li><li data-logo="deming-sky-capital.webp" style="--h:48px"><a href="https://demingsky.com/" target="_blank" rel="noopener"><span>Deming Sky Capital</span></a></li></ul>
     </div>
   </section>
 </main>
 
 <footer id="site-footer"></footer>
 <script src="assets/js/common.js"></script>
+<script src="assets/js/map-data.js"></script>
 <script src="assets/js/home.js"></script>
 </body>
 </html>

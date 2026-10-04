@@ -31,7 +31,8 @@ export function mountScene(host, opts = {}) {
   const STR = window.SS_STREETS || { n: [], s: [], r: [] };
   const phoneNow = () => host.clientWidth < 700;
   const PHONE = opts.phone != null ? !!opts.phone : phoneNow();
-  const CINE = !!opts.cinematic; // home hero: no controls on screen, a slow orbit, the page keeps scrolling
+  const CINE = !!opts.cinematic;
+  const NIGHT = opts.day ? false : true; // evening look, as in gosimply.ai's own model // home hero: no controls on screen, a slow orbit, the page keeps scrolling
   host.innerHTML = '';
   host.classList.add('scene--live');
   const loading = el('div', 'scene-loading', 'Loading 3D view');
@@ -44,7 +45,7 @@ export function mountScene(host, opts = {}) {
   renderer.setPixelRatio(pixelRatio);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = .86;
+  renderer.toneMappingExposure = opts.day ? .86 : .62;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.shadowMap.autoUpdate = false; // the city is static: shadows are redrawn only when the view changes
@@ -53,9 +54,10 @@ export function mountScene(host, opts = {}) {
   const labelLayer = el('div', 'scene-labels'); host.appendChild(labelLayer);
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0xe3e9ef, 2600, 7000);
+  scene.fog = NIGHT ? new THREE.Fog(0x0e1a2c, 2000, 6800) : new THREE.Fog(0xe3e9ef, 2600, 7000);
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+  if (NIGHT) scene.environmentIntensity = .35; // three r163+; older builds ignore it
 
   const camera = new THREE.PerspectiveCamera(38, 1, 4, 9000); // near plane at 4 m keeps distant ground layers from shimmering
   const controls = new OrbitControls(camera, renderer.domElement);
@@ -70,11 +72,11 @@ export function mountScene(host, opts = {}) {
     controls.enableZoom = false; controls.enablePan = false;           // scrolling stays with the page
     controls.autoRotate = !reduce; controls.autoRotateSpeed = .28;      // one slow revolution every few minutes
     controls.minPolarAngle = Math.PI * .22; controls.maxPolarAngle = Math.PI * .4;
-    if (PHONE) { controls.enabled = false; renderer.domElement.style.touchAction = 'pan-y'; }
+    if (PHONE || !opts.interactive) { controls.enableRotate = false; renderer.domElement.style.touchAction = 'pan-y'; renderer.domElement.style.cursor = 'pointer'; }
   }
 
-  scene.add(new THREE.HemisphereLight(0xeaf3ff, 0xa9b4bf, .62));
-  const sun = new THREE.DirectionalLight(0xfff1dc, 2.6);
+  scene.add(NIGHT ? new THREE.HemisphereLight(0x3d5688, 0x0a0d14, .42) : new THREE.HemisphereLight(0xeaf3ff, 0xa9b4bf, .62));
+  const sun = NIGHT ? new THREE.DirectionalLight(0xa9bcff, .38) : new THREE.DirectionalLight(0xfff1dc, 2.6);
   sun.castShadow = true;
   const maxTex = renderer.capabilities.maxTextureSize;
   const SM = PHONE ? 2048 : Math.min(4096, maxTex);
@@ -509,11 +511,19 @@ export function mountScene(host, opts = {}) {
     if (kind === 'conn') p.forEach(([x, z], i) => { const [x2, z2] = p[(i + 1) % p.length]; B.edges.push(x, y1 + .3, z, x2, y1 + .3, z2); });
   });
   const nearMats = [];
+  const litTex = NIGHT ? tex((g, w, h) => {
+    g.fillStyle = '#000'; g.fillRect(0, 0, w, h);
+    for (let r = 0; r < 6; r++) for (let c = 0; c < 8; c++) {
+      const v = rnd(); if (v > .38) continue;
+      g.fillStyle = v < .08 ? 'rgba(170,215,255,.85)' : `rgba(255,${200 + Math.round(rnd() * 30)},${140 + Math.round(rnd() * 40)},${(.45 + rnd() * .45).toFixed(2)})`;
+      g.fillRect(c * w / 8 + 4, r * h / 6 + 6, w / 8 - 8, h / 6 - 14);
+    }
+  }) : null;
   Object.entries(buckets).forEach(([key, B]) => {
     const [kind, zone] = key.split(':');
     const f = FAC[kind];
-    const wallMat = new THREE.MeshStandardMaterial({ map: f.t, color: 0xffffff, vertexColors: true, ...f.m });
-    const roofMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: .85, metalness: .05, vertexColors: true, ...(kind === 'conn' ? { emissive: 0x1f93ec, emissiveIntensity: .35 } : {}) });
+    const wallMat = new THREE.MeshStandardMaterial({ map: f.t, color: 0xffffff, vertexColors: true, ...f.m, ...(NIGHT ? { emissiveMap: litTex, emissive: 0xffffff, emissiveIntensity: 1.25 } : {}) });
+    const roofMat = new THREE.MeshStandardMaterial({ color: NIGHT ? 0x8a929c : 0xffffff, roughness: .85, metalness: .05, vertexColors: true, ...(kind === 'conn' ? { emissive: 0x1f93ec, emissiveIntensity: .35 } : {}) });
     const wg = new THREE.BufferGeometry();
     wg.setAttribute('position', new THREE.Float32BufferAttribute(B.pos, 3));
     wg.setAttribute('normal', new THREE.Float32BufferAttribute(B.nrm, 3));
@@ -638,8 +648,9 @@ export function mountScene(host, opts = {}) {
       const count = Math.max(1, Math.round(L / (r.trunk ? 60 : 95)));
       for (let k = 0; k < count; k++) pulses[r.trunk ? 'trunk' : 'branch'].push({ pts, cum, L, off: k / count, speed: (r.trunk ? 95 : 70) / L });
     });
-    const tubeMesh = (list, m) => { if (!list.length) return; const g = mergeGeos(list.map(g => [g, null])); fiber.add(new THREE.Mesh(g, m)); };
-    tubeMesh(tubes.trunk, trunkCoreM); tubeMesh(tubes.core, coreM); tubeMesh(tubes.sleeve, sleeveM);
+    const tubeMesh = (list, m) => { if (!list.length) return null; const g = mergeGeos(list.map(g => [g, null])); const mesh = new THREE.Mesh(g, m); fiber.add(mesh); return mesh; };
+    tubeMesh(tubes.trunk, trunkCoreM); tubeMesh(tubes.core, coreM);
+    const sleeve = tubeMesh(tubes.sleeve, sleeveM); if (sleeve) beamMeshes.push(sleeve); // the wide glow reads well from far away, not up close
     // light pulses: one point cloud per size, positions updated each frame
     if (!reduce) {
       const glowTex = radial('rgba(255,255,255,1)', 'rgba(255,255,255,0)');
@@ -696,6 +707,8 @@ export function mountScene(host, opts = {}) {
   /* ---------- the plant ---------- */
   const plant = buildPlant(mat, tick);
   plant.root.scale.setScalar(S);
+  // at night the plant's pale concrete and white panels sit lower, so its lights carry the scene
+  if (NIGHT) { const seen = new Set(); plant.root.traverse(o => { const m = o.material; if (!m || Array.isArray(m) || seen.has(m) || !m.color || m.isMeshBasicMaterial || (m.emissive && m.emissiveIntensity > .3 && m.emissive.getHex())) return; seen.add(m); m.color.multiplyScalar(.62); }); }
   scene.add(plant.root);
 
   PROF('plant');
@@ -875,7 +888,7 @@ export function mountScene(host, opts = {}) {
     renderer.setSize(w, h, false);
     camera.aspect = w / h; camera.fov = w < 700 ? 50 : 38;
     // cinematic on wide screens: shift the frame so the city sits to the right of the headline
-    if (CINE && w >= 900) camera.setViewOffset(w, h, -w * .17, 0, w, h); else camera.clearViewOffset();
+    if (CINE && opts.frameRight && w >= 900) camera.setViewOffset(w, h, -w * .17, 0, w, h); else camera.clearViewOffset();
     camera.updateProjectionMatrix();
     cardBox = null; labelsDirty = true; labels.forEach(l => { l.w = 0; });
   }

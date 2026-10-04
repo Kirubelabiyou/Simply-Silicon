@@ -89,7 +89,7 @@
 
 /* Investor logos: show a logo only once its file exists in assets/img/backers (svg, then png); otherwise keep the name */
 (function () {
-  document.querySelectorAll('.marquee-track li[data-logo]').forEach(function (li) {
+  document.querySelectorAll('li[data-logo]').forEach(function (li) {
     var file = li.getAttribute('data-logo'), name = li.textContent, hidden = li.parentNode.hasAttribute('aria-hidden');
     var tryLoad = function (exts) {
       if (!exts.length) return;
@@ -168,4 +168,50 @@
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
     e.preventDefault(); x -= e.deltaX; vel = 0;
   }, { passive: false });
+})();
+
+/* How it works: the step in view lights up its part of the pinned diagram */
+(function () {
+  var steps = [].slice.call(document.querySelectorAll('.pin-step')), parts = document.querySelectorAll('.pin-fig .g-part');
+  if (!steps.length) return;
+  function set(k) {
+    steps.forEach(function (s) { s.classList.toggle('on', s.getAttribute('data-step') === String(k)); });
+    parts.forEach(function (p) { p.classList.toggle('on', p.getAttribute('data-k') === String(k)); });
+  }
+  set(0);
+  if (!('IntersectionObserver' in window)) { steps.forEach(function (s) { s.classList.add('on'); }); parts.forEach(function (p) { p.classList.add('on'); }); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) set(e.target.getAttribute('data-step')); });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  steps.forEach(function (s) { io.observe(s); });
+})();
+
+/* Metro platform: Calgary online, North America and Europe as pipeline regions (as stated on gosimply.ai) */
+(function () {
+  var box = document.getElementById('mapStrip'); if (!box || !window.SS_WORLD) return;
+  var c = window.SS_CITY_XY.calgary;
+  var svg = '<svg viewBox="110 52 540 200" role="img" aria-label="Map: Calgary online; North America and Europe pipeline regions">' +
+    '<path class="ms-land" d="' + window.SS_WORLD.land + '"/>' +
+    '<ellipse class="ms-region" cx="262" cy="168" rx="100" ry="58"/><ellipse class="ms-region" cx="518" cy="140" rx="44" ry="30"/>' +
+    '<text class="ms-region-l" x="262" y="236" text-anchor="middle">North America</text><text class="ms-region-l" x="518" y="182" text-anchor="middle">Europe</text>' +
+    '<circle class="ms-halo" cx="' + c[0] + '" cy="' + c[1] + '" r="8"/><circle class="ms-site" cx="' + c[0] + '" cy="' + c[1] + '" r="3"/>' +
+    '<text class="ms-l" x="' + (c[0] + 7) + '" y="' + (c[1] - 5) + '">Calgary</text></svg>';
+  box.insertAdjacentHTML('afterbegin', svg);
+})();
+
+/* Explore Foundation: a quiet live 3D loop, loaded only when it comes near the screen */
+(function () {
+  var host = document.getElementById('loopScene'); if (!host) return;
+  var started = false;
+  function load(src) { return new Promise(function (ok, no) { var s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = no; document.body.appendChild(s); }); }
+  function start() {
+    if (started) return; started = true;
+    ['assets/js/calgary-data.js', 'assets/js/calgary-buildings.js', 'assets/js/calgary-streets.js', 'assets/js/calgary-parks.js'].reduce(function (p, src) { return p.then(function () { return load(src); }); }, Promise.resolve())
+      .then(function () { return import('./scene.js'); })
+      .then(function (m) { m.mountScene(host, { cinematic: true, view: 'site', phone: window.innerWidth < 900 }); })
+      .catch(function (e) { console.error(e); });
+  }
+  if (!('IntersectionObserver' in window)) { start(); return; }
+  var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { io.disconnect(); start(); } }, { rootMargin: '600px 0px' });
+  io.observe(host);
 })();
