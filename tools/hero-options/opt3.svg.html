@@ -1,0 +1,66 @@
+<svg id="plantSvg" viewBox="0 0 1000 560" preserveAspectRatio="xMaxYMid meet" role="img" aria-label="An elevation drawing of the Foundation plant: a glass hall with a rounded end, four steel stacks in white lattice frames, rooftop coolers, an entrance block and a fan panel">
+  <defs>
+    <linearGradient id="gGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2a3c"/><stop offset=".55" stop-color="#2a3d52"/><stop offset="1" stop-color="#ffe7b8" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="gStack" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6d7783"/><stop offset=".45" stop-color="#e6ebf0"/><stop offset="1" stop-color="#7b8591"/></linearGradient>
+    <radialGradient id="gWarm" cx="50%" cy="80%" r="60%"><stop offset="0" stop-color="#ffdca0" stop-opacity=".55"/><stop offset="1" stop-color="#ffdca0" stop-opacity="0"/></radialGradient>
+    <radialGradient id="gSteam" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#dfe8f2" stop-opacity=".5"/><stop offset="1" stop-color="#dfe8f2" stop-opacity="0"/></radialGradient>
+    <pattern id="gGrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="rgba(120,160,200,.07)" stroke-width="1"/></pattern>
+  </defs>
+  <rect class="grid" x="0" y="0" width="1000" height="560" fill="url(#gGrid)"/>
+
+  <!-- fills fade in after the line drawing -->
+  <g class="fills">
+    <path d="M160 260 H772 A60 60 0 0 1 832 320 V430 H160 Z" fill="url(#gGlass)"/>
+    <ellipse cx="480" cy="430" rx="300" ry="70" fill="url(#gWarm)"/>
+    <rect x="150" y="236" width="692" height="24" fill="#07090c"/>
+    <path d="M150 236 H780 A62 62 0 0 1 842 260 V236 Z" fill="#07090c"/>
+    <g fill="url(#gStack)"><rect x="456" y="40" width="20" height="196"/><rect x="526" y="52" width="20" height="184"/><rect x="596" y="46" width="20" height="190"/><rect x="666" y="58" width="20" height="178"/></g>
+    <rect x="176" y="292" width="70" height="138" fill="#eef1f4"/>
+    <rect x="186" y="306" width="50" height="86" fill="#fff4d6" class="glow-warm"/>
+    <rect x="262" y="352" width="190" height="66" fill="#eef1f4"/><rect x="270" y="358" width="174" height="54" fill="none" stroke="#c8323a" stroke-width="2"/>
+    <g fill="#1d2026"><rect x="282" y="364" width="44" height="42"/><rect x="335" y="364" width="44" height="42"/><rect x="388" y="364" width="44" height="42"/></g>
+    <g fill="#3b4148"><rect x="300" y="210" width="62" height="26"/><rect x="370" y="210" width="62" height="26"/><rect x="440" y="210" width="62" height="26"/><rect x="510" y="210" width="62" height="26"/></g>
+    <rect x="842" y="350" width="96" height="80" fill="#c7ccd2"/>
+    <rect x="160" y="424" width="672" height="5" fill="#cfefff" class="glow-strip"/>
+  </g>
+
+  <!-- the line drawing -->
+  <g class="lines" fill="none" stroke="#dbe6f0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path pathLength="1" d="M40 430 H980"/>
+    <path pathLength="1" d="M40 470 H980" stroke-opacity=".35"/>
+    <path pathLength="1" d="M70 505 H130 M190 505 H250 M310 505 H370 M430 505 H490 M550 505 H610 M670 505 H730 M790 505 H850 M910 505 H970" stroke="#f2b233" stroke-opacity=".6"/>
+    <path pathLength="1" d="M160 430 V260 H772 A60 60 0 0 1 832 320 V430"/>
+    <path pathLength="1" d="M150 236 H780 A62 62 0 0 1 842 298 V260 M150 236 V260 H842"/>
+    <path pathLength="1" d="M160 300 H832 M160 340 H832 M160 380 H832" stroke-opacity=".55"/>
+    <path pathLength="1" d="M190 260 V430 M220 260 V430 M250 260 V430 M280 260 V430 M310 260 V430 M340 260 V430 M370 260 V430 M400 260 V430 M430 260 V430 M460 260 V430 M490 260 V430 M520 260 V430 M550 260 V430 M580 260 V430 M610 260 V430 M640 260 V430 M670 260 V430 M700 260 V430 M730 260 V430 M760 260 V430 M790 268 V430 M815 286 V430" stroke-opacity=".5"/>
+    <g class="stacks">
+      <path pathLength="1" d="M456 236 V40 H476 V236 M526 236 V52 H546 V236 M596 236 V46 H616 V236 M666 236 V58 H686 V236"/>
+      <path pathLength="1" d="M446 236 V140 H486 V236 M446 140 L486 188 M486 140 L446 188 M446 188 L486 236 M486 188 L446 236 M446 188 H486"/>
+      <path pathLength="1" d="M516 236 V146 H556 V236 M516 146 L556 191 M556 146 L516 191 M516 191 L556 236 M556 191 L516 236 M516 191 H556"/>
+      <path pathLength="1" d="M586 236 V143 H626 V236 M586 143 L626 190 M626 143 L586 190 M586 190 L626 236 M626 190 L586 236 M586 190 H626"/>
+      <path pathLength="1" d="M656 236 V149 H696 V236 M656 149 L696 193 M696 149 L656 193 M656 193 L696 236 M696 193 L656 236 M656 193 H696"/>
+      <path pathLength="1" d="M456 90 H476 M456 140 H476 M526 100 H546 M596 95 H616 M666 106 H686" stroke-opacity=".6"/>
+    </g>
+    <g class="coolers">
+      <path pathLength="1" d="M300 236 V210 H362 V236 M370 236 V210 H432 V236 M440 236 V210 H502 V236 M510 236 V210 H572 V236"/>
+      <path pathLength="1" d="M290 226 H582" stroke-opacity=".7"/>
+    </g>
+    <path pathLength="1" d="M176 430 V292 H246 V430 M186 306 H236 V392 H186 Z"/>
+    <path pathLength="1" d="M262 418 V352 H452 V418 Z"/>
+    <path pathLength="1" d="M842 430 V350 H938 V430 M862 380 H918"/>
+    <path pathLength="1" d="M196 448 V430 M214 448 V430 M232 448 V430" stroke-width="5" stroke="#9aa3ad"/>
+  </g>
+  <g class="fan-marks" stroke="#e9edf1" stroke-width="2" fill="none">
+    <circle cx="304" cy="385" r="15"/><path d="M304 372 V398 M291 385 H317"/>
+    <circle cx="357" cy="385" r="15"/><path d="M357 372 V398 M344 385 H370"/>
+    <circle cx="410" cy="385" r="15"/><path d="M410 372 V398 M397 385 H423"/>
+  </g>
+  <g class="rooffans" fill="none" stroke="#e6eaee" stroke-width="1.4">
+    <circle cx="316" cy="219" r="7"/><circle cx="346" cy="219" r="7"/><circle cx="386" cy="219" r="7"/><circle cx="416" cy="219" r="7"/>
+    <circle cx="456" cy="219" r="7"/><circle cx="486" cy="219" r="7"/><circle cx="526" cy="219" r="7"/><circle cx="556" cy="219" r="7"/>
+  </g>
+  <path class="hose" d="M440 232 C470 200 600 196 700 214 S730 236 740 236" fill="none" stroke="#e0563a" stroke-width="4" stroke-linecap="round" pathLength="1"/>
+  <g class="steam"><circle cx="466" cy="30" r="22" fill="url(#gSteam)"/><circle cx="536" cy="40" r="22" fill="url(#gSteam)"/><circle cx="606" cy="34" r="22" fill="url(#gSteam)"/><circle cx="676" cy="46" r="22" fill="url(#gSteam)"/></g>
+  <g class="sign" opacity="0"><rect x="852" y="300" width="76" height="34" fill="#a7aeb6"/><text x="890" y="318" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="700" font-size="11" fill="#f4f6f8" letter-spacing=".06em">CALGARY</text><text x="890" y="329" text-anchor="middle" font-family="Instrument Sans, sans-serif" font-size="6.5" fill="#eef1f4">district heating</text></g>
+  <text class="cap" x="160" y="540" font-family="Instrument Sans, sans-serif" font-size="12" fill="#7a7a84">Foundation · 435 9 Ave SE, Calgary · Phase 3: 12 MW</text>
+</svg>
