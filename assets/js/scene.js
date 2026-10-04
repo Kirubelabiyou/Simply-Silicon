@@ -1085,9 +1085,7 @@ function buildPlant(mat, tick) {
         const fx = HALL.e - 3.75 + dx;
         box(.86, .86, .06, grill, fx, .62, zF - .2, B);
         const ring = new THREE.Mesh(new THREE.TorusGeometry(.33, .025, 8, 28), bladeW); ring.position.set(fx, 1.05, zF - .24); B.add(ring);
-        const bl = new THREE.Group(); bl.position.set(fx, 1.05, zF - .245); bl.userData.dyn = true;
-        for (let k = 0; k < 6; k++) { const b = new THREE.Mesh(new THREE.BoxGeometry(.28, .05, .012), bladeW); b.position.x = .14; const pv = new THREE.Group(); pv.rotation.z = k * Math.PI / 3; pv.add(b); bl.add(pv); }
-        B.add(bl); tick.push(t => { bl.rotation.z = -t * 3; });
+        [Math.PI / 4, -Math.PI / 4].forEach(a => { const bar = new THREE.Mesh(new THREE.BoxGeometry(.62, .04, .012), bladeW); bar.position.set(fx, 1.05, zF - .245); bar.rotation.z = a; B.add(bar); });
       });
       const vents = [0x15171a, 0x3a2a20, 0x5a3a24, 0x23262b, 0x15171a, 0x1e3a2c, 0x24402e, 0x15171a];
       vents.forEach((c, i) => box(.34, .05, .3, mat('vent' + i, c, { roughness: .7 }), HALL.e - 2.4 - i * .52, .1, zF - .95, B).castShadow = false);
@@ -1224,14 +1222,13 @@ function buildPlant(mat, tick) {
     [.22, .42].forEach(h => box(1.46, .025, .025, railM, x, yR + h, z - .78, g).castShadow = false);
   }
   const COOLER_X = [-4.5, -3.0, -1.5, 0.0], COOLER_Z = -.95;
-  { // Phase 2 roof: first two dry coolers and the cooling loop along the front
-    const g = groups.p2;
-    COOLER_X.slice(0, 2).forEach(x => dryCooler(x, COOLER_Z, g));
+  { // the cooling loop along the front of the roof (Phase 3)
+    const g = groups.p3;
     pipe([[-5.0, yR + .05, -2.55], [-2.4, yR + .14, -2.78], [1.2, yR + .14, -2.78], [3.4, yR + .05, -2.5]], .06, mat('coolLoop', 0xc7ecf8, { roughness: .3, emissive: 0x7fd2f2, emissiveIntensity: .25 }), g);
   }
   { // Phase 3: the full roof, more racks across the ground floor, and the hot loop to the plant
     const g = groups.p3;
-    COOLER_X.slice(2).forEach(x => dryCooler(x, COOLER_Z, g));
+    COOLER_X.forEach(x => dryCooler(x, COOLER_Z, g));
     pipe([[-5.1, yR + .1, 1.9], [-2.6, yR + .3, 1.55], [.1, yR + .25, 1.7], [1.1, yR + .15, 2.3], [1.35, yR - .1, 3.25]], .075, mat('hotHose', 0xe0563a, { roughness: .5 }), g);
     for (let row = 0; row < 3; row++) for (let i = 0; i < 8; i++) rack(.47, 1.72, .84, 1.2 + i * .6, -2.3 + row * 1.15, .24, g, COL.cyan);
   }
