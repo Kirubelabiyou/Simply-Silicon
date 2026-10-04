@@ -22,6 +22,30 @@
     </div>
   </section>
 
+  <section class="map-top" aria-label="Map of Simply Silicon sites">
+    <div class="map-wrap">
+      <div class="net-stage" id="stage">
+        <canvas id="dots" aria-hidden="true"></canvas>
+        <svg id="world" role="img" aria-label="World map of Simply Silicon sites"></svg>
+        <div class="net-legend">
+          <span><i class="dot dot--live"></i>Online</span>
+          <span><i class="dot dot--dev"></i>In development</span>
+          <span><i class="dot dot--soon"></i>Coming soon</span>
+        </div>
+        <div class="zoom" id="zoom">
+          <button type="button" data-z="2.5" aria-label="Zoom in">+</button>
+          <button type="button" data-z="0.4" aria-label="Zoom out">−</button>
+        </div>
+        <div class="pop" id="pop" hidden aria-live="polite"></div>
+        <div class="net-3d" id="net3d" hidden>
+          <div class="scene" id="calScene"></div>
+          <div class="net-back"><button class="btn btn--sm" type="button" id="back3d">← Map</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wrap"><p style="margin-top:20px;font-size:14px;color:var(--text-3)">Select a city for its status. Select Calgary to fly into downtown Calgary and Foundation in 3D.</p></div>
+  </section>
+
   <section class="sec sec--light">
     <div class="wrap">
       <div class="sec-intro">
@@ -115,32 +139,12 @@
         <h2 data-rv>Metro platform<span class="stop">.</span></h2>
         <p data-rv="2">Foundation is the first node in a global urban AI network. Simply Silicon is securing and developing a pipeline of 15+ additional sites in major metros around North America and Europe.</p>
       </div>
-      <div class="metrics" style="--n:3;margin-bottom:clamp(40px,5vw,64px)" data-rv>
+      <div class="metrics" style="--n:3" data-rv>
         <div><b>15+</b><span>Site pipeline</span></div>
         <div><b>200<small>MW+</small></b><span>Capacity</span></div>
         <div><b>12+</b><span>Major cities</span></div>
       </div>
     </div>
-    <div class="map-wrap">
-      <div class="net-stage" id="stage">
-        <canvas id="dots" aria-hidden="true"></canvas>
-        <svg id="world" role="img" aria-label="World map of Simply Silicon sites"></svg>
-        <div class="net-legend">
-          <span><i class="dot dot--live"></i>Online</span>
-          <span><i class="region-key"></i>Pipeline regions</span>
-        </div>
-        <div class="zoom" id="zoom">
-          <button type="button" data-z="2.5" aria-label="Zoom in">+</button>
-          <button type="button" data-z="0.4" aria-label="Zoom out">−</button>
-        </div>
-        <div class="pop" id="pop" hidden aria-live="polite"></div>
-        <div class="net-3d" id="net3d" hidden>
-          <div class="scene" id="calScene"></div>
-          <div class="net-back"><button class="btn btn--sm" type="button" id="back3d">← Map</button></div>
-        </div>
-      </div>
-    </div>
-    <div class="wrap"><p style="margin-top:20px;font-size:14px;color:var(--text-3)">Select Calgary to fly into downtown Calgary and Foundation in 3D.</p></div>
     </section>
   <section class="sec">
     <div class="wrap">

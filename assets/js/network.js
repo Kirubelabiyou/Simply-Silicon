@@ -10,11 +10,18 @@
   var pop = document.getElementById('pop');
   var net3d = document.getElementById('net3d');
 
-  // gosimply.ai names one site (Calgary) and says the 15+ site pipeline is in major metros around North America and Europe
   var SITES = [
-    { id: 'calgary', city: 'Calgary', country: 'Canada', region: 'North America', status: 'online' }
+    { id: 'calgary', city: 'Calgary', country: 'Canada', region: 'North America', status: 'online' },
+    { id: 'montreal', city: 'Montreal', country: 'Canada', region: 'North America', status: 'dev' },
+    { id: 'bogota', city: 'Bogotá', country: 'Colombia', region: 'South America', status: 'dev' },
+    { id: 'amsterdam', city: 'Amsterdam', country: 'Netherlands', region: 'Western Europe', status: 'dev' },
+    { id: 'paris', city: 'Paris', country: 'France', region: 'Western Europe', status: 'dev' },
+    { id: 'london', city: 'London', country: 'United Kingdom', region: 'Western Europe', status: 'soon' },
+    { id: 'addis', city: 'Addis Ababa', country: 'Ethiopia', region: 'Africa', status: 'soon' },
+    { id: 'mumbai', city: 'Mumbai', country: 'India', region: 'Asia', status: 'soon' },
+    { id: 'sydney', city: 'Sydney', country: 'Australia', region: 'Oceania', status: 'soon' },
+    { id: 'buenosaires', city: 'Buenos Aires', country: 'Argentina', region: 'South America', status: 'soon' }
   ];
-  var REGIONS = [{ name: 'North America', x: 262, y: 168, rx: 100, ry: 58 }, { name: 'Europe', x: 518, y: 140, rx: 44, ry: 30 }];
   var STATUS = {
     online: { label: 'Online', chip: 'chip--live', dot: 'dot--live' },
     dev: { label: 'In development', chip: 'chip--dev', dot: 'dot--dev', text: 'In the next wave of sites joining the network.' },
@@ -27,7 +34,9 @@
   SITES.forEach(function (a) {
     SITES.filter(function (b) { return b !== a; }).sort(function (b, c) { return Math.hypot(b.x - a.x, b.y - a.y) - Math.hypot(c.x - a.x, c.y - a.y); }).slice(0, 2).forEach(function (b) { link(a, b); });
   });
-
+  link(SITES[0], SITES[1]); link(SITES[0], SITES[2]);
+  var byId = {}; SITES.forEach(function (x) { byId[x.id] = x; });
+  link(byId.montreal, byId.amsterdam); // across the Atlantic, so the network is one mesh
 
   var W = 1, H = 1, dpr = 1, vb = { x: 0, y: 0, w: 1000 };
   function upp() { return vb.w / W; }
@@ -65,12 +74,6 @@
     ctx.fillStyle = MAP.land; ctx.fill(LAND); ctx.restore();
     ctx.lineWidth = .7 / k; ctx.strokeStyle = MAP.border; ctx.stroke(BORD);
     ctx.lineWidth = 1 / k; ctx.strokeStyle = MAP.coast; ctx.stroke(LAND);
-    REGIONS.forEach(function (r) {
-      ctx.save(); ctx.beginPath(); ctx.ellipse(r.x, r.y, r.rx, r.ry, 0, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(77,178,239,.09)'; ctx.fill(); ctx.lineWidth = 1 / k; ctx.setLineDash([4 / k, 5 / k]); ctx.strokeStyle = 'rgba(77,178,239,.35)'; ctx.stroke(); ctx.restore();
-      ctx.save(); ctx.font = '600 ' + (12 / k) + 'px Instrument Sans, sans-serif'; ctx.fillStyle = 'rgba(159,182,204,.9)'; ctx.textAlign = 'center';
-      ctx.fillText(r.name.toUpperCase(), r.x, r.y + r.ry + 14 / k); ctx.restore();
-    });
     // on the dark map, each live or planned site throws light onto the land around it
     if (MAP.dark) {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.globalCompositeOperation = 'lighter';

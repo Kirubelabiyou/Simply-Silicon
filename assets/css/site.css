@@ -678,3 +678,11 @@ section.backers .marquee-track img { height: calc(var(--h, 30px) * 1.4); }
   color: var(--text-2);
 }
 .sec--light .net-stage .btn--primary, .sec--light .net-back .btn { background: #f4f4f5; border-color: #f4f4f5; color: #09090b; }
+.map-top { padding: 0 0 clamp(72px, 9vw, 120px); }
+/* sites on the map glow softly: a slow breathing ring on live and in-development cities */
+.node--online .pulse, .node--dev .pulse { display: block; fill: none; stroke-width: 1.5; transform-box: fill-box; transform-origin: center; animation: node-breathe 3.6s var(--ease-io) infinite; }
+.node--online .pulse { stroke: var(--accent); }
+.node--dev .pulse { stroke: var(--warm); animation-duration: 4.8s; }
+@keyframes node-breathe { 0% { transform: scale(1); opacity: .7; } 70%, 100% { transform: scale(2.6); opacity: 0; } }
+.net-stage.is-3d .node .pulse { animation: none; }
+@media (prefers-reduced-motion: reduce) { .node .pulse { display: none; } }
