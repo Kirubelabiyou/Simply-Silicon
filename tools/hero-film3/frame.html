@@ -1,0 +1,105 @@
+<title>Hero Film Fiber</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=Quicksand:wght@700&display=swap">
+<style>
+/* Simply Silicon hero film. The rack, one point of light, the dark, the fiber, then the answer. */
+:root {
+  --ink: #f2f2f4; --ink-2: #b9b9c1; --ink-3: #74747c; --accent: #4db2ef;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif; --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --logo: "Quicksand", Arial, sans-serif;
+  --ease: cubic-bezier(.16, 1, .3, 1); --gut: clamp(20px, 4.4vw, 64px); --inset: clamp(10px, 1.4vw, 18px);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: #000; }
+body { margin: 0; color: var(--ink-2); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+.wrap { max-width: 1600px; margin-inline: auto; padding-inline: var(--gut); }
+.hdr { position: absolute; top: 0; left: 0; right: 0; z-index: 20; padding-top: env(safe-area-inset-top, 0px); }
+.hdr .wrap { height: 76px; display: flex; align-items: center; gap: 24px; }
+.logo { font: 700 24px/1 var(--logo); color: var(--accent); text-decoration: none; letter-spacing: -.02em; }
+.menu { display: flex; gap: 4px; margin-left: auto; }
+.menu a { padding: 8px 14px; color: var(--ink-2); text-decoration: none; font-size: 15px; }
+.menu a:first-child { color: var(--ink); }
+.btn { display: inline-flex; align-items: center; height: 38px; padding: 0 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,.16); background: transparent; color: var(--ink); font: 500 14px/1 var(--body); text-decoration: none; cursor: pointer; }
+.btn--primary { background: var(--ink); border-color: var(--ink); color: #09090b; }
+.btn:focus-visible { outline: 1.5px solid var(--accent); outline-offset: 3px; }
+
+.hero { position: relative; height: 100svh; min-height: 620px; max-height: 1200px; overflow: hidden; isolation: isolate; background: #000; }
+#film { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+
+/* the chat panel */
+.panel { position: absolute; inset: calc(76px + env(safe-area-inset-top, 0px)) var(--inset) var(--inset); z-index: 1; border-radius: 24px; overflow: hidden; opacity: 0; transform: scale(.985);
+  background: radial-gradient(120% 80% at 50% 0%, #15161a 0%, #0d0e11 55%, #08090b 100%); border: 1px solid rgba(255,255,255,.07); box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
+.mark { position: absolute; left: 50%; top: clamp(30px, 6vh, 56px); width: 34px; height: 34px; margin-left: -17px; border-radius: 50%; opacity: 0;
+  border: 1.5px solid rgba(235,240,248,.7); }
+.mark::after { content: ""; position: absolute; inset: 0; margin: auto; width: 7px; height: 7px; border-radius: 50%; background: #f2f8ff; box-shadow: 0 0 10px rgba(170,210,255,.9), 0 0 22px rgba(120,180,255,.5); }
+.composer { position: absolute; left: 50%; width: min(700px, calc(100% - 2 * var(--gut))); height: 58px; padding: 0 10px 0 22px; border-radius: 18px; background: #1a1b1f; border: 1px solid rgba(255,255,255,.06);
+  display: flex; align-items: center; gap: 12px; transform: translateX(-50%); top: 42%; transition: top .9s var(--ease); }
+.composer.up { top: clamp(92px, 14vh, 128px); }
+.typed { flex: 1; color: var(--ink); font-size: 17px; white-space: nowrap; overflow: hidden; }
+.typed .ph { color: var(--ink-3); }
+.caret { display: inline-block; width: 1.5px; height: 19px; margin-left: 1px; vertical-align: -4px; background: #cfe3ff; animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+.send { flex: none; width: 36px; height: 36px; border-radius: 50%; background: #3a3b40; display: grid; place-items: center; transition: background .25s, transform .2s; }
+.send svg { width: 16px; height: 16px; stroke: #9a9aa2; transition: stroke .25s; }
+.send.ready { background: #f2f2f4; } .send.ready svg { stroke: #000; }
+.send.press { transform: scale(.86); }
+.answer { position: absolute; left: 50%; width: min(700px, calc(100% - 2 * var(--gut))); transform: translateX(-50%); top: calc(clamp(92px, 14vh, 128px) + 80px);
+  display: grid; grid-template-columns: 34px 1fr; gap: 16px; opacity: 0; transition: opacity .6s ease; }
+.answer.on { opacity: 1; }
+.answer .av { position: relative; width: 34px; height: 34px; margin-top: 8px; border-radius: 50%; border: 1.5px solid rgba(235,240,248,.55); }
+.answer .av::after { content: ""; position: absolute; inset: 0; margin: auto; width: 6px; height: 6px; border-radius: 50%; background: #f2f8ff; box-shadow: 0 0 8px rgba(170,210,255,.9); }
+.answer.busy .av::after { animation: breathe 1s ease-in-out infinite; }
+@keyframes breathe { 50% { transform: scale(1.6); opacity: .7; } }
+.card { padding: 16px 20px 18px; border-radius: 16px; background: #141519; border: 1px solid rgba(255,255,255,.05); }
+#ans { margin: 0; color: #e6e6ea; font-size: 17px; line-height: 1.62; }
+.w { opacity: 0; transition: opacity .7s ease; }
+.w.on { opacity: 1; }
+
+.copy { position: absolute; left: calc(var(--inset) + clamp(18px, 3vw, 44px)); right: var(--inset); bottom: calc(var(--inset) + clamp(22px, 5vh, 48px)); z-index: 3; pointer-events: none; opacity: 0; transform: translateY(10px); transition: opacity 1.2s ease, transform 1.4s var(--ease); }
+.copy.on { opacity: 1; transform: none; }
+h1 { margin: 0; max-width: 9em; color: var(--ink); font: 400 clamp(40px, 4.8vw, 76px)/1.04 var(--display); letter-spacing: -.035em; }
+h1 .stop { color: var(--accent); }
+.tag { position: absolute; right: calc(var(--inset) + 18px); bottom: calc(var(--inset) + 16px); z-index: 4; display: flex; align-items: center; gap: 14px; font-size: 13px; color: var(--ink-3); }
+.tag b { color: var(--ink-2); font-weight: 500; }
+
+@media (max-width: 860px) {
+  .menu { display: none; } .hdr .btn { margin-left: auto; }
+  .panel { border-radius: 18px; }
+  .composer { height: 52px; padding-left: 16px; top: 34%; } .composer.up { top: 80px; } .mark { top: 22px; width: 30px; height: 30px; margin-left: -15px; }
+  .typed, #ans { font-size: 15px; }
+  .answer { top: 148px; grid-template-columns: 1fr; gap: 10px; } .answer .av { display: none; }
+  .card { padding: 14px 16px; }
+  .copy { bottom: calc(var(--inset) + 70px); }
+  h1 { font-size: clamp(36px, 10vw, 46px); }
+  .tag { left: calc(var(--inset) + 18px); justify-content: space-between; }
+}
+@media (max-height: 700px) and (min-width: 861px) { h1 { font-size: 48px; } }
+</style>
+
+<header class="hdr"><div class="wrap">
+  <a class="logo" href="#top">simply silicon.</a>
+  <nav class="menu" aria-label="Main"><a href="#top">Home</a><a href="#top">Foundation</a><a href="#top">Workloads</a><a href="#top">Platform</a></nav>
+  <a class="btn btn--primary" href="#top">Connect</a>
+</div></header>
+
+<main id="top">
+  <section class="hero" aria-label="Simply Silicon">
+    <canvas id="film" aria-hidden="true"></canvas>
+    <div class="panel" id="panel">
+      <span class="mark" id="mark" aria-hidden="true"></span>
+      <div class="composer" id="composer">
+        <div class="typed" id="typed"><span class="ph">Ask anything</span></div>
+        <span class="send" id="send" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg></span>
+      </div>
+      <div class="answer" id="answer"><span class="av" aria-hidden="true"></span><div class="card"><p id="ans"></p></div></div>
+    </div>
+    <div class="copy" id="copy"><h1>Secure, localized compute at scale<span class="stop">.</span></h1></div>
+    <div class="tag"><span><b>Hero film</b> · Rack to fiber to answer</span><button class="btn" type="button" id="replay">Replay</button></div>
+  </section>
+</main>
+<script>
+var ANSWER = {{ANSWER}};
+{{JS}}
+</script>
