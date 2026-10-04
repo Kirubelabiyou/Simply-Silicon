@@ -500,3 +500,50 @@ b, strong { color: var(--text); font-weight: 600; }
   html { scroll-behavior: auto; }
   [data-rv] { opacity: 1; transform: none; }
 }
+
+/* map links drawn as a network mesh */
+.arc--link { stroke: var(--accent); stroke-width: 1.4; opacity: .62; }
+.arc--soon { stroke: var(--accent); stroke-width: 1; opacity: .28; stroke-dasharray: 3 6; }
+.hub-glow { fill: var(--accent); opacity: .08; }
+
+/* ---------- Home hero with the plant photo ---------- */
+.hero--photo { min-height: 0; }
+.hero--photo .hero-main { pointer-events: auto; padding-block: clamp(56px, 8vw, 112px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 96px); align-items: center; width: 100%; }
+.hero--photo .hero-copy { max-width: 760px; }
+.hero--photo .lede { max-width: 50ch; }
+.hero-photo { margin: 0; position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 580 / 640; animation: fade 1.8s var(--ease) .2s both; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9, 9, 11, 0) 60%, rgba(9, 9, 11, .35)); pointer-events: none; }
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-photo { aspect-ratio: 4 / 4.4; max-height: 70svh; }
+}
+
+/* ---------- Explore Foundation feature ---------- */
+.feature { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; background: var(--surface); transition: border-color .5s var(--ease); }
+.feature:hover { border-color: var(--line-3); }
+.feature-img { position: relative; min-height: 360px; overflow: hidden; }
+.feature-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.6s var(--ease); }
+.feature:hover .feature-img img { transform: scale(1.03); }
+.feature-copy { padding: clamp(28px, 4vw, 56px); display: flex; flex-direction: column; gap: 20px; }
+.feature-copy h2 { font-size: clamp(28px, 3vw, 42px); line-height: 1.06; }
+.feature-copy p { font-size: 16.5px; }
+.feature-kv { margin: 4px 0 8px; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+.feature-kv div { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.feature-kv div:nth-child(even) { padding-left: 18px; border-left: 1px solid var(--line); }
+.feature-kv dt { color: var(--text); font: 600 22px/1 var(--display); letter-spacing: -.03em; }
+.feature-kv dd { margin: 6px 0 0; font-size: 13.5px; color: var(--text-3); }
+.feature .link { align-self: flex-start; }
+@media (max-width: 900px) { .feature { grid-template-columns: 1fr; } .feature-img { min-height: 240px; } }
+
+/* ---------- Backers, larger, right before the footer ---------- */
+section.backers { margin-top: 0; padding: clamp(80px, 10vw, 136px) 0 clamp(72px, 9vw, 120px); border-top: 1px solid var(--line); }
+section.backers .backers-h { font: 600 clamp(26px, 2.8vw, 40px)/1.15 var(--display); letter-spacing: -.035em; color: var(--text); margin-bottom: clamp(40px, 5vw, 64px); }
+section.backers .marquee-track li { min-height: 148px; padding: 0 clamp(36px, 4.4vw, 72px); }
+section.backers .marquee-track img { height: calc(var(--h, 30px) * 1.4); }
+@media (max-width: 700px) { section.backers .marquee-track li { min-height: 116px; } section.backers .marquee-track img { height: calc(var(--h, 30px) * 1.1); } }
+
+/* five view buttons in the 3D scene on phones */
+@media (max-width: 700px) { .seg button { font-size: 12px; padding: 10px 2px; } }
+.stage-guide { max-width: 860px; margin: 28px 0 0; font-size: 15.5px; color: var(--text-2); }

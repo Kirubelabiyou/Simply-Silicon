@@ -28,6 +28,15 @@
     soon: { label: 'Coming soon', chip: 'chip--soon', dot: 'dot--soon', text: 'Planned for a future wave as the network grows.' }
   };
   SITES.forEach(function (s) { s.x = window.SS_CITY_XY[s.id][0]; s.y = window.SS_CITY_XY[s.id][1]; });
+  // network links: every site to its two nearest neighbours, plus Calgary to the first two sites in the list
+  var EDGES = [], seen = {};
+  function link(a, b) { var k = [a.id, b.id].sort().join('-'); if (a === b || seen[k]) return; seen[k] = 1; EDGES.push([a, b]); }
+  SITES.forEach(function (a) {
+    SITES.filter(function (b) { return b !== a; }).sort(function (b, c) { return Math.hypot(b.x - a.x, b.y - a.y) - Math.hypot(c.x - a.x, c.y - a.y); }).slice(0, 2).forEach(function (b) { link(a, b); });
+  });
+  link(SITES[0], SITES[1]); link(SITES[0], SITES[2]);
+  var byId = {}; SITES.forEach(function (x) { byId[x.id] = x; });
+  link(byId.montreal, byId.amsterdam); // across the Atlantic, so the network is one mesh
 
   var W = 1, H = 1, dpr = 1, vb = { x: 0, y: 0, w: 1000 };
   function upp() { return vb.w / W; }
@@ -78,11 +87,14 @@
     }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    var hp = toPx(SITES[0].x, SITES[0].y), out = '';
-    SITES.slice(1).forEach(function (s) {
-      var p = toPx(s.x, s.y), len = Math.hypot(p[0] - hp[0], p[1] - hp[1]);
-      out += '<path class="arc arc--' + s.status + '" d="M' + hp[0].toFixed(1) + ' ' + hp[1].toFixed(1) + ' Q' + ((hp[0] + p[0]) / 2).toFixed(1) + ' ' + ((hp[1] + p[1]) / 2 - Math.min(160, len * .22)).toFixed(1) + ' ' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + '"/>';
+    // the sites linked as a mesh, like a network: each city joins its nearest neighbours
+    var out = '';
+    EDGES.forEach(function (e) {
+      var a = toPx(e[0].x, e[0].y), b = toPx(e[1].x, e[1].y), len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+      var cls = e[0].status === 'soon' || e[1].status === 'soon' ? 'soon' : 'link';
+      out += '<path class="arc arc--' + cls + '" d="M' + a[0].toFixed(1) + ' ' + a[1].toFixed(1) + ' Q' + ((a[0] + b[0]) / 2).toFixed(1) + ' ' + ((a[1] + b[1]) / 2 - Math.min(90, len * .14)).toFixed(1) + ' ' + b[0].toFixed(1) + ' ' + b[1].toFixed(1) + '"/>';
     });
+    SITES.forEach(function (st) { var q = toPx(st.x, st.y); if (st.status !== 'soon') out += '<circle class="hub-glow" cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="' + (st.status === 'online' ? 14 : 10) + '"/>'; });
     // every city is its own node; crowded ones (London, Amsterdam, Paris) get callout labels with leader lines
     var pts = SITES.map(function (s) { var p = toPx(s.x, s.y); return { s: s, x: p[0], y: p[1] }; });
     var CALL = { london: [-22, -42], amsterdam: [34, -34], paris: [34, 24] };
@@ -152,7 +164,7 @@
     flyTo(around(s.x, s.y, 14), reduce ? 1 : 900, function () {
       net3d.hidden = false; stage.classList.add('is-3d');
       import('./scene.js').then(function (m) {
-        if (!scene) scene = m.mountScene(document.getElementById('calScene'), { phone: phone() });
+        if (!scene) scene = m.mountScene(document.getElementById('calScene'), { phone: phone(), view: 'net' });
         else scene.setView('net');
       }).catch(function (err) { console.error(err); document.getElementById('calScene').innerHTML = '<div class="scene-loading">The 3D view could not load. Open the Foundation page instead.</div>'; });
     });
@@ -234,7 +246,7 @@
   (window.requestIdleCallback || function (f) { setTimeout(f, 1500); })(function () {
     import('./scene.js').then(function (m) {
       // on larger screens, build the Calgary scene in the background (it does not draw until it is shown)
-      if (!scene && !phone() && (navigator.hardwareConcurrency || 4) >= 4) setTimeout(function () { if (!scene) scene = m.mountScene(document.getElementById('calScene'), { phone: false }); }, 1200);
+      if (!scene && !phone() && (navigator.hardwareConcurrency || 4) >= 4) setTimeout(function () { if (!scene) scene = m.mountScene(document.getElementById('calScene'), { phone: false, view: 'net' }); }, 1200);
     }).catch(function () {});
   }, { timeout: 4000 });
   if ('ResizeObserver' in window) new ResizeObserver(resize).observe(stage);

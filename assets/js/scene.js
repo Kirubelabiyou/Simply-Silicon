@@ -40,7 +40,7 @@ export function mountScene(host, opts = {}) {
   /* ---------- renderer, camera, light ---------- */
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
   const DPR = window.devicePixelRatio || 1;
-  let pixelRatio = Math.min(DPR, PHONE ? 1.5 : 1.6), tuned = 0;
+  let pixelRatio = Math.min(DPR, PHONE ? 1.5 : 1.6), tuned = 0, canDraw = false;
   renderer.setPixelRatio(pixelRatio);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -618,6 +618,7 @@ export function mountScene(host, opts = {}) {
   }
   /* ---------- fiber: underground conduits, seen through the street, with light travelling through them ---------- */
   const fiber = new THREE.Group(); scene.add(fiber);
+  const beamMeshes = []; // the tall light beams over connected buildings: shown in the network view only
   const DEPTH = -3.2;
   {
     const coreM = new THREE.MeshBasicMaterial({ color: 0x2aa8ff, transparent: true, opacity: 1, depthWrite: false });
@@ -670,12 +671,14 @@ export function mountScene(host, opts = {}) {
       ringTops.push([e.p[0], top + .6, e.p[1], hash(e.id.length * 9 + Math.round(e.p[0]))]);
     });
     // bright core beam plus a soft outer glow, both additive so they read as light
-    fiber.add(new THREE.Mesh(mergeGeos(beams), new THREE.MeshBasicMaterial({ color: 0x7fd4ff, transparent: true, opacity: .95, blending: THREE.AdditiveBlending, depthWrite: false })));
-    fiber.add(new THREE.Mesh(mergeGeos(beams.map(([g, mm]) => [new THREE.CylinderGeometry(1.7, 1.7, 1, 12, 1, true), mm])), new THREE.MeshBasicMaterial({ color: 0x2aa3f5, transparent: true, opacity: .32, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide })));
+    const beamCore = new THREE.Mesh(mergeGeos(beams), new THREE.MeshBasicMaterial({ color: 0x7fd4ff, transparent: true, opacity: .95, blending: THREE.AdditiveBlending, depthWrite: false }));
+    fiber.add(beamCore); beamMeshes.push(beamCore);
+    const beamGlow = (new THREE.Mesh(mergeGeos(beams.map(([g, mm]) => [new THREE.CylinderGeometry(1.7, 1.7, 1, 12, 1, true), mm])), new THREE.MeshBasicMaterial({ color: 0x2aa3f5, transparent: true, opacity: .32, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide })));
+    fiber.add(beamGlow); beamMeshes.push(beamGlow);
     fiber.add(new THREE.Mesh(mergeGeos(caps), new THREE.MeshBasicMaterial({ color: 0xffffff })));
     const rings = new THREE.InstancedMesh(new THREE.RingGeometry(3.6, 6.2, 40).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, blending: THREE.AdditiveBlending, side: THREE.DoubleSide, depthWrite: false }), ringTops.length);
     const rc = new THREE.Color(0x4fc0ff), c2 = new THREE.Color(), v = new THREE.Vector3(), sv = new THREE.Vector3(), q = new THREE.Quaternion();
-    const setRings = t => ringTops.forEach(([x, y, z, ph], i) => { const f = reduce ? 0 : (t * .6 + ph) % 1, s = 1 + f * 1.6; m4.compose(v.set(x, y, z), q, sv.set(s, 1, s)); rings.setMatrixAt(i, m4); rings.setColorAt(i, c2.copy(rc).multiplyScalar(2.6 * (1 - f))); });
+    const setRings = t => ringTops.forEach(([x, y, z, ph], i) => { m4.compose(v.set(x, y, z), q, sv.set(1.2, 1, 1.2)); rings.setMatrixAt(i, m4); rings.setColorAt(i, c2.copy(rc).multiplyScalar(.55)); });
     setRings(0); fiber.add(rings);
     // a halo of light on every connected roof
     const haloTex = radial('rgba(255,255,255,1)', 'rgba(120,200,255,0)');
@@ -683,7 +686,7 @@ export function mountScene(host, opts = {}) {
     const hg = new THREE.BufferGeometry(); hg.setAttribute('position', new THREE.BufferAttribute(hpos, 3));
     const halo = new THREE.Points(hg, new THREE.PointsMaterial({ map: haloTex, color: 0x9fdcff, size: PHONE ? 18 : 30, sizeAttenuation: false, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
     halo.userData.px = PHONE ? 18 : 30; pulseClouds.push(halo); fiber.add(halo);
-    if (!reduce) tick.push(t => { setRings(t); rings.instanceMatrix.needsUpdate = true; rings.instanceColor.needsUpdate = true; halo.material.opacity = .7; });
+    halo.material.opacity = .7; // rings and halos stay still: no pulsing light
   }
   // draw the fiber after the street so its glow reads through it; buildings still hide it
   fiber.traverse(o => { o.renderOrder = 6; });
@@ -807,24 +810,29 @@ export function mountScene(host, opts = {}) {
     zoomBox.appendChild(b);
   });
   const VIEWS = {
+    site: { name: 'Foundation', title: 'Foundation', sub: 'Calgary, Alberta', chip: ['chip--live', 'dot--live', 'Online'],
+      text: 'Foundation brings 12 MW of secure AI capacity to downtown Calgary.',
+      kv: [['12 MW', 'n+1 redundant power'], ['7 km', 'Private fiber'], ['25+', 'Connected buildings'], ['100 kW', 'Phase 1, online']],
+      cam: [64, 30, -78], tgt: [6, 8, 2], show: ['p1'], floor: true, roof: true, fade: true },
     net: { name: 'Network', title: 'Foundation', sub: 'Calgary, Alberta', chip: ['chip--live', 'dot--live', 'Online'],
       text: 'Foundation brings 12 MW of secure AI capacity to downtown Calgary.',
       kv: [['12 MW', 'n+1 redundant power'], ['7 km', 'Private fiber'], ['25+', 'Connected buildings'], ['100 kW', 'Phase 1, online']],
       cam: [260, 760, 900], tgt: [-420, 0, -120], show: [], floor: true, roof: true, fade: false },
-    1: { name: 'Phase 1', title: 'Phase 1', sub: 'Foundation', chip: ['chip--live', 'dot--live', 'Online'], text: 'Ground floor. 100 kW of air-cooled GPU racks, running now.',
+    1: { name: 'Phase 1', title: 'Phase 1', sub: 'Foundation', chip: ['chip--live', 'dot--live', 'Online'], text: 'Online. 100 kW.',
       cam: [-20, 36, -68], tgt: [-6, 4, 0], show: ['p1'], floor: true, roof: false, fade: true },
-    2: { name: 'Phase 2', title: 'Phase 2', sub: 'Foundation', chip: ['chip--dev', 'dot--dev', 'Feb 2027'], text: '2 MW. Liquid-cooled racks in the basement, with a plate heat exchanger tied to the plant.',
+    2: { name: 'Phase 2', title: 'Phase 2', sub: 'Foundation', chip: ['chip--dev', 'dot--dev', 'Feb 2027'], text: 'February 2027. 2 MW.',
       cam: [12, 62, -38], tgt: [5, -7, 1], show: ['p1', 'p2'], floor: false, roof: false, fade: true },
-    3: { name: 'Phase 3', title: 'Phase 3', sub: 'Foundation', chip: ['chip--soon', 'dot--soon', 'Full build'], text: '12 MW. Rooftop dry coolers and liquid-cooled racks across the plant.',
+    3: { name: 'Phase 3', title: 'Phase 3', sub: 'Foundation', chip: ['chip--soon', 'dot--soon', 'Full Foundation'], text: 'Full Foundation. 12 MW.',
       cam: [70, 70, -80], tgt: [8, 10, 4], show: ['p1', 'p2', 'p3'], floor: true, roof: true, fade: true }
   };
-  ['net', 1, 2, 3].forEach(k => {
+  ['site', 1, 2, 3, 'net'].forEach(k => {
     const b = el('button', '', VIEWS[k].name); b.type = 'button'; b.dataset.v = k;
     b.addEventListener('click', () => setView(k)); seg.appendChild(b);
   });
   let mode = 'net', camAnim = null, lastMove = performance.now();
   function setView(k, instant) {
     const V = VIEWS[k]; mode = k === 'net' ? 'net' : 'phase';
+    beamMeshes.forEach(b => { b.visible = k === 'net'; });
     ['p1', 'p2', 'p3'].forEach(g => { plant.groups[g].visible = V.show.includes(g); });
     plant.groups.floorFront.visible = V.floor; plant.groups.roof.visible = true;
     plant.groups.roof.traverse(o => { if (!o.material) return; const ghost = !V.roof; if (o.material.transparent !== ghost) { o.material.transparent = ghost; o.material.depthWrite = !ghost; o.material.needsUpdate = true; } o.material.opacity = ghost ? .14 : 1; });
@@ -871,10 +879,12 @@ export function mountScene(host, opts = {}) {
     camera.updateProjectionMatrix();
     cardBox = null; labelsDirty = true; labels.forEach(l => { l.w = 0; });
   }
-  const ro = 'ResizeObserver' in window ? new ResizeObserver(size) : null;
-  if (ro) ro.observe(host); else window.addEventListener('resize', size);
+  // a resized canvas is blank until it is drawn again, so redraw straight away instead of flashing the background
+  const resized = () => { size(); if (canDraw) renderer.render(scene, camera); };
+  const ro = 'ResizeObserver' in window ? new ResizeObserver(resized) : null;
+  if (ro) ro.observe(host); else window.addEventListener('resize', resized);
   size();
-  setView(opts.view || 'net', true);
+  setView(opts.view || 'site', true);
   const reveal = () => {
     loading.remove(); host.classList.add('scene--ready');
     // cinematic: a slow push in from high above, easing to rest
@@ -892,7 +902,7 @@ export function mountScene(host, opts = {}) {
 
   PROF('ui');
   let compiled = false;
-  (renderer.compileAsync ? renderer.compileAsync(scene, camera) : Promise.resolve()).catch(() => {}).then(() => { compiled = true; PROF('compile'); });
+  (renderer.compileAsync ? renderer.compileAsync(scene, camera) : Promise.resolve()).catch(() => {}).then(() => { compiled = true; canDraw = true; PROF('compile'); });
   let visible = true, alive = true, firstFrame = true, frame = 0;
   const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => { visible = es[0].isIntersecting; }) : null;
   if (io) io.observe(host);
@@ -903,7 +913,7 @@ export function mountScene(host, opts = {}) {
     if (lastT) ft.push(now - lastT); lastT = now;
     if (ft.length < 50) return;
     const sorted = ft.slice().sort((a, b) => a - b), med = sorted[ft.length >> 1]; ft.length = 0;
-    if (med > 26 && pixelRatio > 1 && tuned < 3) { pixelRatio = Math.max(1, pixelRatio - .25); renderer.setPixelRatio(pixelRatio); size(); tuned++; }
+    if (med > 26 && pixelRatio > 1 && tuned < 3) { pixelRatio = Math.max(1, pixelRatio - .25); renderer.setPixelRatio(pixelRatio); size(); renderer.render(scene, camera); tuned++; }
   }
   (function loop(now) {
     if (!alive) return;
@@ -1056,6 +1066,18 @@ function buildPlant(mat, tick) {
     for (let i = 0; i <= n; i++) { const p = path.getPointAt(i / n); ml.push([mg, new THREE.Matrix4().makeTranslation(p.x, .12 + (HALL.H - .12) / 2, p.z)]); }
     B.add(new THREE.Mesh(mergeGeos(ml), mm));
     [.12, 1.05, 2.1, HALL.H - .04].forEach(y => pipe(ribbon.map(p => [p.x, y, p.y]), .028, mm, B));
+    // light lines along the glass, as in the official model: a cool strip at the base and a white line under the roof band
+    const lineM = (c, k) => new THREE.MeshStandardMaterial({ color: c, emissive: c, emissiveIntensity: k, roughness: .5 });
+    pipe(ribbon.map(p => [p.x, .2, p.y]), .035, lineM(0xcfefff, 1.0), B);
+    pipe(ribbon.map(p => [p.x, HALL.H - .16, p.y]), .022, lineM(0xffffff, .9), B);
+    // warm ceiling panels inside the hall, seen through the glass
+    const ceil = lineM(0xfff1d6, .85), cp = [];
+    for (let x = HALL.w + 1.2; x < HALL.e - .6; x += 1.5) for (let z = HALL.f + 1.0; z < HALL.r - .6; z += 1.6) {
+      const dx = x - (HALL.w + HALL.R), dz = z - (HALL.f + HALL.R);
+      if (x < HALL.w + HALL.R && z < HALL.f + HALL.R && Math.hypot(dx, dz) > HALL.R - .7) continue; // keep inside the rounded end
+      cp.push([new THREE.BoxGeometry(.9, .03, .22), new THREE.Matrix4().makeTranslation(x, HALL.H - .1, z)]);
+    }
+    const panels = new THREE.Mesh(mergeGeos(cp), ceil); B.add(panels);
     box(HALL.e - HALL.w, HALL.H, .2, concrete, (HALL.w + HALL.e) / 2, 0, HALL.r - .1, B);
     box(BASE.x1 - BASE.x0, .12, BASE.z1, floorM, (BASE.x0 + BASE.x1) / 2, -.12, BASE.z1 / 2, B);
     box(BASE.x1 - BASE.x0, .12, -BASE.z0, floorM, (BASE.x0 + BASE.x1) / 2, -.12, BASE.z0 / 2, groups.floorFront);
@@ -1085,10 +1107,16 @@ function buildPlant(mat, tick) {
         const fx = HALL.e - 3.75 + dx;
         box(.86, .86, .06, grill, fx, .62, zF - .2, B);
         const ring = new THREE.Mesh(new THREE.TorusGeometry(.33, .025, 8, 28), bladeW); ring.position.set(fx, 1.05, zF - .24); B.add(ring);
-        [Math.PI / 4, -Math.PI / 4].forEach(a => { const bar = new THREE.Mesh(new THREE.BoxGeometry(.62, .04, .012), bladeW); bar.position.set(fx, 1.05, zF - .245); bar.rotation.z = a; B.add(bar); });
+        [0, Math.PI / 2].forEach(a => { const bar = new THREE.Mesh(new THREE.BoxGeometry(.62, .04, .012), bladeW); bar.position.set(fx, 1.05, zF - .245); bar.rotation.z = a; B.add(bar); });
       });
       const vents = [0x15171a, 0x3a2a20, 0x5a3a24, 0x23262b, 0x15171a, 0x1e3a2c, 0x24402e, 0x15171a];
       vents.forEach((c, i) => box(.34, .05, .3, mat('vent' + i, c, { roughness: .7 }), HALL.e - 2.4 - i * .52, .1, zF - .95, B).castShadow = false);
+    }
+    { // street light at the east corner
+      const poleM = mat('pole', 0xb9c1c9, { metalness: .6, roughness: .35 });
+      cyl(.045, 3.4, poleM, HALL.e + .5, .12, HALL.f - 1.1, B, 10);
+      box(.5, .06, .14, poleM, HALL.e + .3, 3.5, HALL.f - 1.1, B);
+      box(.3, .025, .1, new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xfff4dc, emissiveIntensity: 1.2 }), HALL.e + .2, 3.47, HALL.f - 1.1, B).castShadow = false;
     }
     box(2.55, 1.7, 3.0, concrete, HALL.e + 1.35, 0, 1.4, B);
     box(1.2, 1.25, .04, mat('door', 0x8a939d, { metalness: .6, roughness: .35 }), HALL.e + 1.35, 0, -.12, B);
@@ -1162,7 +1190,7 @@ function buildPlant(mat, tick) {
   function flushRacks() {
     rackQ.forEach((q, parent) => {
       const body = new THREE.Mesh(mergeGeos(q.body), mat('rack', COL.rack, { roughness: .4, metalness: .6 })); body.castShadow = true; body.receiveShadow = true; parent.add(body);
-      q.led.forEach((list, k) => { if (!list.length) return; const m = new THREE.Mesh(mergeGeos(list), new THREE.MeshBasicMaterial({ color: q.color })); m.userData.dyn = true; parent.add(m); tick.push(t => { m.visible = Math.sin(t * (2.2 + k * 1.3) + k) > -.7; }); });
+      q.led.forEach((list, k) => { if (!list.length) return; const m = new THREE.Mesh(mergeGeos(list), new THREE.MeshBasicMaterial({ color: q.color })); m.userData.dyn = true; parent.add(m); });
     });
     rackQ.clear();
   }

@@ -87,18 +87,6 @@
   });
 })();
 
-/* Hero: the Foundation city as the stage. Loads after the page is interactive so the headline paints first. */
-(function () {
-  var host = document.getElementById('heroScene');
-  if (!host) return;
-  var go = function () {
-    import('./scene.js').then(function (m) {
-      m.mountScene(host, { cinematic: true, phone: window.innerWidth < 900 });
-    }).catch(function (e) { console.error(e); });
-  };
-  if (document.readyState === 'complete') setTimeout(go, 60); else window.addEventListener('load', function () { setTimeout(go, 60); });
-})();
-
 /* Investor logos: show a logo only once its file exists in assets/img/backers (svg, then png); otherwise keep the name */
 (function () {
   document.querySelectorAll('.marquee-track li[data-logo]').forEach(function (li) {

@@ -130,7 +130,7 @@
     ftr.innerHTML =
       '<div class="wrap">' +
       '<div class="ftr-top">' +
-      '<div class="ftr-brand"><a class="logo" href="./">' + LOGO + '</a><p>Air-gapped AI infrastructure in major cities. Secure, localized compute at scale.</p>' +
+      '<div class="ftr-brand"><a class="logo" href="./">' + LOGO + '</a><p>Air-gapped AI infrastructure in major cities.</p>' +
       '<div class="social"><a href="' + LINKEDIN + '" target="_blank" rel="noopener" aria-label="Simply Silicon on LinkedIn">' + LI + '</a></div></div>' +
       '<div class="ftr-cols">' +
       '<div><h4>Company</h4><ul><li><a href="./">Home</a></li><li><a href="./#how">How it works</a></li><li><a href="platform.html">Our vision</a></li></ul></div>' +
@@ -138,7 +138,7 @@
       '<div><h4>Contact</h4><ul><li><button class="ftr-link" type="button" data-contact>Get in touch</button></li><li><address>435 9 Ave SE<br>Calgary, Alberta, Canada</address></li></ul></div>' +
       '</div>' +
       '</div>' +
-      '<div class="ftr-bottom"><span>© ' + new Date().getFullYear() + ' Simply Silicon. All rights reserved.</span><a href="#top">Back to top ↑</a></div>' +
+      '<div class="ftr-bottom"><span>© ' + new Date().getFullYear() + ' Simply Silicon. All rights reserved.</span></div>' +
       '</div>';
   }
 })();

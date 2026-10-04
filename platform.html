@@ -18,7 +18,7 @@
   <section class="page-head">
     <div class="wrap">
       <h1>The internet was not built for inference<span class="stop">.</span></h1>
-      <p class="lede">It was built to move information between people. Simply Silicon is building the network inference needs: secure metro sites that put compute, memory and power right next to demand.</p>
+      <p class="lede">The modern internet was designed to move information, not to produce intelligence. Simply Silicon integrates low lead time urban power capacity, dense connectivity, and high performance inference racks into one physical platform.</p>
     </div>
   </section>
 
@@ -39,7 +39,7 @@
         <div class="pop" id="pop" hidden aria-live="polite"></div>
         <div class="net-3d" id="net3d" hidden>
           <div class="scene" id="calScene"></div>
-          <div class="net-back"><button class="btn btn--sm" type="button" id="back3d">← World map</button></div>
+          <div class="net-back"><button class="btn btn--sm" type="button" id="back3d">← Map</button></div>
         </div>
       </div>
     </div>
@@ -50,12 +50,12 @@
     <div class="wrap">
       <div class="sec-intro">
         <h2 data-rv>A global urban AI network<span class="stop">.</span></h2>
-        <p data-rv="2">Foundation in Calgary is the first node. Simply Silicon is securing and developing a pipeline of 15+ additional sites in major metros around North America and Europe.</p>
+        <p data-rv="2">Foundation is the first node in a global urban AI network. Simply Silicon is securing and developing a pipeline of 15+ additional sites in major metros around North America and Europe.</p>
       </div>
       <div class="metrics" style="--n:3" data-rv>
-        <div><b>15+</b><span>Additional metro sites being secured and developed</span></div>
-        <div><b>200<small>MW+</small></b><span>Of secure AI capacity planned across the network</span></div>
-        <div><b>12+</b><span>Major cities targeted in North America and Europe</span></div>
+        <div><b>15+</b><span>Site pipeline</span></div>
+        <div><b>200<small>MW+</small></b><span>Capacity</span></div>
+        <div><b>12+</b><span>Major cities</span></div>
       </div>
     </div>
   </section>
@@ -67,8 +67,8 @@
         <p data-rv="2">The internet was built to distribute information between humans. Inference infrastructure must produce intelligence between machines.</p>
       </div>
       <div class="cols" style="--n:2">
-        <div data-rv><h3>The internet moves what we already know.</h3><p>Web pages, files, email, search and video are stored somewhere, requested and sent. The network rewards reach, redundancy and scale, and it tolerates distance as the price of all three.</p></div>
-        <div data-rv="1"><h3>Inference produces what we don't know yet.</h3><p>Tokens are generated one after another from huge model state, and every token depends on the ones before it. It rewards memory locality, bandwidth and thermal control, and it is punished by distance at every hop.</p></div>
+        <div data-rv><h3>The internet moves what we already know.</h3><p>Web pages, files, email, search queries and streaming video are stored somewhere, requested by a user, sent across a network, and consumed with tolerable latency. It rewards reach, redundancy, and scale, and tolerates distance as the price of all three.</p></div>
+        <div data-rv="1"><h3>Inference produces what we don't know yet.</h3><p>A large language model generates tokens through repeated transformations of enormous state, and every token depends on the tokens before it. It rewards memory locality, bandwidth density, low-latency interconnect, and thermal control, and is punished by distance at every hop.</p></div>
       </div>
     </div>
   </section>
@@ -78,8 +78,8 @@
       <div>
         <h2 data-rv>Every hop is a tax<span class="stop">.</span></h2>
         <div style="margin-top:32px" data-rv="1">
-          <p>Agentic AI turns one user action into hundreds of model calls, tool calls and checks. Latency doesn't just slow the answer. It compounds through the whole chain.</p>
-          <p>A 50 ms penalty, repeated across a chain of machine-speed calls, becomes a real economic cost.</p>
+          <p>An agentic application can trigger chains of model calls, tool calls, retrieval steps, code execution and verification passes. One user action can become hundreds or thousands of inference events. Latency does not merely affect user experience. It compounds through the reasoning graph.</p>
+          <p>A 50 ms penalty repeated across a long chain of machine-speed operations becomes a real economic tax.</p>
         </div>
       </div>
       <figure class="chart" data-rv="2">
@@ -94,18 +94,19 @@
     <div class="wrap">
       <div class="sec-intro">
         <h2 data-rv>The industry is already rebuilding around locality<span class="stop">.</span></h2>
-        <p data-rv="2">None of today's inference techniques exist to move state faster across distance. Every one of them exists to avoid moving it.</p>
+        <p data-rv="2">None of the inference toolkits exist to move state faster across distance. Every one of them exists to avoid moving it. Together they are an industry rebuilding around locality.</p>
       </div>
       <dl class="defs" data-rv>
-        <div><dt>FlashAttention</dt><dd>Fewer reads and writes to memory.</dd></div>
+        <div><dt>FlashAttention</dt><dd>Reduces unnecessary reads and writes to memory.</dd></div>
         <div><dt>Kernel fusion</dt><dd>Avoids round trips between memory and compute.</dd></div>
-        <div><dt>Quantization</dt><dd>Shrinks how many bits have to move.</dd></div>
-        <div><dt>Prefix caching</dt><dd>Reuses state instead of recomputing it.</dd></div>
-        <div><dt>Cache-aware routing</dt><dd>Sends the request to where the state already lives.</dd></div>
-        <div><dt>Disaggregation</dt><dd>Splits prefill and decode onto the hardware each needs.</dd></div>
+        <div><dt>Quantization</dt><dd>Shrinks the number of bits that have to move at all.</dd></div>
+        <div><dt>Prefix caching</dt><dd>Reuses prior KV state instead of recomputing it.</dd></div>
+        <div><dt>Cache-aware routing</dt><dd>Sends the next request to wherever the relevant state already lives.</dd></div>
+        <div><dt>Disaggregation</dt><dd>Splits prefill and decode because they punish different parts of the machine.</dd></div>
       </dl>
       <blockquote class="quote" style="margin-top:clamp(72px,9vw,128px)" data-rv>
-        <p>“The winning systems are not the biggest clusters. The systems that place memory, compute, routing, and power closest to the demand pattern will win.”</p>
+        <p>“The winning systems are not the biggest clusters. Size does not matter. The systems that place memory, compute, routing, and power closest to the demand pattern while minimizing the physical cost of producing intelligence will win.”</p>
+        <cite>From <i>The Internet Was Not Built for Inference</i>, Simply Silicon and Augur</cite>
       </blockquote>
     </div>
   </section>
@@ -114,7 +115,7 @@
     <div class="wrap">
       <div class="sec-intro">
         <h2 data-rv>A second internet for AI<span class="stop">.</span></h2>
-        <p data-rv="2">Our long term goal is to connect these sites into a second internet for superintelligent models, so they don't break the internet humans need.</p>
+        <p data-rv="2">Our long term goal is to connect these sites into a second internet for superintelligent models so they don't break the internet humans need.</p>
       </div>
       <figure class="fig" data-rv>
         <svg viewBox="0 0 1000 440" role="img" aria-label="Two separate networks: the public internet for people above, and Simply Silicon's air-gapped network of city sites below">
@@ -136,8 +137,8 @@
       </figure>
       <div class="cols" style="--n:3;margin-top:clamp(56px,7vw,96px)">
         <div data-rv><span class="idx">01</span><h3>Separate by design</h3><p>Air-gapped sites and private fiber, physically apart from the public internet.</p></div>
-        <div data-rv="1"><span class="idx">02</span><h3>Next to demand</h3><p>Metro sites put compute where the requests come from, cutting hops.</p></div>
-        <div data-rv="2"><span class="idx">03</span><h3>Built for machines</h3><p>Made for machine-speed inference, not people clicking and waiting.</p></div>
+        <div data-rv="1"><span class="idx">02</span><h3>Next to demand</h3><p>Memory, compute, routing, and power placed closest to the demand pattern.</p></div>
+        <div data-rv="2"><span class="idx">03</span><h3>Built for machines</h3><p>The public internet was designed for humans clicking, reading, watching, downloading, and waiting. Inference infrastructure must produce intelligence between machines.</p></div>
       </div>
     </div>
   </section>
@@ -146,7 +147,7 @@
     <div class="wrap">
       <blockquote class="quote" data-rv>
         <p>“The internet is not bad infrastructure. It is the defining architecture of one computational epoch, the era of moving what we already knew, running headlong into the demands of the next, the era of producing what we don’t yet.”</p>
-        <cite>From <i>The Internet Was Not Built for Inference</i>, Simply Silicon</cite>
+        <cite>From <i>The Internet Was Not Built for Inference</i>, Simply Silicon and Augur</cite>
       </blockquote>
     </div>
   </section>
@@ -154,7 +155,7 @@
   <section class="cta">
     <div class="wrap">
       <h2 data-rv>Build the next network with us<span class="stop">.</span></h2>
-      <p data-rv="1">We are securing sites in major metros across North America and Europe. Talk to us about a site partnership, capacity or investment.</p>
+      <p data-rv="1">Simply Silicon is securing and developing a pipeline of 15+ additional sites in major metros around North America and Europe. Talk to us about a site partnership, capacity or investment.</p>
       <div class="hero-ctas" data-rv="2">
         <button class="btn btn--primary" type="button" data-contact>Get in touch <span class="arrow" aria-hidden="true">→</span></button>
         <a class="btn" href="foundation.html">Explore Foundation</a>
