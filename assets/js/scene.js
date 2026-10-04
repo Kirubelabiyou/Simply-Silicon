@@ -15,7 +15,7 @@ const S = 4.2; // metres per plant-model unit
 const COL = {
   ground: 0xa9adb0, sidewalk: 0xc6c9cc, road: 0x3c4148, alley: 0x5d636b, lane: 0xf2f2ee, yellow: 0xe3bf45,
   water: 0x5f8fb3, grass: 0x8fa77a, bed: 0x666b71, rail: 0xb9c0c7,
-  fiber: 0x2aa3f5, mullion: 0x4e5966, steel: 0xaeb7c1, stainless: 0xd5dbe1, copper: 0xc27a4a,
+  fiber: 0x2aa3f5, mullion: 0xd3d9df, steel: 0xaeb7c1, stainless: 0xd5dbe1, copper: 0xc27a4a,
   boiler: 0xc8423a, valve: 0x2f6fd6, rack: 0x1b2230, led: 0x4fb3f0, fan: 0x36df8c,
   cyan: 0x5ee5ff, cyanBright: 0x7fd6f5, blue: 0x3d7bff, amber: 0xffb45e, heat: 0xe8513c
 };
@@ -826,7 +826,8 @@ export function mountScene(host, opts = {}) {
   function setView(k, instant) {
     const V = VIEWS[k]; mode = k === 'net' ? 'net' : 'phase';
     ['p1', 'p2', 'p3'].forEach(g => { plant.groups[g].visible = V.show.includes(g); });
-    plant.groups.floorFront.visible = V.floor; plant.groups.roof.visible = V.roof;
+    plant.groups.floorFront.visible = V.floor; plant.groups.roof.visible = true;
+    plant.groups.roof.traverse(o => { if (!o.material) return; const ghost = !V.roof; if (o.material.transparent !== ghost) { o.material.transparent = ghost; o.material.depthWrite = !ghost; o.material.needsUpdate = true; } o.material.opacity = ghost ? .14 : 1; });
     nearMats.forEach(m => { if (m.transparent !== V.fade) { m.transparent = V.fade; m.depthWrite = !V.fade; m.needsUpdate = true; } m.opacity = V.fade ? .12 : 1; });
     seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === String(k))));
     card.innerHTML = '<div class="t"><div><b>' + V.title + '</b><span class="sub">' + V.sub + '</span></div><span class="chip ' + V.chip[0] + '"><i class="dot ' + V.chip[1] + '"></i>' + V.chip[2] + '</span></div><p>' + V.text + '</p>' +
@@ -1028,8 +1029,9 @@ function buildPlant(mat, tick) {
   function hallShape(inset = 0) {
     const { w, e, f, r, R } = HALL; const s = new THREE.Shape();
     const W0 = w + inset, E0 = e - inset, F0 = f + inset, R0 = r - inset, RR = R - inset;
+    const RE = Math.max(.02, .12 - inset * .5); // as on gosimply.ai: the west end is rounded, the east end square
     s.moveTo(W0, R0); s.lineTo(W0, F0 + RR); s.absarc(W0 + RR, F0 + RR, RR, Math.PI, Math.PI * 1.5, false);
-    s.lineTo(E0 - RR, F0); s.absarc(E0 - RR, F0 + RR, RR, Math.PI * 1.5, Math.PI * 2, false); s.lineTo(E0, R0); s.lineTo(W0, R0); return s;
+    s.lineTo(E0 - RE, F0); s.absarc(E0 - RE, F0 + RE, RE, Math.PI * 1.5, Math.PI * 2, false); s.lineTo(E0, R0); s.lineTo(W0, R0); return s;
   }
   const B = groups.base;
   const concrete = new THREE.MeshStandardMaterial({ map: noiseTex('#cfd4d9', .05), roughness: .9 });
@@ -1060,13 +1062,36 @@ function buildPlant(mat, tick) {
     const hs = hallShape(); const hh = new THREE.Path(); hh.moveTo(BASE.x0, BASE.z0); hh.lineTo(BASE.x0, BASE.z1); hh.lineTo(BASE.x1, BASE.z1); hh.lineTo(BASE.x1, BASE.z0); hh.lineTo(BASE.x0, BASE.z0); hs.holes.push(hh);
     const hsm = new THREE.Mesh(new THREE.ExtrudeGeometry(hs, { depth: .12, bevelEnabled: false }).rotateX(Math.PI / 2), floorM); hsm.position.y = .12; hsm.receiveShadow = true; B.add(hsm);
     const roofG = new THREE.ExtrudeGeometry(hallShape(.05), { depth: .22, bevelEnabled: false }).rotateX(Math.PI / 2);
-    const roof = new THREE.Mesh(roofG, mat('proof', 0x3a4048, { roughness: .7 })); roof.position.y = HALL.H + .26; roof.castShadow = true; roof.receiveShadow = true; groups.roof.add(roof);
+    const roof = new THREE.Mesh(roofG, mat('proof', 0x08090b, { roughness: .92 })); roof.position.y = HALL.H + .26; roof.castShadow = true; roof.receiveShadow = true; groups.roof.add(roof);
     const bs = hallShape(); bs.holes.push(hallShape(.3));
-    const band = new THREE.Mesh(new THREE.ExtrudeGeometry(bs, { depth: .34, bevelEnabled: false }).rotateX(Math.PI / 2), mat('band', 0x1e2329, { roughness: .45, metalness: .3 })); band.position.y = HALL.H + .34; band.castShadow = true; B.add(band);
+    const band = new THREE.Mesh(new THREE.ExtrudeGeometry(bs, { depth: .34, bevelEnabled: false }).rotateX(Math.PI / 2), mat('band', 0x0b0d10, { roughness: .4, metalness: .3 })); band.position.y = HALL.H + .34; band.castShadow = true; B.add(band);
     // Calgary District Heating sign on the roof edge (the plant's own name), Simply Silicon below on the band
     const eM = mat('signEdge', 0x7c848d, { metalness: .4, roughness: .5 }), hsM = [eM, eM, eM, eM, new THREE.MeshStandardMaterial({ map: heatSignTex(), roughness: .5, metalness: .2 }), eM];
-    const heatSign = new THREE.Mesh(new THREE.BoxGeometry(2.9, 1.25, .22), hsM); heatSign.position.set(-2.4, HALL.H + .34 + .62, HALL.f + .35); heatSign.rotation.y = Math.PI; heatSign.castShadow = true; B.add(heatSign);
+    const heatSign = new THREE.Mesh(new THREE.BoxGeometry(2.9, 1.25, .22), hsM); heatSign.scale.set(.72, .72, 1); heatSign.position.set(HALL.e + .14, 2.35, 1.4); heatSign.rotation.y = Math.PI / 2; heatSign.castShadow = true; B.add(heatSign);
     const ss = new THREE.Mesh(new THREE.PlaneGeometry(2.2, .27), new THREE.MeshBasicMaterial({ map: signTex() })); ss.position.set(3.4, HALL.H + .17, HALL.f - .006); ss.rotation.y = Math.PI; B.add(ss);
+    { // street front, after the official model
+      const white = mat('fwhite', 0xeef1f4, { roughness: .55 }), dark = mat('fdark', 0x111317, { roughness: .6 });
+      const glow = new THREE.MeshStandardMaterial({ color: 0xfff6d8, emissive: 0xfff1c8, emissiveIntensity: 1.1, roughness: .6 });
+      const zF = HALL.f;
+      box(1.55, 2.5, .34, white, HALL.e - .86, .12, zF - .17, B);                       // entrance block
+      box(1.0, 1.55, .02, glow, HALL.e - .86, .55, zF - .35, B).castShadow = false;       // lit louvre panel
+      for (let i = 0; i < 9; i++) box(1.0, .035, .04, white, HALL.e - .86, .62 + i * .16, zF - .37, B).castShadow = false;
+      for (let i = 0; i < 6; i++) cyl(.07, .5, dark, HALL.e - .25 - i * .32, .12, zF - .78, B, 12);   // bollards
+      box(3.5, 1.5, .1, white, HALL.e - 3.75, .3, zF - .1, B);                            // exhaust-fan sign frame
+      box(3.2, 1.22, .02, mat('fred', 0xc8323a, { roughness: .5 }), HALL.e - 3.75, .44, zF - .155, B).castShadow = false;
+      box(3.12, 1.14, .02, white, HALL.e - 3.75, .48, zF - .165, B).castShadow = false;
+      const grill = mat('fgrill', 0x2a2e34, { roughness: .5 }), bladeW = mat('fblade', 0xe9edf1, { roughness: .4 });
+      [-1.0, 0, 1.0].forEach(dx => {
+        const fx = HALL.e - 3.75 + dx;
+        box(.86, .86, .06, grill, fx, .62, zF - .2, B);
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(.33, .025, 8, 28), bladeW); ring.position.set(fx, 1.05, zF - .24); B.add(ring);
+        const bl = new THREE.Group(); bl.position.set(fx, 1.05, zF - .245); bl.userData.dyn = true;
+        for (let k = 0; k < 6; k++) { const b = new THREE.Mesh(new THREE.BoxGeometry(.28, .05, .012), bladeW); b.position.x = .14; const pv = new THREE.Group(); pv.rotation.z = k * Math.PI / 3; pv.add(b); bl.add(pv); }
+        B.add(bl); tick.push(t => { bl.rotation.z = -t * 3; });
+      });
+      const vents = [0x15171a, 0x3a2a20, 0x5a3a24, 0x23262b, 0x15171a, 0x1e3a2c, 0x24402e, 0x15171a];
+      vents.forEach((c, i) => box(.34, .05, .3, mat('vent' + i, c, { roughness: .7 }), HALL.e - 2.4 - i * .52, .1, zF - .95, B).castShadow = false);
+    }
     box(2.55, 1.7, 3.0, concrete, HALL.e + 1.35, 0, 1.4, B);
     box(1.2, 1.25, .04, mat('door', 0x8a939d, { metalness: .6, roughness: .35 }), HALL.e + 1.35, 0, -.12, B);
     for (let y = .1; y < 1.25; y += .1) box(1.2, .012, .05, mat('doorline', 0x6c7681), HALL.e + 1.35, y, -.13, B).castShadow = false;
@@ -1146,8 +1171,8 @@ function buildPlant(mat, tick) {
   { // Phase 1
     const g = groups.p1;
     box(4.35, .44, 3.55, floorM, -2.6, -.12, .4, g);
-    for (let row = 0; row < 2; row++) for (let i = 0; i < 5; i++) rack(.46, 1.66, .78, -4.2 + i * .62, -.35 + row * 1.5, .32, g);
-    box(3.3, .05, .5, mat('tray', 0x9fb3c6, { metalness: .6 }), -2.96, 2.1, .4, g);
+    for (let i = 0; i < 4; i++) rack(.46, 1.66, .78, -3.9 + i * .62, .4, .32, g);
+    box(2.6, .05, .5, mat('tray', 0x9fb3c6, { metalness: .6 }), -2.97, 2.1, .4, g);
     const fanM = mat('fanb', COL.fan, { roughness: .5, emissive: COL.fan, emissiveIntensity: .25 });
     [-4.2, -2.6, -1.0].forEach(x => {
       box(.9, .9, .5, mat('fanbox', 0xcfd6dd, { metalness: .5, roughness: .3 }), x, .32, 1.95, g);
@@ -1164,8 +1189,7 @@ function buildPlant(mat, tick) {
     box(.16, BASE.depth, BASE.z1 - BASE.z0, conc, BASE.x0 + .08, y0, 0, g);
     box(.16, BASE.depth, BASE.z1 - BASE.z0, conc, BASE.x1 - .08, y0, 0, g);
     box(BASE.x1 - BASE.x0, BASE.depth, .1, mat('bcut', 0xb7bec6, { transparent: true, opacity: .16, depthWrite: false }), (BASE.x0 + BASE.x1) / 2, y0, BASE.z0 + .05, g).castShadow = false;
-    for (let row = 0; row < 2; row++) for (let i = 0; i < 8; i++) rack(.38, .96, .48, -3.9 + i * .5, 1.2 + row * .75, y0, g, COL.cyan);
-    for (let row = 0; row < 2; row++) for (let i = 0; i < 7; i++) rack(.47, 1.34, .82, -3.9 + i * .6, -1.5 + row * 1.1, y0, g, COL.cyan);
+    for (let row = 0; row < 2; row++) for (let i = 0; i < 6; i++) rack(.47, 1.34, .82, -3.9 + i * .6, -1.5 + row * 1.1, y0, g, COL.cyan);
     for (let i = 0; i < 13; i++) box(.06, 1.1, .7, mat(i % 2 ? 'cu' : 'ss', i % 2 ? COL.copper : COL.stainless, { metalness: .9, roughness: .25 }), 1.8 + i * .09, y0 + .2, -1.4, g);
     box(1.5, .2, .9, mat('skid', 0x6f7985, { metalness: .6 }), 2.35, y0, -1.4, g);
     const cyanM = mat('cyanp', COL.cyanBright, { roughness: .3, metalness: .3, emissive: COL.cyan, emissiveIntensity: .15 });
@@ -1177,24 +1201,39 @@ function buildPlant(mat, tick) {
     pipe([[2.9, y0 + .9, -1.4], [4.4, y0 + .9, -1.4], [5.6, y0 + .9, 1.2]], .05, cyanM, g);
     pipe([[6.1, y0 + 1.6, 1.2], [6.1, y0 + 1.6, 2.6], [6.1, 2.85, 2.6], [6.1, 2.85, 2.95]], .06, hotM, g);
   }
-  { // Phase 3
-    const g = groups.p3, y = HALL.H + .48;
-    const frameM = mat('frame', 0x8b96a2, { metalness: .7, roughness: .35 }), bladeM = mat('blade', 0x4a5561);
-    [[0.5, -1.4], [3.0, -1.4], [0.5, .6], [3.0, .6]].forEach(([x, z]) => {
-      box(2.05, .5, 1.2, frameM, x, y + .06, z, g);
-      box(2.05, .16, 1.2, mat('coolerTop', 0xdfe4e9, { metalness: .5, roughness: .3 }), x, y + .56, z, g);
-      [-.5, .5].forEach(dx => {
-        const ring = new THREE.Mesh(new THREE.TorusGeometry(.36, .04, 8, 24), frameM); ring.rotation.x = Math.PI / 2; ring.position.set(x + dx, y + .75, z); g.add(ring);
-        const blades = new THREE.Group(); blades.position.set(x + dx, y + .74, z); blades.userData.dyn = true;
-        for (let b = 0; b < 5; b++) { const bl = new THREE.Mesh(new THREE.BoxGeometry(.3, .015, .09), bladeM); bl.position.x = .15; const piv = new THREE.Group(); piv.rotation.y = b * Math.PI * 2 / 5; piv.add(bl); blades.add(piv); }
-        g.add(blades); tick.push(t => { blades.rotation.y = t * 5; });
-      });
+  // a V-type dry cooler: dark box, a tilted face with two fans, fins on the front
+  const yR = HALL.H + .27;
+  function dryCooler(x, z, g) {
+    const body = mat('dcBody', 0x3b4148, { roughness: .5, metalness: .4 }), face = mat('dcFace', 0x52595f, { roughness: .45, metalness: .5 });
+    const ringM = mat('dcRing', 0x1a1d21, { roughness: .5 }), bladeM = mat('dcBlade', 0xe6eaee, { roughness: .4 }), finM = mat('dcFin', 0xc9d0d6, { metalness: .5 });
+    box(1.4, .42, .82, body, x, yR, z, g);
+    box(1.4, .36, .12, body, x, yR + .42, z + .35, g);
+    for (let i = 0; i < 10; i++) box(.02, .3, .02, finM, x - .6 + i * .133, yR + .05, z - .42, g).castShadow = false;
+    const tilt = new THREE.Group(); tilt.position.set(x, yR + .6, z); tilt.rotation.x = -.5; g.add(tilt);
+    const panel = new THREE.Mesh(new THREE.BoxGeometry(1.4, .05, .86), face); panel.castShadow = true; tilt.add(panel);
+    [-.35, .35].forEach(dx => {
+      const disc = new THREE.Mesh(new THREE.CylinderGeometry(.3, .3, .03, 24), ringM); disc.position.set(dx, .03, 0); tilt.add(disc);
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(.3, .022, 8, 24), bladeM); ring.rotation.x = Math.PI / 2; ring.position.set(dx, .05, 0); tilt.add(ring);
+      const bl = new THREE.Group(); bl.position.set(dx, .06, 0); bl.userData.dyn = true;
+      for (let k = 0; k < 6; k++) { const b = new THREE.Mesh(new THREE.BoxGeometry(.24, .012, .06), bladeM); b.position.x = .13; const pv = new THREE.Group(); pv.rotation.y = k * Math.PI / 3; pv.add(b); bl.add(pv); }
+      tilt.add(bl); tick.push(t => { bl.rotation.y = t * 4; });
     });
-    pipe([[-.8, y + .2, -2.4], [4.4, y + .2, -2.4], [4.4, y + .2, 1.6], [-.8, y + .2, 1.6]], .06, mat('cyanp', COL.cyanBright), g);
-    const railM = mat('rail2', 0xf2b233, { metalness: .3 });
-    const rp = hallShape(.2).getPoints(24);
-    pipe(rp.map(p => [p.x, y + .9, p.y]), .025, railM, g);
-    for (let row = 0; row < 2; row++) for (let i = 0; i < 6; i++) rack(.47, 1.72, .84, 1.4 + i * .6, -1.8 + row * 1.2, .24, g, COL.cyan);
+    // railing in front of this cooler
+    const railM = mat('dcRail', 0xe9edf1, { metalness: .4, roughness: .4 });
+    for (let i = 0; i < 4; i++) box(.03, .42, .03, railM, x - .7 + i * .467, yR, z - .78, g).castShadow = false;
+    [.22, .42].forEach(h => box(1.46, .025, .025, railM, x, yR + h, z - .78, g).castShadow = false);
+  }
+  const COOLER_X = [-4.5, -3.0, -1.5, 0.0], COOLER_Z = -.95;
+  { // Phase 2 roof: first two dry coolers and the cooling loop along the front
+    const g = groups.p2;
+    COOLER_X.slice(0, 2).forEach(x => dryCooler(x, COOLER_Z, g));
+    pipe([[-5.0, yR + .05, -2.55], [-2.4, yR + .14, -2.78], [1.2, yR + .14, -2.78], [3.4, yR + .05, -2.5]], .06, mat('coolLoop', 0xc7ecf8, { roughness: .3, emissive: 0x7fd2f2, emissiveIntensity: .25 }), g);
+  }
+  { // Phase 3: the full roof, more racks across the ground floor, and the hot loop to the plant
+    const g = groups.p3;
+    COOLER_X.slice(2).forEach(x => dryCooler(x, COOLER_Z, g));
+    pipe([[-5.1, yR + .1, 1.9], [-2.6, yR + .3, 1.55], [.1, yR + .25, 1.7], [1.1, yR + .15, 2.3], [1.35, yR - .1, 3.25]], .075, mat('hotHose', 0xe0563a, { roughness: .5 }), g);
+    for (let row = 0; row < 3; row++) for (let i = 0; i < 8; i++) rack(.47, 1.72, .84, 1.2 + i * .6, -2.3 + row * 1.15, .24, g, COL.cyan);
   }
   flushRacks();
   // animated parts never cast shadows (shadows are drawn once per view)
