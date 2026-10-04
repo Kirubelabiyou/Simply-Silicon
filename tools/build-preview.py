@@ -6,7 +6,7 @@ src = pathlib.Path(__file__).resolve().parent.parent
 dst = pathlib.Path(sys.argv[1])
 if dst.exists(): shutil.rmtree(dst)
 shutil.copytree(src / 'assets', dst / 'assets', ignore=shutil.ignore_patterns('README.md'))
-for p in ['foundation.html', 'workloads.html', 'platform.html']: shutil.copy(src / p, dst / p)
+for p in ['foundation.html', 'workloads.html', 'platform.html', 'careers.html']: shutil.copy(src / p, dst / p)
 s = (src / 'index.html').read_text()
 s = re.sub(r'<!doctype html>\s*<html[^>]*>\s*<head>\s*', '', s, flags=re.I)
 s = re.sub(r'<meta charset="utf-8">\s*<meta name="viewport"[^>]*>\s*', '', s)

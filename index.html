@@ -15,7 +15,7 @@
 <body data-page="home" id="top">
 <header id="site-header"></header>
 
-<main>
+<main id="homeMain">
   <!-- 1. Hero (dark) -->
   <section class="hero-full">
     <div class="hero-bg" aria-hidden="true"><img src="assets/img/hero.webp" width="580" height="727" alt=""></div>
@@ -36,7 +36,7 @@
     <div class="wrap">
       <div class="sec-intro">
         <h2 data-rv>The internet was not built for inference<span class="stop">.</span></h2>
-        <p data-rv="2">The internet moves information that already exists. Inference has to produce new intelligence, one token at a time. The essay calls them two different physical problems.</p>
+        <p data-rv="2">The internet moves information that already exists. Inference produces new intelligence, one token at a time. They are different physical problems, and they need different infrastructure.</p>
       </div>
       <table class="compare" data-rv>
         <thead><tr><th scope="col"><span class="sr">Topic</span></th><th scope="col">The internet</th><th scope="col" class="is-inf">Inference</th></tr></thead>
@@ -50,12 +50,9 @@
       </table>
       <blockquote class="pull" data-rv>
         <p>“Inference is punished by every extra hop because every hop increases the physical cost of maintaining state.”</p>
-        <cite>The Internet Was Not Built for Inference, Simply Silicon and Augur</cite>
+        <cite>The Internet Was Not Built for Inference</cite>
       </blockquote>
-      <blockquote class="pull pull--sm" data-rv>
-        <p>“Traditional data centres and networks were not built for inference, let alone superintelligent models too capable for the public internet.”</p>
-        <cite>gosimply.ai</cite>
-      </blockquote>
+      <p class="statement" data-rv>Traditional data centres and networks were not built for inference, let alone superintelligent models too capable for the public internet. <b>We are rethinking the physical data centre and its networking from the ground up.</b></p>
     </div>
   </section>
 
@@ -131,13 +128,13 @@
     <div class="wrap">
       <div class="sec-intro">
         <h2 data-rv>Built for critical demand<span class="stop">.</span></h2>
-        <p data-rv="2">A physically-secure inference network for applications that cannot compromise. Simply Silicon owns and operates air-gapped AI infrastructure for superintelligent models too capable for the public internet, regulated enterprise, and high-security workloads.</p>
+        <p data-rv="2">A physically-secure inference network for applications that cannot compromise.</p>
       </div>
       <div class="cols" style="--n:4">
         <div data-rv><span class="idx">01</span><h3>Regulated enterprise</h3><p>Banks, utilities, and energy companies operating under strict regulatory requirements.</p></div>
         <div data-rv="1"><span class="idx">02</span><h3>High-security workloads</h3><p>Superintelligent models, defence systems, and government environments where network exposure matters.</p></div>
         <div data-rv="2"><span class="idx">03</span><h3>Critical AI services</h3><p>Emergency response, public safety, security, and other services with no tolerance for unreliable inference.</p></div>
-        <div data-rv="3"><span class="idx">04</span><h3>Live real-time AI</h3><p>Real-time video and low-latency inference that need dependable physical proximity.</p></div>
+        <div data-rv="3"><span class="idx">04</span><h3>Live real-time AI</h3><p>Low-latency inference that needs dependable physical proximity, including agentic applications where one action becomes hundreds or thousands of inference events.</p></div>
       </div>
       <p style="margin-top:56px" data-rv><a class="link" href="workloads.html">See workloads <span class="arrow" aria-hidden="true">→</span></a></p>
     </div>
@@ -182,7 +179,7 @@
 
   <!-- 7. Investors, right before the footer -->
   <section class="backers" aria-labelledby="backers-h">
-    <div class="wrap"><h2 id="backers-h" class="backers-h" data-rv>Backed by investors and angels from</h2></div>
+    <div class="wrap"><h2 id="backers-h" class="backers-h" data-rv>Backed by investors and angels from<span class="stop">.</span></h2></div>
     <div class="marquee-wrap">
       <div class="marquee">
         <ul class="marquee-track"><li data-logo="augur-vc.webp" style="--h:36px"><a href="https://augurvc.com/" target="_blank" rel="noopener"><span>Augur VC</span></a></li><li data-logo="palisade-capital-management.webp" style="--h:39px"><a href="https://www.palisade.ca/" target="_blank" rel="noopener"><span>Palisade Capital Management</span></a></li><li data-logo="garagecapital.webp" style="--h:40px"><a href="https://www.garage.vc/" target="_blank" rel="noopener"><span>GarageCapital</span></a></li><li data-logo="openai.webp" style="--h:36px"><a href="https://openai.com/" target="_blank" rel="noopener"><span>OpenAI</span></a></li><li data-logo="google.svg" style="--h:39px"><a href="https://www.google.com/" target="_blank" rel="noopener"><span>Google</span></a></li><li data-logo="microsoft.svg" style="--h:31px"><a href="https://www.microsoft.com/" target="_blank" rel="noopener"><span>Microsoft</span></a></li><li class="logo-tone logo-tone--soft" data-logo="heartland-generation.webp" style="--h:37px"><a href="https://www.heartlandgeneration.com/" target="_blank" rel="noopener"><span>Heartland Generation</span></a></li><li data-logo="cenovus.webp" style="--h:33px"><a href="https://www.cenovus.com/" target="_blank" rel="noopener"><span>Cenovus</span></a></li><li data-logo="vermilion-energy.webp" style="--h:46px"><a href="https://www.vermilionenergy.com/" target="_blank" rel="noopener"><span>Vermilion Energy</span></a></li><li data-logo="greengate.webp" style="--h:29px"><a href="https://greengatepower.com/" target="_blank" rel="noopener"><span>Greengate</span></a></li><li data-logo="aslan-renewables.webp" style="--h:31px"><a href="https://aslanrenewables.com/" target="_blank" rel="noopener"><span>Aslan Renewables</span></a></li><li class="logo-tone" data-logo="bluearth-renewables.webp" style="--h:36px"><a href="https://www.bluearthrenewables.com/" target="_blank" rel="noopener"><span>BluEarth Renewables</span></a></li><li data-logo="deming-sky-capital.webp" style="--h:48px"><a href="https://demingsky.com/" target="_blank" rel="noopener"><span>Deming Sky Capital</span></a></li></ul>
@@ -191,9 +188,60 @@
     </div>
   </section>
 </main>
+<main id="careersMain" hidden>
+  <section class="page-head">
+    <div class="wrap">
+      <h1>Careers<span class="stop">.</span></h1>
+      <p class="lede">Help build secure, localized compute at scale: air-gapped AI infrastructure in major cities, starting with Foundation in downtown Calgary.</p>
+    </div>
+  </section>
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <form class="job-filters" role="search" onsubmit="return false">
+        <label class="jf-search"><span class="sr">Search roles</span><input id="fQuery" type="search" placeholder="Search roles" autocomplete="off"></label>
+        <label><span class="sr">Team</span><select id="fTeam"><option value="">All teams</option></select></label>
+        <label><span class="sr">Location</span><select id="fLocation"><option value="">All locations</option></select></label>
+        <label><span class="sr">Type</span><select id="fType"><option value="">All types</option></select></label>
+        <button class="btn btn--sm" type="button" id="fClear">Clear</button>
+      </form>
+      <p class="job-count" id="jobCount" aria-live="polite"></p>
+      <ul class="jobs" id="jobList"></ul>
+      <div class="job-empty" id="jobEmpty">
+        <div id="emptyNone">
+          <h2>No open positions right now<span class="stop">.</span></h2>
+          <p>We are not hiring for specific roles at the moment. If you want to help build infrastructure for inference, introduce yourself and we will keep you in mind.</p>
+          <button class="btn btn--primary" type="button" data-contact>Get in touch <span class="arrow" aria-hidden="true">→</span></button>
+        </div>
+        <div id="emptyFilter" hidden>
+          <h2>No roles match your filters<span class="stop">.</span></h2>
+          <p>Try a different search, or clear the filters to see every open position.</p>
+        </div>
+      </div>
+
+      <div class="job-admin" id="jobAdmin" hidden>
+        <h2>Manage positions</h2>
+        <p class="ja-note">Only you and editors of this site see this panel. Changes go live for everyone straight away.</p>
+        <form id="jobForm" class="ja-form">
+          <label class="f-row f-full"><span>Title</span><input name="title" required maxlength="120" placeholder="e.g. Data Centre Operations Lead"></label>
+          <label class="f-row"><span>Team</span><input name="team" list="jaTeams" maxlength="60" placeholder="e.g. Operations"></label>
+          <label class="f-row"><span>Location</span><input name="location" maxlength="80" placeholder="Calgary, Alberta"></label>
+          <label class="f-row"><span>Type</span><select name="type"><option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option></select></label>
+          <label class="f-row"><span>Apply link or email</span><input name="apply" maxlength="300" placeholder="careers@… or https://…"></label>
+          <label class="f-row f-full"><span>Description</span><textarea name="description" rows="5" maxlength="6000" placeholder="What the role does, who it is for, and what success looks like."></textarea></label>
+          <label class="ja-check f-full"><input type="checkbox" name="open" checked> Open (visible on the careers page)</label>
+          <div class="f-actions f-full"><button class="btn btn--primary" type="submit" id="jobSave">Add position</button><button class="btn" type="button" id="jobCancel" hidden>Cancel</button><span class="ja-msg" id="jobMsg" role="status"></span></div>
+          <datalist id="jaTeams"><option>Engineering</option><option>Operations</option><option>Infrastructure</option><option>Business</option><option>Finance</option></datalist>
+        </form>
+        <ul class="ja-list" id="adminList"></ul>
+      </div>
+    </div>
+  </section>
+</main>
+
 
 <footer id="site-footer"></footer>
 <script src="assets/js/common.js"></script>
 <script src="assets/js/home.js"></script>
+<script src="assets/js/careers.js"></script>
 </body>
 </html>

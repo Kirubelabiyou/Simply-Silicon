@@ -170,20 +170,25 @@
   }, { passive: false });
 })();
 
-/* How it works: the step in view lights up its part of the pinned diagram */
+/* How it works: the step nearest the middle of the screen lights up, with its part of the pinned diagram */
 (function () {
   var steps = [].slice.call(document.querySelectorAll('.pin-step')), parts = document.querySelectorAll('.pin-fig .g-part');
   if (!steps.length) return;
+  var cur = -1;
   function set(k) {
-    steps.forEach(function (s) { s.classList.toggle('on', s.getAttribute('data-step') === String(k)); });
+    if (k === cur) return; cur = k;
+    steps.forEach(function (s, i) { s.classList.toggle('on', i === k); });
     parts.forEach(function (p) { p.classList.toggle('on', p.getAttribute('data-k') === String(k)); });
   }
-  set(0);
-  if (!('IntersectionObserver' in window)) { steps.forEach(function (s) { s.classList.add('on'); }); parts.forEach(function (p) { p.classList.add('on'); }); return; }
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { if (e.isIntersecting) set(e.target.getAttribute('data-step')); });
-  }, { rootMargin: '-45% 0px -45% 0px' });
-  steps.forEach(function (s) { io.observe(s); });
+  function pick() {
+    var mid = window.innerHeight * (window.innerWidth < 900 ? .62 : .5), best = 0, bd = Infinity;
+    steps.forEach(function (s, i) { var r = s.getBoundingClientRect(), c = r.top + r.height / 2, d = Math.abs(c - mid); if (d < bd) { bd = d; best = i; } });
+    set(best);
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function () { if (ticking) return; ticking = true; requestAnimationFrame(function () { ticking = false; pick(); }); }, { passive: true });
+  window.addEventListener('resize', pick);
+  pick();
 })();
 
 /* Metro platform: Calgary online, North America and Europe as pipeline regions (as stated on gosimply.ai) */
