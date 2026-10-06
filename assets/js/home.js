@@ -50,7 +50,7 @@
       return s + '</svg>';
     },
     fiber: function () {
-      var s = '<svg viewBox="0 0 480 300" role="img" aria-label="Private fiber runs along the streets from the site to six connected buildings. The public internet is not connected.">';
+      var s = '<svg viewBox="0 0 480 300" role="img" aria-label="Private fiber runs along the streets from the site to six connected buildings. The public network is not connected.">';
       var X = [40, 150, 260, 370], Y = [50, 150, 250];
       X.forEach(function (x) { s += '<line class="f-line" x1="' + x + '" y1="18" x2="' + x + '" y2="282" stroke-width="8" stroke-linecap="round" style="stroke:rgba(255,255,255,.05)"/>'; });
       Y.forEach(function (y) { s += '<line class="f-line" x1="18" y1="' + y + '" x2="402" y2="' + y + '" stroke-width="8" stroke-linecap="round" style="stroke:rgba(255,255,255,.05)"/>'; });
@@ -59,7 +59,7 @@
         s += '<rect class="f-box f-box--solid" x="' + (p[0] - 15) + '" y="' + (p[1] - 15) + '" width="30" height="30" rx="5"/><circle class="f-dot" cx="' + p[0] + '" cy="' + p[1] + '" r="3.5"/>';
       });
       s += '<rect class="f-box f-box--on" x="232" y="122" width="56" height="56" rx="7"/><text class="f-t" x="260" y="155" text-anchor="middle">Site</text>';
-      s += '<g transform="translate(440 150)"><circle r="32" class="f-box f-box--ghost"/><text class="f-s" y="-3" text-anchor="middle">Public</text><text class="f-s" y="11" text-anchor="middle">internet</text></g>';
+      s += '<g transform="translate(440 150)"><circle r="32" class="f-box f-box--ghost"/><text class="f-s" y="-3" text-anchor="middle">Public</text><text class="f-s" y="11" text-anchor="middle">network</text></g>';
       s += '<path class="f-warn" d="M378 150 H402" stroke-dasharray="2 4"/><path class="f-warn" d="M385 143 L395 157 M395 143 L385 157"/>';
       return s + '</svg>';
     },

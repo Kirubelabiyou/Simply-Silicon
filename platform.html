@@ -18,7 +18,6 @@
   <section class="page-head">
     <div class="wrap">
       <h1>The internet was not built for inference<span class="stop">.</span></h1>
-      <p class="lede">The modern internet was designed to move information, not to produce intelligence. Simply Silicon integrates low lead time urban power capacity, dense connectivity, and high performance inference racks into one physical platform.</p>
     </div>
   </section>
 
@@ -45,11 +44,12 @@
     </div>
     <div class="wrap">
       <p style="margin-top:16px;font-size:14px;color:var(--text-3)">Select a city for its status. Select Calgary to fly into downtown Calgary and Foundation in 3D.</p>
-      <div class="metrics metrics--under" style="--n:3">
-        <div><b>15+</b><span>Site pipeline in major metros around North America and Europe</span></div>
-        <div><b>200<small>MW+</small></b><span>Capacity</span></div>
-        <div><b>12+</b><span>Major cities</span></div>
-      </div>
+      <ul class="statline">
+        <li><b>15+</b> sites in the pipeline</li>
+        <li><b>200 MW+</b> of capacity</li>
+        <li><b>12+</b> major cities</li>
+        <li>North America and Europe</li>
+      </ul>
       <p class="map-note">Foundation, in Calgary, is the first node in a global urban AI network.</p>
     </div>
   </section>
@@ -127,15 +127,27 @@
         <h2 data-rv>Two different physical problems<span class="stop">.</span></h2>
         <p data-rv="2">The internet was built to distribute information between humans. Inference infrastructure must produce intelligence between machines.</p>
       </div>
-      <table class="compare" data-rv>
-        <thead><tr><th scope="col"><span class="sr">Topic</span></th><th scope="col">The internet</th><th scope="col" class="is-inf">Inference</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Built for</th><td>Asynchronous human-scale workloads: web pages, files, email, search queries, streaming video</td><td>Continuous machine cognition: tokens generated from enormous state</td></tr>
-          <tr><th scope="row">Main work</th><td>Store information, request it, transmit it, consume it with tolerable latency</td><td>Repeated transformations of model weights, activations, attention maps, and KV cache</td></tr>
-          <tr><th scope="row">Rewards</th><td>Reach, redundancy, and scale</td><td>Memory locality, bandwidth density, low-latency interconnect, and thermal control</td></tr>
-          <tr><th scope="row">Distance</th><td>Tolerated as the price of all three</td><td>Punished at every hop</td></tr>
-        </tbody>
-      </table>
+      <div class="duo" data-rv>
+        <div class="duo-side">
+          <h3>The internet</h3>
+          <dl>
+            <div><dt>Built for</dt><dd>Asynchronous human-scale workloads: web pages, files, email, search queries, streaming video</dd></div>
+            <div><dt>Main work</dt><dd>Store information, request it, transmit it, consume it with tolerable latency</dd></div>
+            <div><dt>Rewards</dt><dd>Reach, redundancy, and scale</dd></div>
+            <div><dt>Distance</dt><dd>Tolerated as the price of all three</dd></div>
+          </dl>
+        </div>
+        <span class="duo-vs" aria-hidden="true">vs</span>
+        <div class="duo-side duo-side--inf">
+          <h3>Inference</h3>
+          <dl>
+            <div><dt>Built for</dt><dd>Continuous machine cognition: tokens generated from enormous state</dd></div>
+            <div><dt>Main work</dt><dd>Repeated transformations of model weights, activations, attention maps, and KV cache</dd></div>
+            <div><dt>Rewards</dt><dd>Memory locality, bandwidth density, low-latency interconnect, and thermal control</dd></div>
+            <div><dt>Distance</dt><dd>Punished at every hop</dd></div>
+          </dl>
+        </div>
+      </div>
     </div>
   </section>
   <section class="sec">
@@ -144,7 +156,7 @@
         <h2 data-rv>The industry is already rebuilding around locality<span class="stop">.</span></h2>
         <p data-rv="2">None of the inference toolkits exist to move state faster across distance. Every one of them exists to avoid moving it. Together they are an industry rebuilding around locality.</p>
       </div>
-      <dl class="defs" data-rv>
+      <dl class="toolkit" data-rv>
         <div><dt>FlashAttention</dt><dd>Reduces unnecessary reads and writes to memory.</dd></div>
         <div><dt>Kernel fusion</dt><dd>Avoids round trips between memory and compute.</dd></div>
         <div><dt>Quantization</dt><dd>Shrinks the number of bits that have to move at all.</dd></div>
