@@ -78,7 +78,7 @@
     '<div class="f-row"><label for="cf-email">Work email</label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>' +
     '<div class="f-row"><label for="cf-org">Company</label><input id="cf-org" name="org" autocomplete="organization"></div>' +
     '<div class="f-row"><label for="cf-topic">Topic</label><select id="cf-topic" name="topic">' +
-    '<option>Compute capacity</option><option>Site partnership</option><option>Investment</option><option>Media</option><option>Careers</option><option>Other</option></select></div>' +
+    '<option>Request access</option><option>Compute capacity</option><option>Site partnership</option><option>Investment</option><option>Media</option><option>Careers</option><option>Other</option></select></div>' +
     '<div class="f-row f-full"><label for="cf-subject">Subject</label><input id="cf-subject" name="subject" required></div>' +
     '<div class="f-row f-full"><label for="cf-msg">Message</label><textarea id="cf-msg" name="message" rows="5" required></textarea></div>' +
     '<p class="f-err" id="cf-err" hidden></p>' +
@@ -88,11 +88,11 @@
     '</div>';
   document.body.appendChild(modal);
   var form = modal.querySelector('#cf'), done = modal.querySelector('#cf-done'), err = modal.querySelector('#cf-err'), lastFocus = null;
-  function openForm() { lastFocus = document.activeElement; if (!drawer.hidden) closeMenu(); modal.hidden = false; document.body.style.overflow = 'hidden'; form.hidden = false; done.hidden = true; modal.querySelector('#cf-name').focus(); }
+  function openForm(topic) { lastFocus = document.activeElement; if (!drawer.hidden) closeMenu(); modal.hidden = false; document.body.style.overflow = 'hidden'; form.hidden = false; done.hidden = true; if (topic) { form.elements.topic.value = topic; if (topic === 'Request access' && !form.elements.subject.value) form.elements.subject.value = 'Request access'; } modal.querySelector('#cf-name').focus(); }
   function closeForm() { modal.hidden = true; document.body.style.overflow = ''; if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); }
   modal.querySelector('.modal-x').addEventListener('click', closeForm);
   modal.querySelector('.modal-scrim').addEventListener('click', closeForm);
-  document.addEventListener('click', function (e) { var t = e.target.closest && e.target.closest('[data-contact]'); if (t) { e.preventDefault(); openForm(); } });
+  document.addEventListener('click', function (e) { var t = e.target.closest && e.target.closest('[data-contact]'); if (t) { e.preventDefault(); openForm(t.getAttribute('data-contact')); } });
   document.addEventListener('keydown', function (e) { if (e.key !== 'Escape') return; if (!modal.hidden) closeForm(); else if (!drawer.hidden) closeMenu(); });
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -154,3 +154,25 @@
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
   els.forEach(function (el) { io.observe(el); });
 })();
+
+/* Pinned steps (Platform page): the step nearest the middle of the screen lights up, with its part of the pinned diagram */
+(function () {
+  var steps = [].slice.call(document.querySelectorAll('.pin-step')), parts = document.querySelectorAll('.pin-fig .g-part');
+  if (!steps.length) return;
+  var cur = -1;
+  function set(k) {
+    if (k === cur) return; cur = k;
+    steps.forEach(function (s, i) { s.classList.toggle('on', i === k); });
+    parts.forEach(function (p) { p.classList.toggle('on', p.getAttribute('data-k') === String(k)); });
+  }
+  function pick() {
+    var mid = window.innerHeight * (window.innerWidth < 900 ? .62 : .5), best = 0, bd = Infinity;
+    steps.forEach(function (s, i) { var r = s.getBoundingClientRect(), c = r.top + r.height / 2, d = Math.abs(c - mid); if (d < bd) { bd = d; best = i; } });
+    set(best);
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function () { if (ticking) return; ticking = true; requestAnimationFrame(function () { ticking = false; pick(); }); }, { passive: true });
+  window.addEventListener('resize', pick);
+  pick();
+})();
+

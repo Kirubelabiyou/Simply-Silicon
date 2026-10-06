@@ -46,14 +46,12 @@ OPTS = {
 #plantSvg.play .sign, #plantSvg.play .cap { opacity: 0; animation: fade 1.2s ease 3.4s forwards; }
 #plantSvg .hose { stroke-dasharray: 1; stroke-dashoffset: 0; }
 #plantSvg.play .hose { stroke-dashoffset: 1; animation: draw 1.6s var(--ease) 3.1s forwards; }
-#plantSvg .steam circle { opacity: 0; transform-box: fill-box; transform-origin: center; }
-#plantSvg.play .steam circle { animation: steam 5s ease-in-out 3.6s infinite; }
-#plantSvg.play .steam circle:nth-child(2) { animation-delay: 4.4s; } #plantSvg.play .steam circle:nth-child(3) { animation-delay: 5.1s; } #plantSvg.play .steam circle:nth-child(4) { animation-delay: 5.8s; }
+#plantSvg .leds { filter: drop-shadow(0 0 2px rgba(77,178,239,.9)); }
+#plantSvg .glow-logo { filter: drop-shadow(0 0 6px rgba(77,178,239,.6)); }
 #plantSvg .glow-strip { filter: drop-shadow(0 0 6px rgba(160,220,255,.9)); }
 #plantSvg .glow-warm { filter: drop-shadow(0 0 10px rgba(255,220,160,.7)); }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 @keyframes fade { to { opacity: 1; } }
-@keyframes steam { 0% { opacity: 0; transform: translateY(0) scale(.6); } 30% { opacity: .9; } 100% { opacity: 0; transform: translateY(-70px) scale(2); } }
 @media (prefers-reduced-motion: reduce) { #plantSvg.play * { animation: none !important; opacity: 1 !important; stroke-dashoffset: 0 !important; } }''',
           body='<script>\n' + read('opt3.js') + '</script>'),
   4: dict(title='Token Skyline Hero', name='Tokens becoming the city', files=DATA,

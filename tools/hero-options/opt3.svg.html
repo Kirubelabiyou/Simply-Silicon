@@ -1,9 +1,9 @@
-<svg id="plantSvg" viewBox="0 0 1000 560" preserveAspectRatio="xMaxYMid meet" role="img" aria-label="An elevation drawing of the Foundation plant: a glass hall with a rounded end, four steel stacks in white lattice frames, rooftop coolers, an entrance block and a fan panel">
+<svg id="plantSvg" viewBox="0 0 1000 560" preserveAspectRatio="xMaxYMid meet" role="img" aria-label="An elevation drawing of the Foundation plant: a glass hall with GPU racks inside, four steel stacks in white lattice frames, rooftop coolers with fans, an entrance block, a fan panel and the Simply Silicon name on the roofline">
   <defs>
     <linearGradient id="gGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2a3c"/><stop offset=".55" stop-color="#2a3d52"/><stop offset="1" stop-color="#ffe7b8" stop-opacity=".55"/></linearGradient>
     <linearGradient id="gStack" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6d7783"/><stop offset=".45" stop-color="#e6ebf0"/><stop offset="1" stop-color="#7b8591"/></linearGradient>
     <radialGradient id="gWarm" cx="50%" cy="80%" r="60%"><stop offset="0" stop-color="#ffdca0" stop-opacity=".55"/><stop offset="1" stop-color="#ffdca0" stop-opacity="0"/></radialGradient>
-    <radialGradient id="gSteam" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#dfe8f2" stop-opacity=".5"/><stop offset="1" stop-color="#dfe8f2" stop-opacity="0"/></radialGradient>
+    <linearGradient id="gHall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4db2ef" stop-opacity="0"/><stop offset="1" stop-color="#4db2ef" stop-opacity=".18"/></linearGradient>
     <pattern id="gGrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="rgba(120,160,200,.07)" stroke-width="1"/></pattern>
   </defs>
   <rect class="grid" x="0" y="0" width="1000" height="560" fill="url(#gGrid)"/>
@@ -22,6 +22,23 @@
     <g fill="#3b4148"><rect x="300" y="210" width="62" height="26"/><rect x="370" y="210" width="62" height="26"/><rect x="440" y="210" width="62" height="26"/><rect x="510" y="210" width="62" height="26"/></g>
     <rect x="842" y="350" width="96" height="80" fill="#c7ccd2"/>
     <rect x="160" y="424" width="672" height="5" fill="#cfefff" class="glow-strip"/>
+    <g class="racks">
+      <rect x="470" y="300" width="340" height="128" fill="url(#gHall)"/>
+      <rect x="480" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="506" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="532" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="558" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="584" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="610" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="636" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="662" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="688" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="714" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="740" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="766" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="792" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <g class="leds" fill="#7cc8f5"><circle cx="495" cy="341" r="1.3"/><circle cx="495" cy="352" r="1.3"/><circle cx="495" cy="363" r="1.3"/><circle cx="495" cy="385" r="1.3"/><circle cx="495" cy="396" r="1.3"/><circle cx="495" cy="407" r="1.3"/><circle cx="521" cy="330" r="1.3"/><circle cx="521" cy="352" r="1.3"/><circle cx="521" cy="363" r="1.3"/><circle cx="521" cy="374" r="1.3"/><circle cx="521" cy="396" r="1.3"/><circle cx="521" cy="407" r="1.3"/><circle cx="521" cy="418" r="1.3"/><circle cx="547" cy="330" r="1.3"/><circle cx="547" cy="341" r="1.3"/><circle cx="547" cy="363" r="1.3"/><circle cx="547" cy="374" r="1.3"/><circle cx="547" cy="385" r="1.3"/><circle cx="547" cy="407" r="1.3"/><circle cx="547" cy="418" r="1.3"/><circle cx="573" cy="330" r="1.3"/><circle cx="573" cy="341" r="1.3"/><circle cx="573" cy="352" r="1.3"/><circle cx="573" cy="374" r="1.3"/><circle cx="573" cy="385" r="1.3"/><circle cx="573" cy="396" r="1.3"/><circle cx="573" cy="418" r="1.3"/><circle cx="599" cy="341" r="1.3"/><circle cx="599" cy="352" r="1.3"/><circle cx="599" cy="363" r="1.3"/><circle cx="599" cy="385" r="1.3"/><circle cx="599" cy="396" r="1.3"/><circle cx="599" cy="407" r="1.3"/><circle cx="625" cy="330" r="1.3"/><circle cx="625" cy="352" r="1.3"/><circle cx="625" cy="363" r="1.3"/><circle cx="625" cy="374" r="1.3"/><circle cx="625" cy="396" r="1.3"/><circle cx="625" cy="407" r="1.3"/><circle cx="625" cy="418" r="1.3"/><circle cx="651" cy="330" r="1.3"/><circle cx="651" cy="341" r="1.3"/><circle cx="651" cy="363" r="1.3"/><circle cx="651" cy="374" r="1.3"/><circle cx="651" cy="385" r="1.3"/><circle cx="651" cy="407" r="1.3"/><circle cx="651" cy="418" r="1.3"/><circle cx="677" cy="330" r="1.3"/><circle cx="677" cy="341" r="1.3"/><circle cx="677" cy="352" r="1.3"/><circle cx="677" cy="374" r="1.3"/><circle cx="677" cy="385" r="1.3"/><circle cx="677" cy="396" r="1.3"/><circle cx="677" cy="418" r="1.3"/><circle cx="703" cy="341" r="1.3"/><circle cx="703" cy="352" r="1.3"/><circle cx="703" cy="363" r="1.3"/><circle cx="703" cy="385" r="1.3"/><circle cx="703" cy="396" r="1.3"/><circle cx="703" cy="407" r="1.3"/><circle cx="729" cy="330" r="1.3"/><circle cx="729" cy="352" r="1.3"/><circle cx="729" cy="363" r="1.3"/><circle cx="729" cy="374" r="1.3"/><circle cx="729" cy="396" r="1.3"/><circle cx="729" cy="407" r="1.3"/><circle cx="729" cy="418" r="1.3"/><circle cx="755" cy="330" r="1.3"/><circle cx="755" cy="341" r="1.3"/><circle cx="755" cy="363" r="1.3"/><circle cx="755" cy="374" r="1.3"/><circle cx="755" cy="385" r="1.3"/><circle cx="755" cy="407" r="1.3"/><circle cx="755" cy="418" r="1.3"/><circle cx="781" cy="330" r="1.3"/><circle cx="781" cy="341" r="1.3"/><circle cx="781" cy="352" r="1.3"/><circle cx="781" cy="374" r="1.3"/><circle cx="781" cy="385" r="1.3"/><circle cx="781" cy="396" r="1.3"/><circle cx="781" cy="418" r="1.3"/><circle cx="807" cy="341" r="1.3"/><circle cx="807" cy="352" r="1.3"/><circle cx="807" cy="363" r="1.3"/><circle cx="807" cy="385" r="1.3"/><circle cx="807" cy="396" r="1.3"/><circle cx="807" cy="407" r="1.3"/></g>
+    </g>
   </g>
 
   <!-- the line drawing -->
@@ -56,11 +73,15 @@
     <circle cx="410" cy="385" r="15"/><path d="M410 372 V398 M397 385 H423"/>
   </g>
   <g class="rooffans" fill="none" stroke="#e6eaee" stroke-width="1.4">
-    <circle cx="316" cy="219" r="7"/><circle cx="346" cy="219" r="7"/><circle cx="386" cy="219" r="7"/><circle cx="416" cy="219" r="7"/>
-    <circle cx="456" cy="219" r="7"/><circle cx="486" cy="219" r="7"/><circle cx="526" cy="219" r="7"/><circle cx="556" cy="219" r="7"/>
+    <g transform="translate(316 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(346 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(386 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(416 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(456 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(486 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(526 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(556 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
   </g>
-  <path class="hose" d="M440 232 C470 200 600 196 700 214 S730 236 740 236" fill="none" stroke="#e0563a" stroke-width="4" stroke-linecap="round" pathLength="1"/>
-  <g class="steam"><circle cx="466" cy="30" r="22" fill="url(#gSteam)"/><circle cx="536" cy="40" r="22" fill="url(#gSteam)"/><circle cx="606" cy="34" r="22" fill="url(#gSteam)"/><circle cx="676" cy="46" r="22" fill="url(#gSteam)"/></g>
-  <g class="sign" opacity="0"><rect x="852" y="300" width="76" height="34" fill="#a7aeb6"/><text x="890" y="318" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="700" font-size="11" fill="#f4f6f8" letter-spacing=".06em">CALGARY</text><text x="890" y="329" text-anchor="middle" font-family="Instrument Sans, sans-serif" font-size="6.5" fill="#eef1f4">district heating</text></g>
+  <g class="sign" opacity="0"><text x="174" y="253" font-family="Quicksand, sans-serif" font-weight="700" font-size="15" fill="#4db2ef" letter-spacing="-.02em" class="glow-logo">simply silicon.</text><rect x="852" y="300" width="76" height="34" fill="#a7aeb6"/><text x="890" y="318" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="700" font-size="11" fill="#f4f6f8" letter-spacing=".06em">CALGARY</text><text x="890" y="329" text-anchor="middle" font-family="Instrument Sans, sans-serif" font-size="6.5" fill="#eef1f4">district heating</text></g>
   <text class="cap" x="160" y="540" font-family="Instrument Sans, sans-serif" font-size="12" fill="#7a7a84">Foundation · 435 9 Ave SE, Calgary · Phase 3: 12 MW</text>
 </svg>

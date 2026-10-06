@@ -54,6 +54,73 @@
     </div>
   </section>
 
+  <!-- One physical platform (dark, pinned diagram), moved from the home page -->
+  <section class="sec" id="platform-how">
+    <div class="wrap">
+      <div class="sec-intro">
+        <h2 data-rv>One physical platform<span class="stop">.</span></h2>
+        <p data-rv="2">Simply Silicon integrates low lead time urban power capacity, dense connectivity, and high performance inference racks into one physical platform.</p>
+      </div>
+      <div class="pin">
+        <div class="pin-steps">
+          <div class="pin-step" data-step="0">
+            <span class="n">01</span>
+            <h3>Power</h3>
+            <p class="lead">Low lead time urban power capacity.</p>
+            <p>Simply Silicon builds on latent utility infrastructure and own-use power that already exists in the city.</p>
+            <p class="src">At our first site: dual redundant grid feeds, on-site generation, and 14 MVA n+1.</p>
+          </div>
+          <div class="pin-step" data-step="1">
+            <span class="n">02</span>
+            <h3>Connectivity</h3>
+            <p class="lead">Dense connectivity on private, air-gapped fiber.</p>
+            <p>Private fiber physically eliminates the security threats posed by common carrier networks, while latency reliability SLAs support applications where delayed inference is a service failure.</p>
+            <p class="src">Private circuits remove common carrier exposure for high-security workloads and superintelligent models.</p>
+          </div>
+          <div class="pin-step" data-step="2">
+            <span class="n">03</span>
+            <h3>Compute</h3>
+            <p class="lead">High performance inference racks.</p>
+            <p>High-density GPU compute as dedicated bare metal, inside the city it serves.</p>
+            <p class="src">Highly redundant infrastructure coupled with deterministic local routing supports latency-sensitive workloads and critical AI services.</p>
+          </div>
+        </div>
+        <div class="pin-fig">
+          <figure class="fig">
+            <svg viewBox="0 0 520 360" role="img" aria-label="Power from two grid feeds and on-site generation feeds a Simply Silicon site in the city. Its inference racks connect to nearby buildings over private fiber, physically separate from the public internet.">
+              <g class="g-part" data-k="0">
+                <rect class="f-box" x="8" y="34" width="132" height="52" rx="6"/><text class="f-t" x="74" y="58" text-anchor="middle">Grid feed A</text><text class="f-s" x="74" y="74" text-anchor="middle">Utility</text>
+                <rect class="f-box" x="8" y="154" width="132" height="52" rx="6"/><text class="f-t" x="74" y="178" text-anchor="middle">Grid feed B</text><text class="f-s" x="74" y="194" text-anchor="middle">Utility</text>
+                <rect class="f-box f-box--ghost" x="8" y="274" width="132" height="52" rx="6"/><text class="f-t" x="74" y="298" text-anchor="middle">On-site</text><text class="f-s" x="74" y="314" text-anchor="middle">generation</text>
+                <path class="f-flow" d="M140 60 C170 60 168 140 196 146"/><path class="f-flow" d="M140 180 H196"/><path class="f-flow" d="M140 300 C170 300 168 220 196 214" stroke-dasharray="3 5"/>
+                <text class="f-s f-acc" x="168" y="128" text-anchor="middle">n+1</text>
+              </g>
+              <g class="g-base">
+                <rect class="f-box f-box--on" x="196" y="96" width="150" height="168" rx="8"/>
+                <text class="f-t" x="271" y="88" text-anchor="middle">Simply Silicon site</text>
+              </g>
+              <g class="g-part" data-k="2">
+                <rect class="f-box f-box--solid" x="212" y="112" width="36" height="136" rx="3"/><rect class="f-box f-box--solid" x="253" y="112" width="36" height="136" rx="3"/><rect class="f-box f-box--solid" x="294" y="112" width="36" height="136" rx="3"/>
+                <g class="f-led"><circle cx="240" cy="124" r="2.2"/><circle cx="240" cy="140" r="2.2"/><circle cx="240" cy="156" r="2.2"/><circle cx="240" cy="172" r="2.2"/><circle cx="240" cy="188" r="2.2"/><circle cx="240" cy="204" r="2.2"/><circle cx="240" cy="220" r="2.2"/><circle cx="240" cy="236" r="2.2"/><circle cx="281" cy="124" r="2.2"/><circle cx="281" cy="140" r="2.2"/><circle cx="281" cy="156" r="2.2"/><circle cx="281" cy="172" r="2.2"/><circle cx="281" cy="188" r="2.2"/><circle cx="281" cy="204" r="2.2"/><circle cx="281" cy="220" r="2.2"/><circle cx="281" cy="236" r="2.2"/><circle cx="322" cy="124" r="2.2"/><circle cx="322" cy="140" r="2.2"/><circle cx="322" cy="156" r="2.2"/><circle cx="322" cy="172" r="2.2"/><circle cx="322" cy="188" r="2.2"/><circle cx="322" cy="204" r="2.2"/><circle cx="322" cy="220" r="2.2"/><circle cx="322" cy="236" r="2.2"/></g>
+                <text class="f-s f-acc" x="271" y="282" text-anchor="middle">GPU racks: dedicated bare metal</text>
+              </g>
+              <g class="g-part" data-k="1">
+                <path class="f-flow" d="M346 130 C380 130 384 52 420 52"/><path class="f-flow" d="M346 160 C384 160 388 126 420 126"/><path class="f-flow" d="M346 200 C384 200 388 200 420 200"/>
+                <rect class="f-box f-box--solid" x="420" y="34" width="36" height="36" rx="4"/><rect class="f-box f-box--solid" x="420" y="108" width="36" height="36" rx="4"/><rect class="f-box f-box--solid" x="420" y="182" width="36" height="36" rx="4"/>
+                <text class="f-s" x="466" y="56">Connected</text><text class="f-s" x="466" y="70">buildings</text>
+                <text class="f-s f-acc" x="383" y="112" text-anchor="middle" transform="rotate(-62 383 112)">private fiber</text>
+                <g transform="translate(456 300)"><circle r="30" class="f-box f-box--ghost"/><text class="f-s" y="-2" text-anchor="middle">Public</text><text class="f-s" y="12" text-anchor="middle">internet</text></g>
+                <path class="f-warn" d="M346 240 C380 250 396 286 420 296" stroke-dasharray="2 5"/><path class="f-warn" d="M392 262 l10 12 M402 262 l-10 12"/>
+                <text class="f-s f-red" x="368" y="300" text-anchor="middle">air gap</text>
+              </g>
+            </svg>
+            <figcaption>Power, connectivity and compute in one physical platform. The private fiber network is physically separate from the public internet.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="sec sec--light">
     <div class="wrap">
       <div class="sec-intro">

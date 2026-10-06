@@ -3,6 +3,7 @@
   var svg = document.getElementById('plantSvg');
   svg.querySelectorAll('.lines path, .lines g path').forEach(function (p, i) { p.style.setProperty('--i', i); });
   function play() { svg.classList.remove('play'); void svg.getBoundingClientRect(); svg.classList.add('play'); }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches && svg.pauseAnimations) svg.pauseAnimations();
   play();
   document.getElementById('replay').addEventListener('click', play);
 })();

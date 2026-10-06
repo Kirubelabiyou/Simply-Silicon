@@ -4,11 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Simply Silicon</title>
-<meta name="description" content="Simply Silicon owns and operates air-gapped AI infrastructure for superintelligent models too capable for the public internet, regulated enterprise, and high-security workloads.">
+<meta name="description" content="Secure, localized compute. Private GPU servers and air-gapped fiber for regulated industries. Run any model on hardware only you use. Your data stays in Canada.">
 <meta name="theme-color" content="#05070b">
 <link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="assets/img/hero.webp" type="image/webp">
 <script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
@@ -16,160 +15,205 @@
 <header id="site-header"></header>
 
 <main id="homeMain">
-  <!-- 1. Hero (dark) -->
-  <section class="hero-full">
-    <div class="hero-bg" aria-hidden="true"><img src="assets/img/hero.webp" width="580" height="727" alt=""></div>
+  <!-- 1. Hero (dark): the plant draws itself -->
+  <section class="hero-full hero-plant">
+    <div class="plant">
+      <svg id="plantSvg" viewBox="0 0 1000 560" preserveAspectRatio="xMaxYMid meet" role="img" aria-label="An elevation drawing of the Foundation plant: a glass hall with GPU racks inside, four steel stacks in white lattice frames, rooftop coolers with fans, an entrance block, a fan panel and the Simply Silicon name on the roofline">
+  <defs>
+    <linearGradient id="gGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2a3c"/><stop offset=".55" stop-color="#2a3d52"/><stop offset="1" stop-color="#ffe7b8" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="gStack" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6d7783"/><stop offset=".45" stop-color="#e6ebf0"/><stop offset="1" stop-color="#7b8591"/></linearGradient>
+    <radialGradient id="gWarm" cx="50%" cy="80%" r="60%"><stop offset="0" stop-color="#ffdca0" stop-opacity=".55"/><stop offset="1" stop-color="#ffdca0" stop-opacity="0"/></radialGradient>
+    <linearGradient id="gHall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4db2ef" stop-opacity="0"/><stop offset="1" stop-color="#4db2ef" stop-opacity=".18"/></linearGradient>
+    <pattern id="gGrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="rgba(120,160,200,.07)" stroke-width="1"/></pattern>
+  </defs>
+  <rect class="grid" x="0" y="0" width="1000" height="560" fill="url(#gGrid)"/>
+
+  <!-- fills fade in after the line drawing -->
+  <g class="fills">
+    <path d="M160 260 H772 A60 60 0 0 1 832 320 V430 H160 Z" fill="url(#gGlass)"/>
+    <ellipse cx="480" cy="430" rx="300" ry="70" fill="url(#gWarm)"/>
+    <rect x="150" y="236" width="692" height="24" fill="#07090c"/>
+    <path d="M150 236 H780 A62 62 0 0 1 842 260 V236 Z" fill="#07090c"/>
+    <g fill="url(#gStack)"><rect x="456" y="40" width="20" height="196"/><rect x="526" y="52" width="20" height="184"/><rect x="596" y="46" width="20" height="190"/><rect x="666" y="58" width="20" height="178"/></g>
+    <rect x="176" y="292" width="70" height="138" fill="#eef1f4"/>
+    <rect x="186" y="306" width="50" height="86" fill="#fff4d6" class="glow-warm"/>
+    <rect x="262" y="352" width="190" height="66" fill="#eef1f4"/><rect x="270" y="358" width="174" height="54" fill="none" stroke="#c8323a" stroke-width="2"/>
+    <g fill="#1d2026"><rect x="282" y="364" width="44" height="42"/><rect x="335" y="364" width="44" height="42"/><rect x="388" y="364" width="44" height="42"/></g>
+    <g fill="#3b4148"><rect x="300" y="210" width="62" height="26"/><rect x="370" y="210" width="62" height="26"/><rect x="440" y="210" width="62" height="26"/><rect x="510" y="210" width="62" height="26"/></g>
+    <rect x="842" y="350" width="96" height="80" fill="#c7ccd2"/>
+    <rect x="160" y="424" width="672" height="5" fill="#cfefff" class="glow-strip"/>
+    <g class="racks">
+      <rect x="470" y="300" width="340" height="128" fill="url(#gHall)"/>
+      <rect x="480" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="506" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="532" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="558" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="584" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="610" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="636" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="662" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="688" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="714" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="740" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="766" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <rect x="792" y="322" width="20" height="104" rx="1.5" fill="#0b0f15" stroke="rgba(255,255,255,.14)"/>
+      <g class="leds" fill="#7cc8f5"><circle cx="495" cy="341" r="1.3"/><circle cx="495" cy="352" r="1.3"/><circle cx="495" cy="363" r="1.3"/><circle cx="495" cy="385" r="1.3"/><circle cx="495" cy="396" r="1.3"/><circle cx="495" cy="407" r="1.3"/><circle cx="521" cy="330" r="1.3"/><circle cx="521" cy="352" r="1.3"/><circle cx="521" cy="363" r="1.3"/><circle cx="521" cy="374" r="1.3"/><circle cx="521" cy="396" r="1.3"/><circle cx="521" cy="407" r="1.3"/><circle cx="521" cy="418" r="1.3"/><circle cx="547" cy="330" r="1.3"/><circle cx="547" cy="341" r="1.3"/><circle cx="547" cy="363" r="1.3"/><circle cx="547" cy="374" r="1.3"/><circle cx="547" cy="385" r="1.3"/><circle cx="547" cy="407" r="1.3"/><circle cx="547" cy="418" r="1.3"/><circle cx="573" cy="330" r="1.3"/><circle cx="573" cy="341" r="1.3"/><circle cx="573" cy="352" r="1.3"/><circle cx="573" cy="374" r="1.3"/><circle cx="573" cy="385" r="1.3"/><circle cx="573" cy="396" r="1.3"/><circle cx="573" cy="418" r="1.3"/><circle cx="599" cy="341" r="1.3"/><circle cx="599" cy="352" r="1.3"/><circle cx="599" cy="363" r="1.3"/><circle cx="599" cy="385" r="1.3"/><circle cx="599" cy="396" r="1.3"/><circle cx="599" cy="407" r="1.3"/><circle cx="625" cy="330" r="1.3"/><circle cx="625" cy="352" r="1.3"/><circle cx="625" cy="363" r="1.3"/><circle cx="625" cy="374" r="1.3"/><circle cx="625" cy="396" r="1.3"/><circle cx="625" cy="407" r="1.3"/><circle cx="625" cy="418" r="1.3"/><circle cx="651" cy="330" r="1.3"/><circle cx="651" cy="341" r="1.3"/><circle cx="651" cy="363" r="1.3"/><circle cx="651" cy="374" r="1.3"/><circle cx="651" cy="385" r="1.3"/><circle cx="651" cy="407" r="1.3"/><circle cx="651" cy="418" r="1.3"/><circle cx="677" cy="330" r="1.3"/><circle cx="677" cy="341" r="1.3"/><circle cx="677" cy="352" r="1.3"/><circle cx="677" cy="374" r="1.3"/><circle cx="677" cy="385" r="1.3"/><circle cx="677" cy="396" r="1.3"/><circle cx="677" cy="418" r="1.3"/><circle cx="703" cy="341" r="1.3"/><circle cx="703" cy="352" r="1.3"/><circle cx="703" cy="363" r="1.3"/><circle cx="703" cy="385" r="1.3"/><circle cx="703" cy="396" r="1.3"/><circle cx="703" cy="407" r="1.3"/><circle cx="729" cy="330" r="1.3"/><circle cx="729" cy="352" r="1.3"/><circle cx="729" cy="363" r="1.3"/><circle cx="729" cy="374" r="1.3"/><circle cx="729" cy="396" r="1.3"/><circle cx="729" cy="407" r="1.3"/><circle cx="729" cy="418" r="1.3"/><circle cx="755" cy="330" r="1.3"/><circle cx="755" cy="341" r="1.3"/><circle cx="755" cy="363" r="1.3"/><circle cx="755" cy="374" r="1.3"/><circle cx="755" cy="385" r="1.3"/><circle cx="755" cy="407" r="1.3"/><circle cx="755" cy="418" r="1.3"/><circle cx="781" cy="330" r="1.3"/><circle cx="781" cy="341" r="1.3"/><circle cx="781" cy="352" r="1.3"/><circle cx="781" cy="374" r="1.3"/><circle cx="781" cy="385" r="1.3"/><circle cx="781" cy="396" r="1.3"/><circle cx="781" cy="418" r="1.3"/><circle cx="807" cy="341" r="1.3"/><circle cx="807" cy="352" r="1.3"/><circle cx="807" cy="363" r="1.3"/><circle cx="807" cy="385" r="1.3"/><circle cx="807" cy="396" r="1.3"/><circle cx="807" cy="407" r="1.3"/></g>
+    </g>
+  </g>
+
+  <!-- the line drawing -->
+  <g class="lines" fill="none" stroke="#dbe6f0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path pathLength="1" d="M40 430 H980"/>
+    <path pathLength="1" d="M40 470 H980" stroke-opacity=".35"/>
+    <path pathLength="1" d="M70 505 H130 M190 505 H250 M310 505 H370 M430 505 H490 M550 505 H610 M670 505 H730 M790 505 H850 M910 505 H970" stroke="#f2b233" stroke-opacity=".6"/>
+    <path pathLength="1" d="M160 430 V260 H772 A60 60 0 0 1 832 320 V430"/>
+    <path pathLength="1" d="M150 236 H780 A62 62 0 0 1 842 298 V260 M150 236 V260 H842"/>
+    <path pathLength="1" d="M160 300 H832 M160 340 H832 M160 380 H832" stroke-opacity=".55"/>
+    <path pathLength="1" d="M190 260 V430 M220 260 V430 M250 260 V430 M280 260 V430 M310 260 V430 M340 260 V430 M370 260 V430 M400 260 V430 M430 260 V430 M460 260 V430 M490 260 V430 M520 260 V430 M550 260 V430 M580 260 V430 M610 260 V430 M640 260 V430 M670 260 V430 M700 260 V430 M730 260 V430 M760 260 V430 M790 268 V430 M815 286 V430" stroke-opacity=".5"/>
+    <g class="stacks">
+      <path pathLength="1" d="M456 236 V40 H476 V236 M526 236 V52 H546 V236 M596 236 V46 H616 V236 M666 236 V58 H686 V236"/>
+      <path pathLength="1" d="M446 236 V140 H486 V236 M446 140 L486 188 M486 140 L446 188 M446 188 L486 236 M486 188 L446 236 M446 188 H486"/>
+      <path pathLength="1" d="M516 236 V146 H556 V236 M516 146 L556 191 M556 146 L516 191 M516 191 L556 236 M556 191 L516 236 M516 191 H556"/>
+      <path pathLength="1" d="M586 236 V143 H626 V236 M586 143 L626 190 M626 143 L586 190 M586 190 L626 236 M626 190 L586 236 M586 190 H626"/>
+      <path pathLength="1" d="M656 236 V149 H696 V236 M656 149 L696 193 M696 149 L656 193 M656 193 L696 236 M696 193 L656 236 M656 193 H696"/>
+      <path pathLength="1" d="M456 90 H476 M456 140 H476 M526 100 H546 M596 95 H616 M666 106 H686" stroke-opacity=".6"/>
+    </g>
+    <g class="coolers">
+      <path pathLength="1" d="M300 236 V210 H362 V236 M370 236 V210 H432 V236 M440 236 V210 H502 V236 M510 236 V210 H572 V236"/>
+      <path pathLength="1" d="M290 226 H582" stroke-opacity=".7"/>
+    </g>
+    <path pathLength="1" d="M176 430 V292 H246 V430 M186 306 H236 V392 H186 Z"/>
+    <path pathLength="1" d="M262 418 V352 H452 V418 Z"/>
+    <path pathLength="1" d="M842 430 V350 H938 V430 M862 380 H918"/>
+    <path pathLength="1" d="M196 448 V430 M214 448 V430 M232 448 V430" stroke-width="5" stroke="#9aa3ad"/>
+  </g>
+  <g class="fan-marks" stroke="#e9edf1" stroke-width="2" fill="none">
+    <circle cx="304" cy="385" r="15"/><path d="M304 372 V398 M291 385 H317"/>
+    <circle cx="357" cy="385" r="15"/><path d="M357 372 V398 M344 385 H370"/>
+    <circle cx="410" cy="385" r="15"/><path d="M410 372 V398 M397 385 H423"/>
+  </g>
+  <g class="rooffans" fill="none" stroke="#e6eaee" stroke-width="1.4">
+    <g transform="translate(316 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(346 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(386 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(416 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(456 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(486 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(526 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(556 219)"><circle r="8"/><g><path d="M0 -6.5 V6.5 M-6.5 0 H6.5"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+  </g>
+  <g class="sign" opacity="0"><text x="174" y="253" font-family="Quicksand, sans-serif" font-weight="700" font-size="15" fill="#4db2ef" letter-spacing="-.02em" class="glow-logo">simply silicon.</text><rect x="852" y="300" width="76" height="34" fill="#a7aeb6"/><text x="890" y="318" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="700" font-size="11" fill="#f4f6f8" letter-spacing=".06em">CALGARY</text><text x="890" y="329" text-anchor="middle" font-family="Instrument Sans, sans-serif" font-size="6.5" fill="#eef1f4">district heating</text></g>
+  <text class="cap" x="160" y="540" font-family="Instrument Sans, sans-serif" font-size="12" fill="#7a7a84">Foundation · downtown Calgary</text>
+</svg>
+    </div>
     <div class="wrap wrap--wide">
       <div class="hero-copy">
-        <h1>Secure, localized compute at scale<span class="stop">.</span></h1>
-        <p class="lede">Simply Silicon turns latent utility infrastructure and own-use power into bare metal inference compute faster than conventional developers. Our long term goal is to connect these sites into a second internet for superintelligent models so they don't break the internet humans need.</p>
+        <h1>Secure, localized compute<span class="stop">.</span></h1>
+        <p class="lede">Private GPU servers for regulated industries. Run any model on hardware only you use. Your data stays in Canada.</p>
         <div class="hero-ctas">
-          <a class="btn btn--primary" href="#how">How it works <span class="arrow" aria-hidden="true">↓</span></a>
-          <button class="btn" type="button" data-contact>Talk to us</button>
+          <button class="btn btn--primary" type="button" data-contact="Request access">Request access</button>
+          <a class="btn" href="#how">How it works <span class="arrow" aria-hidden="true">↓</span></a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 2. The problem (light) -->
+  <!-- 2. Control (light) -->
   <section class="sec sec--light">
     <div class="wrap">
       <div class="sec-intro">
-        <h2 data-rv>The internet was not built for inference<span class="stop">.</span></h2>
-        <p data-rv="2">The internet moves information that already exists. Inference produces new intelligence, one token at a time. They are different physical problems, and they need different infrastructure.</p>
+        <h2 data-rv>AI without giving up control<span class="stop">.</span></h2>
+        <p data-rv="2">Public AI clouds mean shared servers and data sent over the public internet. For banks, hospitals, governments and utilities, that is a risk. With Simply Silicon the hardware is yours alone. So is the line that connects it.</p>
       </div>
-      <table class="compare" data-rv>
-        <thead><tr><th scope="col"><span class="sr">Topic</span></th><th scope="col">The internet</th><th scope="col" class="is-inf">Inference</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Built to</th><td>Distribute information between humans</td><td>Produce intelligence between machines</td></tr>
-          <tr><th scope="row">Unit of work</th><td>The webpage, the video segment, the API response</td><td>The token</td></tr>
-          <tr><th scope="row">Rewards</th><td>Reach, redundancy, and scale</td><td>Memory locality, bandwidth density, low-latency interconnect, and thermal control</td></tr>
-          <tr><th scope="row">Distance</th><td>Tolerated as the price of all three</td><td>Punished at every hop</td></tr>
-          <tr><th scope="row">Designed for</th><td>Humans clicking, reading, watching, downloading, and waiting</td><td>Persistent machine-speed cognitive recursion</td></tr>
-        </tbody>
-      </table>
-      <blockquote class="pull" data-rv>
-        <p>“Inference is punished by every extra hop because every hop increases the physical cost of maintaining state.”</p>
-        <cite>The Internet Was Not Built for Inference</cite>
-      </blockquote>
-      <p class="statement" data-rv>Traditional data centres and networks were not built for inference, let alone superintelligent models too capable for the public internet. <b>We are rethinking the physical data centre and its networking from the ground up.</b></p>
+      <div class="cols" style="--n:3">
+        <div data-rv><span class="idx">01</span><h3>Your hardware</h3><p>Dedicated bare metal that no one else touches.</p></div>
+        <div data-rv="1"><span class="idx">02</span><h3>Your models</h3><p>Run any model you want. Generate your own tokens.</p></div>
+        <div data-rv="2"><span class="idx">03</span><h3>Your network</h3><p>Private air-gapped fiber. Never the public internet.</p></div>
+      </div>
     </div>
   </section>
 
-  <!-- 3. How it works (dark, pinned diagram) -->
-  <section class="sec" id="how">
+  <!-- 3. Services (dark) -->
+  <section class="sec" id="services">
+    <div class="wrap">
+      <div class="sec-intro">
+        <h2 data-rv>Two services. One private system<span class="stop">.</span></h2>
+        <p data-rv="2">Rent dedicated GPU servers. Reach them over our own fiber. Use one or both.</p>
+      </div>
+      <div class="svc">
+        <article class="svc-card" data-rv>
+          <div class="svc-img"><img src="assets/img/rack.webp" width="2560" height="1920" alt="The front of a GPU server in a dark rack" loading="lazy"></div>
+          <div class="svc-body">
+            <span class="idx">Service 01</span>
+            <h3>Dedicated bare metal</h3>
+            <p>Your own GPU servers at our Calgary site. You choose the models and the software. The tokens you generate are yours.</p>
+            <ul class="ticks"><li>No shared virtual layer</li><li>Any model you choose</li><li>Hardware used only by you</li></ul>
+          </div>
+        </article>
+        <article class="svc-card" data-rv="1">
+          <div class="svc-img svc-img--fig"><figure class="fig" data-fig="fiber"></figure></div>
+          <div class="svc-body">
+            <span class="idx">Service 02</span>
+            <h3>Air-gapped private fiber</h3>
+            <p>A direct private line from your building to our site. Your data never crosses the public internet.</p>
+            <ul class="ticks"><li>Direct line from your building</li><li>Separate from the public internet</li><li>7 km network with 25+ buildings connected</li></ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. How it works (light) -->
+  <section class="sec sec--light" id="how">
     <div class="wrap">
       <div class="sec-intro">
         <h2 data-rv>How it works<span class="stop">.</span></h2>
-        <p data-rv="2">Simply Silicon integrates low lead time urban power capacity, dense connectivity, and high performance inference racks into one physical platform.</p>
+        <p data-rv="2">Four steps from first call to running your own models.</p>
       </div>
-      <div class="pin">
-        <div class="pin-steps">
-          <div class="pin-step" data-step="0">
-            <span class="n">01</span>
-            <h3>Power</h3>
-            <p class="lead">Low lead time urban power capacity.</p>
-            <p>Simply Silicon builds on latent utility infrastructure and own-use power that already exists in the city.</p>
-            <p class="src">At our first site: dual redundant grid feeds, on-site generation, and 14 MVA n+1.</p>
-          </div>
-          <div class="pin-step" data-step="1">
-            <span class="n">02</span>
-            <h3>Connectivity</h3>
-            <p class="lead">Dense connectivity on private, air-gapped fiber.</p>
-            <p>Private fiber physically eliminates the security threats posed by common carrier networks, while latency reliability SLAs support applications where delayed inference is a service failure.</p>
-            <p class="src">Private circuits remove common carrier exposure for high-security workloads and superintelligent models.</p>
-          </div>
-          <div class="pin-step" data-step="2">
-            <span class="n">03</span>
-            <h3>Compute</h3>
-            <p class="lead">High performance inference racks.</p>
-            <p>High-density GPU compute for bare metal or API applications, inside the city it serves.</p>
-            <p class="src">Highly redundant infrastructure coupled with deterministic local routing supports latency-sensitive workloads and critical AI services.</p>
-          </div>
-        </div>
-        <div class="pin-fig">
-          <figure class="fig">
-            <svg viewBox="0 0 520 360" role="img" aria-label="Power from two grid feeds and on-site generation feeds a Simply Silicon site in the city. Its inference racks connect to nearby buildings over private fiber, physically separate from the public internet.">
-              <g class="g-part" data-k="0">
-                <rect class="f-box" x="8" y="34" width="132" height="52" rx="6"/><text class="f-t" x="74" y="58" text-anchor="middle">Grid feed A</text><text class="f-s" x="74" y="74" text-anchor="middle">Utility</text>
-                <rect class="f-box" x="8" y="154" width="132" height="52" rx="6"/><text class="f-t" x="74" y="178" text-anchor="middle">Grid feed B</text><text class="f-s" x="74" y="194" text-anchor="middle">Utility</text>
-                <rect class="f-box f-box--ghost" x="8" y="274" width="132" height="52" rx="6"/><text class="f-t" x="74" y="298" text-anchor="middle">On-site</text><text class="f-s" x="74" y="314" text-anchor="middle">generation</text>
-                <path class="f-flow" d="M140 60 C170 60 168 140 196 146"/><path class="f-flow" d="M140 180 H196"/><path class="f-flow" d="M140 300 C170 300 168 220 196 214" stroke-dasharray="3 5"/>
-                <text class="f-s f-acc" x="168" y="128" text-anchor="middle">n+1</text>
-              </g>
-              <g class="g-base">
-                <rect class="f-box f-box--on" x="196" y="96" width="150" height="168" rx="8"/>
-                <text class="f-t" x="271" y="88" text-anchor="middle">Simply Silicon site</text>
-              </g>
-              <g class="g-part" data-k="2">
-                <rect class="f-box f-box--solid" x="212" y="112" width="36" height="136" rx="3"/><rect class="f-box f-box--solid" x="253" y="112" width="36" height="136" rx="3"/><rect class="f-box f-box--solid" x="294" y="112" width="36" height="136" rx="3"/>
-                <g class="f-led"><circle cx="240" cy="124" r="2.2"/><circle cx="240" cy="140" r="2.2"/><circle cx="240" cy="156" r="2.2"/><circle cx="240" cy="172" r="2.2"/><circle cx="240" cy="188" r="2.2"/><circle cx="240" cy="204" r="2.2"/><circle cx="240" cy="220" r="2.2"/><circle cx="240" cy="236" r="2.2"/><circle cx="281" cy="124" r="2.2"/><circle cx="281" cy="140" r="2.2"/><circle cx="281" cy="156" r="2.2"/><circle cx="281" cy="172" r="2.2"/><circle cx="281" cy="188" r="2.2"/><circle cx="281" cy="204" r="2.2"/><circle cx="281" cy="220" r="2.2"/><circle cx="281" cy="236" r="2.2"/><circle cx="322" cy="124" r="2.2"/><circle cx="322" cy="140" r="2.2"/><circle cx="322" cy="156" r="2.2"/><circle cx="322" cy="172" r="2.2"/><circle cx="322" cy="188" r="2.2"/><circle cx="322" cy="204" r="2.2"/><circle cx="322" cy="220" r="2.2"/><circle cx="322" cy="236" r="2.2"/></g>
-                <text class="f-s f-acc" x="271" y="282" text-anchor="middle">GPU racks: bare metal or API</text>
-              </g>
-              <g class="g-part" data-k="1">
-                <path class="f-flow" d="M346 130 C380 130 384 52 420 52"/><path class="f-flow" d="M346 160 C384 160 388 126 420 126"/><path class="f-flow" d="M346 200 C384 200 388 200 420 200"/>
-                <rect class="f-box f-box--solid" x="420" y="34" width="36" height="36" rx="4"/><rect class="f-box f-box--solid" x="420" y="108" width="36" height="36" rx="4"/><rect class="f-box f-box--solid" x="420" y="182" width="36" height="36" rx="4"/>
-                <text class="f-s" x="466" y="56">Connected</text><text class="f-s" x="466" y="70">buildings</text>
-                <text class="f-s f-acc" x="383" y="112" text-anchor="middle" transform="rotate(-62 383 112)">private fiber</text>
-                <g transform="translate(456 300)"><circle r="30" class="f-box f-box--ghost"/><text class="f-s" y="-2" text-anchor="middle">Public</text><text class="f-s" y="12" text-anchor="middle">internet</text></g>
-                <path class="f-warn" d="M346 240 C380 250 396 286 420 296" stroke-dasharray="2 5"/><path class="f-warn" d="M392 262 l10 12 M402 262 l-10 12"/>
-                <text class="f-s f-red" x="368" y="300" text-anchor="middle">air gap</text>
-              </g>
-            </svg>
-            <figcaption>Power, connectivity and compute in one physical platform. The private fiber network is physically separate from the public internet.</figcaption>
-          </figure>
-        </div>
+      <div class="cols" style="--n:4">
+        <div data-rv><span class="idx">01</span><h3>Tell us your workload</h3><p>What you need to run and how much.</p></div>
+        <div data-rv="1"><span class="idx">02</span><h3>Get your servers</h3><p>Dedicated GPUs set up for you.</p></div>
+        <div data-rv="2"><span class="idx">03</span><h3>Connect privately</h3><p>Over air-gapped fiber from your building.</p></div>
+        <div data-rv="3"><span class="idx">04</span><h3>Run any model</h3><p>Your data and your tokens stay with you.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- 4. Built for critical demand (light) -->
-  <section class="sec sec--light">
+  <!-- 5. Who it's for (dark) -->
+  <section class="sec">
     <div class="wrap">
       <div class="sec-intro">
-        <h2 data-rv>Built for critical demand<span class="stop">.</span></h2>
-        <p data-rv="2">A physically-secure inference network for applications that cannot compromise.</p>
+        <h2 data-rv>Built for regulated industries<span class="stop">.</span></h2>
+        <p data-rv="2">For teams that need the latest AI and cannot let their data leave their control.</p>
       </div>
       <div class="cols" style="--n:4">
-        <div data-rv><span class="idx">01</span><h3>Regulated enterprise</h3><p>Banks, utilities, and energy companies operating under strict regulatory requirements.</p></div>
-        <div data-rv="1"><span class="idx">02</span><h3>High-security workloads</h3><p>Superintelligent models, defence systems, and government environments where network exposure matters.</p></div>
-        <div data-rv="2"><span class="idx">03</span><h3>Critical AI services</h3><p>Emergency response, public safety, security, and other services with no tolerance for unreliable inference.</p></div>
-        <div data-rv="3"><span class="idx">04</span><h3>Live real-time AI</h3><p>Low-latency inference that needs dependable physical proximity, including agentic applications where one action becomes hundreds or thousands of inference events.</p></div>
+        <div data-rv><h3>Banking</h3><p>Use AI on client data without a public cloud.</p></div>
+        <div data-rv="1"><h3>Healthcare</h3><p>Keep patient data private while your teams use the latest models.</p></div>
+        <div data-rv="2"><h3>Government</h3><p>Run sensitive work on hardware you control.</p></div>
+        <div data-rv="3"><h3>Utilities</h3><p>Bring AI to critical systems without exposing them.</p></div>
       </div>
       <p style="margin-top:56px" data-rv><a class="link" href="workloads.html">See workloads <span class="arrow" aria-hidden="true">→</span></a></p>
     </div>
   </section>
 
-  <!-- 5. Metro platform (dark) -->
-  <section class="sec">
-    <div class="wrap">
-      <div class="sec-intro">
-        <h2 data-rv>A global urban AI network<span class="stop">.</span></h2>
-        <p data-rv="2">Simply Silicon is securing and developing a pipeline of 15+ additional sites in major metros around North America and Europe.</p>
-      </div>
-      <div class="metrics" style="--n:3" data-rv>
-        <div><b>15+</b><span>Site pipeline</span></div>
-        <div><b>200<small>MW+</small></b><span>Capacity</span></div>
-        <div><b>12+</b><span>Major cities</span></div>
-      </div>
-      <p style="margin-top:40px" data-rv><a class="link" href="platform.html">See the platform <span class="arrow" aria-hidden="true">→</span></a></p>
-    </div>
-  </section>
-
-  <!-- 6. Explore Foundation (light, live 3D) -->
+  <!-- 6. Proof (light): Canada and Foundation -->
   <section class="sec sec--light">
     <div class="wrap">
+      <div class="sec-intro">
+        <h2 data-rv>Your data stays in Canada<span class="stop">.</span></h2>
+        <p data-rv="2">Your servers sit at Foundation, our site in downtown Calgary. Your data never leaves the country.</p>
+      </div>
       <a class="feature feature--live" href="foundation.html" data-rv>
         <div class="feature-img"><div class="scene" id="loopScene" aria-hidden="true"></div></div>
         <div class="feature-copy">
           <span class="status"><i class="dot dot--live"></i>Online</span>
-          <h2>Explore Foundation, our first site, online in Calgary<span class="stop">.</span></h2>
-          <p>Foundation brings 12 MW of secure AI capacity to downtown Calgary. Foundation is the first node in a global urban AI network.</p>
+          <h2>Foundation, our first site<span class="stop">.</span></h2>
+          <p>Secure AI capacity in downtown Calgary, connected to the buildings around it by private fiber.</p>
           <dl class="feature-kv">
-            <div><dt>12 MW</dt><dd>n+1 redundant power</dd></div>
-            <div><dt>7 km</dt><dd>Private fiber</dd></div>
+            <div><dt>12 MW</dt><dd>n+1 redundant power and cooling</dd></div>
+            <div><dt>7 km</dt><dd>Air-gapped fiber</dd></div>
             <div><dt>25+</dt><dd>Connected buildings</dd></div>
-            <div><dt>100 kW</dt><dd>Phase 1, now online</dd></div>
+            <div><dt>Calgary</dt><dd>Downtown, Canada</dd></div>
           </dl>
           <span class="link">Explore Foundation in 3D <span class="arrow" aria-hidden="true">→</span></span>
         </div>
@@ -177,7 +221,16 @@
     </div>
   </section>
 
-  <!-- 7. Investors, right before the footer -->
+  <!-- 7. Closing call to action (dark) -->
+  <section class="cta">
+    <div class="wrap">
+      <h2 data-rv>Keep your AI under your control<span class="stop">.</span></h2>
+      <p data-rv="1">Tell us what you need to run. We will reply with capacity and next steps.</p>
+      <div class="hero-ctas" data-rv="2"><button class="btn btn--primary" type="button" data-contact="Request access">Request access</button></div>
+    </div>
+  </section>
+
+  <!-- 8. Investors, right before the footer -->
   <section class="backers" aria-labelledby="backers-h">
     <div class="wrap"><h2 id="backers-h" class="backers-h" data-rv>Backed by investors and angels from<span class="stop">.</span></h2></div>
     <div class="marquee-wrap">

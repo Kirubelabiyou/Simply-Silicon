@@ -755,3 +755,49 @@ section.backers .backers-h { font: 600 clamp(32px, 4vw, 56px)/1.02 var(--display
 .ja-actions { display: flex; gap: 8px; }
 @media (max-width: 600px) { .ja-form { grid-template-columns: 1fr; } .job summary { grid-template-columns: 1fr 28px; } .job-meta { grid-column: 1; } }
 .ja-form .ja-check input { width: auto; padding: 0; accent-color: var(--accent); }
+
+/* ---------- V12: customer home ---------- */
+/* Hero: the Foundation plant draws itself on the right */
+.hero-plant .plant { position: absolute; top: 0; right: 0; bottom: 0; width: min(60%, 1080px); z-index: -1; display: flex; align-items: center; padding: 40px var(--gut) 40px 0; }
+.hero-plant .plant svg { width: 100%; height: auto; max-height: 100%; }
+.hero-plant .plant::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, #05070b 0%, rgba(5, 7, 11, .55) 18%, rgba(5, 7, 11, 0) 42%); }
+.hero-plant h1 { max-width: 9ch; }
+.hero-plant .lede { max-width: 34ch; }
+@media (min-width: 901px) and (max-width: 1200px) { .hero-plant .plant { width: 54%; } .hero-plant .lede { max-width: 30ch; } }
+@media (max-width: 900px) {
+  .hero-plant .plant { width: 100%; bottom: auto; height: 50%; align-items: center; padding: 0; overflow: hidden; }
+  .hero-plant .plant svg { width: 150%; max-width: none; flex: none; margin-left: -22%; }
+  .hero-plant .lede { max-width: 40ch; }
+  .hero-plant .plant::after { background: linear-gradient(0deg, #05070b 0%, rgba(5, 7, 11, 0) 40%); }
+}
+#plantSvg .lines path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+#plantSvg.play .lines path { stroke-dashoffset: 1; animation: draw 1.5s var(--ease) forwards; animation-delay: calc(var(--i) * .1s); }
+#plantSvg.play .fills { opacity: 0; animation: fade-in 1.8s ease 2.4s forwards; }
+#plantSvg.play .fan-marks, #plantSvg.play .rooffans { opacity: 0; animation: fade-in 1s ease 3s forwards; }
+#plantSvg.play .sign, #plantSvg.play .cap { opacity: 0; animation: fade-in 1.2s ease 3.4s forwards; }
+#plantSvg .sign, #plantSvg .cap { opacity: 1; }
+#plantSvg .hose { stroke-dasharray: 1; stroke-dashoffset: 0; }
+#plantSvg.play .hose { stroke-dashoffset: 1; animation: draw 1.6s var(--ease) 3.1s forwards; }
+#plantSvg .glow-strip { filter: drop-shadow(0 0 6px rgba(160, 220, 255, .9)); }
+#plantSvg .glow-warm { filter: drop-shadow(0 0 10px rgba(255, 220, 160, .7)); }
+#plantSvg .leds { filter: drop-shadow(0 0 2px rgba(77, 178, 239, .9)); }
+#plantSvg .glow-logo { filter: drop-shadow(0 0 6px rgba(77, 178, 239, .6)); }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fade-in { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { #plantSvg.play * { animation: none !important; opacity: 1 !important; stroke-dashoffset: 0 !important; } }
+
+/* Two services */
+.svc { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 28px); }
+.svc-card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--surface); }
+.svc-img { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #05070b; border-bottom: 1px solid var(--line); }
+.svc-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 48%; }
+.svc-img--fig { display: grid; place-items: center; padding: 20px 28px; }
+.svc-img--fig .fig { margin: 0; width: 100%; max-width: 460px; border: 0; background: none; padding: 0; }
+.svc-body { padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 14px; flex: 1; }
+.svc-body .idx { font: 500 13px/1 var(--display); color: var(--text-3); }
+.svc-body h3 { font-size: clamp(24px, 2.2vw, 32px); letter-spacing: -.03em; }
+.svc-body p { font-size: 16.5px; max-width: 48ch; }
+.ticks { list-style: none; margin: 8px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.ticks li { position: relative; padding: 12px 0 12px 22px; border-bottom: 1px solid var(--line); font-size: 15px; color: var(--text); }
+.ticks li::before { content: ""; position: absolute; left: 2px; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px rgba(77, 178, 239, .6); }
+@media (max-width: 860px) { .svc { grid-template-columns: 1fr; } }
