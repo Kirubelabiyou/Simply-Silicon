@@ -953,3 +953,19 @@ section.backers .marquee-track img { height: calc(var(--h, 30px) * 1.15); }
 .hero-plant .plant::after { background: linear-gradient(90deg, #05070b 0%, rgba(5, 7, 11, .4) 10%, rgba(5, 7, 11, 0) 22%); }
 @media (max-width: 900px) { .hero-plant .plant::after { background: linear-gradient(0deg, #05070b 0%, rgba(5, 7, 11, 0) 30%); } }
 @media (min-width: 901px) { .hero-plant .plant::after { display: none; } }
+
+/* ---------- V12.5: plain, editorial text on Workloads; bigger network line; wider Platform title ---------- */
+.prose2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); padding-top: clamp(28px, 3vw, 40px); border-top: 1px solid var(--line-2); }
+.prose2 h3 { font-size: clamp(26px, 2.6vw, 38px); letter-spacing: -.035em; }
+.prose2 p { margin-top: 16px; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.6; max-width: 44ch; }
+@media (max-width: 760px) { .prose2 { grid-template-columns: 1fr; } }
+.leadlist { columns: 2; column-gap: clamp(32px, 6vw, 96px); }
+.leadlist p { break-inside: avoid; margin: 0 0 22px; font-size: clamp(16.5px, 1.3vw, 18.5px); line-height: 1.6; color: var(--text-2); }
+.leadlist b { color: var(--text); font-weight: 600; }
+@media (max-width: 760px) { .leadlist { columns: 1; } }
+/* the network numbers, large and clear under the map */
+.statline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px clamp(24px, 3.4vw, 48px); margin: clamp(28px, 3.5vw, 44px) 0 0; padding: 0; list-style: none; font: 500 clamp(20px, 2vw, 28px)/1.25 var(--display); letter-spacing: -.02em; color: var(--text-2); }
+.statline span { padding: 0; border: 0; border-radius: 0; font: inherit; color: inherit; }
+.statline b { font: 600 clamp(36px, 4.2vw, 60px)/1 var(--display); letter-spacing: -.045em; color: var(--text); margin-right: 6px; }
+.statline .statline-sub { flex-basis: 100%; font-size: clamp(15px, 1.2vw, 17px); color: var(--text-3); letter-spacing: 0; }
+.page-head--wide h1 { max-width: 18ch; }
