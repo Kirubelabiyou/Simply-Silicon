@@ -414,11 +414,16 @@
         <h2 data-rv>AI without giving up control<span class="stop">.</span></h2>
         <p data-rv="2">Public AI clouds mean shared servers and data sent over the public internet. For many teams, that is a risk. With Simply Silicon the hardware is yours alone. So is the line that connects it.</p>
       </div>
-      <div class="cols" style="--n:3">
-        <div data-rv><span class="idx">01</span><h3>Your hardware</h3><p>Dedicated bare metal that no one else touches.</p></div>
-        <div data-rv="1"><span class="idx">02</span><h3>Your models</h3><p>Run any model you want. Generate your own tokens.</p></div>
-        <div data-rv="2"><span class="idx">03</span><h3>Your network</h3><p>Private air-gapped fiber. Never the public internet.</p></div>
-      </div>
+      <table class="compare compare--vs" data-rv>
+        <thead><tr><th scope="col"><span class="sr">What you get</span></th><th scope="col">Public AI clouds</th><th scope="col" class="is-inf">Simply Silicon</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Hardware</th><td>Shared with other customers</td><td>Dedicated bare metal that no one else touches</td></tr>
+          <tr><th scope="row">Models</th><td>The ones the provider offers</td><td>Any model you want, open source or your own</td></tr>
+          <tr><th scope="row">Network</th><td>The public internet</td><td>Private air-gapped fiber</td></tr>
+          <tr><th scope="row">Tokens</th><td>Generated on someone else's machine</td><td>Generated for you alone</td></tr>
+          <tr><th scope="row">Your data</th><td>Leaves your hands</td><td>Stays with you</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
@@ -459,12 +464,12 @@
         <h2 data-rv>How it works<span class="stop">.</span></h2>
         <p data-rv="2">Four steps from first call to running your own models.</p>
       </div>
-      <div class="cols" style="--n:4">
-        <div data-rv><span class="idx">01</span><h3>Tell us your workload</h3><p>What you need to run and how much.</p></div>
-        <div data-rv="1"><span class="idx">02</span><h3>Get your servers</h3><p>Dedicated GPUs set up for you.</p></div>
-        <div data-rv="2"><span class="idx">03</span><h3>Connect privately</h3><p>Over air-gapped fiber from your location.</p></div>
-        <div data-rv="3"><span class="idx">04</span><h3>Run any model</h3><p>Your data and your tokens stay with you.</p></div>
-      </div>
+      <ol class="steps" data-rv>
+        <li><span class="step-n">1</span><h3>Tell us your workload</h3><p>What you need to run and how much.</p></li>
+        <li><span class="step-n">2</span><h3>Get your servers</h3><p>Dedicated GPUs set up for you.</p></li>
+        <li><span class="step-n">3</span><h3>Connect privately</h3><p>Over air-gapped fiber from your location.</p></li>
+        <li><span class="step-n is-end">4</span><h3>Run any model</h3><p>Your data and your tokens stay with you.</p></li>
+      </ol>
     </div>
   </section>
 
@@ -475,11 +480,11 @@
         <h2 data-rv>Built for every team that wants control<span class="stop">.</span></h2>
         <p data-rv="2">From banks to AI startups. If you want to run your own models on hardware only you use, we are built for you.</p>
       </div>
-      <div class="cols" style="--n:4">
-        <div data-rv><h3>Banking</h3><p>Use AI on client data without a public cloud.</p></div>
-        <div data-rv="1"><h3>Healthcare</h3><p>Keep patient data private while your teams use the latest models.</p></div>
-        <div data-rv="2"><h3>Government</h3><p>Run sensitive work on hardware you control.</p></div>
-        <div data-rv="3"><h3>AI and software companies</h3><p>Run open source models for your product on dedicated hardware.</p></div>
+      <div class="tiles">
+        <article class="tile" data-rv><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 15 20 7l14 8M8 15h24M10 18v12M16 18v12M24 18v12M30 18v12M6 33h28"/></svg><h3>Banking</h3><p>Use AI on client data without a public cloud.</p></article>
+        <article class="tile" data-rv="1"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="7" y="7" width="26" height="26" rx="7"/><path d="M20 13v14M13 20h14"/></svg><h3>Healthcare</h3><p>Keep patient data private while your teams use the latest models.</p></article>
+        <article class="tile" data-rv="2"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4v6M20 4h6v3.5h-6M11 18a9 9 0 0 1 18 0M8 18h24M11 21v9M17 21v9M23 21v9M29 21v9M6 33h28"/></svg><h3>Government</h3><p>Run sensitive work on hardware you control.</p></article>
+        <article class="tile tile--hi" data-rv="3"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="11" y="11" width="18" height="18" rx="3"/><rect x="16" y="16" width="8" height="8" rx="1.5"/><path d="M16 6v5M24 6v5M16 29v5M24 29v5M6 16h5M6 24h5M29 16h5M29 24h5"/></svg><h3>AI and software companies</h3><p>Run open source models for your product on dedicated hardware.</p></article>
       </div>
       <p style="margin-top:56px" data-rv><a class="link" href="workloads.html">See workloads <span class="arrow" aria-hidden="true">→</span></a></p>
     </div>
