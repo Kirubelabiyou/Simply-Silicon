@@ -801,3 +801,26 @@ section.backers .backers-h { font: 600 clamp(32px, 4vw, 56px)/1.02 var(--display
 .ticks li { position: relative; padding: 12px 0 12px 22px; border-bottom: 1px solid var(--line); font-size: 15px; color: var(--text); }
 .ticks li::before { content: ""; position: absolute; left: 2px; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px rgba(77, 178, 239, .6); }
 @media (max-width: 860px) { .svc { grid-template-columns: 1fr; } }
+
+/* ---------- V12.1: essay on the Platform page, even section rhythm ---------- */
+.essay { max-width: 760px; margin-inline: auto; }
+.essay-k { display: block; margin-bottom: 18px; font: 500 13px/1 var(--display); letter-spacing: .04em; text-transform: uppercase; color: var(--text-3); }
+.essay h2 { text-wrap: balance; }
+.essay-lead, .essay-body p { font-size: clamp(17px, 1.3vw, 19px); line-height: 1.7; color: var(--text-2); }
+.essay-lead { margin-top: clamp(24px, 3vw, 36px); color: var(--text); }
+.essay-body p { margin-top: 1.1em; }
+.essay-more { margin-top: 8px; }
+.essay-more summary { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 10px 0; cursor: pointer; list-style: none; font: 500 15px/1 var(--body); color: var(--text); border-bottom: 1px solid var(--line-2); }
+.essay-more summary::-webkit-details-marker { display: none; }
+.essay-more summary::after { content: "↓"; transition: transform .4s var(--ease); }
+.essay-more[open] summary::after { transform: rotate(180deg); }
+.essay-more .when-open, .essay-more[open] .when-closed { display: none; }
+.essay-more[open] .when-open { display: inline; }
+.essay-more[open] summary { margin-bottom: 8px; }
+.essay .doc-link { margin-top: clamp(36px, 4.5vw, 56px); }
+/* sections share one rhythm: closing call to action and backers match the rest */
+.cta { padding-block: var(--sec); }
+.cta h2 { font-size: clamp(36px, 4.6vw, 64px); }
+section.backers .marquee-track li { min-height: 112px; padding: 0 clamp(28px, 3.6vw, 56px); }
+section.backers .marquee-track img { height: calc(var(--h, 30px) * 1.15); }
+@media (max-width: 700px) { section.backers .marquee-track li { min-height: 96px; } section.backers .marquee-track img { height: var(--h, 30px); } }
