@@ -1103,6 +1103,10 @@ function buildPlant(mat, tick) {
     // Calgary District Heating sign on the roof edge (the plant's own name), Simply Silicon below on the band
     const eM = mat('signEdge', 0x7c848d, { metalness: .4, roughness: .5 }), hsM = [eM, eM, eM, eM, new THREE.MeshStandardMaterial({ map: heatSignTex(), roughness: .5, metalness: .2 }), eM];
     const heatSign = new THREE.Mesh(new THREE.BoxGeometry(2.9, 1.25, .22), hsM); heatSign.scale.set(.72, .72, 1); heatSign.position.set(HALL.e + .14, 2.35, 1.4); heatSign.rotation.y = Math.PI / 2; heatSign.castShadow = true; B.add(heatSign);
+    // the same Calgary District Heating sign on the street front, on the roofline, as on the real plant
+    const hsTex = heatSignTex(), hsFront = [eM, eM, eM, eM, new THREE.MeshStandardMaterial({ map: hsTex, emissive: 0xffffff, emissiveMap: hsTex, emissiveIntensity: .45, roughness: .5, metalness: .1 }), eM];
+    const heatFront = new THREE.Mesh(new THREE.BoxGeometry(2.9, 1.25, .22), hsFront); heatFront.scale.set(.78, .78, 1); heatFront.position.set(HALL.e - 1.25, HALL.H + .34 + .62, HALL.f + .25); heatFront.rotation.y = Math.PI; heatFront.castShadow = true; B.add(heatFront);
+    box(.08, .5, .08, eM, HALL.e - 2.1, HALL.H + .34, HALL.f + .3, B); box(.08, .5, .08, eM, HALL.e - .4, HALL.H + .34, HALL.f + .3, B);
     const ss = new THREE.Mesh(new THREE.PlaneGeometry(2.2, .27), new THREE.MeshBasicMaterial({ map: signTex() })); ss.position.set(3.4, HALL.H + .17, HALL.f - .006); ss.rotation.y = Math.PI; B.add(ss);
     { // street front, after the official model
       const white = mat('fwhite', 0xeef1f4, { roughness: .55 }), dark = mat('fdark', 0x111317, { roughness: .6 });

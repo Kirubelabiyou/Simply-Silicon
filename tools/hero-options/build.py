@@ -47,7 +47,7 @@ OPTS = {
 #plantSvg .hose { stroke-dasharray: 1; stroke-dashoffset: 0; }
 #plantSvg.play .hose { stroke-dashoffset: 1; animation: draw 1.6s var(--ease) 3.1s forwards; }
 #plantSvg .leds { filter: drop-shadow(0 0 2px rgba(77,178,239,.9)); }
-#plantSvg .glow-logo { filter: drop-shadow(0 0 6px rgba(77,178,239,.6)); }
+#plantSvg .glow-logo { filter: drop-shadow(0 0 2px #4db2ef) drop-shadow(0 0 8px rgba(77,178,239,.9)) drop-shadow(0 0 18px rgba(77,178,239,.55)); }
 #plantSvg .glow-strip { filter: drop-shadow(0 0 6px rgba(160,220,255,.9)); }
 #plantSvg .glow-warm { filter: drop-shadow(0 0 10px rgba(255,220,160,.7)); }
 @keyframes draw { to { stroke-dashoffset: 0; } }

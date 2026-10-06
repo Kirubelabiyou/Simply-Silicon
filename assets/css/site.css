@@ -948,3 +948,8 @@ section.backers .marquee-track img { height: calc(var(--h, 30px) * 1.15); }
 @media (max-width: 760px) { .checks { grid-template-columns: 1fr; } }
 /* Workloads: figure first, words second */
 .split--rev > :first-child { order: 2; }
+/* the logo on the plant glows like a lit sign, and the hero shade no longer covers it */
+#plantSvg .glow-logo { filter: drop-shadow(0 0 2px #4db2ef) drop-shadow(0 0 8px rgba(77, 178, 239, .9)) drop-shadow(0 0 18px rgba(77, 178, 239, .55)); }
+.hero-plant .plant::after { background: linear-gradient(90deg, #05070b 0%, rgba(5, 7, 11, .4) 10%, rgba(5, 7, 11, 0) 22%); }
+@media (max-width: 900px) { .hero-plant .plant::after { background: linear-gradient(0deg, #05070b 0%, rgba(5, 7, 11, 0) 30%); } }
+@media (min-width: 901px) { .hero-plant .plant::after { display: none; } }
