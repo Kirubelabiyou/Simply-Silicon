@@ -1007,3 +1007,8 @@ section.backers .marquee-track img { height: calc(var(--h, 30px) * 1.15); }
   .hero-plant .hero-grid .plant svg { width: 100%; margin: 0; }
 }
 @media (min-width: 901px) { .hero-plant .hero-grid .plant { margin-right: 0; } }
+/* phone: the drawing runs edge to edge, larger, with no frame */
+@media (max-width: 900px) {
+  .hero-plant .hero-grid .plant { margin: 26px calc(var(--gut) * -1) 22px; padding: 0; border: 0; border-radius: 0; background: none; overflow: visible; }
+  .hero-plant .hero-grid .plant svg { width: 100%; margin: 0; }
+}
