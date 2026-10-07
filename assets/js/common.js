@@ -192,3 +192,10 @@
     }).catch(function () {});
   });
 })();
+
+/* Measure the real header height (it grows with the phone's safe area) so pinned figures stop just below it */
+(function () {
+  function set() { var h = document.querySelector('.hdr'); if (h) document.documentElement.style.setProperty('--hdr-live', Math.ceil(h.getBoundingClientRect().height) + 'px'); }
+  set(); window.addEventListener('load', set); window.addEventListener('resize', set);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
+})();

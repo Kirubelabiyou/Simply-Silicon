@@ -1044,3 +1044,9 @@ section.backers .marquee-track img { height: calc(var(--h, 30px) * 1.15); }
   .netstat b { font-size: 44px; }
 }
 @media (max-width: 900px) { .pin-fig { position: relative; top: auto; } }
+/* pinned figure: stops right under the header on every screen, phones included */
+.pin-fig { top: calc(var(--hdr-live, var(--hdr)) + 24px); }
+@media (max-width: 900px) {
+  .pin-fig { position: sticky; top: var(--hdr-live, var(--hdr)); z-index: 3; background: var(--bg); padding: 10px 0 12px; box-shadow: 0 12px 24px -12px rgba(0, 0, 0, .8); }
+  .pin-fig svg { max-height: 40svh; }
+}
