@@ -176,3 +176,19 @@
   pick();
 })();
 
+
+/* Essay PDF: opens in a new tab on the live site. Inside the claude.ai preview, new tabs are blocked,
+   so the preview offers the PDF as a download instead. */
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-pdf]'); if (!a) return;
+    var c = window.claude; if (!c || typeof c.use !== 'function') return; // live site: the normal new-tab link
+    e.preventDefault();
+    c.use('downloads').then(function (d) {
+      if (!d) { window.location.href = a.href; return; }
+      return fetch(a.href).then(function (r) { return r.blob(); }).then(function (b) {
+        return d.save({ filename: 'The Internet Was Not Built for Inference.pdf', data: b });
+      });
+    }).catch(function () {});
+  });
+})();
