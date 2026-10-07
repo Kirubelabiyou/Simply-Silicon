@@ -1031,3 +1031,16 @@ section.backers .marquee-track img { height: calc(var(--h, 30px) * 1.15); }
 .pin-fig { top: calc(var(--hdr) + 24px); height: auto; align-items: flex-start; }
 .pin-fig svg { display: block; width: 100%; max-height: calc(100svh - var(--hdr) - 170px); }
 @media (max-width: 900px) { .pin-fig { top: calc(var(--hdr) + 8px); } .pin-fig svg { max-height: 44svh; } }
+
+/* ---------- V12.9: network numbers kept plain; no sticky figure on phones ---------- */
+.netstats { background: none; border: 0; border-top: 1px solid var(--line-2); border-bottom: 1px solid var(--line-2); border-radius: 0; overflow: visible; }
+.netstat { padding: clamp(24px, 3vw, 40px) clamp(20px, 2.6vw, 36px) clamp(24px, 3vw, 40px) 0; }
+.netstat + .netstat { padding-left: clamp(20px, 2.6vw, 36px); }
+.netstat b { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--text); font-size: clamp(48px, 5vw, 76px); }
+.netstat span { margin-top: 10px; color: var(--text-3); }
+.netstats-note { margin: 16px 0 0; font-size: 14px; color: var(--text-3); }
+@media (max-width: 760px) {
+  .netstat, .netstat + .netstat { padding: 18px 0; }
+  .netstat b { font-size: 44px; }
+}
+@media (max-width: 900px) { .pin-fig { position: relative; top: auto; } }
