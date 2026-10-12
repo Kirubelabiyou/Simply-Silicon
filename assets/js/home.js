@@ -178,19 +178,6 @@
   }, { passive: false });
 })();
 
-/* Metro platform: Calgary online, North America and Europe as pipeline regions (as stated on gosimply.ai) */
-(function () {
-  var box = document.getElementById('mapStrip'); if (!box || !window.SS_WORLD) return;
-  var c = window.SS_CITY_XY.calgary;
-  var svg = '<svg viewBox="110 52 540 200" role="img" aria-label="Map: Calgary online; North America and Europe pipeline regions">' +
-    '<path class="ms-land" d="' + window.SS_WORLD.land + '"/>' +
-    '<ellipse class="ms-region" cx="262" cy="168" rx="100" ry="58"/><ellipse class="ms-region" cx="518" cy="140" rx="44" ry="30"/>' +
-    '<text class="ms-region-l" x="262" y="236" text-anchor="middle">North America</text><text class="ms-region-l" x="518" y="182" text-anchor="middle">Europe</text>' +
-    '<circle class="ms-halo" cx="' + c[0] + '" cy="' + c[1] + '" r="8"/><circle class="ms-site" cx="' + c[0] + '" cy="' + c[1] + '" r="3"/>' +
-    '<text class="ms-l" x="' + (c[0] + 7) + '" y="' + (c[1] - 5) + '">Calgary</text></svg>';
-  box.insertAdjacentHTML('afterbegin', svg);
-})();
-
 /* Explore Foundation: a quiet live 3D loop, loaded only when it comes near the screen */
 (function () {
   var host = document.getElementById('loopScene'); if (!host) return;

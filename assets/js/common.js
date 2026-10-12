@@ -34,12 +34,14 @@
   var hdr = document.getElementById('site-header');
   if (hdr) {
     hdr.className = 'hdr';
+    var mainEl = document.querySelector('main:not([hidden])'); if (mainEl && !mainEl.id) mainEl.id = 'main';
+    hdr.insertAdjacentHTML('beforebegin', '<a class="skip" href="#' + (mainEl ? mainEl.id : 'main') + '">Skip to content</a>');
     hdr.innerHTML =
       '<div class="wrap">' +
       '<button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-drawer"><span></span></button>' +
       '<a class="logo" href="./" aria-label="Simply Silicon home">' + LOGO + '</a>' +
       '<nav class="menu" aria-label="Main">' + links() + '</nav>' +
-      '<button class="btn btn--primary btn--sm hdr-cta" type="button" data-contact>Connect</button>' +
+      '<button class="btn btn--primary btn--sm hdr-cta" type="button" data-contact="Request access">Request access</button>' +
       '</div>';
   }
 
@@ -133,9 +135,9 @@
       '<div class="ftr-brand"><a class="logo" href="./">' + LOGO + '</a><p>Air-gapped AI infrastructure in major cities.</p>' +
       '<div class="social"><a href="' + LINKEDIN + '" target="_blank" rel="noopener" aria-label="Simply Silicon on LinkedIn">' + LI + '</a></div></div>' +
       '<div class="ftr-cols">' +
-      '<div><h4>Company</h4><ul><li><a href="./">Home</a></li><li><a href="./#how">How it works</a></li><li><a href="platform.html">Our vision</a></li><li><a href="./#careers">Careers</a></li></ul></div>' +
-      '<div><h4>Product</h4><ul><li><a href="foundation.html">Foundation</a></li><li><a href="workloads.html">Workloads</a></li><li><a href="platform.html">Platform</a></li></ul></div>' +
-      '<div><h4>Contact</h4><ul><li><button class="ftr-link" type="button" data-contact>Get in touch</button></li><li><address>435 9 Ave SE<br>Calgary, Alberta, Canada</address></li></ul></div>' +
+      '<div><h3>Company</h3><ul><li><a href="./">Home</a></li><li><a href="./#how">How it works</a></li><li><a href="platform.html">Our vision</a></li><li><a href="./#careers">Careers</a></li></ul></div>' +
+      '<div><h3>Product</h3><ul><li><a href="foundation.html">Foundation</a></li><li><a href="workloads.html">Workloads</a></li><li><a href="platform.html">Platform</a></li></ul></div>' +
+      '<div><h3>Contact</h3><ul><li><button class="ftr-link" type="button" data-contact>Get in touch</button></li><li><address>435 9 Ave SE<br>Calgary, Alberta, Canada</address></li></ul></div>' +
       '</div>' +
       '</div>' +
       '<div class="ftr-bottom"><span>© ' + new Date().getFullYear() + ' Simply Silicon. All rights reserved.</span></div>' +
