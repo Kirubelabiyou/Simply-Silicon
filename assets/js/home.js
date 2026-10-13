@@ -104,7 +104,7 @@
       var img = new Image();
       img.onload = function () { img.alt = hidden ? '' : name; var host = li.querySelector('a') || li; host.insertBefore(img, host.firstChild); li.classList.add('has-logo'); };
       img.onerror = function () { tryLoad(exts.slice(1)); };
-      img.src = 'assets/img/backers/' + exts[0];
+      img.src = (window.SS_BASE || '') + 'assets/img/backers/' + exts[0];
     };
     tryLoad([file]);
   });
@@ -185,7 +185,7 @@
   function load(src) { return new Promise(function (ok, no) { var s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = no; document.body.appendChild(s); }); }
   function start() {
     if (started) return; started = true;
-    ['assets/js/calgary-data.js', 'assets/js/calgary-buildings.js', 'assets/js/calgary-streets.js', 'assets/js/calgary-parks.js'].reduce(function (p, src) { return p.then(function () { return load(src); }); }, Promise.resolve())
+    ['assets/js/calgary-data.js', 'assets/js/calgary-buildings.js', 'assets/js/calgary-streets.js', 'assets/js/calgary-parks.js'].reduce(function (p, src) { return p.then(function () { return load((window.SS_BASE || '') + src); }); }, Promise.resolve())
       .then(function () { return import('./scene.js'); })
       .then(function (m) { m.mountScene(host, { cinematic: true, view: 'site', phone: window.innerWidth < 900 }); })
       .catch(function (e) { console.error(e); });

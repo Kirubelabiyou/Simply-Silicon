@@ -1,0 +1,106 @@
+/* Blueprint edition: a theme layer loaded after site.css on the pages in /blueprint/.
+   Navy-black ground with a faint drafting grid, square corners, mono labels and numbered sections. */
+
+:root {
+  --bg: #0a0e13; --bg-2: #0c1219; --surface: #0e151d; --surface-2: #121b25;
+  --line: rgba(77, 178, 239, .14); --line-2: rgba(77, 178, 239, .26); --line-3: rgba(77, 178, 239, .4);
+  --text: #eef3f7; --text-2: #a7b2bd; --text-3: #8796a5;
+  --accent: #4db2ef; --accent-2: #8fd0f6; --accent-soft: rgba(77, 178, 239, .1);
+  --r: 0px;
+  --bp-grid: linear-gradient(rgba(77, 178, 239, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(77, 178, 239, .06) 1px, transparent 1px);
+}
+html, body { background: var(--bg); }
+
+/* light sections become a second, slightly lifted sheet of the same blueprint */
+.sec--light {
+  --bg: #0c1219; --bg-2: #0e151d; --surface: #101821; --surface-2: #142030;
+  --line: rgba(77, 178, 239, .14); --line-2: rgba(77, 178, 239, .26); --line-3: rgba(77, 178, 239, .4);
+  --text: #eef3f7; --text-2: #a7b2bd; --text-3: #8796a5;
+  --accent: #4db2ef; --accent-2: #8fd0f6; --accent-soft: rgba(77, 178, 239, .1);
+}
+.sec--light .btn { color: var(--text); border-color: var(--line-3); }
+.sec--light .btn--primary { background: var(--text); border-color: var(--text); color: #0a0e13; }
+
+/* the drafting grid sits behind every full-width band */
+.sec, .cta, .page-head, .bp-hero, .backers, .stage, .map-top { background-color: var(--bg); background-image: var(--bp-grid); background-size: 32px 32px; }
+.sec + .sec, .sec + .cta, .sec--light + .sec, .sec + .sec--light { border-top: 1px solid var(--line); }
+
+/* header and footer */
+.hdr { background: rgba(10, 14, 19, .96); border-bottom-color: var(--line-2); }
+.menu a { font: 400 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.ftr { background: #080b10; border-top: 1px solid var(--line-2); }
+.ftr h3 { font: 400 11px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+
+/* square corners everywhere */
+.btn, .svc-card, .svc-img, .tile, .feature, .feature-img, .doc-link, .doc-link .doc-ico, .fig, .scene, .map-strip, .net-stage,
+.modal-panel, .modal-x, .drawer-close, input, select, textarea, .job-filters *, .jobs li, .duo > *, .story, .metrics > *, .netstats > * { border-radius: 0 !important; }
+.btn { font-weight: 500; }
+.btn--primary, .btn--light { background: var(--text); border-color: var(--text); color: #0a0e13; }
+
+/* type: lighter display weight, mono labels */
+h1, h2, h3 { font-weight: 500; }
+.idx, .status, .step-n, .eyebrow, .kicker, .label, .feature-kv dd, .tiles h3 + p::before { font-family: var(--mono); }
+.idx, .status, .eyebrow, .kicker { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+
+/* every section heading gets a drawing number */
+main { counter-reset: bpsec; }
+.sec .sec-intro h2::before, .cta h2::before {
+  counter-increment: bpsec; content: "Sec. " counter(bpsec, decimal-leading-zero);
+  display: block; margin-bottom: 18px; font: 400 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent);
+}
+
+/* cards read as drawing panels: hairline frame, corner ticks */
+.svc-card, .tile, .feature, .doc-link { position: relative; background: var(--surface); border: 1px solid var(--line-2); }
+.svc-card::before, .tile::before { content: ""; position: absolute; top: -1px; left: -1px; width: 12px; height: 12px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); pointer-events: none; }
+.tile svg { stroke: var(--accent); }
+
+/* how-it-works numbers become square markers */
+.step-n { border-radius: 0 !important; font-size: 13px; }
+
+/* ---------- Home hero (from design B) ---------- */
+.bp-hero { position: relative; border-bottom: 1px solid var(--line-2); }
+.bp-hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 5vw, 72px); align-items: center; padding-block: clamp(56px, 8vh, 96px) clamp(40px, 5vh, 56px); }
+.bp-hero .bp-copy { display: flex; flex-direction: column; gap: 30px; min-width: 0; }
+.bp-hero .bp-kicker { font: 400 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.bp-hero h1 { margin: 0; font-weight: 500; font-size: clamp(48px, 6.2vw, 96px); line-height: .98; letter-spacing: -.04em; color: #f2f5f8; max-width: 11ch; }
+.bp-hero .lede { margin: 0; max-width: 32em; font-size: clamp(17px, 1.4vw, 19px); color: #a7b2bd; }
+.bp-hero .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
+.bp-hero figure { margin: 0; min-width: 0; border: 1px solid var(--line-2); padding: clamp(16px, 2vw, 24px); background: rgba(10, 14, 19, .7); }
+.bp-hero figure svg { display: block; width: 100%; height: auto; font-family: var(--mono); }
+.bp-hero figcaption { margin-top: 12px; font: 400 11px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+.bp-facts { grid-column: 1 / -1; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line-2); }
+.bp-facts > div { padding: 20px 20px 0 0; display: flex; flex-direction: column; gap: 8px; }
+.bp-facts dt { font: 400 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.bp-facts dd { margin: 0; color: var(--text); font-size: 17px; }
+@media (max-width: 900px) {
+  .bp-hero .wrap { grid-template-columns: 1fr; }
+  .bp-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 8px; }
+}
+
+/* ---------- Home: the live 3D model as a full-width plate ---------- */
+.bp-3d { display: block; margin-top: clamp(40px, 5vw, 64px); text-decoration: none; color: inherit; border: 1px solid var(--line-2); background: var(--surface); }
+.bp-3d-stage { position: relative; height: clamp(380px, 56vw, 680px); border-bottom: 1px solid var(--line-2); }
+.bp-3d-stage .scene { position: absolute; inset: 0; height: 100%; border: 0; }
+.bp-3d-stage .bp-tag { position: absolute; z-index: 4; left: 16px; top: 16px; padding: 8px 10px; background: rgba(10, 14, 19, .85); border: 1px solid var(--line-2); font: 400 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.bp-3d-stage::before, .bp-3d-stage::after { content: ""; position: absolute; z-index: 4; width: 18px; height: 18px; pointer-events: none; }
+.bp-3d-stage::before { right: 12px; top: 12px; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+.bp-3d-stage::after { left: 12px; bottom: 12px; border-bottom: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+.bp-3d-body { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr); gap: 24px 48px; padding: clamp(24px, 3vw, 36px); align-items: start; }
+.bp-3d-body h3 { font-size: clamp(24px, 2.4vw, 34px); letter-spacing: -.03em; }
+.bp-3d-body p { margin-top: 10px; }
+.bp-3d-body .link { margin-top: 20px; }
+.bp-3d-kv { margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.bp-3d-kv > div { padding: 0 16px; border-left: 1px solid var(--line-2); }
+.bp-3d-kv dt { font: 500 clamp(24px, 2.4vw, 34px)/1 var(--display); letter-spacing: -.03em; color: var(--text); }
+.bp-3d-kv dd { margin: 10px 0 0; font: 400 11px/1.5 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); }
+.bp-3d:hover .link { border-color: var(--text); }
+@media (max-width: 900px) {
+  .bp-3d-body { grid-template-columns: 1fr; }
+  .bp-3d-kv { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
+}
+
+/* the switcher back to the main edition */
+.bp-edition { font: 400 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+
+/* panels drawn over the 3D scene stay square too (the live dot stays round) */
+.scene *:not(.dot):not(i), .stage *:not(.dot):not(i) { border-radius: 0 !important; }

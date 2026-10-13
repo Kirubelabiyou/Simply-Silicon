@@ -66,7 +66,7 @@
   /* ---------- load ---------- */
   function sortAll() { all.sort(function (a, b) { return String(b.created || '').localeCompare(String(a.created || '')); }); }
   function fromFile() {
-    fetch('assets/data/positions.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; })
+    fetch((window.SS_BASE || '') + 'assets/data/positions.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; })
       .then(function (rows) { if (!db) { all = Array.isArray(rows) ? rows : []; sortAll(); render(); } }).catch(function () { render(); });
   }
   function start() {
