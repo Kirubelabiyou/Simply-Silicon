@@ -157,28 +157,6 @@
   els.forEach(function (el) { io.observe(el); });
 })();
 
-/* Pinned steps (Platform page): the step nearest the middle of the screen lights up, with its part of the pinned diagram */
-(function () {
-  var steps = [].slice.call(document.querySelectorAll('.pin-step')), parts = document.querySelectorAll('.pin-fig .g-part');
-  if (!steps.length) return;
-  var cur = -1;
-  function set(k) {
-    if (k === cur) return; cur = k;
-    steps.forEach(function (s, i) { s.classList.toggle('on', i === k); });
-    parts.forEach(function (p) { p.classList.toggle('on', p.getAttribute('data-k') === String(k)); });
-  }
-  function pick() {
-    var mid = window.innerHeight * (window.innerWidth < 900 ? .62 : .5), best = 0, bd = Infinity;
-    steps.forEach(function (s, i) { var r = s.getBoundingClientRect(), c = r.top + r.height / 2, d = Math.abs(c - mid); if (d < bd) { bd = d; best = i; } });
-    set(best);
-  }
-  var ticking = false;
-  window.addEventListener('scroll', function () { if (ticking) return; ticking = true; requestAnimationFrame(function () { ticking = false; pick(); }); }, { passive: true });
-  window.addEventListener('resize', pick);
-  pick();
-})();
-
-
 /* Essay PDF: opens in a new tab on the live site. Inside the claude.ai preview, new tabs are blocked,
    so the preview offers the PDF as a download instead. */
 (function () {

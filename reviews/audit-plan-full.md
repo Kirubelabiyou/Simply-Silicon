@@ -54,9 +54,9 @@ The site is structurally sound, loads with no errors or broken requests, and res
 | 2 | Add a 404 page for GitHub Pages | Production, UX | `404.html` | Branded page with links home | Fixed |
 | 3 | Shorten motion. Reveals took 1.4 s and moved 28 px, hovers took 0.5 to 0.6 s | Design (animation) | `site.css` | Reveals now 0.9 s and 16 px, hovers 0.2 s with ease-out, no lift on touch screens | Fixed |
 | 4 | Remove dead code: map strip script and unused styles (essay, pair, checklist, statline, eyebrow) | Repo Maintainer | `home.js`, `site.css` | Removed | Fixed |
-| 5 | Consolidate the CSS override layers | Frontend, Repo Maintainer | `site.css` | One refactor pass, no visual change | Open |
-| 6 | Lazy-load `map-data.js` (238 KB) only when the map nears the screen | Performance | `platform.html`, `network.js` | IntersectionObserver loader, like the home 3D loop | Open |
-| 7 | Move `tools/` (hero experiments) off `main`, since GitHub Pages serves it publicly | Repo Maintainer | `tools/` | Keep it on a `lab` branch | Open |
+| 5 | Consolidate the CSS override layers | Frontend, Repo Maintainer | `site.css` | 107 fully overridden declarations removed automatically, version labels renamed, pixel-identical on all pages at 1440 and 390 px | Fixed |
+| 6 | Reduce `map-data.js` (238 KB) | Performance | `map-data.js` | The map is the first thing on Platform, so lazy loading would not help. Paths re-encoded as relative coordinates instead: 238 KB to 143 KB, rendering identical | Fixed |
+| 7 | Move `tools/` (hero experiments) off `main`, since GitHub Pages serves it publicly | Repo Maintainer | `tools/` | Kept on the `lab` branch, removed from `main` | Fixed |
 | 8 | At launch, remove `noindex` and point `og:url` to the real domain | Production | all pages | Edit 5 meta tags | Open (intentional for now) |
 
 ---
@@ -146,7 +146,7 @@ The site is structurally sound, loads with no errors or broken requests, and res
 - `network.js` with `map-data.js`: the Platform map.
 - `scene.js`: the 3D model, loaded as a module.
 
-Boundaries are clean and each page loads only what it needs. Recommendation: Platform-only logic in `common.js` (pinned steps) could move to `network.js`, but the guard clauses make this harmless.
+Boundaries are clean and each page loads only what it needs. Fixed: the Platform-only pinned steps code moved from `common.js` to `network.js`.
 
 ---
 
