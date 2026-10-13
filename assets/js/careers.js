@@ -45,7 +45,7 @@
       return (!ft.value || p.team === ft.value) && (!fl.value || p.location === fl.value) && (!fy.value || p.type === fy.value) &&
         (!q || [p.title, p.team, p.location, p.type, p.description].join(' ').toLowerCase().indexOf(q) >= 0);
     });
-    count.textContent = open.length ? shown.length + ' of ' + open.length + ' open position' + (open.length === 1 ? '' : 's') : '';
+    count.textContent = open.length ? shown.length + ' of ' + open.length + ' open role' + (open.length === 1 ? '' : 's') : '';
     list.innerHTML = shown.map(function (p) {
       var apply = p.apply ? (/^[^@\s]+@[^@\s]+$/.test(p.apply) ? 'mailto:' + p.apply + '?subject=' + encodeURIComponent('Application: ' + p.title) : p.apply) : '';
       return '<li class="job"><details><summary><span class="job-title">' + esc(p.title) + '</span><span class="job-meta">' +
@@ -115,7 +115,7 @@
     data.created = prev && prev.created ? prev.created : new Date().toISOString();
     $('jobSave').disabled = true;
     ref.set(data).then(function () { say(editing ? 'Saved.' : 'Position added.'); fill(null); })
-      .catch(function (err) { say('Could not save: ' + (err && err.message ? err.message : 'try again'), true); })
+      .catch(function (err) { say('Could not save this role. ' + (err && err.message ? err.message : 'Check your connection and try again.'), true); })
       .then(function () { $('jobSave').disabled = false; });
   });
   $('jobCancel').addEventListener('click', function () { fill(null); say(''); });
@@ -124,8 +124,8 @@
     var id = b.getAttribute('data-edit') || b.getAttribute('data-toggle') || b.getAttribute('data-del');
     var p = all.filter(function (x) { return x.id === id; })[0]; if (!p) return;
     if (b.hasAttribute('data-edit')) { fill(p); form.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
-    if (b.hasAttribute('data-toggle')) { db.collection('positions').doc(id).update({ open: p.open === false }).catch(function () { say('Could not update.', true); }); return; }
-    if (b.hasAttribute('data-del') && window.confirm('Delete "' + p.title + '"? This cannot be undone.')) db.collection('positions').doc(id).delete().catch(function () { say('Could not delete.', true); });
+    if (b.hasAttribute('data-toggle')) { db.collection('positions').doc(id).update({ open: p.open === false }).catch(function () { say('Could not change this role. Check your connection and try again.', true); }); return; }
+    if (b.hasAttribute('data-del') && window.confirm('Delete "' + p.title + '"? This cannot be undone.')) db.collection('positions').doc(id).delete().catch(function () { say('Could not delete this role. Check your connection and try again.', true); });
   });
   fill(null);
 

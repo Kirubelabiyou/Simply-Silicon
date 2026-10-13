@@ -74,17 +74,17 @@
     '<div class="modal-panel">' +
     '<button class="modal-x" type="button" aria-label="Close">×</button>' +
     '<h2 id="cf-title">Contact Simply Silicon</h2>' +
-    '<p class="modal-sub">Tell us about your workload, site or partnership. We reply by email.</p>' +
+    '<p class="modal-sub">Tell us what you plan to run or how you want to work with us. We will get back to you.</p>' +
     '<form id="cf" novalidate>' +
-    '<div class="f-row"><label for="cf-name">Full name</label><input id="cf-name" name="name" autocomplete="name" required></div>' +
+    '<div class="f-row"><label for="cf-name">Name</label><input id="cf-name" name="name" autocomplete="name" required></div>' +
     '<div class="f-row"><label for="cf-email">Work email</label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>' +
-    '<div class="f-row"><label for="cf-org">Company</label><input id="cf-org" name="org" autocomplete="organization"></div>' +
+    '<div class="f-row"><label for="cf-org">Organization (optional)</label><input id="cf-org" name="org" autocomplete="organization"></div>' +
     '<div class="f-row"><label for="cf-topic">Topic</label><select id="cf-topic" name="topic">' +
-    '<option>Request access</option><option>Compute capacity</option><option>Site partnership</option><option>Investment</option><option>Media</option><option>Careers</option><option>Other</option></select></div>' +
+    '<option>Request access</option><option>Site partnership</option><option>Investment</option><option>Media</option><option>Careers</option><option>Other</option></select></div>' +
     '<div class="f-row f-full"><label for="cf-subject">Subject</label><input id="cf-subject" name="subject" required></div>' +
-    '<div class="f-row f-full"><label for="cf-msg">Message</label><textarea id="cf-msg" name="message" rows="5" required></textarea></div>' +
+    '<div class="f-row f-full"><label for="cf-msg">Message</label><textarea id="cf-msg" name="message" rows="5" required placeholder="What you plan to run and where your teams work"></textarea></div>' +
     '<p class="f-err" id="cf-err" hidden></p>' +
-    '<div class="f-actions"><button class="btn btn--primary" type="submit">Prepare email</button></div>' +
+    '<div class="f-actions"><button class="btn btn--primary" type="submit">Review message</button></div>' +
     '</form>' +
     '<div class="cf-done" id="cf-done" hidden></div>' +
     '</div>';
@@ -103,22 +103,22 @@
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim())) missing.push('a valid email');
     if (!f.subject.value.trim()) missing.push('a subject');
     if (!f.message.value.trim()) missing.push('a message');
-    if (missing.length) { err.textContent = 'Please add ' + missing.join(', ') + '.'; err.hidden = false; return; }
+    if (missing.length) { err.textContent = 'Add ' + (missing.length > 1 ? missing.slice(0, -1).join(', ') + ' and ' + missing[missing.length - 1] : missing[0]) + ' to continue.'; err.hidden = false; return; }
     err.hidden = true;
     var subject = '[' + f.topic.value + '] ' + f.subject.value.trim();
     var body = f.message.value.trim() + '\n\n' + f.name.value.trim() + (f.org.value.trim() ? '\n' + f.org.value.trim() : '') + '\n' + f.email.value.trim();
     var full = 'Subject: ' + subject + '\n\n' + body;
     done.innerHTML =
-      '<h3>Your email is ready</h3>' +
+      '<h3>Your message is ready</h3>' +
       (CONTACT_EMAIL
-        ? '<p>Open it in your email app to send it to <span class="sel">' + CONTACT_EMAIL + '</span>. If nothing opens, copy it below.</p><div class="f-actions"><a class="btn btn--primary" href="mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body) + '">Open in email app</a><button class="btn" type="button" data-copy>Copy message</button></div>'
-        : '<p>Copy your message and send it to Simply Silicon on LinkedIn.</p><div class="f-actions"><button class="btn btn--primary" type="button" data-copy>Copy message</button><a class="btn" href="' + LINKEDIN + '" target="_blank" rel="noopener">Open LinkedIn</a></div>') +
+        ? '<p>Send it from your email app to <span class="sel">' + CONTACT_EMAIL + '</span>. If your app does not open, copy the message instead.</p><div class="f-actions"><a class="btn btn--primary" href="mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body) + '">Open in email app</a><button class="btn" type="button" data-copy>Copy message</button></div>'
+        : '<p>Copy the message below and send it to us on LinkedIn.</p><div class="f-actions"><button class="btn btn--primary" type="button" data-copy>Copy message</button><a class="btn" href="' + LINKEDIN + '" target="_blank" rel="noopener">Open LinkedIn</a></div>') +
       '<pre class="cf-preview" tabindex="0"></pre><button class="btn btn--sm" type="button" data-back>Edit message</button>';
     done.querySelector('.cf-preview').textContent = full;
     done.querySelector('[data-copy]').addEventListener('click', function () {
       var b = this, pre = done.querySelector('.cf-preview');
       function ok() { b.textContent = 'Copied'; }
-      function sel() { var r = document.createRange(); r.selectNodeContents(pre); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected, press copy'; }
+      function sel() { var r = document.createRange(); r.selectNodeContents(pre); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected. Press Ctrl+C to copy'; }
       try { navigator.clipboard.writeText(full).then(ok, sel); } catch (x) { sel(); }
     });
     done.querySelector('[data-back]').addEventListener('click', function () { done.hidden = true; form.hidden = false; });
@@ -132,10 +132,10 @@
     ftr.innerHTML =
       '<div class="wrap">' +
       '<div class="ftr-top">' +
-      '<div class="ftr-brand"><a class="logo" href="./">' + LOGO + '</a><p>Air-gapped AI infrastructure in major cities.</p>' +
+      '<div class="ftr-brand"><a class="logo" href="./">' + LOGO + '</a><p>Secure, localized compute at scale.</p>' +
       '<div class="social"><a href="' + LINKEDIN + '" target="_blank" rel="noopener" aria-label="Simply Silicon on LinkedIn">' + LI + '</a></div></div>' +
       '<div class="ftr-cols">' +
-      '<div><h3>Company</h3><ul><li><a href="./">Home</a></li><li><a href="./#how">How it works</a></li><li><a href="platform.html">Our vision</a></li><li><a href="./#careers">Careers</a></li></ul></div>' +
+      '<div><h3>Company</h3><ul><li><a href="./">Home</a></li><li><a href="./#how">How it works</a></li><li><a href="./#careers">Careers</a></li></ul></div>' +
       '<div><h3>Product</h3><ul><li><a href="foundation.html">Foundation</a></li><li><a href="workloads.html">Workloads</a></li><li><a href="platform.html">Platform</a></li></ul></div>' +
       '<div><h3>Contact</h3><ul><li><button class="ftr-link" type="button" data-contact>Get in touch</button></li><li><address>435 9 Ave SE<br>Calgary, Alberta, Canada</address></li></ul></div>' +
       '</div>' +
