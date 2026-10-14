@@ -558,14 +558,16 @@ section.backers { margin-top: 0; border-top: 1px solid var(--line); }
 .compare tbody th { width: 18%; font: 500 14px/1.4 var(--body); color: var(--text-3); padding-top: calc(clamp(18px, 2vw, 26px) + 4px); }
 .compare tbody td { width: 41%; font-size: clamp(16px, 1.35vw, 19px); line-height: 1.5; color: var(--text); }
 .compare tbody td + td { border-left: 1px solid var(--line); padding-left: clamp(16px, 2.4vw, 32px); }
+/* phone: keep two side-by-side columns so it still reads as a comparison */
 @media (max-width: 700px) {
-  .compare thead { display: none; }
-  .compare, .compare tbody, .compare tr, .compare th, .compare td { display: block; width: 100% !important; }
-  .compare tr { padding: 18px 0; border-top: 1px solid var(--line); }
-  .compare th, .compare td { border: 0 !important; padding: 4px 0 !important; }
-  .compare tbody td::before { display: block; font: 600 12px/1.4 var(--body); color: var(--text-3); }
-  .compare tbody td:nth-of-type(1)::before { content: "The internet"; }
-  .compare tbody td:nth-of-type(2)::before { content: "Inference"; color: var(--accent); }
+  .compare, .compare thead, .compare tbody { display: block; }
+  .compare tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .compare thead th:first-child { display: none; }
+  .compare thead th { padding: 0 12px 14px 0; font-size: 18px; }
+  .compare thead th.is-inf { padding-left: 14px; border-left: 1px solid var(--line); }
+  .compare tbody th { grid-column: 1 / -1; width: auto; padding: 16px 0 8px; font: 600 11px/1.4 var(--body); letter-spacing: .08em; text-transform: uppercase; }
+  .compare tbody td { width: auto; padding: 0 12px 18px 0; border-top: 0; font-size: 15px; line-height: 1.45; }
+  .compare tbody td + td { padding-left: 14px; border-left: 1px solid var(--line); }
 }
 .pull { margin: clamp(56px, 7vw, 96px) 0 0; padding-left: clamp(20px, 2.4vw, 32px); border-left: 2px solid var(--accent); max-width: 980px; }
 .pull p { font: 500 clamp(24px, 2.8vw, 40px)/1.2 var(--display); letter-spacing: -.03em; color: var(--text); text-wrap: balance; }
@@ -824,10 +826,6 @@ section.backers .marquee-track img { height: calc(var(--h, 30px) * 1.15); }
 /* Control: a straight comparison */
 .compare--vs tbody td + td { color: var(--text); font-weight: 500; }
 .compare--vs tbody td:first-of-type { color: var(--text-3); }
-@media (max-width: 700px) {
-  .compare--vs tbody td:nth-of-type(1)::before { content: "Public AI clouds"; }
-  .compare--vs tbody td:nth-of-type(2)::before { content: "Simply Silicon"; color: #1673b8; }
-}
 /* How it works: a connected timeline */
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); position: relative; }
 .steps::before { content: ""; position: absolute; left: 24px; top: 24px; height: 1px; background: linear-gradient(90deg, var(--line-3), #1673b8); }
