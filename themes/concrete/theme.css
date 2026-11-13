@@ -32,3 +32,4 @@
 .s-cta .btn--primary { background: #d8d5cf; color: #121110; border-color: #d8d5cf; }
 .s-backers { padding-top: var(--sec); }
 @media (max-width: 760px) { .hero-copy { grid-template-columns: 1fr; } }
+.duo-side--inf h3 { color: #f1f1ef; }

@@ -4,11 +4,13 @@
   // Set this to Simply Silicon's contact address. Until it is set, the form offers to copy the message instead.
   var CONTACT_EMAIL = '';
   var LINKEDIN = 'https://www.linkedin.com/company/simply-silicon/';
+  // A page can set window.SS_PAGES (e.g. 'themes/swiss/') so its menu and footer link to pages in that folder
+  var P = window.SS_PAGES || '';
   var PAGES = [
-    { href: './', key: 'home', name: 'Home' },
-    { href: 'foundation.html', key: 'foundation', name: 'Foundation' },
-    { href: 'workloads.html', key: 'workloads', name: 'Workloads' },
-    { href: 'platform.html', key: 'platform', name: 'Platform' }
+    { href: P + './', key: 'home', name: 'Home' },
+    { href: P + 'foundation.html', key: 'foundation', name: 'Foundation' },
+    { href: P + 'workloads.html', key: 'workloads', name: 'Workloads' },
+    { href: P + 'platform.html', key: 'platform', name: 'Platform' }
   ];
   var current = document.body.getAttribute('data-page') || 'home';
 
@@ -39,7 +41,7 @@
     hdr.innerHTML =
       '<div class="wrap">' +
       '<button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-drawer"><span></span></button>' +
-      '<a class="logo" href="./" aria-label="Simply Silicon home">' + LOGO + '</a>' +
+      '<a class="logo" href="' + P + './" aria-label="Simply Silicon home">' + LOGO + '</a>' +
       '<nav class="menu" aria-label="Main">' + links() + '</nav>' +
       '<button class="btn btn--primary btn--sm hdr-cta" type="button" data-contact="Request access">Request access</button>' +
       '</div>';
@@ -52,7 +54,7 @@
   drawer.innerHTML =
     '<div class="drawer-scrim"></div>' +
     '<div class="drawer-panel">' +
-    '<div class="drawer-top"><a class="logo" href="./">' + LOGO + '</a><button class="drawer-close" type="button" aria-label="Close menu">×</button></div>' +
+    '<div class="drawer-top"><a class="logo" href="' + P + './">' + LOGO + '</a><button class="drawer-close" type="button" aria-label="Close menu">×</button></div>' +
     '<nav aria-label="Main">' + links() + '</nav>' +
     '<div class="drawer-foot"><span class="logo">' + LOGO + '</span><span>435 9 Ave SE<br>Calgary, Alberta, Canada</span></div>' +
     '</div>';
@@ -143,11 +145,11 @@
     ftr.innerHTML =
       '<div class="wrap">' +
       '<div class="ftr-top">' +
-      '<div class="ftr-brand"><a class="logo" href="./">' + LOGO + '</a><p>Secure, localized compute at scale.</p>' +
+      '<div class="ftr-brand"><a class="logo" href="' + P + './">' + LOGO + '</a><p>Secure, localized compute at scale.</p>' +
       '<div class="social"><a href="' + LINKEDIN + '" target="_blank" rel="noopener" aria-label="Simply Silicon on LinkedIn">' + LI + '</a></div></div>' +
       '<div class="ftr-cols">' +
-      '<div><h3>Company</h3><ul><li><a href="./">Home</a></li><li><a href="./#how">How it works</a></li><li><a href="./#careers">Careers</a></li></ul></div>' +
-      '<div><h3>Product</h3><ul><li><a href="foundation.html">Foundation</a></li><li><a href="workloads.html">Workloads</a></li><li><a href="platform.html">Platform</a></li></ul></div>' +
+      '<div><h3>Company</h3><ul><li><a href="' + P + './">Home</a></li><li><a href="' + P + './#how">How it works</a></li><li><a href="' + P + './#careers">Careers</a></li></ul></div>' +
+      '<div><h3>Product</h3><ul><li><a href="' + P + 'foundation.html">Foundation</a></li><li><a href="' + P + 'workloads.html">Workloads</a></li><li><a href="' + P + 'platform.html">Platform</a></li></ul></div>' +
       '<div><h3>Contact</h3><ul><li><button class="ftr-link" type="button" data-contact>Get in touch</button></li><li><address>435 9 Ave SE<br>Calgary, Alberta, Canada</address></li></ul></div>' +
       '</div>' +
       '</div>' +

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" data-theme="swiss">
+<head>
+<meta charset="utf-8">
+<base href="../../">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Foundation · Simply Silicon</title>
+<meta name="description" content="Foundation brings 12 MW of secure AI capacity to downtown Calgary. Explore the site, its phases and its private fiber network in 3D.">
+<meta name="theme-color" content="#ffffff">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
+<link rel="modulepreload" href="assets/vendor/three/three.module.min.js">
+<link rel="modulepreload" href="assets/js/scene.js">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="themes/fonts/plex-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="themes/src/core.css">
+<link rel="stylesheet" href="themes/swiss/theme.css">
+<script>window.SS_PAGES = 'themes/swiss/';</script>
+</head>
+<body data-page="foundation" id="top">
+<!-- Theme 8, Swiss: White, black and one signal red. Huge flush-left type on a strict grid. Built from themes/src by themes/build.py; edit the source, not this file. -->
+<header id="site-header"></header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap">
+      <h1>Foundation</h1>
+      <p class="lede">Our first site brings 12 MW of secure AI capacity to downtown Calgary.</p>
+    </div>
+  </section>
+
+  <section class="scene-stage" aria-label="Foundation in 3D">
+    <div class="wrap wrap--wide">
+      <div class="scene" id="scene"></div>
+    </div>
+  </section>
+
+  <section class="sec s-metrics">
+    <div class="wrap">
+      <div class="metrics">
+        <div><b>12<small>MW</small></b><span>n+1 redundant power</span></div>
+        <div><b>7<small>km</small></b><span>Private fiber</span></div>
+        <div><b>25+</b><span>Connected buildings</span></div>
+        <div><b>100<small>kW</small></b><span>Phase 1, now online</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec s-phases">
+    <div class="wrap">
+      <div class="intro">
+        <h2>Three phases</h2>
+        <p>Foundation comes online in three phases, up to 12 MW.</p>
+      </div>
+      <div class="phases">
+        <div class="phases-bar" aria-hidden="true"><i style="width:.83%"></i></div>
+        <ol class="phases-list">
+          <li class="is-live"><span class="when">Phase 1 · Online</span><b>100 kW</b></li>
+          <li class="is-dev"><span class="when">Phase 2 · Feb 2027</span><b>2 MW</b></li>
+          <li class="is-soon"><span class="when">Phase 3 · Full Foundation</span><b>12 MW</b></li>
+        </ol>
+      </div>
+      <p class="note">The bar is drawn to scale: 100 kW is under one percent of 12 MW.</p>
+    </div>
+  </section>
+
+  <section class="sec s-story">
+    <div class="wrap">
+      <h2>About the site</h2>
+      <div class="story">
+        <div><span class="story-k">Location</span><p class="story-lead">Foundation sits at 435 9 Ave SE in downtown Calgary, inside an existing district heating plant.</p></div>
+        <div><span class="story-k">The plant</span><p>The plant gives the site utility-grade infrastructure from day one: its stacks, below-grade thermal conduit paths and a district heating loop were already in place before the first rack arrived.</p></div>
+        <div><span class="story-k">Power</span><p>Dual redundant grid feeds and on-site generation supply 14 MVA n+1. At full build the site delivers 12 MW of n+1 redundant power and cooling.</p></div>
+        <div><span class="story-k">Network</span><p>A 7 km air-gapped fiber network links the site to more than 25 buildings downtown. n+1 public internet connectivity is there when a workload needs it.</p></div>
+        <div><span class="story-k">Compute</span><p>High-density GPU compute is offered as dedicated bare metal, so every server belongs to one customer.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec s-cta">
+    <div class="wrap">
+      <h2>Capacity at Foundation</h2>
+      <p>Talk to us about dedicated bare metal at Foundation.</p>
+      <div class="ctas">
+        <button class="btn btn--primary" type="button" data-contact="Request access">Request access</button>
+        <a class="btn" href="themes/swiss/workloads.html">See workloads</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/calgary-data.js"></script>
+<script src="assets/js/calgary-buildings.js"></script>
+<script src="assets/js/calgary-streets.js"></script>
+<script src="assets/js/calgary-parks.js"></script>
+<script type="module">
+  import { mountScene } from './assets/js/scene.js';
+  mountScene(document.getElementById('scene'), { view: 'site' });
+</script>
+</body>
+</html>

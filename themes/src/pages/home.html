@@ -1,21 +1,3 @@
-<!doctype html>
-<html lang="en" data-theme="{{ID}}">
-<head>
-<meta charset="utf-8">
-<base href="../../">
-<meta name="robots" content="noindex">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Simply Silicon · {{NAME}}</title>
-<meta name="description" content="Secure, localized compute. Private GPU servers and air-gapped fiber for any team. Run any model on hardware only you use. Your data stays with you.">
-<meta name="theme-color" content="{{THEME_COLOR}}">
-<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-{{FONTS}}
-<link rel="stylesheet" href="themes/src/core.css">
-<link rel="stylesheet" href="themes/{{ID}}/theme.css">
-</head>
-<body data-page="home" id="top">
-<!-- Theme {{NUM}}, {{NAME}}: {{NOTE}} Built from themes/src by themes/build.py; edit the source, not this file. -->
 <header id="site-header"></header>
 
 <main id="homeMain">
@@ -111,7 +93,7 @@
         <article class="tile"><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg><h3>Government</h3><p>Run sensitive work on hardware you control.</p></article>
         <article class="tile"><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg><h3>Software companies</h3><p>Run open source models for your product on dedicated hardware.</p></article>
       </div>
-      <p class="more"><a class="link" href="workloads.html">See workloads</a></p>
+      <p class="more"><a class="link" href="{{P}}workloads.html">See workloads</a></p>
     </div>
   </section>
 
@@ -121,7 +103,7 @@
         <h2>Your data stays with you</h2>
         <p>Your servers run in our secure data centres, on hardware no one else uses. Your data and your models stay within your organization.</p>
       </div>
-      <a class="feature" href="foundation.html">
+      <a class="feature" href="{{P}}foundation.html">
         <div class="feature-img"><div class="scene" id="loopScene" aria-hidden="true"></div></div>
         <div class="feature-copy">
           <span class="status">Online</span>
@@ -168,10 +150,59 @@
     </div>
   </section>
 </main>
+<main id="careersMain" hidden>
+  <section class="page-head">
+    <div class="wrap">
+      <h1>Careers</h1>
+      <p class="lede">Help build secure, localized compute at scale in major cities.</p>
+    </div>
+  </section>
+  <section class="sec careers">
+    <div class="wrap">
+      <form class="job-filters" role="search" onsubmit="return false">
+        <label class="jf-search"><span class="sr">Search roles</span><input id="fQuery" type="search" placeholder="Search roles" autocomplete="off"></label>
+        <label><span class="sr">Team</span><select id="fTeam"><option value="">All teams</option></select></label>
+        <label><span class="sr">Location</span><select id="fLocation"><option value="">All locations</option></select></label>
+        <label><span class="sr">Type</span><select id="fType"><option value="">All types</option></select></label>
+        <button class="btn btn--sm" type="button" id="fClear">Clear</button>
+      </form>
+      <p class="job-count" id="jobCount" aria-live="polite"></p>
+      <ul class="jobs" id="jobList"></ul>
+      <div class="job-empty" id="jobEmpty">
+        <div id="emptyNone">
+          <h2>No open roles right now</h2>
+          <p>We are not hiring for specific roles yet. If you want to help build infrastructure for inference, introduce yourself and we will keep you in mind.</p>
+          <button class="btn btn--primary" type="button" data-contact="Careers">Introduce yourself</button>
+        </div>
+        <div id="emptyFilter" hidden>
+          <h2>No roles match your filters</h2>
+          <p>Try a different search or clear the filters to see every open role.</p>
+        </div>
+      </div>
+      <div class="job-admin" id="jobAdmin" hidden>
+        <h2>Manage positions</h2>
+        <p class="ja-note">Only you and editors of this site see this panel. Changes go live for everyone straight away.</p>
+        <form id="jobForm" class="ja-form">
+          <label class="f-row f-full"><span>Title</span><input name="title" required maxlength="120" placeholder="e.g. Data Centre Operations Lead"></label>
+          <label class="f-row"><span>Team</span><input name="team" list="jaTeams" maxlength="60" placeholder="e.g. Operations"></label>
+          <label class="f-row"><span>Location</span><input name="location" maxlength="80" placeholder="Calgary, Alberta"></label>
+          <label class="f-row"><span>Type</span><select name="type"><option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option></select></label>
+          <label class="f-row"><span>Apply link or email</span><input name="apply" maxlength="300" placeholder="careers@… or https://…"></label>
+          <label class="f-row f-full"><span>Description</span><textarea name="description" rows="5" maxlength="6000" placeholder="What the role does, who it is for, and what success looks like."></textarea></label>
+          <label class="ja-check f-full"><input type="checkbox" name="open" checked> Open (visible on the careers page)</label>
+          <div class="f-actions f-full"><button class="btn btn--primary" type="submit" id="jobSave">Add position</button><button class="btn" type="button" id="jobCancel" hidden>Cancel</button><span class="ja-msg" id="jobMsg" role="status"></span></div>
+          <datalist id="jaTeams"><option>Engineering</option><option>Operations</option><option>Infrastructure</option><option>Business</option><option>Finance</option></datalist>
+        </form>
+        <ul class="ja-list" id="adminList"></ul>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer id="site-footer"></footer>
 <script src="assets/js/common.js"></script>
 <script src="assets/js/home.js"></script>
+<script src="assets/js/careers.js"></script>
 <script>
   /* The page uses <base href="../../">, so in-page links like #how are scrolled here instead of leaving the page */
   document.addEventListener('click', function (e) {
@@ -180,5 +211,3 @@
     e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
   });
 </script>
-</body>
-</html>
