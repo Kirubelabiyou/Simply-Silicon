@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en" data-theme="steel">
+<head>
+<meta charset="utf-8">
+<base href="../../">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simply Silicon · Steel</title>
+<meta name="description" content="Secure, localized compute. Private GPU servers and air-gapped fiber for any team. Run any model on hardware only you use. Your data stays with you.">
+<meta name="theme-color" content="#ffffff">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="themes/fonts/plex-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="themes/src/core.css">
+<link rel="stylesheet" href="themes/steel/theme.css">
+</head>
+<body data-page="home" id="top">
+<!-- Theme 6, Steel: White with deep steel-blue bands. Calm and corporate, like an infrastructure firm. Built from themes/src by themes/build.py; edit the source, not this file. -->
+<header id="site-header"></header>
+
+<main id="homeMain">
+  <section class="hero">
+    <div class="wrap hero-head">
+      <h1>Secure, localized compute <span class="h1-2">at scale.</span></h1>
+      <div class="hero-copy">
+        <p class="lede">Simply Silicon delivers private, high-performance AI compute inside the city, built for organizations that cannot tolerate latency, outages or exposure to the public network.</p>
+        <div class="ctas">
+          <button class="btn btn--primary" type="button" data-contact="Request access">Request access</button>
+          <a class="btn" href="#how">How it works</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="stage">
+        <div class="plant">
+<svg id="plantSvg" viewBox="120 22 850 498" preserveAspectRatio="xMidYMid meet" role="img" aria-label="An elevation drawing of the Foundation plant: a glass hall with GPU racks inside, four steel stacks in white lattice frames, rooftop coolers with fans, an entrance block, a fan panel and the Simply Silicon name on the roofline">
+  <defs>
+    <linearGradient id="gGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2a3c"/><stop offset=".55" stop-color="#2a3d52"/><stop offset="1" stop-color="#ffe7b8" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="gStack" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6d7783"/><stop offset=".45" stop-color="#e6ebf0"/><stop offset="1" stop-color="#7b8591"/></linearGradient>
+    <radialGradient id="gWarm" cx="50%" cy="80%" r="60%"><stop offset="0" stop-color="#ffdca0" stop-opacity=".55"/><stop offset="1" stop-color="#ffdca0" stop-opacity="0"/></radialGradient>
+    <linearGradient id="gHall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4db2ef" stop-opacity="0"/><stop offset="1" stop-color="#4db2ef" stop-opacity=".18"/></linearGradient>
+    <pattern id="gMesh" width="2.2" height="2.2" patternUnits="userSpaceOnUse"><circle cx="1.1" cy="1.1" r=".55" fill="#2b3340"/></pattern>
+    <pattern id="gGrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="rgba(120,160,200,.07)" stroke-width="1"/></pattern>
+  </defs>
+  <rect class="grid" x="0" y="0" width="1000" height="560" fill="url(#gGrid)"/>
+
+  <!-- fills fade in after the line drawing -->
+  <g class="fills">
+    <path d="M160 260 H772 A60 60 0 0 1 832 320 V430 H160 Z" fill="url(#gGlass)"/>
+    <ellipse cx="480" cy="430" rx="300" ry="70" fill="url(#gWarm)"/>
+    <rect x="150" y="236" width="692" height="24" fill="#07090c"/>
+    <path d="M150 236 H780 A62 62 0 0 1 842 260 V236 Z" fill="#07090c"/>
+    <g fill="url(#gStack)"><rect x="456" y="40" width="20" height="196"/><rect x="526" y="52" width="20" height="184"/><rect x="596" y="46" width="20" height="190"/><rect x="666" y="58" width="20" height="178"/></g>
+    <rect x="176" y="292" width="70" height="138" fill="#eef1f4"/>
+    <rect x="186" y="306" width="50" height="86" fill="#fff4d6" class="glow-warm"/>
+    <rect x="262" y="352" width="190" height="66" fill="#eef1f4"/><rect x="270" y="358" width="174" height="54" fill="none" stroke="#c8323a" stroke-width="2"/>
+    <g fill="#1d2026"><rect x="282" y="364" width="44" height="42"/><rect x="335" y="364" width="44" height="42"/><rect x="388" y="364" width="44" height="42"/></g>
+    <g fill="#3b4148"><rect x="306" y="210" width="62" height="26"/><rect x="376" y="210" width="62" height="26"/></g>
+    <rect x="160" y="424" width="672" height="5" fill="#cfefff" class="glow-strip"/>
+    <g class="racks">
+      <rect x="468" y="286" width="350" height="140" fill="url(#gHall)"/>
+      <rect x="472" y="287" width="324" height="4" fill="#1a2029" stroke="#2c343f" stroke-width=".6"/>
+      <path d="M476 290 H792" stroke="#f2b233" stroke-opacity=".55" stroke-width=".8"/>
+      <path d="M476 291.5 H792" stroke="#4db2ef" stroke-opacity=".7" stroke-width=".8"/>
+      <rect x="476" y="296" width="36" height="128" rx="1.2" fill="#07090d" stroke="#343c47" stroke-width=".9"/>
+      <rect x="476" y="296" width="36" height="6" fill="#121720"/><rect x="480" y="298" width="10" height="2" fill="#2a323d"/>
+      <path d="M478.5 304 V420 M509.5 304 V420" stroke="#262d37" stroke-width="1"/>
+      <rect x="480" y="305" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="482" y="306.4" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M481 306.6 V311.8 M507 306.6 V311.8" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="480" y="314.6" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="482" y="316.0" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M481 316.20000000000005 V321.40000000000003 M507 316.20000000000005 V321.40000000000003" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="480" y="324.20000000000005" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="482" y="325.6" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M481 325.80000000000007 V331.00000000000006 M507 325.80000000000007 V331.00000000000006" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="480" y="333.80000000000007" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="480" y="339.00000000000006" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="480" y="344.20000000000005" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="482" y="345.6" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M481 345.80000000000007 V351.00000000000006 M507 345.80000000000007 V351.00000000000006" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="480" y="353.80000000000007" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="482" y="355.20000000000005" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M481 355.4000000000001 V360.6000000000001 M507 355.4000000000001 V360.6000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="480" y="363.4000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="482" y="364.80000000000007" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M481 365.0000000000001 V370.2000000000001 M507 365.0000000000001 V370.2000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="480" y="373.0000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="482" y="374.4000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M481 374.60000000000014 V379.8000000000001 M507 374.60000000000014 V379.8000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="480" y="382.60000000000014" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="482" y="384.0000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M481 384.20000000000016 V389.40000000000015 M507 384.20000000000016 V389.40000000000015" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="480" y="392.20000000000016" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="482" y="393.60000000000014" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M481 393.8000000000002 V399.00000000000017 M507 393.8000000000002 V399.00000000000017" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="480" y="401.8000000000002" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="482" y="403.20000000000016" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M481 403.4000000000002 V408.6000000000002 M507 403.4000000000002 V408.6000000000002" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="476" y="420" width="36" height="4" fill="#0d1117"/>
+      <rect x="516" y="296" width="36" height="128" rx="1.2" fill="#07090d" stroke="#343c47" stroke-width=".9"/>
+      <rect x="516" y="296" width="36" height="6" fill="#121720"/><rect x="520" y="298" width="10" height="2" fill="#2a323d"/>
+      <path d="M518.5 304 V420 M549.5 304 V420" stroke="#262d37" stroke-width="1"/>
+      <rect x="520" y="305" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="522" y="306.4" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M521 306.6 V311.8 M547 306.6 V311.8" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="520" y="314.6" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="522" y="316.0" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M521 316.20000000000005 V321.40000000000003 M547 316.20000000000005 V321.40000000000003" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="520" y="324.20000000000005" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="522" y="325.6" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M521 325.80000000000007 V331.00000000000006 M547 325.80000000000007 V331.00000000000006" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="520" y="333.80000000000007" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="522" y="335.20000000000005" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M521 335.4000000000001 V340.6000000000001 M547 335.4000000000001 V340.6000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="520" y="343.4000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="522" y="344.80000000000007" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M521 345.0000000000001 V350.2000000000001 M547 345.0000000000001 V350.2000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="520" y="353.0000000000001" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="520" y="358.2000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="522" y="359.6000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M521 359.8000000000001 V365.0000000000001 M547 359.8000000000001 V365.0000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="520" y="367.8000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="522" y="369.2000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M521 369.40000000000015 V374.60000000000014 M547 369.40000000000015 V374.60000000000014" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="520" y="377.40000000000015" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="522" y="378.8000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M521 379.00000000000017 V384.20000000000016 M547 379.00000000000017 V384.20000000000016" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="520" y="387.00000000000017" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="522" y="388.40000000000015" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M521 388.6000000000002 V393.8000000000002 M547 388.6000000000002 V393.8000000000002" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="520" y="396.6000000000002" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="520" y="401.8000000000002" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="522" y="403.20000000000016" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M521 403.4000000000002 V408.6000000000002 M547 403.4000000000002 V408.6000000000002" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="516" y="420" width="36" height="4" fill="#0d1117"/>
+      <rect x="556" y="296" width="36" height="128" rx="1.2" fill="#07090d" stroke="#343c47" stroke-width=".9"/>
+      <rect x="556" y="296" width="36" height="6" fill="#121720"/><rect x="560" y="298" width="10" height="2" fill="#2a323d"/>
+      <path d="M558.5 304 V420 M589.5 304 V420" stroke="#262d37" stroke-width="1"/>
+      <rect x="560" y="305" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="562" y="306.4" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M561 306.6 V311.8 M587 306.6 V311.8" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="560" y="314.6" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="562" y="316.0" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M561 316.20000000000005 V321.40000000000003 M587 316.20000000000005 V321.40000000000003" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="560" y="324.20000000000005" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="562" y="325.6" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M561 325.80000000000007 V331.00000000000006 M587 325.80000000000007 V331.00000000000006" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="560" y="333.80000000000007" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="562" y="335.20000000000005" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M561 335.4000000000001 V340.6000000000001 M587 335.4000000000001 V340.6000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="560" y="343.4000000000001" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="560" y="348.6000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="562" y="350.00000000000006" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M561 350.2000000000001 V355.4000000000001 M587 350.2000000000001 V355.4000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="560" y="358.2000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="562" y="359.6000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M561 359.8000000000001 V365.0000000000001 M587 359.8000000000001 V365.0000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="560" y="367.8000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="562" y="369.2000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M561 369.40000000000015 V374.60000000000014 M587 369.40000000000015 V374.60000000000014" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="560" y="377.40000000000015" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="562" y="378.8000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M561 379.00000000000017 V384.20000000000016 M587 379.00000000000017 V384.20000000000016" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="560" y="387.00000000000017" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="562" y="388.40000000000015" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M561 388.6000000000002 V393.8000000000002 M587 388.6000000000002 V393.8000000000002" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="560" y="396.6000000000002" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="562" y="398.00000000000017" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M561 398.2000000000002 V403.4000000000002 M587 398.2000000000002 V403.4000000000002" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="560" y="406.2000000000002" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="556" y="420" width="36" height="4" fill="#0d1117"/>
+      <rect x="596" y="296" width="36" height="128" rx="1.2" fill="#07090d" stroke="#343c47" stroke-width=".9"/>
+      <rect x="596" y="296" width="36" height="6" fill="#121720"/><rect x="600" y="298" width="10" height="2" fill="#2a323d"/>
+      <path d="M598.5 304 V420 M629.5 304 V420" stroke="#262d37" stroke-width="1"/>
+      <rect x="600" y="305" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="600" y="310.2" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="602" y="311.59999999999997" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M601 311.8 V317.0 M627 311.8 V317.0" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="600" y="319.8" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="602" y="321.2" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M601 321.40000000000003 V326.6 M627 321.40000000000003 V326.6" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="600" y="329.40000000000003" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="600" y="334.6" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="602" y="336.0" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M601 336.20000000000005 V341.40000000000003 M627 336.20000000000005 V341.40000000000003" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="600" y="344.20000000000005" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="602" y="345.6" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M601 345.80000000000007 V351.00000000000006 M627 345.80000000000007 V351.00000000000006" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="600" y="353.80000000000007" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="602" y="355.20000000000005" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M601 355.4000000000001 V360.6000000000001 M627 355.4000000000001 V360.6000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="600" y="363.4000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="602" y="364.80000000000007" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M601 365.0000000000001 V370.2000000000001 M627 365.0000000000001 V370.2000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="600" y="373.0000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="602" y="374.4000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M601 374.60000000000014 V379.8000000000001 M627 374.60000000000014 V379.8000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="600" y="382.60000000000014" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="602" y="384.0000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M601 384.20000000000016 V389.40000000000015 M627 384.20000000000016 V389.40000000000015" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="600" y="392.20000000000016" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="602" y="393.60000000000014" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M601 393.8000000000002 V399.00000000000017 M627 393.8000000000002 V399.00000000000017" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="600" y="401.8000000000002" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="602" y="403.20000000000016" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M601 403.4000000000002 V408.6000000000002 M627 403.4000000000002 V408.6000000000002" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="596" y="420" width="36" height="4" fill="#0d1117"/>
+      <rect x="636" y="296" width="36" height="128" rx="1.2" fill="#07090d" stroke="#343c47" stroke-width=".9"/>
+      <rect x="636" y="296" width="36" height="6" fill="#121720"/><rect x="640" y="298" width="10" height="2" fill="#2a323d"/>
+      <path d="M638.5 304 V420 M669.5 304 V420" stroke="#262d37" stroke-width="1"/>
+      <rect x="640" y="305" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="642" y="306.4" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M641 306.6 V311.8 M667 306.6 V311.8" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="640" y="314.6" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="640" y="319.8" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="642" y="321.2" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M641 321.40000000000003 V326.6 M667 321.40000000000003 V326.6" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="640" y="329.40000000000003" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="642" y="330.8" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M641 331.00000000000006 V336.20000000000005 M667 331.00000000000006 V336.20000000000005" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="640" y="339.00000000000006" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="640" y="344.20000000000005" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="642" y="345.6" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M641 345.80000000000007 V351.00000000000006 M667 345.80000000000007 V351.00000000000006" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="640" y="353.80000000000007" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="642" y="355.20000000000005" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M641 355.4000000000001 V360.6000000000001 M667 355.4000000000001 V360.6000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="640" y="363.4000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="642" y="364.80000000000007" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M641 365.0000000000001 V370.2000000000001 M667 365.0000000000001 V370.2000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="640" y="373.0000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="642" y="374.4000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M641 374.60000000000014 V379.8000000000001 M667 374.60000000000014 V379.8000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="640" y="382.60000000000014" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="642" y="384.0000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M641 384.20000000000016 V389.40000000000015 M667 384.20000000000016 V389.40000000000015" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="640" y="392.20000000000016" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="642" y="393.60000000000014" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M641 393.8000000000002 V399.00000000000017 M667 393.8000000000002 V399.00000000000017" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="640" y="401.8000000000002" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="642" y="403.20000000000016" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M641 403.4000000000002 V408.6000000000002 M667 403.4000000000002 V408.6000000000002" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="636" y="420" width="36" height="4" fill="#0d1117"/>
+      <rect x="676" y="296" width="36" height="128" rx="1.2" fill="#07090d" stroke="#343c47" stroke-width=".9"/>
+      <rect x="676" y="296" width="36" height="6" fill="#121720"/><rect x="680" y="298" width="10" height="2" fill="#2a323d"/>
+      <path d="M678.5 304 V420 M709.5 304 V420" stroke="#262d37" stroke-width="1"/>
+      <rect x="680" y="305" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="682" y="306.4" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M681 306.6 V311.8 M707 306.6 V311.8" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="680" y="314.6" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="682" y="316.0" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M681 316.20000000000005 V321.40000000000003 M707 316.20000000000005 V321.40000000000003" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="680" y="324.20000000000005" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="680" y="329.40000000000003" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="682" y="330.8" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M681 331.00000000000006 V336.20000000000005 M707 331.00000000000006 V336.20000000000005" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="680" y="339.00000000000006" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="682" y="340.40000000000003" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M681 340.6000000000001 V345.80000000000007 M707 340.6000000000001 V345.80000000000007" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="680" y="348.6000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="682" y="350.00000000000006" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M681 350.2000000000001 V355.4000000000001 M707 350.2000000000001 V355.4000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="680" y="358.2000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="682" y="359.6000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M681 359.8000000000001 V365.0000000000001 M707 359.8000000000001 V365.0000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="680" y="367.8000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="682" y="369.2000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M681 369.40000000000015 V374.60000000000014 M707 369.40000000000015 V374.60000000000014" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="680" y="377.40000000000015" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="682" y="378.8000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M681 379.00000000000017 V384.20000000000016 M707 379.00000000000017 V384.20000000000016" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="680" y="387.00000000000017" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="680" y="392.20000000000016" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="682" y="393.60000000000014" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M681 393.8000000000002 V399.00000000000017 M707 393.8000000000002 V399.00000000000017" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="680" y="401.8000000000002" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="682" y="403.20000000000016" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M681 403.4000000000002 V408.6000000000002 M707 403.4000000000002 V408.6000000000002" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="676" y="420" width="36" height="4" fill="#0d1117"/>
+      <rect x="716" y="296" width="36" height="128" rx="1.2" fill="#07090d" stroke="#343c47" stroke-width=".9"/>
+      <rect x="716" y="296" width="36" height="6" fill="#121720"/><rect x="720" y="298" width="10" height="2" fill="#2a323d"/>
+      <path d="M718.5 304 V420 M749.5 304 V420" stroke="#262d37" stroke-width="1"/>
+      <rect x="720" y="305" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="722" y="306.4" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M721 306.6 V311.8 M747 306.6 V311.8" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="720" y="314.6" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="722" y="316.0" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M721 316.20000000000005 V321.40000000000003 M747 316.20000000000005 V321.40000000000003" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="720" y="324.20000000000005" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="722" y="325.6" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M721 325.80000000000007 V331.00000000000006 M747 325.80000000000007 V331.00000000000006" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="720" y="333.80000000000007" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="720" y="339.00000000000006" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="722" y="340.40000000000003" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M721 340.6000000000001 V345.80000000000007 M747 340.6000000000001 V345.80000000000007" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="720" y="348.6000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="722" y="350.00000000000006" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M721 350.2000000000001 V355.4000000000001 M747 350.2000000000001 V355.4000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="720" y="358.2000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="722" y="359.6000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M721 359.8000000000001 V365.0000000000001 M747 359.8000000000001 V365.0000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="720" y="367.8000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="722" y="369.2000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M721 369.40000000000015 V374.60000000000014 M747 369.40000000000015 V374.60000000000014" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="720" y="377.40000000000015" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="720" y="382.60000000000014" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="722" y="384.0000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M721 384.20000000000016 V389.40000000000015 M747 384.20000000000016 V389.40000000000015" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="720" y="392.20000000000016" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="722" y="393.60000000000014" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M721 393.8000000000002 V399.00000000000017 M747 393.8000000000002 V399.00000000000017" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="720" y="401.8000000000002" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="722" y="403.20000000000016" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M721 403.4000000000002 V408.6000000000002 M747 403.4000000000002 V408.6000000000002" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="716" y="420" width="36" height="4" fill="#0d1117"/>
+      <rect x="756" y="296" width="36" height="128" rx="1.2" fill="#07090d" stroke="#343c47" stroke-width=".9"/>
+      <rect x="756" y="296" width="36" height="6" fill="#121720"/><rect x="760" y="298" width="10" height="2" fill="#2a323d"/>
+      <path d="M758.5 304 V420 M789.5 304 V420" stroke="#262d37" stroke-width="1"/>
+      <rect x="760" y="305" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="762" y="306.4" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M761 306.6 V311.8 M787 306.6 V311.8" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="760" y="314.6" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="762" y="316.0" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M761 316.20000000000005 V321.40000000000003 M787 316.20000000000005 V321.40000000000003" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="760" y="324.20000000000005" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="762" y="325.6" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M761 325.80000000000007 V331.00000000000006 M787 325.80000000000007 V331.00000000000006" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="760" y="333.80000000000007" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="762" y="335.20000000000005" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M761 335.4000000000001 V340.6000000000001 M787 335.4000000000001 V340.6000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="760" y="343.4000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="762" y="344.80000000000007" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M761 345.0000000000001 V350.2000000000001 M787 345.0000000000001 V350.2000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="760" y="353.0000000000001" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="762" y="354.4000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M761 354.60000000000014 V359.8000000000001 M787 354.60000000000014 V359.8000000000001" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="760" y="362.60000000000014" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="762" y="364.0000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M761 364.20000000000016 V369.40000000000015 M787 364.20000000000016 V369.40000000000015" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="760" y="372.20000000000016" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="760" y="377.40000000000015" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="762" y="378.8000000000001" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M761 379.00000000000017 V384.20000000000016 M787 379.00000000000017 V384.20000000000016" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="760" y="387.00000000000017" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="762" y="388.40000000000015" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M761 388.6000000000002 V393.8000000000002 M787 388.6000000000002 V393.8000000000002" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="760" y="396.6000000000002" width="28" height="4" fill="#0f131a" stroke="#1d232c" stroke-width=".5"/>
+      <rect x="760" y="401.8000000000002" width="28" height="8.4" rx=".6" fill="#1a202a" stroke="#303845" stroke-width=".5"/>
+      <rect x="762" y="403.20000000000016" width="17" height="5.6" fill="url(#gMesh)"/>
+      <path d="M761 403.4000000000002 V408.6000000000002 M787 403.4000000000002 V408.6000000000002" stroke="#3a424e" stroke-width=".7"/>
+      <rect x="756" y="420" width="36" height="4" fill="#0d1117"/>
+      <g class="leds"><circle cx="502.5" cy="308.2" r=".95" fill="#74e0a5"/><circle cx="502.5" cy="310.6" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="502.5" cy="317.8" r=".95" fill="#74e0a5"/><circle cx="502.5" cy="327.40000000000003" r=".95" fill="#7cc8f5"/><circle cx="502.5" cy="329.80000000000007" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="502.5" cy="347.40000000000003" r=".95" fill="#7cc8f5"/><circle cx="502.5" cy="349.80000000000007" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="502.5" cy="357.00000000000006" r=".95" fill="#7cc8f5"/><circle cx="502.5" cy="359.4000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="502.5" cy="366.6000000000001" r=".95" fill="#7cc8f5"/><circle cx="502.5" cy="376.2000000000001" r=".95" fill="#74e0a5"/><circle cx="502.5" cy="385.8000000000001" r=".95" fill="#7cc8f5"/><circle cx="502.5" cy="388.20000000000016" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="502.5" cy="395.40000000000015" r=".95" fill="#7cc8f5"/><circle cx="502.5" cy="397.8000000000002" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="502.5" cy="405.00000000000017" r=".95" fill="#7cc8f5"/><circle cx="542.5" cy="308.2" r=".95" fill="#74e0a5"/><circle cx="542.5" cy="310.6" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="542.5" cy="317.8" r=".95" fill="#7cc8f5"/><circle cx="542.5" cy="320.20000000000005" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="542.5" cy="327.40000000000003" r=".95" fill="#74e0a5"/><circle cx="542.5" cy="329.80000000000007" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="542.5" cy="337.00000000000006" r=".95" fill="#74e0a5"/><circle cx="542.5" cy="339.4000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="542.5" cy="346.6000000000001" r=".95" fill="#7cc8f5"/><circle cx="542.5" cy="349.0000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="542.5" cy="361.4000000000001" r=".95" fill="#7cc8f5"/><circle cx="542.5" cy="363.8000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="542.5" cy="371.0000000000001" r=".95" fill="#7cc8f5"/><circle cx="542.5" cy="373.40000000000015" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="542.5" cy="380.60000000000014" r=".95" fill="#7cc8f5"/><circle cx="542.5" cy="383.00000000000017" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="542.5" cy="390.20000000000016" r=".95" fill="#7cc8f5"/><circle cx="542.5" cy="392.6000000000002" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="542.5" cy="405.00000000000017" r=".95" fill="#7cc8f5"/><circle cx="582.5" cy="308.2" r=".95" fill="#7cc8f5"/><circle cx="582.5" cy="317.8" r=".95" fill="#74e0a5"/><circle cx="582.5" cy="320.20000000000005" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="582.5" cy="327.40000000000003" r=".95" fill="#7cc8f5"/><circle cx="582.5" cy="329.80000000000007" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="582.5" cy="337.00000000000006" r=".95" fill="#7cc8f5"/><circle cx="582.5" cy="351.80000000000007" r=".95" fill="#7cc8f5"/><circle cx="582.5" cy="361.4000000000001" r=".95" fill="#7cc8f5"/><circle cx="582.5" cy="371.0000000000001" r=".95" fill="#7cc8f5"/><circle cx="582.5" cy="380.60000000000014" r=".95" fill="#7cc8f5"/><circle cx="582.5" cy="383.00000000000017" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="582.5" cy="390.20000000000016" r=".95" fill="#7cc8f5"/><circle cx="582.5" cy="392.6000000000002" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="582.5" cy="399.8000000000002" r=".95" fill="#7cc8f5"/><circle cx="622.5" cy="313.4" r=".95" fill="#7cc8f5"/><circle cx="622.5" cy="315.8" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="622.5" cy="323.0" r=".95" fill="#7cc8f5"/><circle cx="622.5" cy="337.8" r=".95" fill="#7cc8f5"/><circle cx="622.5" cy="347.40000000000003" r=".95" fill="#74e0a5"/><circle cx="622.5" cy="349.80000000000007" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="622.5" cy="357.00000000000006" r=".95" fill="#74e0a5"/><circle cx="622.5" cy="359.4000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="622.5" cy="366.6000000000001" r=".95" fill="#7cc8f5"/><circle cx="622.5" cy="369.0000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="622.5" cy="376.2000000000001" r=".95" fill="#7cc8f5"/><circle cx="622.5" cy="385.8000000000001" r=".95" fill="#7cc8f5"/><circle cx="622.5" cy="395.40000000000015" r=".95" fill="#7cc8f5"/><circle cx="622.5" cy="397.8000000000002" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="622.5" cy="405.00000000000017" r=".95" fill="#7cc8f5"/><circle cx="622.5" cy="407.4000000000002" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="662.5" cy="308.2" r=".95" fill="#7cc8f5"/><circle cx="662.5" cy="310.6" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="662.5" cy="323.0" r=".95" fill="#7cc8f5"/><circle cx="662.5" cy="332.6" r=".95" fill="#7cc8f5"/><circle cx="662.5" cy="347.40000000000003" r=".95" fill="#7cc8f5"/><circle cx="662.5" cy="349.80000000000007" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="662.5" cy="357.00000000000006" r=".95" fill="#7cc8f5"/><circle cx="662.5" cy="359.4000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="662.5" cy="366.6000000000001" r=".95" fill="#7cc8f5"/><circle cx="662.5" cy="369.0000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="662.5" cy="376.2000000000001" r=".95" fill="#7cc8f5"/><circle cx="662.5" cy="378.60000000000014" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="662.5" cy="385.8000000000001" r=".95" fill="#7cc8f5"/><circle cx="662.5" cy="388.20000000000016" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="662.5" cy="395.40000000000015" r=".95" fill="#74e0a5"/><circle cx="662.5" cy="405.00000000000017" r=".95" fill="#7cc8f5"/><circle cx="662.5" cy="407.4000000000002" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="702.5" cy="308.2" r=".95" fill="#74e0a5"/><circle cx="702.5" cy="310.6" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="702.5" cy="317.8" r=".95" fill="#7cc8f5"/><circle cx="702.5" cy="320.20000000000005" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="702.5" cy="332.6" r=".95" fill="#74e0a5"/><circle cx="702.5" cy="335.00000000000006" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="702.5" cy="342.20000000000005" r=".95" fill="#7cc8f5"/><circle cx="702.5" cy="344.6000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="702.5" cy="351.80000000000007" r=".95" fill="#7cc8f5"/><circle cx="702.5" cy="354.2000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="702.5" cy="361.4000000000001" r=".95" fill="#7cc8f5"/><circle cx="702.5" cy="363.8000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="702.5" cy="371.0000000000001" r=".95" fill="#74e0a5"/><circle cx="702.5" cy="373.40000000000015" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="702.5" cy="380.60000000000014" r=".95" fill="#7cc8f5"/><circle cx="702.5" cy="383.00000000000017" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="702.5" cy="395.40000000000015" r=".95" fill="#7cc8f5"/><circle cx="702.5" cy="397.8000000000002" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="702.5" cy="405.00000000000017" r=".95" fill="#74e0a5"/><circle cx="742.5" cy="308.2" r=".95" fill="#7cc8f5"/><circle cx="742.5" cy="317.8" r=".95" fill="#7cc8f5"/><circle cx="742.5" cy="327.40000000000003" r=".95" fill="#74e0a5"/><circle cx="742.5" cy="329.80000000000007" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="742.5" cy="342.20000000000005" r=".95" fill="#7cc8f5"/><circle cx="742.5" cy="344.6000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="742.5" cy="351.80000000000007" r=".95" fill="#7cc8f5"/><circle cx="742.5" cy="354.2000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="742.5" cy="361.4000000000001" r=".95" fill="#7cc8f5"/><circle cx="742.5" cy="363.8000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="742.5" cy="371.0000000000001" r=".95" fill="#7cc8f5"/><circle cx="742.5" cy="373.40000000000015" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="742.5" cy="385.8000000000001" r=".95" fill="#74e0a5"/><circle cx="742.5" cy="395.40000000000015" r=".95" fill="#7cc8f5"/><circle cx="742.5" cy="397.8000000000002" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="742.5" cy="405.00000000000017" r=".95" fill="#7cc8f5"/><circle cx="782.5" cy="308.2" r=".95" fill="#7cc8f5"/><circle cx="782.5" cy="310.6" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="782.5" cy="317.8" r=".95" fill="#7cc8f5"/><circle cx="782.5" cy="320.20000000000005" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="782.5" cy="327.40000000000003" r=".95" fill="#7cc8f5"/><circle cx="782.5" cy="329.80000000000007" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="782.5" cy="337.00000000000006" r=".95" fill="#7cc8f5"/><circle cx="782.5" cy="339.4000000000001" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="782.5" cy="346.6000000000001" r=".95" fill="#7cc8f5"/><circle cx="782.5" cy="356.2000000000001" r=".95" fill="#7cc8f5"/><circle cx="782.5" cy="358.60000000000014" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="782.5" cy="365.8000000000001" r=".95" fill="#7cc8f5"/><circle cx="782.5" cy="380.60000000000014" r=".95" fill="#7cc8f5"/><circle cx="782.5" cy="390.20000000000016" r=".95" fill="#7cc8f5"/><circle cx="782.5" cy="392.6000000000002" r=".75" fill="#7cc8f5" fill-opacity=".7"/><circle cx="782.5" cy="405.00000000000017" r=".95" fill="#74e0a5"/></g>
+      <rect x="470" y="422" width="328" height="3" fill="#4db2ef" fill-opacity=".18"/>
+    </g>
+  </g>
+
+  <!-- the line drawing -->
+  <g class="lines" fill="none" stroke="#dbe6f0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path pathLength="1" d="M40 430 H980"/>
+    <path pathLength="1" d="M40 470 H980" stroke-opacity=".35"/>
+    <path pathLength="1" d="M70 505 H130 M190 505 H250 M310 505 H370 M430 505 H490 M550 505 H610 M670 505 H730 M790 505 H850 M910 505 H970" stroke="#f2b233" stroke-opacity=".6"/>
+    <path pathLength="1" d="M160 430 V260 H772 A60 60 0 0 1 832 320 V430"/>
+    <path pathLength="1" d="M150 236 H780 A62 62 0 0 1 842 298 V260 M150 236 V260 H842"/>
+    <path pathLength="1" d="M160 300 H832 M160 340 H832 M160 380 H832" stroke-opacity=".26"/>
+    <path pathLength="1" d="M190 260 V430 M220 260 V430 M250 260 V430 M280 260 V430 M310 260 V430 M340 260 V430 M370 260 V430 M400 260 V430 M430 260 V430 M460 260 V430 M490 260 V430 M520 260 V430 M550 260 V430 M580 260 V430 M610 260 V430 M640 260 V430 M670 260 V430 M700 260 V430 M730 260 V430 M760 260 V430 M790 268 V430 M815 286 V430" stroke-opacity=".26"/>
+    <g class="stacks">
+      <path pathLength="1" d="M456 236 V40 H476 V236 M526 236 V52 H546 V236 M596 236 V46 H616 V236 M666 236 V58 H686 V236"/>
+      <path pathLength="1" d="M446 236 V140 H486 V236 M446 140 L486 188 M486 140 L446 188 M446 188 L486 236 M486 188 L446 236 M446 188 H486"/>
+      <path pathLength="1" d="M516 236 V146 H556 V236 M516 146 L556 191 M556 146 L516 191 M516 191 L556 236 M556 191 L516 236 M516 191 H556"/>
+      <path pathLength="1" d="M586 236 V143 H626 V236 M586 143 L626 190 M626 143 L586 190 M586 190 L626 236 M626 190 L586 236 M586 190 H626"/>
+      <path pathLength="1" d="M656 236 V149 H696 V236 M656 149 L696 193 M696 149 L656 193 M656 193 L696 236 M696 193 L656 236 M656 193 H696"/>
+      <path pathLength="1" d="M456 90 H476 M456 140 H476 M526 100 H546 M596 95 H616 M666 106 H686" stroke-opacity=".6"/>
+    </g>
+    <g class="coolers">
+      <path pathLength="1" d="M306 236 V210 H368 V236 M376 236 V210 H438 V236"/>
+    </g>
+    <path pathLength="1" d="M176 430 V292 H246 V430 M186 306 H236 V392 H186 Z"/>
+    <path pathLength="1" d="M262 418 V352 H452 V418 Z"/>
+    
+    <path pathLength="1" d="M196 448 V430 M214 448 V430 M232 448 V430" stroke-width="5" stroke="#9aa3ad"/>
+  </g>
+  <g class="fan-marks" stroke="#e9edf1" stroke-width="2" fill="none">
+    <circle cx="304" cy="385" r="15"/><path d="M304 372 V398 M291 385 H317"/>
+    <circle cx="357" cy="385" r="15"/><path d="M357 372 V398 M344 385 H370"/>
+    <circle cx="410" cy="385" r="15"/><path d="M410 372 V398 M397 385 H423"/>
+  </g>
+  <g class="rooffans" fill="none" stroke="#e6eaee" stroke-width="1.4">
+    <path d="M310 231.5 H364 M380 231.5 H434" stroke-width="1.2"/>
+    <g transform="translate(322 220)"><circle r="7.5"/><g><path d="M0 -6 V6 M-6 0 H6"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(352 220)"><circle r="7.5"/><g><path d="M0 -6 V6 M-6 0 H6"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(392 220)"><circle r="7.5"/><g><path d="M0 -6 V6 M-6 0 H6"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+    <g transform="translate(422 220)"><circle r="7.5"/><g><path d="M0 -6 V6 M-6 0 H6"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.6s" repeatCount="indefinite"/></g></g>
+  </g>
+  <g class="sign" opacity="0"><text x="172" y="254" font-family="Quicksand, sans-serif" font-weight="700" font-size="17" fill="#8fd6ff" letter-spacing="-.02em" class="glow-logo">simply silicon.</text></g>
+</svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec s-compare">
+    <div class="wrap">
+      <div class="intro">
+        <h2>AI without giving up control</h2>
+        <p>Public AI clouds mean shared servers and data sent over the public network. For many teams, that is a risk. With Simply Silicon the hardware is yours alone, and so is the network that connects it.</p>
+      </div>
+      <table class="compare">
+        <thead><tr><th scope="col"><span class="sr">What you get</span></th><th scope="col">Public AI clouds</th><th scope="col" class="us">Simply Silicon</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Hardware</th><td>Shared with other customers</td><td class="us">Dedicated bare metal used by you alone</td></tr>
+          <tr><th scope="row">Models</th><td>The ones the provider offers</td><td class="us">Any model you want, open source or your own</td></tr>
+          <tr><th scope="row">Network</th><td>The public network</td><td class="us">Private air-gapped fiber</td></tr>
+          <tr><th scope="row">Your data</th><td>Leaves your organization</td><td class="us">Stays within your organization</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec s-services" id="services">
+    <div class="wrap">
+      <div class="intro">
+        <h2>Two services, one private system</h2>
+        <p>Use dedicated GPU servers, our private fiber or both together.</p>
+      </div>
+      <div class="svc">
+        <article class="svc-item">
+          <div class="media"><img src="assets/img/rack-1280.webp" srcset="assets/img/rack-1280.webp 1280w, assets/img/rack.webp 2560w" sizes="(max-width: 860px) 100vw, 50vw" width="1280" height="960" alt="The front of a GPU server in a dark rack" loading="lazy"></div>
+          <div class="body">
+            <h3>Dedicated bare metal</h3>
+            <p>Your own GPU servers in our secure data centres. You choose the models and the software. The tokens you generate are yours.</p>
+            <ul class="ticks"><li>No shared virtual layer</li><li>Any model you choose</li><li>Hardware used only by you</li></ul>
+          </div>
+        </article>
+        <article class="svc-item">
+          <div class="media media--fig"><figure class="fig" data-fig="fiber"></figure></div>
+          <div class="body">
+            <h3>Air-gapped private fiber</h3>
+            <p>A direct private line from your location to our site. Your data never crosses the public network.</p>
+            <ul class="ticks"><li>Direct line from your location</li><li>Separate from the public network</li><li>Nothing shared with other traffic</li></ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec s-how" id="how">
+    <div class="wrap">
+      <div class="intro">
+        <h2>How it works</h2>
+        <p>Four steps from first call to running your own models.</p>
+      </div>
+      <ol class="steps">
+        <li><span class="n">1</span><h3>Tell us your workload</h3><p>What you need to run and how much.</p></li>
+        <li><span class="n">2</span><h3>Get your servers</h3><p>Dedicated GPUs set up for you.</p></li>
+        <li><span class="n">3</span><h3>Connect privately</h3><p>Over air-gapped fiber from your location.</p></li>
+        <li><span class="n">4</span><h3>Run any model</h3><p>Your data and your tokens stay with you.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec s-who">
+    <div class="wrap">
+      <div class="intro">
+        <h2>Built for every kind of team</h2>
+        <p>From banks to software companies. If you want to run your own models on hardware only you use, we are built for you.</p>
+      </div>
+      <div class="tiles">
+        <article class="tile"><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 18v-7"/><path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M3 22h18"/><path d="M6 18v-7"/></svg><h3>Banking</h3><p>Use AI on client data without a public cloud.</p></article>
+        <article class="tile"><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg><h3>Healthcare</h3><p>Keep patient data private while your teams use the latest models.</p></article>
+        <article class="tile"><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg><h3>Government</h3><p>Run sensitive work on hardware you control.</p></article>
+        <article class="tile"><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg><h3>Software companies</h3><p>Run open source models for your product on dedicated hardware.</p></article>
+      </div>
+      <p class="more"><a class="link" href="workloads.html">See workloads</a></p>
+    </div>
+  </section>
+
+  <section class="sec s-proof">
+    <div class="wrap">
+      <div class="intro">
+        <h2>Your data stays with you</h2>
+        <p>Your servers run in our secure data centres, on hardware no one else uses. Your data and your models stay within your organization.</p>
+      </div>
+      <a class="feature" href="foundation.html">
+        <div class="feature-img"><div class="scene" id="loopScene" aria-hidden="true"></div></div>
+        <div class="feature-copy">
+          <span class="status">Online</span>
+          <h3>Foundation, our first site</h3>
+          <p>Our first data centre is online. More sites are in development.</p>
+          <dl class="kv">
+            <div><dt>12 MW</dt><dd>n+1 redundant power and cooling</dd></div>
+            <div><dt>7 km</dt><dd>Air-gapped fiber</dd></div>
+            <div><dt>25+</dt><dd>Connected buildings</dd></div>
+            <div><dt>Online</dt><dd>Phase 1 running now</dd></div>
+          </dl>
+          <span class="link">Explore Foundation in 3D</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="sec s-cta">
+    <div class="wrap">
+      <h2>Keep your data and run your own models</h2>
+      <p>Tell us what you plan to run and where your teams work. We will design the capacity around it.</p>
+      <button class="btn btn--primary" type="button" data-contact="Request access">Request access</button>
+    </div>
+  </section>
+
+  <section class="sec s-backers" aria-labelledby="backers-h">
+    <div class="wrap">
+      <h2 id="backers-h">Backed by investors and angels from</h2>
+      <ul class="logos">
+        <li data-logo="augur-vc.webp" style="--h:30px"><a href="https://augurvc.com/" target="_blank" rel="noopener"><span>Augur VC</span></a></li>
+        <li data-logo="palisade-capital-management.webp" style="--h:32px"><a href="https://www.palisade.ca/" target="_blank" rel="noopener"><span>Palisade Capital Management</span></a></li>
+        <li data-logo="garagecapital.webp" style="--h:33px"><a href="https://www.garage.vc/" target="_blank" rel="noopener"><span>GarageCapital</span></a></li>
+        <li data-logo="openai.webp" style="--h:30px"><a href="https://openai.com/" target="_blank" rel="noopener"><span>OpenAI</span></a></li>
+        <li data-logo="google.svg" style="--h:32px"><a href="https://www.google.com/" target="_blank" rel="noopener"><span>Google</span></a></li>
+        <li data-logo="microsoft.svg" style="--h:26px"><a href="https://www.microsoft.com/" target="_blank" rel="noopener"><span>Microsoft</span></a></li>
+        <li data-logo="heartland-generation.webp" style="--h:31px"><a href="https://www.heartlandgeneration.com/" target="_blank" rel="noopener"><span>Heartland Generation</span></a></li>
+        <li data-logo="cenovus.webp" style="--h:27px"><a href="https://www.cenovus.com/" target="_blank" rel="noopener"><span>Cenovus</span></a></li>
+        <li data-logo="vermilion-energy.webp" style="--h:38px"><a href="https://www.vermilionenergy.com/" target="_blank" rel="noopener"><span>Vermilion Energy</span></a></li>
+        <li data-logo="greengate.webp" style="--h:24px"><a href="https://greengatepower.com/" target="_blank" rel="noopener"><span>Greengate</span></a></li>
+        <li data-logo="aslan-renewables.webp" style="--h:26px"><a href="https://aslanrenewables.com/" target="_blank" rel="noopener"><span>Aslan Renewables</span></a></li>
+        <li data-logo="bluearth-renewables.webp" style="--h:30px"><a href="https://www.bluearthrenewables.com/" target="_blank" rel="noopener"><span>BluEarth Renewables</span></a></li>
+        <li data-logo="deming-sky-capital.webp" style="--h:40px"><a href="https://demingsky.com/" target="_blank" rel="noopener"><span>Deming Sky Capital</span></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/home.js"></script>
+<script>
+  /* The page uses <base href="../../">, so in-page links like #how are scrolled here instead of leaving the page */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return;
+    var t = document.getElementById(a.getAttribute('href').slice(1)); if (!t) return;
+    e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>

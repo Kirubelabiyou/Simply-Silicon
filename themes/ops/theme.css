@@ -1,0 +1,24 @@
+/* 7. Ops room: near-black, green status accents, monospaced headings at modest sizes, like a network operations room.
+   No glow, no scanlines; the green is the colour of a healthy status light and is used sparingly. */
+:root { --bg: #08090a; --bg-2: #0f1112; --ink: #e4e7e3; --ink-2: #959b95; --ink-3: #6c726c; --accent: #3fd17f; --on-accent: #04140b; --logo: #4db2ef; --panel: #050606; --radius: 2px;
+  --display: "IBM Plex Mono", ui-monospace, monospace; --h-weight: 500; --h-track: -.02em; --h1: clamp(38px, 5vw, 76px); --h2: clamp(26px, 2.8vw, 38px); --h1-line: 1.04; }
+
+.hero h1 { max-width: 17ch; }
+.h1-2 { color: var(--accent); }
+.btn { font-family: var(--mono); font-size: 14px; }
+.btn--primary:hover { background: #7af0ac; border-color: #7af0ac; color: #04140b; }
+.compare { font-family: var(--mono); font-size: 15px; }
+.compare tbody tr + tr th, .compare tbody tr + tr td { border-top: 1px dashed #23272a; }
+.compare td.us { color: var(--accent); font-weight: 400; }
+.compare tbody th { font-weight: 400; color: var(--ink-2); }
+.svc h3, .steps h3, .tile h3, .feature-copy h3 { font-family: var(--body); letter-spacing: -.02em; }
+.ticks { font-family: var(--mono); font-size: 13px; }
+.ticks li::before { width: 6px; height: 6px; border-radius: 50%; }
+.steps .n { font: 500 15px/1 var(--mono); color: var(--accent); margin-bottom: 16px; letter-spacing: 0; }
+.steps .n::before { content: "0"; }
+.tile .ico { color: var(--accent); }
+.feature { background: var(--bg-2); }
+.kv dt { font-family: var(--mono); font-weight: 500; font-size: 26px; color: var(--accent); }
+.s-cta h2 { font-size: clamp(34px, 4.4vw, 64px); max-width: 20ch; }
+.s-backers { padding-top: var(--sec); }
+.ftr { background: #050606; }

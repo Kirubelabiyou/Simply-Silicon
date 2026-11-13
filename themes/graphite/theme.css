@@ -1,0 +1,13 @@
+/* 1. Graphite: dark charcoal, IBM Plex, the brand blue. No boxes, no rules; tone and space do the separating. */
+:root { --bg: #121315; --bg-2: #18191c; --ink: #efefec; --ink-2: #a6a6a1; --ink-3: #7d7d78; --accent: #4db2ef; --on-accent: #04121d; --panel: #0b0c0e; --radius: 6px; }
+
+.compare tbody tr:nth-child(odd) { background: #16171a; }
+.compare th:first-child { padding-left: 20px; }
+.compare td.us { color: #fff; }
+.s-services, .s-who { background: var(--bg-2); }
+.s-services .media, .s-services .media--fig { background: var(--panel); }
+.feature { background: #1b1c20; }
+.s-cta { background: #0c0d0f; }
+.s-cta h2 { max-width: 14ch; }
+.s-backers { background: #0c0d0f; padding-bottom: var(--sec); }
+.ftr { background: #0c0d0f; }

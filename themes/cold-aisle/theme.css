@@ -1,0 +1,23 @@
+/* 2. Cold aisle: the cool light grey of a server hall. The drawing, the fiber figure and the 3D scene sit in dark instrument panels. */
+:root { --bg: #e6e9ec; --bg-2: #dce0e4; --ink: #12171c; --ink-2: #4b5560; --ink-3: #6b7580; --accent: #0f66a6; --on-accent: #fff; --logo: #1f86c9; --panel: #0d1218; --radius: 2px; --h-weight: 500; --logo-filter: brightness(0) saturate(0); --logo-opacity: .72; }
+
+.hdr { background: var(--bg); }
+.hero h1 { max-width: 13ch; }
+.h1-2 { color: var(--accent); }
+.btn--primary:hover { background: #0b4f80; border-color: #0b4f80; color: #fff; }
+.compare { background: #eef0f2; }
+.compare th, .compare td { padding-top: 16px; padding-bottom: 16px; }
+.compare th:first-child { padding-left: 20px; }
+.compare tbody tr + tr th, .compare tbody tr + tr td { border-top: 2px solid var(--bg); }
+.compare thead th { background: var(--bg); }
+.compare td.us { background: #dfe8f0; padding-left: 20px; }
+.compare thead th.us { padding-left: 20px; }
+.s-services, .s-how { background: var(--bg-2); }
+.steps .n { font-weight: 300; color: var(--ink); }
+.steps li { border-top: 3px solid var(--ink); padding-top: 18px; }
+.steps .n { font-size: 15px; font-family: var(--mono); font-weight: 500; color: var(--accent); margin-bottom: 14px; letter-spacing: 0; }
+.feature { background: #f2f4f6; }
+.s-cta { background: var(--panel); color: #eef1f4; --ink: #eef1f4; --ink-2: #a5afb9; --bg: var(--panel); }
+.s-cta .btn--primary { background: #4db2ef; border-color: #4db2ef; color: #06121c; }
+.s-backers { padding-top: var(--sec); }
+.ftr { background: var(--bg-2); }

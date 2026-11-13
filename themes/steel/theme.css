@@ -1,0 +1,24 @@
+/* 6. Steel: white with deep steel-blue bands. Calm and corporate, like an engineering or infrastructure firm. */
+:root { --bg: #ffffff; --bg-2: #f1f4f7; --ink: #142230; --ink-2: #4f5e6c; --ink-3: #74818d; --accent: #1b6fb0; --on-accent: #fff; --logo: #1f86c9; --panel: #142230; --radius: 3px;
+  --display: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --h-weight: 600; --h-track: -.035em; --h1: clamp(46px, 6.2vw, 96px);
+  --logo-filter: brightness(0) saturate(0); --logo-opacity: .62; }
+
+/* the hero is one steel band, header included */
+.hdr { background: #142230; --ink: #eef3f7; --ink-2: #b4c2cf; }
+.hero { background: #142230; color: #eef3f7; --ink: #eef3f7; --ink-2: #b4c2cf; --bg: #142230; padding-bottom: 0; }
+.h1-2 { color: #7cc4f2; }
+.hero .btn--primary { background: #4db2ef; border-color: #4db2ef; color: #06121c; }
+.stage { background: #0e1923; border-radius: var(--radius) var(--radius) 0 0; }
+.btn--primary:hover { background: #134f80; border-color: #134f80; color: #fff; }
+.compare thead th { font-family: var(--body); font-size: 14px; }
+.compare tbody tr:nth-child(odd) { background: var(--bg-2); }
+.compare th:first-child { padding-left: 20px; }
+.ticks li::before { border-radius: 50%; }
+.s-how { background: var(--bg-2); }
+.steps .n { color: var(--accent); font-weight: 600; font-size: 44px; }
+.feature { background: var(--bg-2); }
+.status::before { background: #2f9e64; }
+.s-cta { background: #142230; color: #eef3f7; --ink: #eef3f7; --ink-2: #b4c2cf; }
+.s-cta .btn--primary { background: #4db2ef; border-color: #4db2ef; color: #06121c; }
+.s-backers { padding-top: var(--sec); }
+.ftr { background: var(--bg-2); }

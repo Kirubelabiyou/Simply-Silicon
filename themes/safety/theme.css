@@ -1,0 +1,32 @@
+/* 4. Safety: facility signage. Off-white, black and safety yellow; heavy condensed capitals; yellow used as a solid colour, never as a glow. */
+:root { --bg: #f1efe8; --bg-2: #e7e4db; --ink: #111110; --ink-2: #4e4c46; --ink-3: #75726a; --accent: #ffc400; --on-accent: #111110; --logo: #1f86c9; --panel: #121212; --radius: 0px;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif; --h-weight: 800; --h-case: uppercase; --h-stretch: 68%; --h-track: -.005em; --h1: clamp(56px, 8.6vw, 140px); --h2: clamp(36px, 4.2vw, 64px); --h1-line: .86;
+  --logo-filter: brightness(0); --logo-opacity: .8; }
+
+.h1-2 { color: var(--ink); display: inline; background: var(--accent); padding: 0 .08em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.hero h1 { max-width: 11ch; }
+.btn { border-width: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; font-size: 14px; }
+.btn--primary { border-color: var(--ink); }
+.btn--primary:hover { background: var(--ink); color: var(--accent); }
+.link { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 5px; }
+.stage { border-top: 10px solid #ffc400; }
+.compare thead th { color: var(--ink-2); }
+.compare thead th.us { color: var(--ink); }
+.compare tbody tr { background: #fff; }
+.compare tbody tr + tr th, .compare tbody tr + tr td { border-top: 3px solid var(--bg); }
+.compare th:first-child { padding-left: 18px; }
+.compare td.us { background: #fff2bf; padding-left: 18px; }
+.compare thead th.us { padding-left: 18px; }
+.ticks li::before { background: var(--ink); }
+.s-how { background: var(--ink); color: #f1efe8; --ink-2: #b9b6ad; }
+.steps .n { color: var(--accent); font-weight: 800; font-family: var(--display); font-stretch: 68%; }
+.tile .ico { color: var(--ink); background: var(--accent); width: 48px; height: 48px; padding: 10px; }
+.status::before { background: #1e9e5a; box-shadow: none; border-radius: 0; }
+.feature { background: #fff; }
+.kv dt { font-weight: 800; font-stretch: 68%; font-size: 36px; }
+.s-cta { background: var(--accent); }
+.s-cta .btn--primary { background: var(--ink); color: var(--accent); }
+.s-cta .btn--primary:hover { background: #000; }
+.s-backers { padding-top: var(--sec); }
+.ftr { background: #111110; color: #b9b6ad; --ink: #f1efe8; --ink-2: #b9b6ad; --ink-3: #8b8880; }
+.ftr .social svg { fill: #b9b6ad; }

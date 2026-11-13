@@ -1,0 +1,93 @@
+/* ---- copied from the base site.css: 3D scene, figures and the plant drawing's animation ---- */
+.scene { position: relative; height: clamp(520px, 78vh, 860px); overflow: hidden; border-radius: 14px; border: 1px solid var(--line); background: #0d0f13 url("../../assets/img/scene-poster-wide.webp") center / cover no-repeat; }
+@media (max-width: 700px) { .scene { background-image: url("../../assets/img/scene-poster-tall.webp"); } }
+.scene canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.scene canvas, .scene .scene-labels { opacity: 0; transition: opacity 1.4s var(--ease); }
+.scene.scene--ready canvas, .scene.scene--ready .scene-labels { opacity: 1; }
+.scene.scene--ready { background: linear-gradient(180deg, #03060c 0%, #0a1424 34%, #132a46 60%, #1c3a5c 76%); }
+.scene::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1; box-shadow: inset 0 0 160px 40px rgba(9, 9, 11, .55); }
+.scene-loading { position: absolute; inset: 0; z-index: 2; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 40px; font-size: 13px; color: var(--text-2); background: linear-gradient(180deg, transparent 50%, rgba(9, 9, 11, .5)); }
+.scene.scene--ready .scene-loading { display: none; }
+.scene-labels { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.s-lbl { position: absolute; left: 0; top: 0; opacity: 0; white-space: nowrap; will-change: transform; font: 500 12px/1 var(--body); color: var(--text); background: rgba(12, 12, 15, .82); padding: 6px 9px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, .1); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: opacity .5s var(--ease); }
+.s-lbl.main { background: var(--text); color: #09090b; border-color: transparent; font-weight: 600; font-size: 13px; padding: 8px 11px; }
+.s-lbl.street { background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; color: #4b5563; font: 600 10.5px/1 var(--body); letter-spacing: .06em; }
+.s-lbl.click { cursor: pointer; }
+.s-lbl.click:hover { background: #fff; }
+.scene-ui { position: absolute; left: 16px; right: 16px; bottom: 16px; z-index: 3; display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; flex-wrap: wrap; pointer-events: none; }
+.scene-ui > * { pointer-events: auto; }
+.seg { display: inline-flex; gap: 2px; padding: 4px; border-radius: 10px; background: rgba(12, 12, 15, .84); border: 1px solid var(--line-2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.seg button { border: 0; background: none; padding: 9px 15px; border-radius: 7px; cursor: pointer; font: 500 14px/1 var(--body); color: var(--text-2); white-space: nowrap; transition: background .4s var(--ease), color .4s var(--ease); }
+.seg button:hover { color: var(--text); }
+.seg button[aria-pressed="true"] { background: var(--text); color: #09090b; }
+.scene-hint { font-size: 12px; color: var(--text-2); background: rgba(12, 12, 15, .7); padding: 8px 12px; border-radius: 8px; }
+.scene-card { position: absolute; top: 16px; right: 16px; z-index: 3; width: min(340px, calc(100% - 32px)); padding: 20px; border-radius: 12px; background: rgba(12, 12, 15, .86); border: 1px solid var(--line-2); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); color: var(--text-2); }
+.scene-card .t { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.scene-card b { display: block; color: var(--text); font: 600 21px/1.1 var(--display); letter-spacing: -.03em; }
+.scene-card .sub { display: block; margin-top: 4px; font-size: 13px; color: var(--text-3); }
+.scene-card p { margin-top: 12px; font-size: 14px; line-height: 1.55; }
+.kv { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+.kv div { padding: 12px 0 2px; min-width: 0; }
+.kv div:nth-child(even) { padding-left: 14px; border-left: 1px solid var(--line); }
+.kv div:nth-child(n + 3) { border-top: 1px solid var(--line); margin-top: 10px; }
+.kv b { font: 600 19px/1 var(--display); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.kv span { display: block; margin-top: 5px; font-size: 12px; color: var(--text-3); line-height: 1.35; }
+.scene-zoom { position: absolute; right: 16px; bottom: 72px; z-index: 3; display: flex; flex-direction: column; border-radius: 10px; overflow: hidden; background: rgba(12, 12, 15, .84); border: 1px solid var(--line-2); }
+.scene-zoom button { width: 40px; height: 40px; border: 0; background: none; cursor: pointer; font-size: 20px; line-height: 1; color: var(--text); }
+.scene-zoom button + button { border-top: 1px solid var(--line); }
+.scene-zoom button:hover { background: rgba(255, 255, 255, .06); }
+@media (max-width: 700px) {
+  .scene { height: 76svh; min-height: 500px; }
+  .scene-card { top: 10px; right: 10px; width: calc(100% - 20px); padding: 14px 16px; }
+  .scene-card p { font-size: 13px; margin-top: 6px; }
+  .scene-card .kv { display: none; }
+  .scene-hint { display: none; }
+  .seg { width: 100%; }
+  .seg button { flex: 1; }
+  .scene-zoom { bottom: 74px; right: 10px; }
+}
+/* cinematic mode (home hero): no controls, only the city */
+.scene--cinematic::after { display: none; }
+.scene--cinematic .scene-card, .scene--cinematic .scene-ui, .scene--cinematic .scene-zoom { display: none; }
+.scene--cinematic .s-lbl:not(.main) { display: none; }
+.scene--cinematic .scene-loading { display: none; }
+.fig { margin: 0; border: 1px solid var(--line); border-radius: 14px; background: radial-gradient(120% 90% at 50% 0%, #141419 0%, #0d0d10 70%); padding: clamp(24px, 3.4vw, 44px); }
+.fig svg { display: block; width: 100%; height: auto; }
+.f-line { fill: none; stroke: rgba(255, 255, 255, .16); stroke-width: 1.5; }
+.f-line--dash { stroke-dasharray: 3 6; }
+.f-flow { fill: none; stroke: var(--accent); stroke-width: 1.75; stroke-linecap: round; }
+.f-heat { fill: none; stroke: var(--warm); stroke-width: 1.75; stroke-linecap: round; }
+.f-warn { fill: none; stroke: var(--warn); stroke-width: 1.75; stroke-linecap: round; }
+.f-box { fill: #16161b; stroke: rgba(255, 255, 255, .12); stroke-width: 1; }
+.f-box--on { fill: #0f1a24; stroke: rgba(77, 178, 239, .55); }
+.f-box--solid { fill: #1d1d23; stroke: rgba(255, 255, 255, .16); }
+.f-box--heat { fill: #1d1712; stroke: rgba(217, 162, 115, .5); }
+.f-box--ghost { fill: none; stroke: rgba(255, 255, 255, .14); stroke-dasharray: 4 5; }
+.f-slot { fill: #26262d; }
+.f-led { fill: var(--accent); }
+.f-led--dim { fill: #5a5a63; }
+.f-t { font: 600 13px var(--body); fill: var(--text); }
+.f-t--sm { font-size: 12px; }
+.f-s { font: 400 11.5px var(--body); fill: var(--text-3); }
+.f-h { font: 600 12px var(--body); fill: var(--text-2); letter-spacing: .02em; }
+.f-acc { fill: var(--accent-2); }
+.f-warm { fill: var(--warm); }
+.f-red { fill: var(--warn); }
+.f-dot { fill: var(--accent); }
+#plantSvg .lines path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+#plantSvg.play .lines path { stroke-dashoffset: 1; animation: draw 1.5s var(--ease) forwards; animation-delay: calc(var(--i) * .1s); }
+#plantSvg.play .fills { opacity: 0; animation: fade-in 1.8s ease 2.4s forwards; }
+#plantSvg.play .fan-marks, #plantSvg.play .rooffans { opacity: 0; animation: fade-in 1s ease 3s forwards; }
+#plantSvg.play .sign, #plantSvg.play .cap { opacity: 0; animation: fade-in 1.2s ease 3.4s forwards; }
+#plantSvg .sign, #plantSvg .cap { opacity: 1; }
+#plantSvg .hose { stroke-dasharray: 1; stroke-dashoffset: 0; }
+#plantSvg.play .hose { stroke-dashoffset: 1; animation: draw 1.6s var(--ease) 3.1s forwards; }
+#plantSvg .glow-strip { filter: drop-shadow(0 0 6px rgba(160, 220, 255, .9)); }
+#plantSvg .glow-warm { filter: drop-shadow(0 0 10px rgba(255, 220, 160, .7)); }
+#plantSvg .leds { filter: drop-shadow(0 0 2px rgba(77, 178, 239, .9)); }
+
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fade-in { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { #plantSvg.play * { animation: none !important; opacity: 1 !important; stroke-dashoffset: 0 !important; } }
+#plantSvg .glow-logo { filter: drop-shadow(0 0 2px #4db2ef) drop-shadow(0 0 8px rgba(77, 178, 239, .9)) drop-shadow(0 0 18px rgba(77, 178, 239, .55)); }
+#plantSvg.play .pipes { opacity: 0; animation: fade-in 1.1s ease 2.8s forwards; }

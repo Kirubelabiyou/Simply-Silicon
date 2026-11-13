@@ -140,6 +140,8 @@
 
   mq.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hover = true; });
   mq.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hover = false; });
+  mq.addEventListener('focusin', function () { hover = true; });
+  mq.addEventListener('focusout', function () { hover = false; });
   mq.addEventListener('pointerdown', function (e) {
     if (e.button !== 0) return;
     drag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, lx: e.clientX, lt: performance.now(), moved: false, v: 0, type: e.pointerType, pts: [] };

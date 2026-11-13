@@ -57,9 +57,12 @@
     '<div class="drawer-foot"><span class="logo">' + LOGO + '</span><span>435 9 Ave SE<br>Calgary, Alberta, Canada</span></div>' +
     '</div>';
   document.body.appendChild(drawer);
+
+  /* while a dialog is open, the page behind it is inert so Tab stays inside the dialog */
+  function setInert(on) { ['site-header', 'site-footer'].forEach(function (id) { var n = document.getElementById(id); if (n) n.inert = on; }); [].forEach.call(document.querySelectorAll('main, .skip'), function (n) { n.inert = on; }); }
   var burger = hdr && hdr.querySelector('.burger');
-  function openMenu() { drawer.hidden = false; burger.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; drawer.querySelector('.drawer-close').focus(); }
-  function closeMenu() { drawer.hidden = true; burger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; burger.focus({ preventScroll: true }); }
+  function openMenu() { setInert(true); drawer.hidden = false; burger.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; drawer.querySelector('.drawer-close').focus(); }
+  function closeMenu() { setInert(false); drawer.hidden = true; burger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; burger.focus({ preventScroll: true }); }
   if (burger) burger.addEventListener('click', openMenu);
   drawer.querySelector('.drawer-close').addEventListener('click', closeMenu);
   drawer.querySelector('.drawer-scrim').addEventListener('click', closeMenu);
@@ -83,15 +86,15 @@
     '<option>Request access</option><option>Site partnership</option><option>Investment</option><option>Media</option><option>Careers</option><option>Other</option></select></div>' +
     '<div class="f-row f-full"><label for="cf-subject">Subject</label><input id="cf-subject" name="subject" required></div>' +
     '<div class="f-row f-full"><label for="cf-msg">Message</label><textarea id="cf-msg" name="message" rows="5" required placeholder="What you plan to run and where your teams work"></textarea></div>' +
-    '<p class="f-err" id="cf-err" hidden></p>' +
+    '<p class="f-err" id="cf-err" role="alert" hidden></p>' +
     '<div class="f-actions"><button class="btn btn--primary" type="submit">Review message</button></div>' +
     '</form>' +
     '<div class="cf-done" id="cf-done" hidden></div>' +
     '</div>';
   document.body.appendChild(modal);
   var form = modal.querySelector('#cf'), done = modal.querySelector('#cf-done'), err = modal.querySelector('#cf-err'), lastFocus = null;
-  function openForm(topic) { lastFocus = document.activeElement; if (!drawer.hidden) closeMenu(); modal.hidden = false; document.body.style.overflow = 'hidden'; form.hidden = false; done.hidden = true; if (topic) { form.elements.topic.value = topic; if (topic === 'Request access' && !form.elements.subject.value) form.elements.subject.value = 'Request access'; } modal.querySelector('#cf-name').focus(); }
-  function closeForm() { modal.hidden = true; document.body.style.overflow = ''; if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); }
+  function openForm(topic) { lastFocus = document.activeElement; if (!drawer.hidden) closeMenu(); setInert(true); modal.hidden = false; document.body.style.overflow = 'hidden'; form.hidden = false; done.hidden = true; if (topic) { form.elements.topic.value = topic; if (topic === 'Request access' && !form.elements.subject.value) form.elements.subject.value = 'Request access'; } modal.querySelector('#cf-name').focus(); }
+  function closeForm() { setInert(false); modal.hidden = true; document.body.style.overflow = ''; if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); }
   modal.querySelector('.modal-x').addEventListener('click', closeForm);
   modal.querySelector('.modal-scrim').addEventListener('click', closeForm);
   document.addEventListener('click', function (e) { var t = e.target.closest && e.target.closest('[data-contact]'); if (t) { e.preventDefault(); openForm(t.getAttribute('data-contact')); } });
@@ -103,6 +106,14 @@
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim())) missing.push('a valid email');
     if (!f.subject.value.trim()) missing.push('a subject');
     if (!f.message.value.trim()) missing.push('a message');
+    [f.name, f.email, f.subject, f.message].forEach(function (el) { el.removeAttribute('aria-invalid'); });
+    var bad = [];
+    if (!f.name.value.trim()) bad.push(f.name);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim())) bad.push(f.email);
+    if (!f.subject.value.trim()) bad.push(f.subject);
+    if (!f.message.value.trim()) bad.push(f.message);
+    bad.forEach(function (el) { el.setAttribute('aria-invalid', 'true'); el.setAttribute('aria-describedby', 'cf-err'); });
+    if (bad.length) bad[0].focus();
     if (missing.length) { err.textContent = 'Add ' + (missing.length > 1 ? missing.slice(0, -1).join(', ') + ' and ' + missing[missing.length - 1] : missing[0]) + ' to continue.'; err.hidden = false; return; }
     err.hidden = true;
     var subject = '[' + f.topic.value + '] ' + f.subject.value.trim();

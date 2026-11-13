@@ -1,0 +1,32 @@
+/* 8. Swiss: white, black and one signal red. Huge flush-left type on a strict 12-column grid; red only for the one action and the numbers. */
+:root { --bg: #ffffff; --bg-2: #f3f3f3; --ink: #0b0b0b; --ink-2: #555; --ink-3: #777; --accent: #e30613; --on-accent: #fff; --logo: #1f86c9; --panel: #0b0b0b; --radius: 0px;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif; --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --h-weight: 600; --h-track: -.05em; --h1: clamp(56px, 9vw, 150px); --h2: clamp(38px, 4.6vw, 72px); --h1-line: .88;
+  --logo-filter: brightness(0); --logo-opacity: .85; --max: 1360px; }
+
+.hero-head { grid-template-columns: 1fr; }
+.hero h1 { max-width: 12ch; }
+.h1-2 { color: var(--ink); }
+.hero-copy { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+.hero-copy .lede { grid-column: 6 / span 5; }
+.hero-copy .ctas { grid-column: 6 / span 7; margin-top: 4px; }
+.btn--primary:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.link { color: var(--ink); }
+.link::after { color: var(--accent); }
+@media (min-width: 961px) {
+  .intro { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 24px; max-width: none; }
+  .intro h2 { grid-column: 1 / span 7; }
+  .intro p { grid-column: 6 / span 6; }
+}
+.compare thead th { font-family: var(--body); font-size: 14px; font-weight: 600; color: var(--ink); }
+.compare thead th.us { color: var(--accent); }
+.compare th, .compare td { border-top: 2px solid var(--ink); }
+.compare thead th { border-top: 0; }
+.ticks li::before { background: var(--accent); }
+.steps .n { color: var(--accent); font-weight: 600; font-size: clamp(72px, 8vw, 120px); letter-spacing: -.06em; }
+.tile .ico { color: var(--ink); }
+.status::before { background: var(--accent); box-shadow: none; }
+.feature { background: var(--bg-2); }
+.kv dt { font-weight: 600; font-size: 36px; }
+.s-cta h2 { font-size: clamp(56px, 8vw, 128px); max-width: 13ch; }
+.s-backers { padding-top: var(--sec); }
+.ftr { background: #fff; border-top: 2px solid var(--ink); }

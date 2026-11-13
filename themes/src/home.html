@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en" data-theme="{{ID}}">
+<head>
+<meta charset="utf-8">
+<base href="../../">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simply Silicon · {{NAME}}</title>
+<meta name="description" content="Secure, localized compute. Private GPU servers and air-gapped fiber for any team. Run any model on hardware only you use. Your data stays with you.">
+<meta name="theme-color" content="{{THEME_COLOR}}">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+{{FONTS}}
+<link rel="stylesheet" href="themes/src/core.css">
+<link rel="stylesheet" href="themes/{{ID}}/theme.css">
+</head>
+<body data-page="home" id="top">
+<!-- Theme {{NUM}}, {{NAME}}: {{NOTE}} Built from themes/src by themes/build.py; edit the source, not this file. -->
+<header id="site-header"></header>
+
+<main id="homeMain">
+  <section class="hero">
+    <div class="wrap hero-head">
+      <h1>Secure, localized compute <span class="h1-2">at scale.</span></h1>
+      <div class="hero-copy">
+        <p class="lede">Simply Silicon delivers private, high-performance AI compute inside the city, built for organizations that cannot tolerate latency, outages or exposure to the public network.</p>
+        <div class="ctas">
+          <button class="btn btn--primary" type="button" data-contact="Request access">Request access</button>
+          <a class="btn" href="#how">How it works</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="stage">
+        <div class="plant">
+{{PLANT}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec s-compare">
+    <div class="wrap">
+      <div class="intro">
+        <h2>AI without giving up control</h2>
+        <p>Public AI clouds mean shared servers and data sent over the public network. For many teams, that is a risk. With Simply Silicon the hardware is yours alone, and so is the network that connects it.</p>
+      </div>
+      <table class="compare">
+        <thead><tr><th scope="col"><span class="sr">What you get</span></th><th scope="col">Public AI clouds</th><th scope="col" class="us">Simply Silicon</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Hardware</th><td>Shared with other customers</td><td class="us">Dedicated bare metal used by you alone</td></tr>
+          <tr><th scope="row">Models</th><td>The ones the provider offers</td><td class="us">Any model you want, open source or your own</td></tr>
+          <tr><th scope="row">Network</th><td>The public network</td><td class="us">Private air-gapped fiber</td></tr>
+          <tr><th scope="row">Your data</th><td>Leaves your organization</td><td class="us">Stays within your organization</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec s-services" id="services">
+    <div class="wrap">
+      <div class="intro">
+        <h2>Two services, one private system</h2>
+        <p>Use dedicated GPU servers, our private fiber or both together.</p>
+      </div>
+      <div class="svc">
+        <article class="svc-item">
+          <div class="media"><img src="assets/img/rack-1280.webp" srcset="assets/img/rack-1280.webp 1280w, assets/img/rack.webp 2560w" sizes="(max-width: 860px) 100vw, 50vw" width="1280" height="960" alt="The front of a GPU server in a dark rack" loading="lazy"></div>
+          <div class="body">
+            <h3>Dedicated bare metal</h3>
+            <p>Your own GPU servers in our secure data centres. You choose the models and the software. The tokens you generate are yours.</p>
+            <ul class="ticks"><li>No shared virtual layer</li><li>Any model you choose</li><li>Hardware used only by you</li></ul>
+          </div>
+        </article>
+        <article class="svc-item">
+          <div class="media media--fig"><figure class="fig" data-fig="fiber"></figure></div>
+          <div class="body">
+            <h3>Air-gapped private fiber</h3>
+            <p>A direct private line from your location to our site. Your data never crosses the public network.</p>
+            <ul class="ticks"><li>Direct line from your location</li><li>Separate from the public network</li><li>Nothing shared with other traffic</li></ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec s-how" id="how">
+    <div class="wrap">
+      <div class="intro">
+        <h2>How it works</h2>
+        <p>Four steps from first call to running your own models.</p>
+      </div>
+      <ol class="steps">
+        <li><span class="n">1</span><h3>Tell us your workload</h3><p>What you need to run and how much.</p></li>
+        <li><span class="n">2</span><h3>Get your servers</h3><p>Dedicated GPUs set up for you.</p></li>
+        <li><span class="n">3</span><h3>Connect privately</h3><p>Over air-gapped fiber from your location.</p></li>
+        <li><span class="n">4</span><h3>Run any model</h3><p>Your data and your tokens stay with you.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec s-who">
+    <div class="wrap">
+      <div class="intro">
+        <h2>Built for every kind of team</h2>
+        <p>From banks to software companies. If you want to run your own models on hardware only you use, we are built for you.</p>
+      </div>
+      <div class="tiles">
+        <article class="tile"><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 18v-7"/><path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M3 22h18"/><path d="M6 18v-7"/></svg><h3>Banking</h3><p>Use AI on client data without a public cloud.</p></article>
+        <article class="tile"><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg><h3>Healthcare</h3><p>Keep patient data private while your teams use the latest models.</p></article>
+        <article class="tile"><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg><h3>Government</h3><p>Run sensitive work on hardware you control.</p></article>
+        <article class="tile"><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg><h3>Software companies</h3><p>Run open source models for your product on dedicated hardware.</p></article>
+      </div>
+      <p class="more"><a class="link" href="workloads.html">See workloads</a></p>
+    </div>
+  </section>
+
+  <section class="sec s-proof">
+    <div class="wrap">
+      <div class="intro">
+        <h2>Your data stays with you</h2>
+        <p>Your servers run in our secure data centres, on hardware no one else uses. Your data and your models stay within your organization.</p>
+      </div>
+      <a class="feature" href="foundation.html">
+        <div class="feature-img"><div class="scene" id="loopScene" aria-hidden="true"></div></div>
+        <div class="feature-copy">
+          <span class="status">Online</span>
+          <h3>Foundation, our first site</h3>
+          <p>Our first data centre is online. More sites are in development.</p>
+          <dl class="kv">
+            <div><dt>12 MW</dt><dd>n+1 redundant power and cooling</dd></div>
+            <div><dt>7 km</dt><dd>Air-gapped fiber</dd></div>
+            <div><dt>25+</dt><dd>Connected buildings</dd></div>
+            <div><dt>Online</dt><dd>Phase 1 running now</dd></div>
+          </dl>
+          <span class="link">Explore Foundation in 3D</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="sec s-cta">
+    <div class="wrap">
+      <h2>Keep your data and run your own models</h2>
+      <p>Tell us what you plan to run and where your teams work. We will design the capacity around it.</p>
+      <button class="btn btn--primary" type="button" data-contact="Request access">Request access</button>
+    </div>
+  </section>
+
+  <section class="sec s-backers" aria-labelledby="backers-h">
+    <div class="wrap">
+      <h2 id="backers-h">Backed by investors and angels from</h2>
+      <ul class="logos">
+        <li data-logo="augur-vc.webp" style="--h:30px"><a href="https://augurvc.com/" target="_blank" rel="noopener"><span>Augur VC</span></a></li>
+        <li data-logo="palisade-capital-management.webp" style="--h:32px"><a href="https://www.palisade.ca/" target="_blank" rel="noopener"><span>Palisade Capital Management</span></a></li>
+        <li data-logo="garagecapital.webp" style="--h:33px"><a href="https://www.garage.vc/" target="_blank" rel="noopener"><span>GarageCapital</span></a></li>
+        <li data-logo="openai.webp" style="--h:30px"><a href="https://openai.com/" target="_blank" rel="noopener"><span>OpenAI</span></a></li>
+        <li data-logo="google.svg" style="--h:32px"><a href="https://www.google.com/" target="_blank" rel="noopener"><span>Google</span></a></li>
+        <li data-logo="microsoft.svg" style="--h:26px"><a href="https://www.microsoft.com/" target="_blank" rel="noopener"><span>Microsoft</span></a></li>
+        <li data-logo="heartland-generation.webp" style="--h:31px"><a href="https://www.heartlandgeneration.com/" target="_blank" rel="noopener"><span>Heartland Generation</span></a></li>
+        <li data-logo="cenovus.webp" style="--h:27px"><a href="https://www.cenovus.com/" target="_blank" rel="noopener"><span>Cenovus</span></a></li>
+        <li data-logo="vermilion-energy.webp" style="--h:38px"><a href="https://www.vermilionenergy.com/" target="_blank" rel="noopener"><span>Vermilion Energy</span></a></li>
+        <li data-logo="greengate.webp" style="--h:24px"><a href="https://greengatepower.com/" target="_blank" rel="noopener"><span>Greengate</span></a></li>
+        <li data-logo="aslan-renewables.webp" style="--h:26px"><a href="https://aslanrenewables.com/" target="_blank" rel="noopener"><span>Aslan Renewables</span></a></li>
+        <li data-logo="bluearth-renewables.webp" style="--h:30px"><a href="https://www.bluearthrenewables.com/" target="_blank" rel="noopener"><span>BluEarth Renewables</span></a></li>
+        <li data-logo="deming-sky-capital.webp" style="--h:40px"><a href="https://demingsky.com/" target="_blank" rel="noopener"><span>Deming Sky Capital</span></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/home.js"></script>
+<script>
+  /* The page uses <base href="../../">, so in-page links like #how are scrolled here instead of leaving the page */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return;
+    var t = document.getElementById(a.getAttribute('href').slice(1)); if (!t) return;
+    e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
