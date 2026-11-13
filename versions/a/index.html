@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simply Silicon</title>
+<meta name="description" content="Dedicated GPU servers in downtown Calgary, reached over private fiber instead of the public internet. Foundation, our first site, is online.">
+<meta name="theme-color" content="#f3efe7">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../shared.css">
+</head>
+<body data-page="home">
+<!-- Version A, "Letter": warm paper, a serif for headings, the photograph doing the work. Almost no lines: space separates sections. -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="logo" href="./" aria-label="Simply Silicon home">simply silicon.</a>
+    <nav aria-label="Main">
+      <a href="../../foundation.html">Foundation</a>
+      <a href="../../workloads.html">Workloads</a>
+      <a href="../../platform.html">Platform</a>
+    </nav>
+    <button class="btn btn--ink btn--sm" type="button" data-contact="Request access">Request access</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <h1>Private AI compute, in downtown Calgary.</h1>
+        <p class="lede">Dedicated GPU servers in our own data centre, reached over our own fiber instead of the public internet. For banks, healthcare, government and software teams that can't send their data to a shared cloud.</p>
+        <div class="actions">
+          <button class="btn btn--ink" type="button" data-contact="Request access">Request access</button>
+          <a class="text-link" href="../../foundation.html">See Foundation, our first site</a>
+        </div>
+        <p class="fact">Foundation is online: 12&nbsp;MW of power, 7&nbsp;km of private fiber and more than 25 buildings connected.</p>
+      </div>
+      <figure class="hero-photo">
+        <img src="../../assets/img/hero.webp" width="580" height="727" alt="The four steel stacks of the Calgary district heating plant against a clear sky">
+      </figure>
+    </div>
+  </section>
+
+  <section class="block" id="compare">
+    <div class="wrap narrow">
+      <h2>What's different from a public cloud</h2>
+      <p class="intro">On a public AI cloud you share servers with other customers and your data crosses the public internet. Here the hardware is used by you alone, and so is the line that reaches it.</p>
+      <table class="compare">
+        <thead><tr><th scope="col"><span class="sr">Topic</span></th><th scope="col">Public AI cloud</th><th scope="col">Simply Silicon</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Hardware</th><td>Shared with other customers</td><td>Bare metal used only by you</td></tr>
+          <tr><th scope="row">Models</th><td>The ones the provider offers</td><td>Any model, open source or your own</td></tr>
+          <tr><th scope="row">Network</th><td>The public internet</td><td>Private, air-gapped fiber</td></tr>
+          <tr><th scope="row">Your data</th><td>Leaves your organization</td><td>Stays within your organization</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="services">
+    <div class="wrap">
+      <h2 class="wide-h">Two services: the servers, and the line to them</h2>
+      <div class="rack"><img src="../../assets/img/rack.webp" width="2560" height="1920" alt="The front of a GPU server: fans, drive bays and an open status panel" loading="lazy"></div>
+      <div class="two">
+        <div>
+          <h3>Dedicated GPU servers</h3>
+          <p>Your own bare-metal servers in our data centre. There's no shared virtual layer: you choose the models and the software, and the tokens you generate are yours.</p>
+        </div>
+        <div>
+          <h3>Private fiber</h3>
+          <p>A direct line from your building to ours, separate from the public internet and from anyone else's traffic. Your data never crosses the public network.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="who">
+    <div class="wrap two two--wide">
+      <div>
+        <h2>Who it's for</h2>
+        <p class="intro">Anyone who wants to run their own models on hardware only they use. That includes:</p>
+      </div>
+      <dl class="who">
+        <div><dt>Banks</dt><dd>Use AI on client data without a public cloud.</dd></div>
+        <div><dt>Healthcare</dt><dd>Keep patient data private while your teams use current models.</dd></div>
+        <div><dt>Government</dt><dd>Run sensitive work on hardware you control.</dd></div>
+        <div><dt>Software companies</dt><dd>Serve open source models in your product from dedicated hardware.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="block" id="how">
+    <div class="wrap two two--wide">
+      <div>
+        <h2>How you start</h2>
+        <p class="intro">From the first call to running your own models.</p>
+      </div>
+      <ol class="steps">
+        <li><strong>Tell us the workload.</strong> What you need to run, and how much of it.</li>
+        <li><strong>We set up your servers.</strong> Dedicated GPUs, configured for you.</li>
+        <li><strong>You connect over private fiber</strong> from your own location.</li>
+        <li><strong>You run any model you like.</strong> Your data and your tokens stay with you.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="foundation">
+    <div class="wrap">
+      <h2 class="wide-h">Foundation, our first site, is running</h2>
+      <a class="poster" href="../../foundation.html">
+        <img src="../../assets/img/foundation-poster.webp" width="1728" height="891" alt="A 3D model of downtown Calgary with the buildings on our private fiber lit in blue" loading="lazy">
+      </a>
+      <div class="stats">
+        <p><span class="num">12&nbsp;MW</span> of power, with n+1 redundant power and cooling</p>
+        <p><span class="num">7&nbsp;km</span> of air-gapped fiber</p>
+        <p><span class="num">25+</span> buildings connected to it</p>
+      </div>
+      <p><a class="text-link" href="../../foundation.html">Walk through Foundation in 3D</a></p>
+    </div>
+  </section>
+
+  <section class="block" id="backers">
+    <div class="wrap narrow">
+      <h2>Who backs us</h2>
+      <p class="intro">Investors, and angels from these companies.</p>
+      <ul class="names">
+        <li>Augur VC</li><li>Palisade Capital Management</li><li>GarageCapital</li><li>OpenAI</li><li>Google</li><li>Microsoft</li><li>Heartland Generation</li><li>Cenovus</li><li>Vermilion Energy</li><li>Greengate</li><li>Aslan Renewables</li><li>BluEarth Renewables</li><li>Deming Sky Capital</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="wrap narrow">
+      <h2>Tell us what you plan to run.</h2>
+      <p>And where your teams work. We'll size the servers and the fiber around it.</p>
+      <button class="btn btn--ink" type="button" data-contact="Request access">Request access</button>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <div>
+      <span class="logo">simply silicon.</span>
+      <address>435 9 Ave SE, Calgary, Alberta</address>
+    </div>
+    <ul>
+      <li><a href="../../foundation.html">Foundation</a></li>
+      <li><a href="../../workloads.html">Workloads</a></li>
+      <li><a href="../../platform.html">Platform</a></li>
+      <li><a href="https://www.linkedin.com/company/simply-silicon/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><button type="button" data-contact="Other">Get in touch</button></li>
+    </ul>
+  </div>
+  <div class="wrap small">© 2026 Simply Silicon</div>
+</footer>
+<script src="../../assets/js/common.js"></script>
+</body>
+</html>
