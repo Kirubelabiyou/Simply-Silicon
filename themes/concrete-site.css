@@ -1,0 +1,120 @@
+/* concrete.css: the Concrete theme on the published Simply Silicon site.
+   Loaded last; changes colours and type only. Layout, words and pictures are the site's own.
+   Concrete: warm concrete grey and black, heavy tight Archivo headings, a black closing band.
+   The drawings, map and 3D scenes sit on dark "instrument panels", and nothing on the site is blue but the wordmark. */
+
+@font-face { font-family: "Archivo"; src: url("../fonts/archivo.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; }
+
+/* ---------- the page: concrete grey, black ink (was the dark ground) ---------- */
+:root {
+  --c-concrete: #d8d5cf; --c-concrete-2: #cfcbc4; --c-paper: #e7e4df; --c-ink: #121110; --c-ink-2: #3d3a35; --c-ink-3: #6c6862;
+  --bg: var(--c-concrete); --bg-2: var(--c-concrete-2); --surface: #e1ded8; --surface-2: #dcd9d3;
+  --line: rgba(18, 17, 16, .12); --line-2: rgba(18, 17, 16, .2); --line-3: rgba(18, 17, 16, .42);
+  --text: var(--c-ink); --text-2: var(--c-ink-2); --text-3: var(--c-ink-3);
+  --accent: var(--c-ink); --accent-2: var(--c-ink); --accent-soft: rgba(18, 17, 16, .06);
+  --warm: #8a5a2b; --soon: #6c6862;
+  --ink: var(--text); --action: var(--c-ink); --action-ink: var(--c-concrete);
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --display-weight: 800; --display-tracking: -0.045em; --display-tracking-xl: -0.05em;
+  color-scheme: light;
+}
+html { color-scheme: light; background: var(--bg); }
+body { background: var(--bg); color: var(--text-2); }
+::selection { background: var(--c-ink); color: var(--c-concrete); }
+
+/* the light bands: a paler concrete, so the page keeps its rhythm of alternating sections */
+.sec--light {
+  --bg: var(--c-paper); --bg-2: #dedbd5; --surface: #f1efeb; --surface-2: #ebe8e3;
+  --line: rgba(18, 17, 16, .12); --line-2: rgba(18, 17, 16, .2); --line-3: rgba(18, 17, 16, .42);
+  --text: var(--c-ink); --text-2: var(--c-ink-2); --text-3: var(--c-ink-3);
+  --accent: var(--c-ink); --accent-2: var(--c-ink); --accent-soft: rgba(18, 17, 16, .06); --warm: #8a5a2b;
+}
+
+/* ---------- instrument panels: the drawings, figures, map and 3D scenes stay dark ---------- */
+.hx-stage, .fig, .net-stage, .scene, .svc-img, .map-strip, .feature-img, .duo-side--inf, .net-3d,
+.sec--light .net-stage, .sec--light .scene, .sec--light .fig, .sec--light .map-strip, .sec--light .feature-img {
+  --bg: #141312; --bg-2: #181716; --surface: #1c1b19; --surface-2: #22201e;
+  --line: rgba(241, 239, 234, .1); --line-2: rgba(241, 239, 234, .16); --line-3: rgba(241, 239, 234, .28);
+  --text: #f1efea; --text-2: #c4c1bc; --text-3: #9a958e;
+  --accent: #dcd9d4; --accent-2: #e9e7e4; --accent-soft: rgba(220, 217, 212, .1);
+  --warm: #d9a273; --soon: #8d877e; --ink: var(--text);
+  color: var(--text-2);
+}
+.hx-stage { background: #141312; }
+.fig { background: radial-gradient(120% 90% at 50% 0%, #1d1c1a 0%, #141312 70%); }
+.svc-img--fig { background: #141312; }
+.svc-img--fig .fig { background: none; }
+.net-stage { background: radial-gradient(90% 80% at 45% 30%, #1b1a18, #121110 80%); }
+.pop, .scene-card, .seg { background: rgba(20, 19, 18, .92); }
+.net-stage .btn--primary, .net-back .btn, .sec--light .net-stage .btn--primary, .sec--light .net-back .btn { background: #f1efea; border-color: #f1efea; color: #121110; }
+.duo-side--inf { background: #141312; border-color: #141312; }
+
+/* ---------- type: Concrete's heavy, tight Archivo headings (sizes are the site's own) ---------- */
+h1, h2, .hx-h1, .page-head h1, .cta h2, .backers-h, .feature-copy .feature-h { font-family: var(--display) !important; font-weight: 800 !important; letter-spacing: -.045em !important; }
+h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side h3 { font-family: var(--display); font-weight: 700; letter-spacing: -.02em; }
+.hx-h1, .page-head h1, .cta h2 { line-height: .9; }
+.hx-h1 .hx-l2, .hx-h1 .hx-l2 .stop { color: var(--c-ink-3); }
+.stop { color: inherit; }
+.step-n, .step-n.is-end, .sec--light .step-n, .sec--light .step-n.is-end,
+.metrics b, .phases-list b, .netstat b, .hero-facts dt, .feature-kv dt { font-family: var(--display); font-weight: 800; letter-spacing: -.05em; color: var(--text); }
+.metrics b small, .sec--light .metrics b small { color: var(--text-3); font-weight: 700; }
+.lede, .quote p { font-weight: 400; }
+.quote p { font-family: var(--display); font-weight: 600; letter-spacing: -.025em; color: var(--text); }
+
+/* ---------- buttons: black on concrete, concrete on black ---------- */
+.btn { color: var(--text); }
+.btn--primary, .sec--light .btn--primary { background: var(--c-ink); border-color: var(--c-ink); color: var(--c-concrete); font-weight: 500; }
+.btn--primary:hover, .sec--light .btn--primary:hover { background: #34322f; border-color: #34322f; color: var(--c-concrete); }
+.btn:not(.btn--primary) { border: 2px solid var(--c-ink); font-weight: 500; }
+.btn:not(.btn--primary):hover { background: var(--c-ink); color: var(--c-concrete); }
+
+/* ---------- header and drawer: concrete, the wordmark keeps its blue ---------- */
+.hdr { background: rgba(216, 213, 207, .94); border-bottom-color: var(--line-2); }
+.logo, .ftr .logo { color: #1d7fc0; }
+.menu a { color: var(--text-2); }
+.menu a:hover, .menu a[aria-current="page"] { color: var(--text); }
+.menu a[aria-current="page"]::after { background: var(--c-ink); height: 3px; }
+
+/* ---------- closing band: black, like Concrete's ---------- */
+.cta {
+  --bg: #121110; --surface: #1c1b19; --line: rgba(216, 213, 207, .1); --line-2: rgba(216, 213, 207, .18); --line-3: rgba(216, 213, 207, .3);
+  --text: #d8d5cf; --text-2: #a19d96; --text-3: #8a857e; --accent: #d8d5cf; --ink: var(--text);
+  background-color: #121110; color: var(--text-2);
+}
+.cta .btn { color: #d8d5cf; }
+.cta .btn--primary { background: #d8d5cf; border-color: #d8d5cf; color: #121110; }
+.cta .btn--primary:hover { background: #f1efea; border-color: #f1efea; color: #121110; }
+.cta .btn:not(.btn--primary) { border-color: #d8d5cf; }
+.cta .btn:not(.btn--primary):hover { background: #d8d5cf; color: #121110; }
+
+/* ---------- details that were blue ---------- */
+.tile { border-top-color: var(--c-ink); }
+.tile svg.ico, .ticks li::before, .svc-body .idx, .rows .idx, .cols .idx, .pin-step .n, .compare thead th.is-inf { color: var(--text); }
+.svc-body .idx, .rows .idx, .cols .idx, .pin-step .n { color: var(--text-3); }
+.metrics { border-top-color: var(--c-ink); }
+.phases-list li.is-live { background: var(--surface); box-shadow: inset 0 3px 0 var(--c-ink); }
+.phases-list li.is-live .when { color: var(--text); }
+.phases-list li.is-soon { --c: #8d877e; }
+.dot--live { background: var(--accent); }
+.net-legend .dot--live { box-shadow: 0 0 0 3px rgba(220, 217, 212, .18), 0 0 10px rgba(220, 217, 212, .7) !important; }
+.bar-row .bt i { background: var(--c-ink); }
+.chart, .doc-link { background: var(--surface); }
+.doc-ico { background: var(--c-ink); color: var(--c-concrete); border-color: var(--c-ink); }
+
+/* ---------- investors: their logos in black, as on Concrete ---------- */
+.marquee-track img { filter: brightness(0); opacity: .72; }
+.marquee-track li a:hover img { opacity: 1; }
+
+/* ---------- Dedicated bare metal: the rack photo a little brighter ---------- */
+.svc-img img { filter: brightness(1.38) contrast(1.04); }
+
+/* ---------- phones: the pinned Platform figure sits on the page colour ---------- */
+@media (max-width: 900px) { .pin-fig { box-shadow: 0 12px 24px -16px rgba(18, 17, 16, .35); } }
+
+/* ---------- light text the dark site set by hand, back to the page's ink ---------- */
+.hero .lede, .hero-full .lede { color: var(--text-2); }
+.pin-step .lead, .arch-copy .arch-lead { color: var(--text); }
+.pin-step.on h3 { color: var(--text); text-shadow: none; }
+.pin-step.on .n { color: var(--text); }
+.pin-step.on::before { background: var(--c-ink); box-shadow: none; }
+.duo-side--inf h3 { color: #f1efea; }
