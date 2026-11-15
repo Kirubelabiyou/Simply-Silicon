@@ -27,7 +27,7 @@ python3 -m http.server 8000      # then visit http://localhost:8000
 - Sections are told apart by two shades of black and a soft light at the top of each.
 - Behind every page is a field of faint dots that slowly light and fade (`assets/js/dots.js`). Visitors who ask for reduced motion see it still.
 - Blue appears only in the hero's plant drawing and the 3D model.
-- Green and amber appear only on Online and In-development markers.
+- Green (Online) and lime (In development) appear only on the status markers.
 - All text passes WCAG AAA contrast (7:1) against its background.
 
 ### Files
