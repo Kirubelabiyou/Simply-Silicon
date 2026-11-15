@@ -37,7 +37,8 @@ html, body { background: var(--g); }
 
 /* ---------- background: a field of small dim dots that slowly light and fade (assets/js/dots.js), on black.
    Sections are told apart by two shades of black taken in turn and a soft light at the top of each. ---------- */
-.dot-field { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.dot-field { position: fixed; inset: 0; z-index: 0; pointer-events: none; width: 100vw; height: 100vh;
+  background-image: radial-gradient(circle at 11px 11px, rgba(255, 255, 255, .09) 1px, transparent 1.6px); background-size: 22px 22px; }
 main, .ftr { position: relative; z-index: 1; }
 :root { --glow: linear-gradient(180deg, rgba(255, 255, 255, .045) 0, rgba(255, 255, 255, 0) 200px); }
 .sec, .sec--light, .cta, .hx, .map-top, .page-head, main > section, .ftr { background-color: transparent !important; }

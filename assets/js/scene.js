@@ -41,7 +41,7 @@ export function mountScene(host, opts = {}) {
   /* ---------- renderer, camera, light ---------- */
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
   const DPR = window.devicePixelRatio || 1;
-  let pixelRatio = Math.min(DPR, PHONE ? 1.5 : 1.6), tuned = 0, canDraw = false;
+  let pixelRatio = Math.min(DPR, PHONE ? 1.25 : 1.35), tuned = 0, canDraw = false; // antialiased, so a little under 1.5x stays crisp
   renderer.setPixelRatio(pixelRatio);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -79,7 +79,7 @@ export function mountScene(host, opts = {}) {
   const sun = NIGHT ? new THREE.DirectionalLight(0xa9bcff, .38) : new THREE.DirectionalLight(0xfff1dc, 2.6);
   sun.castShadow = true;
   const maxTex = renderer.capabilities.maxTextureSize;
-  const SM = PHONE ? 2048 : Math.min(4096, maxTex);
+  const SM = PHONE ? 1024 : Math.min(2048, maxTex); // shadows are soft-filtered, so 2048 looks the same and draws 4x faster
   sun.shadow.mapSize.set(SM, SM);
   sun.shadow.bias = -.0004; sun.shadow.normalBias = .6;
   scene.add(sun); scene.add(sun.target);
@@ -884,7 +884,7 @@ export function mountScene(host, opts = {}) {
   function size() {
     const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return;
     // big canvases (like the full-width map stage) start at a lower resolution so the first frames stay smooth
-    if (!tuned) { const cap = PHONE ? 1.5 : (w * h > 1.1e6 ? 1.2 : 1.6); if (Math.abs(Math.min(DPR, cap) - pixelRatio) > .01) { pixelRatio = Math.min(DPR, cap); renderer.setPixelRatio(pixelRatio); } }
+    if (!tuned) { const cap = PHONE ? 1.25 : (w * h > 1.1e6 ? 1.1 : 1.35); if (Math.abs(Math.min(DPR, cap) - pixelRatio) > .01) { pixelRatio = Math.min(DPR, cap); renderer.setPixelRatio(pixelRatio); } }
     renderer.setSize(w, h, false);
     camera.aspect = w / h; camera.fov = w < 700 ? 50 : 38;
     // cinematic on wide screens: shift the frame so the city sits to the right of the headline
@@ -926,7 +926,7 @@ export function mountScene(host, opts = {}) {
     if (lastT) ft.push(now - lastT); lastT = now;
     if (ft.length < 50) return;
     const sorted = ft.slice().sort((a, b) => a - b), med = sorted[ft.length >> 1]; ft.length = 0;
-    if (med > 26 && pixelRatio > 1 && tuned < 3) { pixelRatio = Math.max(1, pixelRatio - .25); renderer.setPixelRatio(pixelRatio); size(); renderer.render(scene, camera); tuned++; }
+    if (med > 20 && pixelRatio > 1 && tuned < 3) { pixelRatio = Math.max(1, pixelRatio - .25); renderer.setPixelRatio(pixelRatio); size(); renderer.render(scene, camera); tuned++; }
   }
   (function loop(now) {
     if (!alive) return;

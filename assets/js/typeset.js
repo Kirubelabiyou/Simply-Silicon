@@ -12,7 +12,7 @@
     });
   }
   fix(document);
-  // the header, footer and careers list are written by scripts after load
-  new MutationObserver(function (ms) { ms.forEach(function (m) { m.addedNodes.forEach(function (a) { if (a.nodeType === 1) fix(a.parentNode || a); }); }); })
-    .observe(document.body, { childList: true, subtree: true });
+  // the header, footer and careers list are written by scripts after load: watch only those
+  var mo = new MutationObserver(function (ms) { ms.forEach(function (m) { if (m.target.nodeType === 1) fix(m.target); }); });
+  ['site-header', 'site-footer', 'jobList'].forEach(function (id) { var el = document.getElementById(id); if (el) mo.observe(el, { childList: true }); });
 })();
