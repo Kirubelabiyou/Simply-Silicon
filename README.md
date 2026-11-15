@@ -1,61 +1,72 @@
 # Simply Silicon
 
-Website for Simply Silicon: secure, localized AI compute, starting with Foundation in downtown Calgary.
+The website for Simply Silicon: secure, localized AI compute, starting with Foundation in downtown Calgary.
 
-Built as a pitch. Facts and numbers come from [gosimply.ai](https://gosimply.ai).
+**Live:** https://kirubelabiyou.github.io/Simply-Silicon/ (GitHub Pages, from the `main` branch)
+**Deploy anywhere else:** send `deploy/simply-silicon-site.zip`. It contains the whole site and `DEPLOY.md` with the steps.
 
-## Pages
+## The site
 
-- `index.html` – Home: hero, how it works (five core pieces)
-- `foundation.html` – Foundation: 3D downtown Calgary with the private fiber network and the plant by phase
-- `workloads.html` – Workloads: who it serves and why
-- `platform.html` – Platform: world network map (Calgary opens the 3D scene), pipeline and vision
-
-## Structure
+A static site with no build step. Open `index.html`, or run a local server from this folder:
 
 ```
-assets/css/site.css          Theme tokens, header, menu, footer
-assets/css/pages.css         Page components
-assets/js/common.js          Shared header, phone menu and footer
-assets/js/home.js            GPU racks and How it works
-assets/js/network.js         World map (Platform)
-assets/js/scene.js           3D scene: Calgary streets, fiber, plant (Three.js)
-assets/js/map-data.js        World map paths (Natural Earth 1:50m, simplified)
-assets/js/calgary-data.js    Calgary fiber routes and connected buildings (from gosimply.ai)
-assets/js/calgary-buildings.js Downtown Calgary footprints and heights (City of Calgary Open Data, 3D Buildings - Citywide)
-assets/js/calgary-streets.js Downtown street centrelines and the Bow River banks (City of Calgary Open Data, Street Centreline)
-tools/build-buildings.mjs    Rebuilds calgary-buildings.js from tools/data
-tools/build-streets.mjs      Rebuilds calgary-streets.js from tools/data/v2
-assets/js/calgary-parks.js   Downtown parks and plazas (City of Calgary Open Data, Parks Sites)
-tools/build-parks.mjs        Rebuilds calgary-parks.js from tools/data/v2/parks_*.txt
-assets/vendor/three/         Three.js r160 (MIT)
-assets/fonts/                Archivo, Instrument Sans, Martian Mono, Quicksand (SIL OFL, self-hosted)
-assets/img/hero.webp         Home hero: Calgary District Heating plant
-assets/img/scene-poster-*    Instant preview shown while the 3D view loads
+python3 -m http.server 8000      # then visit http://localhost:8000
 ```
 
-## 3D scene
-
-Built from City of Calgary open data: real footprints and rooftop heights, the real street network (with widths by road class, sidewalks, lane markings and crosswalks), the Bow River between the streets on each bank, and the CTrain on 7 Ave. Shadows are drawn once per view rather than every frame, static parts are merged into a few draw calls, and resolution steps down on slower devices.
-
-## Look
-
-A utility blueprint: drafting-grid backgrounds, ruled panels with corner ticks, wide Archivo headlines, condensed numerals, and one heat-orange accent against the blue. Theme tokens live at the top of `assets/css/site.css`.
-
-## Network map status
-
-| Status | Cities |
+| Page | What's on it |
 |---|---|
-| Online | Calgary |
-| In development | Montreal, Bogotá, Amsterdam, Paris |
-| Coming soon | London, Addis Ababa, Mumbai, Sydney, Buenos Aires |
+| `index.html` | Home: hero drawing of the plant, comparison, the two services, how it works, who it's for, the Foundation 3D loop, investors. Careers lives at `index.html#careers`. |
+| `foundation.html` | Foundation: the 3D model of downtown Calgary, key numbers, the three phases, the site. |
+| `workloads.html` | Workloads: who it serves and what every workload gets. |
+| `platform.html` | Platform: the world map (tap Calgary for 3D), one physical platform, the internet vs inference, the paper. |
+| `404.html` | Page-not-found page. |
 
-Edit the `SITES` list in `assets/js/network.js` to change cities or status.
+### Look
 
-## Run locally
+- Black ground with white type, and heavy Archivo headings.
+- Sections are told apart by two shades of black and a soft light at the top of each.
+- Behind every page is a field of faint dots that slowly light and fade (`assets/js/dots.js`). Visitors who ask for reduced motion see it still.
+- Blue appears only in the hero's plant drawing and the 3D model.
+- Green and amber appear only on Online and In-development markers.
+- All text passes WCAG AAA contrast (7:1) against its background.
 
-Any static server works:
+### Files
 
 ```
-python3 -m http.server
+assets/css/site.css, design.css   the base styles
+assets/css/mono.css               the black-and-white theme (loaded last; colour, type, spacing)
+assets/kit/                       hero entrance and cursor light
+assets/js/common.js               header, phone menu, contact form, footer
+assets/js/home.js                 plant drawing, service figures, investor strip, Foundation loop
+assets/js/careers.js              careers list (reads assets/data/positions.json)
+assets/js/network.js              Platform world map
+assets/js/scene.js                3D model of downtown Calgary (Three.js)
+assets/js/calgary-*.js            City of Calgary open data: buildings, streets, parks; fiber routes
+assets/js/map-data.js             world map (Natural Earth, simplified)
+assets/js/dots.js                 the dot-field background
+assets/js/typeset.js              keeps the last two words of a line together
+assets/vendor/three/              Three.js r160 (MIT)
+assets/fonts/                     Archivo, IBM Plex Sans and Mono, Instrument Sans, Martian Mono, Quicksand (SIL OFL)
+tools/                            rebuild the Calgary data files; package.py makes the deploy zip and QR code
+deploy/                           simply-silicon-site.zip, DEPLOY.md inside it, qr-code.png / .svg
+archive/                          every earlier version of the site, kept for reference (see archive/README.md)
 ```
+
+### Updating
+
+- **Words and numbers:** edit them in the `.html` files.
+- **Open roles:** add them to `assets/data/positions.json`. See `DEPLOY.md` for the format.
+- **After any change:** run `python3 tools/package.py` to refresh the deploy zip and QR code.
+
+## Facts used on the site
+
+These are the same on every page and in the 3D model:
+
+- 12 MW at full build, with n+1 power and cooling
+- 14 MVA n+1 from dual grid feeds and on-site generation
+- 7 km of private air-gapped fiber to 25+ buildings
+- 435 9 Ave SE, Calgary, inside a district heating plant
+- Phase 1 is 100 kW and online; Phase 2 is 2 MW in February 2027; Phase 3 is the full 12 MW
+- Pipeline: 15+ sites, 200 MW+ and 12+ major cities
+
+Earlier versions note that the facts come from gosimply.ai.

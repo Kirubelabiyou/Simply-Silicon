@@ -1,0 +1,350 @@
+/* design.css: Simply Silicon redesign.
+   Dealt with the taste skill (start.mjs brand: the client's own logo blue on a near-black ground;
+   type pairing "plex": IBM Plex Sans + IBM Plex Mono; hero "product"; moment cursor-spotlight; solid buttons; close-type; dark-band rhythm). Structure from the IBM DESIGN.md
+   (awesome-design-md): square corners, hairline grid, light display weights, mono for data.
+   Grid discipline from the web-design-engineer "vignelli-swiss" recipe. Copy is untouched. */
+
+@font-face { font-family: "IBM Plex Sans"; src: url("../fonts/plex-sans.woff2") format("woff2"); font-weight: 100 700; font-stretch: 85% 100%; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+
+/* ---------- tokens (start.mjs brand output, mapped onto the site's own variable names) ---------- */
+:root {
+  --p-bg: #07090d; --p-surface: #0e131a; --p-ink: #f2f5f8; --p-muted: #93a1b0; --p-accent: #4db2ef;
+  --bg: var(--p-bg); --bg-2: #0a0d12; --surface: var(--p-surface); --surface-2: #131a23;
+  --line: rgba(160, 190, 220, .10); --line-2: rgba(160, 190, 220, .18); --line-3: rgba(160, 190, 220, .32);
+  --text: var(--p-ink); --text-2: #b4c0cc; --text-3: var(--p-muted);
+  --accent: var(--p-accent); --accent-2: #8fd0f6; --accent-soft: rgba(77, 178, 239, .10);
+  --display: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r: 2px; --hdr: 64px; --col: 1360px;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  /* names the taste kit (motion.css, moments) reads */
+  --ink: var(--text); --card: var(--surface); --action: var(--accent); --action-ink: #07090d;
+  --line-strong: var(--line-3); --r-btn: 0px; --s-2: 8px;
+  --font-display: var(--display); --font-text: var(--body); --font-mono: var(--mono);
+  --display-weight: 300; --display-tracking: -0.02em; --display-tracking-xl: -0.03em;
+  --t-h2: clamp(32px, 4.2vw, 60px);
+  color-scheme: dark;
+}
+html { color-scheme: dark; -webkit-tap-highlight-color: transparent; }
+a, button, summary { touch-action: manipulation; }
+body { font: 400 17px/1.6 var(--body); letter-spacing: .005em; }
+::selection { background: var(--accent); color: #07090d; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 1.5px solid var(--accent); outline-offset: 2px; }
+
+/* the light band: cool paper, deeper logo blue */
+.sec--light {
+  --bg: #eef1f4; --bg-2: #e6eaee; --surface: #ffffff; --surface-2: #f7f9fa;
+  --line: rgba(7, 9, 13, .10); --line-2: rgba(7, 9, 13, .18); --line-3: rgba(7, 9, 13, .36);
+  --text: #07090d; --text-2: #3d4652; --text-3: #5b6672;
+  --accent: #1673b8; --accent-2: #1673b8; --accent-soft: rgba(22, 115, 184, .08);
+  --ink: var(--text);
+}
+
+/* ---------- type: light display, hierarchy by size ---------- */
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 300; letter-spacing: -.02em; text-wrap: balance; }
+h1 { letter-spacing: -.035em; }
+h3 { font-weight: 400; letter-spacing: -.01em; }
+h2 { font-size: var(--t-h2); line-height: 1.04; }
+p, li, dd { text-wrap: pretty; }
+.lede { font-weight: 300; color: var(--text-2); }
+/* the accent full stop belongs to the wordmark and the page titles only */
+h2 .stop, h3 .stop { color: inherit; }
+
+/* ---------- no stock scroll reveals: content stands; the kit's hero entrance and moments do the moving ---------- */
+[data-rv], [data-rv].in { opacity: 1 !important; transform: none !important; transition: none !important; }
+
+/* ---------- the visible grid: faint 12-column rules behind dark sections ---------- */
+.sec:not(.sec--light), .cta, .hx {
+  background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: calc((min(100vw, var(--col)) - 2 * var(--gut)) / 12) 100%;
+  background-position: calc((100vw - min(100vw, var(--col))) / 2 + var(--gut)) 0;
+  background-repeat: repeat-x;
+}
+.sec:not(.sec--light) { background-color: var(--bg); }
+@media (max-width: 700px) { .sec:not(.sec--light), .cta, .hx { background-size: calc((100vw - 2 * var(--gut)) / 4) 100%; background-position: var(--gut) 0; } }
+
+/* ---------- buttons: solid, square, the arrow at the far end (dealt "solid"; IBM button) ---------- */
+.btn { height: 52px; padding: 0 20px; border-radius: 0; font: 400 15px/1 var(--body); letter-spacing: .01em; gap: 32px; justify-content: space-between; min-width: 0; }
+.btn--sm { height: 40px; padding: 0 16px; gap: 16px; font-size: 14px; }
+.btn--primary { background: var(--accent); border-color: var(--accent); color: #07090d; }
+.btn--primary:hover { background: #7cc6f3; border-color: #7cc6f3; }
+.sec--light .btn--primary { background: #07090d; border-color: #07090d; color: #fff; }
+.sec--light .btn--primary:hover { background: #1673b8; border-color: #1673b8; }
+.btn:not(.btn--primary) { border-color: var(--line-3); }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 1px; }
+.hero-ctas .btn { min-width: 200px; }
+
+/* ---------- header: a flat bar on the grid ---------- */
+.hdr { background: rgba(7, 9, 13, .92); -webkit-backdrop-filter: saturate(140%) blur(12px); backdrop-filter: saturate(140%) blur(12px); }
+.hdr .wrap { max-width: var(--col); }
+.menu { gap: 0; }
+.menu a { padding: 0 16px; height: var(--hdr); display: flex; align-items: center; font-size: 14px; font-weight: 400; letter-spacing: .01em; position: relative; }
+.menu a[aria-current="page"]::after { content: ""; position: absolute; left: 16px; right: 16px; bottom: -1px; height: 2px; background: var(--accent); }
+.hdr-cta { height: var(--hdr); margin-right: calc(var(--gut) * -1); padding-inline: 24px; }
+@media (max-width: 900px) { .hdr-cta { height: 40px; margin-right: 0; } }
+.wrap--wide { max-width: var(--col); }
+
+/* ---------- Home hero: dealt "product" hero. Head row, then the plant whole on a lit stage ---------- */
+.hx { position: relative; padding: clamp(56px, 8vh, 104px) 0 0; overflow: hidden; }
+.hx-head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: end; }
+.hx-h1 { grid-column: 1 / span 8; margin: 0; font-size: clamp(44px, 6.6vw, 104px); line-height: .98; font-weight: 300; letter-spacing: -.045em; color: var(--text); }
+.hx-h1 .hx-l2 { display: block; color: var(--accent); }
+.hx-h1 .hx-l2 .stop { color: var(--accent); }
+.hx-copy { grid-column: 9 / span 4; padding-bottom: 6px; }
+.hx-copy .lede { margin: 0; font-size: clamp(17px, 1.3vw, 19px); line-height: 1.55; max-width: 40ch; color: var(--text-2); }
+.hx-copy .hero-ctas { margin-top: 28px; }
+.hx-stage { position: relative; margin-top: clamp(40px, 6vh, 72px); border-top: 1px solid var(--line-2); --surface: #102033; --mo-light: rgba(77, 178, 239, .13); }
+.hx-stage .plant { position: relative; display: block; padding: clamp(16px, 3vw, 40px) 0 0; }
+.hx-stage .plant svg { display: block; width: 100%; height: auto; max-height: min(58vh, 620px); margin-inline: auto; }
+.hx-stage .plant svg .grid { display: none; }
+.hx .hero-facts { position: relative; border-top: 1px solid var(--line-2); background: var(--bg); }
+.hx .hero-facts .wrap { max-width: var(--col); }
+.hero-facts dl > div { padding-block: 22px 26px; }
+.hero-facts dt { font: 400 clamp(18px, 1.5vw, 22px)/1.1 var(--display); letter-spacing: -.01em; }
+.hero-facts dd { margin-top: 8px; font: 400 13px/1.4 var(--mono); letter-spacing: 0; color: var(--text-3); }
+@media (max-width: 1100px) {
+  .hx-h1 { grid-column: 1 / -1; }
+  .hx-copy { grid-column: 1 / span 9; margin-top: 28px; }
+}
+@media (max-width: 700px) {
+  .hx { padding-top: 36px; }
+  .hx-h1 { font-size: clamp(40px, 12vw, 56px); }
+  .hx-copy { grid-column: 1 / -1; }
+  .hx-copy .hero-ctas .btn { flex: 1 1 100%; }
+  .hx-stage { margin-top: 32px; margin-inline: calc(var(--gut) * -1); }
+  .hx-stage .plant svg { width: 128%; max-width: none; margin-left: -14%; max-height: none; }
+  .hero-facts dl { grid-template-columns: 1fr 1fr; }
+  .hero-facts dl > div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .hero-facts dl > div:nth-child(n + 3) { border-top: 1px solid var(--line); }
+}
+
+/* ---------- page titles on inner pages ---------- */
+.page-head h1 { font-size: clamp(52px, 8vw, 128px); font-weight: 300; letter-spacing: -.05em; line-height: .95; }
+.page-head .lede { font-size: clamp(18px, 1.6vw, 22px); }
+
+/* ---------- section openers: rule, headline, paragraph under it on the grid ---------- */
+.sec-intro { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 20px; align-items: start; padding-top: 28px; border-top: 1px solid var(--line-3); max-width: none; }
+.sec-intro > h2 { grid-column: 1 / span 8; }
+.sec-intro > p { grid-column: 1 / span 6; max-width: 56ch; font-size: clamp(17px, 1.35vw, 19px); color: var(--text-2); }
+@media (max-width: 860px) { .sec-intro > h2, .sec-intro > p { grid-column: 1 / -1; } }
+
+/* ---------- comparison: a data table, mono labels, the column that matters in blue ---------- */
+.compare thead th { font: 400 13px/1.2 var(--mono); letter-spacing: .02em; text-transform: none; color: var(--text-3); padding-bottom: 16px; border-bottom: 1px solid var(--line-3); }
+.compare thead th.is-inf { color: var(--accent); }
+.compare tbody th { font: 400 13px/1.4 var(--mono); color: var(--text-3); letter-spacing: 0; text-transform: none; }
+.compare tbody td { font-size: clamp(17px, 1.5vw, 22px); font-weight: 300; letter-spacing: -.01em; }
+.compare--vs tbody td + td { font-weight: 400; background: var(--accent-soft); }
+.compare tbody td + td { padding-left: clamp(16px, 2vw, 28px); }
+
+/* ---------- services: two panels side by side on one rule, square ---------- */
+.svc { gap: 0; border: 1px solid var(--line-2); }
+.svc-card { border: 0; border-radius: 0; background: var(--surface); }
+.svc-card + .svc-card { border-left: 1px solid var(--line-2); }
+.svc-img { aspect-ratio: 16 / 8; }
+.svc-body { padding: clamp(24px, 3vw, 40px); }
+.svc-body .idx { font: 400 13px/1 var(--mono); color: var(--accent); letter-spacing: .02em; }
+.svc-body h3 { font-size: clamp(26px, 2.4vw, 36px); font-weight: 300; letter-spacing: -.025em; }
+.ticks li { padding-left: 0; font-size: 15px; display: flex; justify-content: space-between; gap: 16px; }
+.ticks li::before { position: static; order: 2; flex: none; margin: 0; width: auto; height: auto; border-radius: 0; background: none; box-shadow: none; content: "\2713"; font: 400 13px/1.6 var(--mono); color: var(--accent); }
+@media (max-width: 860px) { .svc { grid-template-columns: 1fr; } .svc-card + .svc-card { border-left: 0; border-top: 1px solid var(--line-2); } }
+
+/* ---------- how it works: four columns, one oversized numeral each (Vignelli canon) ---------- */
+.steps { gap: 0; border-top: 1px solid var(--line-3); }
+.steps::before { display: none; }
+.steps li { padding: 28px 24px 8px 0; }
+.steps li + li { padding-left: 24px; border-left: 1px solid var(--line-2); }
+.step-n, .step-n.is-end { display: block; width: auto; height: auto; border: 0; border-radius: 0; background: none; box-shadow: none; color: var(--accent); font: 200 clamp(64px, 7vw, 112px)/.85 var(--display); letter-spacing: -.05em; }
+.sec--light .step-n, .sec--light .step-n.is-end { background: none; color: #1673b8; }
+.steps h3 { margin-top: clamp(32px, 4vw, 56px); font-size: clamp(20px, 1.6vw, 24px); }
+.steps p { color: var(--text-2); }
+@media (max-width: 860px) {
+  .steps li, .steps li + li { display: grid; grid-template-columns: 72px 1fr; column-gap: 16px; padding: 24px 0; border-left: 0; border-top: 1px solid var(--line-2); }
+  .steps li:first-child { border-top: 0; }
+  .step-n { grid-row: span 2; font-size: 56px; }
+  .steps h3 { margin-top: 4px; }
+}
+
+/* ---------- who it's for: a 4-cell matrix sharing its rules, no icons, no lift ---------- */
+.tiles { gap: 0; border-top: 1px solid var(--line-2); border-left: 1px solid var(--line-2); }
+.tile { min-height: clamp(220px, 20vw, 300px); padding: 28px; border: 0; border-right: 1px solid var(--line-2); border-bottom: 1px solid var(--line-2); border-radius: 0; background: none; transition: background-color .15s var(--ease); }
+.tile:hover { transform: none; border-color: var(--line-2); background: var(--surface); }
+.tile svg { width: 28px; height: 28px; stroke: var(--text-3); stroke-width: 1.4; }
+.tile h3 { padding-top: 0; font-size: clamp(22px, 2vw, 28px); font-weight: 300; letter-spacing: -.02em; }
+.tile p { color: var(--text-2); }
+@media (max-width: 560px) { .tile { min-height: 0; padding: 22px 20px; } .tile h3 { margin-top: 28px; } }
+
+/* ---------- Foundation feature: square, data in mono ---------- */
+.feature { border-radius: 0; border-color: var(--line-2); }
+.feature-copy h2 { font-weight: 300; }
+.feature-kv dt { font: 400 clamp(24px, 2.2vw, 32px)/1 var(--display); letter-spacing: -.02em; }
+.feature-kv dd { font: 400 12.5px/1.4 var(--mono); letter-spacing: 0; }
+.status { font: 400 13px/1 var(--mono); }
+.feature .link { font-size: 15px; }
+
+/* ---------- closing: dealt close-type, the line set very large ---------- */
+.cta { padding-block: clamp(96px, 14vw, 200px); background-color: var(--bg); }
+.cta::before { display: none; }
+.cta h2 { font-size: clamp(48px, 8.4vw, 136px); font-weight: 300; letter-spacing: -.05em; line-height: .94; max-width: 12ch; }
+.cta p { font-size: clamp(18px, 1.5vw, 21px); color: var(--text-2); }
+
+/* ---------- investors: the strip keeps flowing; sharp cells, a ruled heading ---------- */
+.backers { margin-top: 0; padding-block: clamp(64px, 8vw, 112px) 0; border-top: 1px solid var(--line-2); }
+.backers-h { font: 400 13px/1.4 var(--mono); color: var(--text-3); letter-spacing: .02em; }
+.marquee-wrap { border-color: var(--line-2); }
+.marquee-track li { min-height: 120px; border-left-color: var(--line-2); }
+
+/* ---------- inner pages ---------- */
+.rows { border-top-color: var(--line-3); }
+.rows .idx, .cols .idx, .pin-step .n { font: 400 13px/1 var(--mono); color: var(--accent); letter-spacing: .02em; }
+.rows h2, .rows h3 { font-weight: 300; }
+.rows li { transition: background-color .15s var(--ease); }
+.cols > div { border-top-color: var(--line-3); }
+.metrics b, .phases-list b { font-weight: 200; letter-spacing: -.05em; }
+.story-k { font-family: var(--mono); letter-spacing: .02em; text-transform: none; font-size: 13px; }
+.duo-side { border-radius: 0; }
+.prose2 h3 { font-weight: 300; }
+.statement b { font-weight: 400; }
+.quote p { font-weight: 300; }
+.fig, .net-stage, .scene, .stage, .doc-link, .bars, .chart { border-radius: 0 !important; }
+.pin-step.on h3 { text-shadow: none; }
+.pin-step.on::before { box-shadow: none; }
+@media (max-width: 900px) { .pin-step { opacity: 1; min-height: 0; } .pin-step::before { display: none; } }
+@media (max-width: 700px) {
+  .fig:has(> svg[viewBox="0 0 1000 440"]) { overflow-x: auto; overscroll-behavior-x: contain; }
+  .fig > svg[viewBox="0 0 1000 440"] { min-width: 720px; }
+}
+
+/* ---------- footer ---------- */
+.ftr h3, .ftr h4 { font: 500 14px/1 var(--body); color: var(--text); letter-spacing: 0; }
+.ftr-bottom { font-size: 13px; }
+
+/* ---------- squared corners across the system ---------- */
+.modal-card, .drawer-panel, input, select, textarea, .seg, .seg button, .net-back .btn, .kv, .legend { border-radius: 0 !important; }
+
+/* ---------- hero sections and the taste kit's entrance ---------- */
+.hx { min-height: calc(100svh - var(--hdr)); display: flex; flex-direction: column; }
+.hx .hero-facts { margin-top: auto; }
+.page-head.hero { min-height: 0; display: block; overflow: visible; }
+/* the plant draws itself; the kit only settles its frame */
+.hx-stage[data-enter-media] { will-change: auto; }
+.hx > .wrap { width: 100%; align-self: center; }
+.hx-stage .plant { width: 100%; }
+.cta { padding-block: clamp(88px, 11vw, 160px); }
+.backers-h { font: 300 clamp(28px, 3vw, 44px)/1.1 var(--display) !important; letter-spacing: -.02em !important; color: var(--text) !important; }
+@media (min-width: 701px) { .hx-stage .plant svg { max-height: max(300px, calc(100svh - var(--hdr) - 400px)); } .hx-stage { margin-top: clamp(28px, 4vh, 48px); } .hx { padding-top: clamp(40px, 6vh, 80px); } }
+.hx-copy .hero-ctas .btn { min-width: 0; flex: 1 1 170px; }
+@media (max-width: 700px) { .hx-stage .plant svg { width: 112%; margin-left: -6%; } }
+
+/* ---------- taste checker: one section per screen ---------- */
+.cta { display: flex; flex-direction: column; justify-content: center; }
+@media (max-width: 700px) {
+  .hx { min-height: calc(100svh - var(--hdr)); max-height: calc(100svh - var(--hdr)); }
+  .hx-h1 { font-size: 40px; }
+  .hx-copy { margin-top: 20px; }
+  .hx-copy .lede { font-size: 16px; }
+  .hx-copy .hero-ctas { margin-top: 20px; }
+  .hx-stage { margin-top: 24px; }
+  .hx-stage .plant { padding-top: 8px; }
+  .hx-stage .plant svg { max-height: 200px; width: auto; max-width: 112%; margin-inline: auto; }
+  .hx .hero-facts dl > div { padding-block: 14px 16px; }
+}
+@media (min-width: 701px) { .hx-stage .plant svg { max-height: max(280px, calc(100svh - var(--hdr) - 440px)); } }
+.cta > .wrap { width: 100%; }
+@media (min-width: 701px) { .hx-stage .plant svg { max-height: max(300px, calc(100svh - var(--hdr) - 410px)); } }
+@media (max-width: 700px) { .hx { max-height: none; } }
+
+/* ---------- status labels: plain words with a small square key, no pills, no glowing dots ---------- */
+.status, .chip { display: inline-flex; align-items: center; gap: 8px; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; font: 500 13px/1.2 var(--body); letter-spacing: 0; color: var(--text-2); }
+.chip--live, .chip--dev, .chip--soon { color: var(--text-2); border: 0; background: none; }
+.dot, .dot--live, .dot--dev, .dot--soon { width: 8px; height: 8px; border-radius: 0; box-shadow: none !important; border: 0; }
+.dot--live { background: var(--accent); }
+.dot--dev { background: var(--warm); }
+.dot--soon { background: transparent; outline: 1px solid var(--text-3); outline-offset: -1px; }
+.net-legend { border-radius: 0; gap: 6px 20px; font-size: 13px; }
+
+/* ================= round 3: spacing, buttons, icons, phases ================= */
+/* buttons sized to their words, always apart */
+.btn { height: 48px; padding: 0 22px; gap: 12px; justify-content: center; min-width: 0; }
+.btn--sm { height: 40px; padding: 0 16px; }
+.hero-ctas, .hx-copy .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-ctas .btn, .hx-copy .hero-ctas .btn { flex: 0 0 auto; min-width: 0; }
+@media (max-width: 700px) { .hx-copy .hero-ctas .btn { flex: 1 1 0; } }
+
+/* tighter rhythm: no empty bands under sections */
+.sec { padding-block: clamp(72px, 8vw, 120px); }
+.cta { padding-block: clamp(72px, 9vw, 128px); min-height: 0; }
+.backers { padding-block: clamp(56px, 6vw, 88px) 0; }
+
+/* who it's for: an icon, a blue rule and the words; no boxed cells */
+.tiles { gap: clamp(28px, 3vw, 48px); border: 0; }
+.tile { min-height: 0; padding: 24px 0 0; border: 0; border-top: 2px solid var(--accent); background: none; }
+.tile:hover { background: none; }
+.tile svg.ico { display: block; width: 36px; height: 36px; color: var(--accent); stroke: currentColor; stroke-width: 1.5; }
+.tile h3 { margin-top: 28px; }
+@media (max-width: 1000px) { .tiles { row-gap: 40px; } }
+@media (max-width: 560px) { .tile { padding-top: 20px; } .tile h3 { margin-top: 18px; } }
+
+/* Foundation numbers: one size, eye-catching */
+.metrics { border-top: 2px solid var(--accent); }
+.metrics b { font: 300 clamp(56px, 6.8vw, 104px)/.9 var(--display); letter-spacing: -.05em; color: var(--text); white-space: nowrap; }
+.metrics b small { font-size: .34em; font-weight: 400; color: #1673b8; letter-spacing: 0; }
+.sec--light .metrics b small { color: #1673b8; }
+
+/* Foundation phases: three panels, each with its capacity drawn to scale against 12 MW */
+.phases-bar { display: none; }
+.phases-list { gap: 0; border: 1px solid var(--line-2); }
+.phases-list li { padding: clamp(24px, 3vw, 36px); background: var(--surface); }
+.phases-list li + li { border-left: 1px solid var(--line-2); }
+.phases-list li::before { display: none; }
+.phases-list li::after { content: ""; display: block; margin-top: 28px; height: 6px; background: linear-gradient(90deg, var(--c, var(--text-3)) var(--w, 0%), var(--line) var(--w, 0%)); }
+.phases-list li { --c: var(--text-3); }
+.phases-list li.is-live { --c: var(--accent); background: linear-gradient(180deg, rgba(77, 178, 239, .14), rgba(77, 178, 239, .02)), var(--surface); box-shadow: inset 0 2px 0 var(--accent); }
+.phases-list li.is-dev { --c: var(--warm); box-shadow: inset 0 2px 0 var(--warm); }
+.phases-list li.is-soon { --c: #5d6b7a; box-shadow: inset 0 2px 0 var(--line-3); }
+.phases-list .when { display: block; font: 500 14px/1.3 var(--body); color: var(--text-2); }
+.phases-list li.is-live .when { color: var(--accent); }
+.phases-list li.is-dev .when { color: var(--warm); }
+.phases-list b { margin-top: 18px; font: 300 clamp(48px, 5.4vw, 80px)/.95 var(--display); letter-spacing: -.045em; }
+@media (max-width: 760px) { .phases-list li + li { border-left: 0; border-top: 1px solid var(--line-2); } .phases-list li { padding: 24px; border-bottom: 0; } }
+
+/* the Platform map keeps its live look: glowing site markers and key */
+.net-legend .dot--live { box-shadow: 0 0 0 3px rgba(77, 178, 239, .18), 0 0 10px rgba(77, 178, 239, .8) !important; border-radius: 50%; }
+.net-legend .dot--dev { box-shadow: 0 0 0 3px rgba(217, 162, 115, .16), 0 0 10px rgba(217, 162, 115, .7) !important; border-radius: 50%; }
+.net-legend .dot--soon { border-radius: 50%; }
+
+/* ================= audit fixes ================= */
+/* buttons keep their own width on a phone too */
+@media (max-width: 700px) { .hx-copy .hero-ctas .btn { flex: 0 0 auto; } }
+.job-filters #fClear { justify-self: start; }
+/* one font family: the toolkit terms in Plex Mono */
+.toolkit dt { font-family: var(--mono); }
+/* tap targets: 44px on touch screens */
+@media (pointer: coarse), (max-width: 900px) {
+  .hdr-cta, .btn--sm { min-height: 44px; }
+  .ftr-cols a, .ftr-cols .ftr-link, .ftr ul a { display: inline-flex; align-items: center; min-height: 44px; padding: 0; }
+  .ftr ul { gap: 0; }
+  .seg button { min-height: 44px; }
+  .drawer-close, .modal-x, .zoom button, .scene-zoom button, .burger { min-width: 44px; min-height: 44px; }
+}
+/* square corners everywhere (IBM DESIGN.md) */
+.modal-panel, .pop, .scene-card, .job-filters, .zoom, .scene-zoom, .s-lbl, .modal-x, .drawer-close, .burger, .skip, .social a, .bars .bt, .doc-ico, .scene, .zoom button, .scene-zoom button, .chip, .card { border-radius: 0 !important; }
+:focus-visible { border-radius: 0; }
+/* Platform steps on a phone sit on the page edge */
+@media (max-width: 900px) { .pin-step { padding-left: 0; } }
+/* Foundation numbers band: no extra air */
+.sec:has(> .wrap > .metrics:only-child), .sec:has(> .wrap > .metrics[data-rv]:first-child:last-child) { padding-block: clamp(48px, 5vw, 72px); }
+/* the Foundation card title, now an h3, keeps its size */
+.feature-copy .feature-h { font-size: clamp(28px, 3vw, 42px); line-height: 1.06; font-weight: 300; letter-spacing: -.02em; color: var(--text); }
+@media (pointer: coarse), (max-width: 900px) {
+  .hdr .logo, .ftr .logo { display: inline-flex; align-items: center; min-height: 44px; }
+  .social a { width: 44px; height: 44px; }
+}
+
+/* Home: the hero holds the page's first "Request access", so the header button steps aside there */
+body[data-page="home"] .hdr-cta { display: none; }
+/* Home hero without the facts strip: the plant drawing sits on the hero's foot */
+.hx .hx-stage { margin-bottom: 0; }
+@media (max-width: 700px) { .hx { min-height: 0; padding-bottom: 0; } .hx-stage .plant svg { max-height: 260px; } }

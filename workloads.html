@@ -6,9 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Workloads · Simply Silicon</title>
 <meta name="description" content="The AI workloads teams run on Simply Silicon: regulated industries, high-security workloads, software companies and critical AI services.">
-<meta name="theme-color" content="#09090b">
-<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="theme-color" content="#0a0a0a">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Workloads · Simply Silicon">
@@ -17,12 +15,17 @@
 <meta property="og:url" content="https://kirubelabiyou.github.io/Simply-Silicon/workloads.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/design.css">
+<link rel="stylesheet" href="assets/kit/motion/motion.css">
+<link rel="stylesheet" href="assets/css/mono.css">
+<link rel="preload" href="assets/fonts/plex-sans.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add("m-enter","mo-js");setTimeout(function(){document.documentElement.classList.add("m-enter-done")},700);setTimeout(function(){document.documentElement.classList.add("mo-safe")},2500)</script>
 </head>
 <body data-page="workloads" id="top">
 <header id="site-header"></header>
 
 <main>
-  <section class="page-head">
+  <section class="page-head hero" data-enter>
     <div class="wrap">
       <h1>Workloads<span class="stop">.</span></h1>
       <p class="lede">The AI work teams run on Simply Silicon, and what every workload gets when it runs here.</p>
@@ -51,7 +54,7 @@
       </div>
       <figure class="fig" data-rv="2">
         <svg viewBox="0 0 420 300" role="img" aria-label="A model runs on bare metal inside an air-gapped boundary. Private fiber connects out. The public network is cut off.">
-          <circle cx="210" cy="150" r="118" class="f-box f-box--ghost" style="stroke:rgba(77,178,239,.45)"/>
+          <circle cx="210" cy="150" r="118" class="f-box f-box--ghost" style="stroke:rgba(221,221,221,.45)"/>
           <circle cx="210" cy="150" r="80" class="f-line"/>
           <rect x="166" y="112" width="88" height="76" rx="8" class="f-box f-box--on"/>
           <rect x="178" y="124" width="52" height="9" rx="2" class="f-slot"/><rect x="178" y="140" width="52" height="9" rx="2" class="f-slot"/><rect x="178" y="156" width="52" height="9" rx="2" class="f-slot"/>
@@ -109,5 +112,9 @@
 
 <footer id="site-footer"></footer>
 <script src="assets/js/common.js"></script>
+<script type="module" src="assets/kit/motion/motion.js"></script>
+<script type="module" src="assets/kit/moments/moments.js"></script>
+<script src="assets/js/dots.js"></script>
+<script src="assets/js/typeset.js"></script>
 </body>
 </html>

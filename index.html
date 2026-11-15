@@ -1,14 +1,11 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Simply Silicon</title>
 <meta name="description" content="Secure, localized compute. Private GPU servers and air-gapped fiber for any team. Run any model on hardware only you use. Your data stays with you.">
-<meta name="theme-color" content="#05070b">
-<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="theme-color" content="#0a0a0a">
 <script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
@@ -17,17 +14,34 @@
 <meta property="og:image" content="https://kirubelabiyou.github.io/Simply-Silicon/assets/img/og.jpg">
 <meta property="og:url" content="https://kirubelabiyou.github.io/Simply-Silicon/">
 <meta name="twitter:card" content="summary_large_image">
+<style>[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/design.css">
+<link rel="stylesheet" href="assets/kit/motion/motion.css">
+<link rel="stylesheet" href="assets/css/mono.css">
+<link rel="preload" href="assets/fonts/plex-sans.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add("m-enter","mo-js");setTimeout(function(){document.documentElement.classList.add("m-enter-done")},700);setTimeout(function(){document.documentElement.classList.add("mo-safe")},2500)</script>
 </head>
-<body data-page="home" id="top">
+<body>
+<script>document.body.setAttribute("data-page","home");document.body.id="top";</script>
 <header id="site-header"></header>
 
 <main id="homeMain">
   <!-- 1. Hero (dark): the plant draws itself -->
-  <section class="hero-full hero-plant">
-    <div class="wrap wrap--wide hero-grid">
-      <h1 class="hero-h1"><span class="l1"><span>Secure,</span> <span>localized</span> <span>compute</span></span> <span class="l2 h1-glow">at scale<span class="stop">.</span></span></h1>
-      <div class="plant">
+  <section class="hero hx" data-enter>
+    <div class="wrap hx-head">
+      <h1 class="hx-h1">Secure, localized compute <span class="hx-l2">at scale<span class="stop">.</span></span></h1>
+      <div class="hx-copy">
+        <p class="lede">Simply Silicon delivers private, high-performance AI compute inside the city, built for organizations that cannot tolerate latency, outages or exposure to the public network.</p>
+        <div class="hero-ctas">
+          <button class="btn btn--primary" type="button" data-contact="Request access">Request access</button>
+          <a class="btn" href="#how">How it works <span class="arrow" aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="hx-stage" data-moment="cursor-spotlight" data-moment-opts='{"rest": [0.5, 0.4], "radius": 560}' data-enter-media>
+        <div class="plant">
       <svg id="plantSvg" viewBox="120 22 850 498" preserveAspectRatio="xMidYMid meet" role="img" aria-label="An elevation drawing of the Foundation plant: a glass hall with GPU racks inside, four steel stacks in white lattice frames, rooftop coolers with fans, an entrance block, a fan panel and the Simply Silicon name on the roofline">
   <defs>
     <linearGradient id="gGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2a3c"/><stop offset=".55" stop-color="#2a3d52"/><stop offset="1" stop-color="#ffe7b8" stop-opacity=".55"/></linearGradient>
@@ -389,32 +403,16 @@
   </g>
   <g class="sign" opacity="0"><text x="172" y="254" font-family="Quicksand, sans-serif" font-weight="700" font-size="17" fill="#8fd6ff" letter-spacing="-.02em" class="glow-logo">simply silicon.</text></g>
 </svg>
-      </div>
-      <div class="hero-copy">
-        <p class="lede">Simply Silicon delivers private, high-performance AI compute inside the city, built for organizations that cannot tolerate latency, outages or exposure to the public network.</p>
-        <div class="hero-ctas">
-          <button class="btn btn--primary" type="button" data-contact="Request access">Request access</button>
-          <a class="btn" href="#how">How it works <span class="arrow" aria-hidden="true">↓</span></a>
         </div>
       </div>
     </div>
-    <div class="hero-facts">
-      <div class="wrap wrap--wide">
-        <dl>
-          <div><dt>Bare metal</dt><dd>Servers only you use</dd></div>
-          <div><dt>Private fiber</dt><dd>Never the public network</dd></div>
-          <div><dt>Any model</dt><dd>Whatever you choose to run</dd></div>
-          <div><dt>Your data</dt><dd>Stays within your organization</dd></div>
-        </dl>
-      </div>
-    </div>
-  </section>
+</section>
 
   <!-- 2. Control (light) -->
   <section class="sec sec--light">
     <div class="wrap">
       <div class="sec-intro">
-        <h2 data-rv>AI without giving up control<span class="stop">.</span></h2>
+        <h2 data-rv>Compute without giving up control<span class="stop">.</span></h2>
         <p data-rv="2">Public AI clouds mean shared servers and data sent over the public network. For many teams, that is a risk. With Simply Silicon the hardware is yours alone, and so is the network that connects it.</p>
       </div>
       <table class="compare compare--vs" data-rv>
@@ -438,7 +436,7 @@
       </div>
       <div class="svc">
         <article class="svc-card" data-rv>
-          <div class="svc-img"><img src="assets/img/rack.webp" width="2560" height="1920" alt="The front of a GPU server in a dark rack" loading="lazy"></div>
+          <div class="svc-img"><img src="assets/img/rack-1280-bright.webp" srcset="assets/img/rack-1280-bright.webp 1280w, assets/img/rack-bright.webp 2560w" sizes="(max-width: 860px) 100vw, 50vw" width="1280" height="960" alt="The front of a GPU server in a dark rack" loading="lazy"></div>
           <div class="svc-body">
             <span class="idx">Service 01</span>
             <h3>Dedicated bare metal</h3>
@@ -483,10 +481,10 @@
         <p data-rv="2">From banks to software companies. If you want to run your own models on hardware only you use, we are built for you.</p>
       </div>
       <div class="tiles">
-        <article class="tile" data-rv><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 15 20 7l14 8M8 15h24M10 18v12M16 18v12M24 18v12M30 18v12M6 33h28"/></svg><h3>Banking</h3><p>Use AI on client data without a public cloud.</p></article>
-        <article class="tile" data-rv="1"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="7" y="7" width="26" height="26" rx="7"/><path d="M20 13v14M13 20h14"/></svg><h3>Healthcare</h3><p>Keep patient data private while your teams use the latest models.</p></article>
-        <article class="tile" data-rv="2"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4v6M20 4h6v3.5h-6M11 18a9 9 0 0 1 18 0M8 18h24M11 21v9M17 21v9M23 21v9M29 21v9M6 33h28"/></svg><h3>Government</h3><p>Run sensitive work on hardware you control.</p></article>
-        <article class="tile" data-rv="3"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="11" y="11" width="18" height="18" rx="3"/><rect x="16" y="16" width="8" height="8" rx="1.5"/><path d="M16 6v5M24 6v5M16 29v5M24 29v5M6 16h5M6 24h5M29 16h5M29 24h5"/></svg><h3>Software companies</h3><p>Run open source models for your product on dedicated hardware.</p></article>
+        <article class="tile" data-rv><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"> <path d="M10 18v-7" /> <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /> <path d="M14 18v-7" /> <path d="M18 18v-7" /> <path d="M3 22h18" /> <path d="M6 18v-7" /> </svg><h3>Regulated enterprise</h3><p>Banks, healthcare and government teams with strict rules about where data can go.</p></article>
+        <article class="tile" data-rv="1"><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" /> </svg><h3>Critical AI services</h3><p>Emergency response, public safety, security, and other services with no tolerance for unreliable inference.</p></article>
+        <article class="tile" data-rv="2"><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"> <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /> </svg><h3>High-security workloads</h3><p>Superintelligent models, defence systems, and government environments where network exposure matters.</p></article>
+        <article class="tile" data-rv="3"><svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"> <path d="m18 16 4-4-4-4" /> <path d="m6 8-4 4 4 4" /> <path d="m14.5 4-5 16" /> </svg><h3>Software companies</h3><p>Run open source models for your product on dedicated hardware.</p></article>
       </div>
       <p style="margin-top:56px" data-rv><a class="link" href="workloads.html">See workloads <span class="arrow" aria-hidden="true">→</span></a></p>
     </div>
@@ -503,7 +501,7 @@
         <div class="feature-img"><div class="scene" id="loopScene" aria-hidden="true"></div></div>
         <div class="feature-copy">
           <span class="status"><i class="dot dot--live"></i>Online</span>
-          <h2>Foundation, our first site<span class="stop">.</span></h2>
+          <h3 class="feature-h">Foundation, our first site<span class="stop">.</span></h3>
           <p>Our first data centre is online. More sites are in development.</p>
           <dl class="feature-kv">
             <div><dt>12 MW</dt><dd>n+1 redundant power and cooling</dd></div>
@@ -520,7 +518,7 @@
   <!-- 7. Closing call to action (dark) -->
   <section class="cta">
     <div class="wrap">
-      <h2 data-rv>Keep your data and run your own models<span class="stop">.</span></h2>
+      <h2 data-rv>Keep your data. Run your own model<span class="stop">.</span></h2>
       <p data-rv="1">Tell us what you plan to run and where your teams work. We will design the capacity around it.</p>
       <div class="hero-ctas" data-rv="2"><button class="btn btn--primary" type="button" data-contact="Request access">Request access</button></div>
     </div>
@@ -592,5 +590,9 @@
 <script src="assets/js/common.js"></script>
 <script src="assets/js/home.js"></script>
 <script src="assets/js/careers.js"></script>
-</body>
-</html>
+<script type="module" src="assets/kit/motion/motion.js"></script>
+<script type="module" src="assets/kit/moments/moments.js"></script>
+
+<script src="assets/js/dots.js"></script>
+<script src="assets/js/typeset.js"></script>
+</body></html>

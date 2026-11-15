@@ -4,24 +4,34 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<base href="/Simply-Silicon/">
 <title>Page not found · Simply Silicon</title>
-<meta name="theme-color" content="#09090b">
+<meta name="theme-color" content="#0a0a0a">
+<script>
+  // A missing page can sit at any depth, so links and styles resolve from the site's root:
+  // "/Simply-Silicon/" on GitHub Pages, "/" on its own domain.
+  (function () { var p = location.pathname, i = p.indexOf('/Simply-Silicon/'); document.write('<base href="' + (i === 0 ? '/Simply-Silicon/' : '/') + '">'); })();
+</script>
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/design.css">
+<link rel="stylesheet" href="assets/kit/motion/motion.css">
+<link rel="stylesheet" href="assets/css/mono.css">
 </head>
 <body data-page="none" id="top">
 <header id="site-header"></header>
 <main>
-  <section class="page-head">
+  <section class="page-head hero">
     <div class="wrap">
-      <h1>Page not found<span class="stop">.</span></h1>
-      <p class="lede">This page has moved or does not exist. Head back home or see what teams run on Simply Silicon.</p>
-      <div class="hero-ctas" style="margin-top:32px"><a class="btn btn--primary" href="./">Back to home</a><a class="btn" href="workloads.html">See workloads</a></div>
+      <h1>Page not found.</h1>
+      <p class="lede">This page does not exist or has moved.</p>
+      <div class="hero-ctas" style="margin-top:32px">
+        <a class="btn btn--primary" href="./">Go to the home page</a>
+      </div>
     </div>
   </section>
 </main>
 <footer id="site-footer"></footer>
 <script src="assets/js/common.js"></script>
+<script src="assets/js/dots.js"></script>
 </body>
 </html>
