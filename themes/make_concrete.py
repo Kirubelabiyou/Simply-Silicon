@@ -8,6 +8,7 @@
 Words, sections, pictures and scripts are not touched.
 Run from the repository root:  python3 themes/make_concrete.py <downloaded-site-folder> [--report]"""
 import colorsys, pathlib, re, shutil, sys
+from PIL import Image, ImageEnhance
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 SRC = pathlib.Path(sys.argv[1]).resolve()
@@ -110,6 +111,48 @@ for p in sorted(OUT.rglob("*")):
                       '<link rel="stylesheet" href="assets/kit/motion/motion.css">\n<link rel="stylesheet" href="assets/css/concrete.css">', 1)
         n = re.sub(r'<meta name="theme-color" content="[^"]*">', '<meta name="theme-color" content="#ffffff">', n)
     if n != t: p.write_text(n)
+
+# Home: wording asked for by the owner
+hp = OUT / "index.html"; t = hp.read_text()
+ACTIVITY = '<path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />'
+for old_, new_ in [
+    ("AI without giving up control<span", "Compute without giving up control<span"),
+    ("Keep your data and run your own models<span", "Keep your data. Run your own model<span"),
+    # the team tiles take the names and lines the Workloads page already uses
+    ("<h3>Banking</h3><p>Use AI on client data without a public cloud.</p>",
+     "<h3>Regulated enterprise</h3><p>Banks, healthcare and government teams with strict rules about where data can go.</p>"),
+    ('<path d="M11 2v2" /> <path d="M5 2v2" /> <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" /> <path d="M8 15a6 6 0 0 0 12 0v-3" /> <circle cx="20" cy="10" r="2" /> </svg><h3>Healthcare</h3><p>Keep patient data private while your teams use the latest models.</p>',
+     ACTIVITY + ' </svg><h3>Critical AI services</h3><p>Emergency response, public safety, security, and other services with no tolerance for unreliable inference.</p>'),
+    ("<h3>Government</h3><p>Run sensitive work on hardware you control.</p>",
+     "<h3>High-security workloads</h3><p>Superintelligent models, defence systems, and government environments where network exposure matters.</p>"),
+    # Dedicated bare metal: a brightened copy of the same rack photo
+    ('src="assets/img/rack-1280.webp" srcset="assets/img/rack-1280.webp 1280w, assets/img/rack.webp 2560w"',
+     'src="assets/img/rack-1280-bright.webp" srcset="assets/img/rack-1280-bright.webp 1280w, assets/img/rack-bright.webp 2560w"'),
+]:
+    assert old_ in t, old_[:60]; t = t.replace(old_, new_)
+hp.write_text(t)
+# the rack photo with its shadows lifted (gamma), so the hardware can be seen; the original files stay as they are
+for name in ("rack-1280", "rack"):
+    im = Image.open(OUT / f"assets/img/{name}.webp").convert("RGB")
+    im = im.point([round(255 * ((i / 255) ** 0.5)) for i in range(256)] * 3)
+    ImageEnhance.Contrast(im).enhance(1.12).save(OUT / f"assets/img/{name}-bright.webp", "WEBP", quality=86)
+
+# Investors' logos for a light ground: the files are made for a dark ground (white lettering), so only their white and
+# pale-grey parts are turned dark; every coloured part keeps its own colour. Microsoft's pale wordmark takes its usual grey.
+for f in sorted((OUT / "assets/img/backers").glob("*.webp")):
+    im = Image.open(f).convert("RGBA"); px = im.load()
+    x0 = im.size[1] + 4 if f.stem == "heartland-generation" else 0  # Heartland's round emblem keeps its white centre
+    for y in range(im.size[1]):
+        for x in range(x0, im.size[0]):
+            r, g, b, a = px[x, y]
+            if not a: continue
+            mx, mn = max(r, g, b), min(r, g, b)
+            if mx > 140 and (mx - mn) / mx < 0.22:   # white or pale grey lettering
+                v = round(28 + (255 - mx) * 0.25)
+                px[x, y] = (v, v, v, a)
+    im.save(f, "WEBP", lossless=True)
+ms = OUT / "assets/img/backers/microsoft.svg"
+ms.write_text(ms.read_text().replace('fill="#e8f8fb"', 'fill="#737373"'))
 
 # Platform: the sections from "The industry is already rebuilding around locality" to "Built for machines" are removed
 pf = OUT / "platform.html"; t = pf.read_text()
