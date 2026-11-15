@@ -80,7 +80,7 @@
       SITES.forEach(function (st) {
         if (st.status === 'soon') return;
         var q = toPx(st.x, st.y); if (!isFinite(q[0]) || !isFinite(q[1])) return;
-        var r = st.status === 'online' ? 70 : 42, c = st.status === 'online' ? '77,178,239' : '217,162,115';
+        var r = st.status === 'online' ? 70 : 42, c = st.status === 'online' ? '43,182,115' : '195,230,107'; // the light each site throws on the land: green live, lime in development
         var g = ctx.createRadialGradient(q[0], q[1], 0, q[0], q[1], r); g.addColorStop(0, 'rgba(' + c + ',.2)'); g.addColorStop(.35, 'rgba(' + c + ',.06)'); g.addColorStop(1, 'rgba(' + c + ',0)');
         ctx.fillStyle = g; ctx.fillRect(q[0] - r, q[1] - r, r * 2, r * 2);
       });

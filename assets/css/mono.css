@@ -9,7 +9,7 @@
 /* ---------- black ground (also on the original's light bands) ---------- */
 :root, .sec--light {
   --k: #f5f5f5; --k-2: #c9c9c9; --k-3: #a3a3a3; --g: #0a0a0a; --g-2: #141414; --g-3: #1b1b1b;
-  --live: #2bb673; --dev: #e09a3e;
+  --live: #2bb673; --dev: #c3e66b; /* in development: lime, the same family as the live green */
   --bg: var(--g); --bg-2: var(--g-2); --surface: var(--g-2); --surface-2: var(--g-3);
   --line: rgba(255, 255, 255, .09); --line-2: rgba(255, 255, 255, .16); --line-3: rgba(255, 255, 255, .28);
   --text: var(--k); --text-2: var(--k-2); --text-3: var(--k-3);
@@ -123,7 +123,7 @@ h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side
 .dot--live, .net-legend .dot--live { background: var(--live); }
 .dot--dev, .net-legend .dot--dev { background: var(--dev); }
 .net-legend .dot--live { box-shadow: 0 0 0 3px rgba(43, 182, 115, .2), 0 0 10px rgba(43, 182, 115, .7) !important; }
-.net-legend .dot--dev { box-shadow: 0 0 0 3px rgba(224, 154, 62, .18), 0 0 10px rgba(224, 154, 62, .6) !important; }
+.net-legend .dot--dev { box-shadow: 0 0 0 3px rgba(195, 230, 107, .18), 0 0 10px rgba(195, 230, 107, .6) !important; }
 .node--online .core, .node--online .halo { fill: var(--live); }
 .node--online .pulse { stroke: var(--live); }
 .status::before { background: var(--live); box-shadow: 0 0 8px rgba(43, 182, 115, .6); }
@@ -197,3 +197,18 @@ h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side
 .pin-fig svg .g-part { opacity: .35; }
 .pin-fig svg .g-part.on { filter: drop-shadow(0 0 8px rgba(255, 255, 255, .28)); }
 .net-stage .node .nl { font-size: 13.5px; }
+
+/* in development: the map's markers, arcs and pulses, and any chip, use the lime */
+.node--dev .core { fill: var(--dev); }
+.node--dev .pulse { stroke: var(--dev); }
+.arc--dev { stroke: var(--dev); }
+.chip--dev { color: var(--dev); border-color: rgba(195, 230, 107, .3); }
+
+/* phones: the hero's drawing has empty space on its right, so it is nudged right to sit centred */
+@media (max-width: 700px) { .hx-stage .plant svg { transform: translateX(6%); } }
+/* phones: the comparison table without row lines; space alone separates the rows */
+@media (max-width: 700px) {
+  .compare th, .compare td, .compare tbody th, .compare tbody td, .compare thead th { border: 0 !important; }
+  .compare thead th { padding-bottom: 12px; }
+  .compare tbody th { padding-top: 28px !important; padding-bottom: 6px; }
+}
