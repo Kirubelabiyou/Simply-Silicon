@@ -20,7 +20,7 @@
     for (var i = 0; i < n; i++) s += '<rect class="f-slot" x="' + (x + 14) + '" y="' + (y + 12 + i * 19) + '" width="' + (w - 40) + '" height="10" rx="2"/><circle class="' + (led ? 'f-led' : 'f-led f-led--dim') + '" cx="' + (x + w - 16) + '" cy="' + (y + 17 + i * 19) + '" r="2.4"/>';
     return s;
   }
-  var DEFS = '<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#dcd9d4"/></marker>' +
+  var DEFS = '<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#dddddd"/></marker>' +
     '<marker id="ahw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#d9a273"/></marker></defs>';
 
   var FIG = {

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Builds concrete/: the published Simply Silicon site, unchanged except for its theme.
+"""Builds concrete/: the published Simply Silicon site in a black-and-white Concrete and Swiss design.
  1. Copies the site as downloaded from the artifact (the folder given on the command line).
- 2. Recolours every blue in the styles, drawings and map (the 3D model keeps its own colours) into the Concrete palette
-    (warm blacks, concrete greys and off-whites); other colours (warm lights, amber, red warnings, green LEDs) stay.
- 3. Adds assets/css/concrete.css, the Concrete theme: concrete-grey page, black ink, Archivo headings, black closing band,
-    dark instrument panels for the drawings, map and 3D scenes.
-Words, layout, pictures and scripts are not touched.
+ 2. Recolours every blue and red in the styles, figures and map into black, white and greys.
+    Left as they were: the data centre drawing in the home hero, the 3D model, warm lights and the amber "in development" key.
+ 3. Adds assets/css/concrete.css (from themes/concrete-site.css): white page, black ink, Concrete's heavy Archivo type,
+    Swiss rules and grid, no background grid lines or boxes, black closing band, black panels for the figures and map.
+Words, sections, pictures and scripts are not touched.
 Run from the repository root:  python3 themes/make_concrete.py <downloaded-site-folder> [--report]"""
 import colorsys, pathlib, re, shutil, sys
 
@@ -13,25 +13,29 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 SRC = pathlib.Path(sys.argv[1]).resolve()
 OUT = REPO / "concrete"
 REPORT = "--report" in sys.argv
-WARM_H = 38 / 360  # the hue of concrete: a little warm
+GREY_H = 0  # greys are neutral: black and white, nothing tinted
 
 KIND = "css"
 def concrete(r, g, b):
-    """A blue (or blue-grey) becomes the Concrete tone of matching weight; anything else is returned unchanged."""
+    """A blue (or blue-grey) or a red becomes a neutral of matching weight; anything else is returned unchanged."""
     h, l, s = colorsys.rgb_to_hls(r / 255, g / 255, b / 255)
     deg = h * 360
-    if not (175 <= deg <= 255) or s < 0.06 or max(r, g, b) - min(r, g, b) < 10:
+    if max(r, g, b) - min(r, g, b) < 10 or s < 0.06:
         return None
-    if s < 0.35 or l < 0.25:            # blue-greys and the dark slate panels: same lightness, warm grey
-        nl, ns = l, min(s, 0.06)
-    elif l < 0.5 and KIND == "css":      # deep blue used as the accent on light grounds: Concrete's black ink
-        return (18, 17, 16)
-    elif l < 0.5:                        # deep blues inside the 3D scene and map (sky light, glass): warm grey of the same weight
-        nl, ns = l, 0.06
-    else:                                # bright blues on dark grounds (lines, glows, LEDs, fiber): off-white concrete
-        nl, ns = min(0.97, 0.80 + (l - 0.5) * 0.4), 0.10
-    rr, gg, bb = colorsys.hls_to_rgb(WARM_H, nl, ns)
-    return tuple(round(x * 255) for x in (rr, gg, bb))
+    if (deg <= 15 or deg >= 345) and s >= 0.35 and 0.3 <= l <= 0.8:   # red warnings: a mid grey
+        nl = 0.6
+    elif not (175 <= deg <= 255):
+        return None
+    elif s < 0.35 or l < 0.25:          # blue-greys and dark slate panels: the same lightness in grey
+        nl = l
+    elif l < 0.5 and KIND == "css":      # deep blue used as the accent on light grounds: black ink
+        return (17, 17, 17)
+    elif l < 0.5:
+        nl = l
+    else:                                # bright blues on dark grounds (lines, glows, LEDs, fiber): near white
+        nl = min(0.97, 0.82 + (l - 0.5) * 0.4)
+    v = round(nl * 255)
+    return (v, v, v)
 
 changes = {}
 def note(old, new):
@@ -93,17 +97,21 @@ for p in sorted(OUT.rglob("*")):
     if rel == "assets/img/favicon.svg": continue  # the brand mark keeps its blue
     if rel == "assets/js/scene.js": continue  # the 3D model keeps its own colours, as asked
     t = p.read_text()
-    if p.suffix == ".css":  # rules that style the 3D model itself (its sky and its labels) keep their colours
-        n = "".join(l if re.match(r"\s*\.(scene\.scene--ready|s-lbl)\b", l) else recolor(l, "css") for l in t.splitlines(True))
+    if p.suffix == ".css":  # rules for the 3D model (its sky and labels) and the hero's data centre drawing keep their colours
+        keep = r"\s*(\.scene\.scene--ready|\.s-lbl|#plantSvg|\.hx-stage \{)"
+        n = "".join(l if re.match(keep, l) else recolor(l, "css") for l in t.splitlines(True))
+    elif rel == "index.html":  # the data centre drawing in the hero keeps its own colours
+        a = t.index('<svg id="plantSvg"'); b = t.index("</svg>", a) + 6
+        n = recolor(t[:a], "css") + t[a:b] + recolor(t[b:], "css")
     else:
         n = recolor(t, "js" if p.suffix == ".js" else "css")
     if p.suffix == ".html" and "assets/css/design.css" in n:
         n = n.replace('<link rel="stylesheet" href="assets/kit/motion/motion.css">',
                       '<link rel="stylesheet" href="assets/kit/motion/motion.css">\n<link rel="stylesheet" href="assets/css/concrete.css">', 1)
-        n = re.sub(r'<meta name="theme-color" content="[^"]*">', '<meta name="theme-color" content="#d8d5cf">', n)
+        n = re.sub(r'<meta name="theme-color" content="[^"]*">', '<meta name="theme-color" content="#ffffff">', n)
     if n != t: p.write_text(n)
 
 shutil.copy(REPO / "themes" / "concrete-site.css", OUT / "assets" / "css" / "concrete.css")
 if REPORT:
     for k, v in sorted(changes.items()): print(f"{k:32} -> {v}")
-print(f"concrete/ built: {len(changes)} distinct blues recoloured")
+print(f"concrete/ built: {len(changes)} distinct colours changed")

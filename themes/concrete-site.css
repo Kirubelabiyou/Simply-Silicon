@@ -1,120 +1,193 @@
-/* concrete.css: the Concrete theme on the published Simply Silicon site.
-   Loaded last; changes colours and type only. Layout, words and pictures are the site's own.
-   Concrete: warm concrete grey and black, heavy tight Archivo headings, a black closing band.
-   The drawings, map and 3D scenes sit on dark "instrument panels", and nothing on the site is blue but the wordmark. */
+/* concrete.css: the Simply Silicon site in a black-and-white Concrete and Swiss design. Loaded last.
+   Swiss: white ground, black ink, flush-left type on the 12-column grid, sections divided by heavy black rules, no boxes.
+   Concrete: heavy, tight Archivo headings set large, huge numerals, a black closing band, square everything.
+   Colour only where it means something: the Online and In-development keys. The hero's data centre drawing and the
+   3D model keep their own colours; every other figure and the map are black and white. Words and sections are the site's own. */
 
 @font-face { font-family: "Archivo"; src: url("../fonts/archivo.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; }
 
-/* ---------- the page: concrete grey, black ink (was the dark ground) ---------- */
+/* ---------- tokens: white and black ---------- */
 :root {
-  --c-concrete: #d8d5cf; --c-concrete-2: #cfcbc4; --c-paper: #e7e4df; --c-ink: #121110; --c-ink-2: #3d3a35; --c-ink-3: #6c6862;
-  --bg: var(--c-concrete); --bg-2: var(--c-concrete-2); --surface: #e1ded8; --surface-2: #dcd9d3;
-  --line: rgba(18, 17, 16, .12); --line-2: rgba(18, 17, 16, .2); --line-3: rgba(18, 17, 16, .42);
-  --text: var(--c-ink); --text-2: var(--c-ink-2); --text-3: var(--c-ink-3);
-  --accent: var(--c-ink); --accent-2: var(--c-ink); --accent-soft: rgba(18, 17, 16, .06);
-  --warm: #8a5a2b; --soon: #6c6862;
-  --ink: var(--text); --action: var(--c-ink); --action-ink: var(--c-concrete);
+  --k: #111111; --k-2: #3a3a3a; --k-3: #6b6b6b; --w: #ffffff;
+  --live: #1f9d55; --dev: #d08a2e;
+  --bg: var(--w); --bg-2: #f4f4f4; --surface: var(--w); --surface-2: #f6f6f6;
+  --line: rgba(17, 17, 17, .14); --line-2: rgba(17, 17, 17, .24); --line-3: var(--k);
+  --text: var(--k); --text-2: var(--k-2); --text-3: var(--k-3);
+  --accent: var(--k); --accent-2: var(--k); --accent-soft: #f2f2f2;
+  --warm: var(--dev); --warn: var(--k); --soon: #8a8a8a;
+  --ink: var(--k); --action: var(--k); --action-ink: var(--w); --card: var(--w);
   --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --display-weight: 800; --display-tracking: -0.045em; --display-tracking-xl: -0.05em;
+  --t-h2: clamp(40px, 5.2vw, 80px);
   color-scheme: light;
 }
-html { color-scheme: light; background: var(--bg); }
-body { background: var(--bg); color: var(--text-2); }
-::selection { background: var(--c-ink); color: var(--c-concrete); }
-
-/* the light bands: a paler concrete, so the page keeps its rhythm of alternating sections */
 .sec--light {
-  --bg: var(--c-paper); --bg-2: #dedbd5; --surface: #f1efeb; --surface-2: #ebe8e3;
-  --line: rgba(18, 17, 16, .12); --line-2: rgba(18, 17, 16, .2); --line-3: rgba(18, 17, 16, .42);
-  --text: var(--c-ink); --text-2: var(--c-ink-2); --text-3: var(--c-ink-3);
-  --accent: var(--c-ink); --accent-2: var(--c-ink); --accent-soft: rgba(18, 17, 16, .06); --warm: #8a5a2b;
+  --bg: var(--w); --bg-2: #f4f4f4; --surface: var(--w); --surface-2: #f6f6f6;
+  --line: rgba(17, 17, 17, .14); --line-2: rgba(17, 17, 17, .24); --line-3: var(--k);
+  --text: var(--k); --text-2: var(--k-2); --text-3: var(--k-3); --accent: var(--k); --accent-2: var(--k); --accent-soft: #f2f2f2; --warm: var(--dev);
 }
+html { color-scheme: light; background: var(--w); }
+body { background: var(--w); color: var(--k-2); }
+::selection { background: var(--k); color: var(--w); }
+:focus-visible { outline-color: var(--k); }
 
-/* ---------- instrument panels: the drawings, figures, map and 3D scenes stay dark ---------- */
-.hx-stage, .fig, .net-stage, .scene, .svc-img, .map-strip, .feature-img, .duo-side--inf, .net-3d,
+/* ---------- black panels: figures, map, photo frames (white lines on black) ---------- */
+.fig, .net-stage, .scene, .svc-img, .map-strip, .feature-img, .duo-side--inf, .net-3d,
 .sec--light .net-stage, .sec--light .scene, .sec--light .fig, .sec--light .map-strip, .sec--light .feature-img {
-  --bg: #141312; --bg-2: #181716; --surface: #1c1b19; --surface-2: #22201e;
-  --line: rgba(241, 239, 234, .1); --line-2: rgba(241, 239, 234, .16); --line-3: rgba(241, 239, 234, .28);
-  --text: #f1efea; --text-2: #c4c1bc; --text-3: #9a958e;
-  --accent: #dcd9d4; --accent-2: #e9e7e4; --accent-soft: rgba(220, 217, 212, .1);
-  --warm: #d9a273; --soon: #8d877e; --ink: var(--text);
+  --bg: #0b0b0b; --bg-2: #111; --surface: #161616; --surface-2: #1d1d1d;
+  --line: rgba(255, 255, 255, .12); --line-2: rgba(255, 255, 255, .2); --line-3: rgba(255, 255, 255, .34);
+  --text: #ffffff; --text-2: #c8c8c8; --text-3: #9a9a9a;
+  --accent: #ffffff; --accent-2: #ffffff; --accent-soft: rgba(255, 255, 255, .08);
+  --warm: var(--dev); --warn: #8f8f8f; --soon: #8a8a8a; --ink: var(--text);
   color: var(--text-2);
 }
-.hx-stage { background: #141312; }
-.fig { background: radial-gradient(120% 90% at 50% 0%, #1d1c1a 0%, #141312 70%); }
-.svc-img--fig { background: #141312; }
+.fig { background: #0b0b0b; border: 0; }
+.net-stage { background: #0b0b0b; border: 0; }
+.svc-img, .svc-img--fig { background: #0b0b0b; }
 .svc-img--fig .fig { background: none; }
-.net-stage { background: radial-gradient(90% 80% at 45% 30%, #1b1a18, #121110 80%); }
-.pop, .scene-card, .seg { background: rgba(20, 19, 18, .92); }
-.net-stage .btn--primary, .net-back .btn, .sec--light .net-stage .btn--primary, .sec--light .net-back .btn { background: #f1efea; border-color: #f1efea; color: #121110; }
-.duo-side--inf { background: #141312; border-color: #141312; }
+.pop, .scene-card, .seg { background: rgba(11, 11, 11, .94); }
+.net-stage .btn--primary, .net-back .btn, .sec--light .net-stage .btn--primary, .sec--light .net-back .btn { background: #fff; border-color: #fff; color: #111; }
 
-/* ---------- type: Concrete's heavy, tight Archivo headings (sizes are the site's own) ---------- */
-h1, h2, .hx-h1, .page-head h1, .cta h2, .backers-h, .feature-copy .feature-h { font-family: var(--display) !important; font-weight: 800 !important; letter-spacing: -.045em !important; }
-h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side h3 { font-family: var(--display); font-weight: 700; letter-spacing: -.02em; }
-.hx-h1, .page-head h1, .cta h2 { line-height: .9; }
-.hx-h1 .hx-l2, .hx-h1 .hx-l2 .stop { color: var(--c-ink-3); }
-.stop { color: inherit; }
-.step-n, .step-n.is-end, .sec--light .step-n, .sec--light .step-n.is-end,
-.metrics b, .phases-list b, .netstat b, .hero-facts dt, .feature-kv dt { font-family: var(--display); font-weight: 800; letter-spacing: -.05em; color: var(--text); }
-.metrics b small, .sec--light .metrics b small { color: var(--text-3); font-weight: 700; }
-.lede, .quote p { font-weight: 400; }
-.quote p { font-family: var(--display); font-weight: 600; letter-spacing: -.025em; color: var(--text); }
-
-/* ---------- buttons: black on concrete, concrete on black ---------- */
-.btn { color: var(--text); }
-.btn--primary, .sec--light .btn--primary { background: var(--c-ink); border-color: var(--c-ink); color: var(--c-concrete); font-weight: 500; }
-.btn--primary:hover, .sec--light .btn--primary:hover { background: #34322f; border-color: #34322f; color: var(--c-concrete); }
-.btn:not(.btn--primary) { border: 2px solid var(--c-ink); font-weight: 500; }
-.btn:not(.btn--primary):hover { background: var(--c-ink); color: var(--c-concrete); }
-
-/* ---------- header and drawer: concrete, the wordmark keeps its blue ---------- */
-.hdr { background: rgba(216, 213, 207, .94); border-bottom-color: var(--line-2); }
-.logo, .ftr .logo { color: #1d7fc0; }
-.menu a { color: var(--text-2); }
-.menu a:hover, .menu a[aria-current="page"] { color: var(--text); }
-.menu a[aria-current="page"]::after { background: var(--c-ink); height: 3px; }
-
-/* ---------- closing band: black, like Concrete's ---------- */
-.cta {
-  --bg: #121110; --surface: #1c1b19; --line: rgba(216, 213, 207, .1); --line-2: rgba(216, 213, 207, .18); --line-3: rgba(216, 213, 207, .3);
-  --text: #d8d5cf; --text-2: #a19d96; --text-3: #8a857e; --accent: #d8d5cf; --ink: var(--text);
-  background-color: #121110; color: var(--text-2);
+/* the hero's data centre drawing: back on its own night ground, in its own colours */
+.hx-stage {
+  --bg: #07090d; --surface: #102033; --text: #f2f5f8; --text-2: #b4c0cc; --text-3: #93a1b0;
+  --line: rgba(160, 190, 220, .10); --line-2: rgba(160, 190, 220, .18); --line-3: rgba(160, 190, 220, .32);
+  --accent: #4db2ef; --accent-2: #8fd0f6; --ink: var(--text);
+  background: #07090d; color: #b4c0cc; border-top: 0;
 }
-.cta .btn { color: #d8d5cf; }
-.cta .btn--primary { background: #d8d5cf; border-color: #d8d5cf; color: #121110; }
-.cta .btn--primary:hover { background: #f1efea; border-color: #f1efea; color: #121110; }
-.cta .btn:not(.btn--primary) { border-color: #d8d5cf; }
-.cta .btn:not(.btn--primary):hover { background: #d8d5cf; color: #121110; }
 
-/* ---------- details that were blue ---------- */
-.tile { border-top-color: var(--c-ink); }
-.tile svg.ico, .ticks li::before, .svc-body .idx, .rows .idx, .cols .idx, .pin-step .n, .compare thead th.is-inf { color: var(--text); }
-.svc-body .idx, .rows .idx, .cols .idx, .pin-step .n { color: var(--text-3); }
-.metrics { border-top-color: var(--c-ink); }
-.phases-list li.is-live { background: var(--surface); box-shadow: inset 0 3px 0 var(--c-ink); }
-.phases-list li.is-live .when { color: var(--text); }
-.phases-list li.is-soon { --c: #8d877e; }
-.dot--live { background: var(--accent); }
-.net-legend .dot--live { box-shadow: 0 0 0 3px rgba(220, 217, 212, .18), 0 0 10px rgba(220, 217, 212, .7) !important; }
-.bar-row .bt i { background: var(--c-ink); }
-.chart, .doc-link { background: var(--surface); }
-.doc-ico { background: var(--c-ink); color: var(--c-concrete); border-color: var(--c-ink); }
+/* ---------- design: no background grid lines, no boxes; sections ruled in black ---------- */
+.sec:not(.sec--light), .cta, .hx, .sec { background-image: none !important; }
+.sec, .sec--light, .hx { background-color: var(--w); }
+.sec-intro { border-top: 3px solid var(--k); padding-top: 24px; }
+.hdr { background: rgba(255, 255, 255, .96); border-bottom: 1px solid var(--k); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.ftr { border-top: 3px solid var(--k); background: var(--w); }
+.page-head + .sec, .sec + .sec { border-top: 0; }
 
-/* ---------- investors: their logos in black, as on Concrete ---------- */
-.marquee-track img { filter: brightness(0); opacity: .72; }
-.marquee-track li a:hover img { opacity: 1; }
+/* ---------- type: Concrete's heavy, tight Archivo, flush left ---------- */
+h1, h2, .hx-h1, .page-head h1, .cta h2, .backers-h, .feature-copy .feature-h { font-family: var(--display) !important; font-weight: 800 !important; letter-spacing: -.045em !important; color: var(--text); }
+h2 { font-size: var(--t-h2); line-height: .98; }
+.page-head h1 { font-size: clamp(58px, 9.4vw, 156px); line-height: .86; }
+.hx-h1 { font-size: clamp(46px, 7vw, 116px); line-height: .9; }
+.hx-h1 .hx-l2, .hx-h1 .hx-l2 .stop { color: var(--k-3); }
+.cta h2 { font-size: clamp(56px, 8vw, 128px); line-height: .9; max-width: 12ch; }
+.stop { color: inherit; }
+h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side h3, .pin-step h3 { font-family: var(--display); font-weight: 700; letter-spacing: -.025em; }
+.rows h2 { font-weight: 800; letter-spacing: -.04em; }
+.step-n, .step-n.is-end, .sec--light .step-n, .sec--light .step-n.is-end { color: var(--k); font: 800 clamp(80px, 9vw, 140px)/.82 var(--display); letter-spacing: -.06em; }
+.metrics b, .phases-list b, .netstat b, .hero-facts dt, .feature-kv dt { font-family: var(--display); font-weight: 800; letter-spacing: -.05em; color: var(--text); }
+.metrics b small, .sec--light .metrics b small { color: var(--k-3); font-weight: 700; }
+.lede { font-weight: 400; color: var(--k-2); }
+.hero .lede, .hero-full .lede { color: var(--k-2); }
+.quote p { font-family: var(--display); font-weight: 700; letter-spacing: -.03em; color: var(--k); line-height: 1.12; }
+.spec-statement em { color: var(--k); font-weight: 700; }
+.svc-body .idx, .rows .idx, .cols .idx, .pin-step .n, .story-k, .backers-h { color: var(--k-3); }
 
-/* ---------- Dedicated bare metal: the rack photo a little brighter ---------- */
+/* ---------- buttons: square, black solid or black outline ---------- */
+.btn { border-radius: 0; color: var(--k); font-weight: 600; }
+.btn--primary, .sec--light .btn--primary { background: var(--k); border: 2px solid var(--k); color: var(--w); }
+.btn--primary:hover, .sec--light .btn--primary:hover { background: var(--w); border-color: var(--k); color: var(--k); }
+.btn:not(.btn--primary) { border: 2px solid var(--k); background: transparent; }
+.btn:not(.btn--primary):hover { background: var(--k); color: var(--w); }
+.link { color: var(--k); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; }
+
+/* ---------- header ---------- */
+.logo, .ftr .logo { color: #1d7fc0; }
+.menu a { color: var(--k-2); font-weight: 500; }
+.menu a:hover, .menu a[aria-current="page"] { color: var(--k); }
+.menu a[aria-current="page"]::after { background: var(--k); height: 3px; }
+
+/* ---------- comparison table: Swiss rules ---------- */
+.compare thead th { border-bottom: 3px solid var(--k); color: var(--k-3); }
+.compare thead th.is-inf { color: var(--k); }
+.compare tbody th, .compare tbody td { border-top: 1px solid var(--k); }
+.compare--vs tbody td + td { background: none; font-weight: 700; color: var(--k); }
+
+/* ---------- two services: no box, a heavy rule over each ---------- */
+.svc { border: 0; gap: clamp(24px, 3vw, 48px); }
+.svc-card, .svc-card + .svc-card { border: 0; border-radius: 0; background: none; border-top: 3px solid var(--k); padding-top: 0; }
+.svc-body { padding: 28px 0 0; }
+.svc-body h3 { font-size: clamp(30px, 3vw, 44px); font-weight: 800; letter-spacing: -.04em; }
+.ticks li { border-color: var(--line-2); }
+.ticks li::before { color: var(--k); }
 .svc-img img { filter: brightness(1.38) contrast(1.04); }
 
-/* ---------- phones: the pinned Platform figure sits on the page colour ---------- */
-@media (max-width: 900px) { .pin-fig { box-shadow: 0 12px 24px -16px rgba(18, 17, 16, .35); } }
+/* ---------- steps, tiles, rows, metrics: rules, not cells ---------- */
+.steps { border-top: 3px solid var(--k); }
+.steps li + li { border-left: 1px solid var(--k); }
+.tile { border-top: 3px solid var(--k); }
+.tile svg.ico { color: var(--k); }
+.rows, .rows li { border-color: var(--k) !important; }
+.metrics { border-top: 3px solid var(--k); }
+.metrics > div + div { border-left-color: var(--k) !important; }
+.cols > div { border-top: 3px solid var(--k); }
 
-/* ---------- light text the dark site set by hand, back to the page's ink ---------- */
-.hero .lede, .hero-full .lede { color: var(--text-2); }
-.pin-step .lead, .arch-copy .arch-lead { color: var(--text); }
-.pin-step.on h3 { color: var(--text); text-shadow: none; }
-.pin-step.on .n { color: var(--text); }
-.pin-step.on::before { background: var(--c-ink); box-shadow: none; }
-.duo-side--inf h3 { color: #f1efea; }
+/* ---------- Foundation card on Home: no frame ---------- */
+.feature, .sec--light .feature { border: 0; border-top: 3px solid var(--k); background: none; border-radius: 0; }
+
+/* ---------- phases: three columns under one rule; the key colours mean the status ---------- */
+.phases-list { border: 0; border-top: 3px solid var(--k); gap: clamp(16px, 2vw, 32px); }
+.phases-list li, .phases-list li + li { background: none !important; border: 0; box-shadow: none !important; padding: 24px 0 0; }
+.phases-list li.is-live { --c: var(--live); }
+.phases-list li.is-dev { --c: var(--dev); }
+.phases-list li.is-soon { --c: #9a9a9a; }
+.phases-list li.is-live .when { color: var(--live); }
+.phases-list li.is-dev .when { color: var(--dev); }
+.phases-list li::after { height: 8px; background: linear-gradient(90deg, var(--c) var(--w, 0%), #e6e6e6 var(--w, 0%)); }
+
+/* ---------- status keys: the one place for colour ---------- */
+.dot--live, .net-legend .dot--live { background: var(--live); }
+.dot--dev, .net-legend .dot--dev { background: var(--dev); }
+.net-legend .dot--live { box-shadow: 0 0 0 3px rgba(31, 157, 85, .25), 0 0 10px rgba(31, 157, 85, .8) !important; }
+.node--online .core, .node--online .halo { fill: var(--live); }
+.node--online .pulse { stroke: var(--live); }
+.status::before { background: var(--live); }
+
+/* ---------- Platform ---------- */
+.pin-step::before { background: var(--line-2); }
+.pin-step.on::before { background: var(--k); box-shadow: none; }
+.pin-step.on h3, .pin-step.on .n { color: var(--k); text-shadow: none; }
+.pin-step .lead, .arch-copy .arch-lead { color: var(--k); }
+.duo-side { border: 0; border-top: 3px solid var(--k); border-radius: 0; background: none; padding-inline: 0; }
+.duo-side--inf { background: #0b0b0b; border-top-color: #0b0b0b; padding-inline: clamp(24px, 3vw, 40px); }
+.duo-side--inf h3 { color: #fff; }
+.duo-vs { border-color: var(--k); color: var(--k); background: var(--w); }
+.chart { background: none; border: 0; border-top: 3px solid var(--k); padding-inline: 0; }
+.bar-row .bt { background: #ececec; }
+.bar-row .bt i { background: var(--k); }
+.toolkit dt { color: var(--k); }
+.toolkit > div { border-color: var(--k) !important; }
+.quote { border-color: var(--k); }
+.doc-link { background: none; border: 0; border-top: 3px solid var(--k); border-bottom: 1px solid var(--k); padding-inline: 0; }
+.doc-ico { background: var(--k); color: var(--w); border-color: var(--k); }
+
+/* ---------- closing band: black (Concrete) ---------- */
+.cta {
+  --bg: #0b0b0b; --line: rgba(255, 255, 255, .14); --line-2: rgba(255, 255, 255, .24); --line-3: #fff;
+  --text: #fff; --text-2: #bdbdbd; --text-3: #8f8f8f; --accent: #fff; --ink: #fff;
+  background: #0b0b0b !important; color: #bdbdbd;
+}
+.cta h2 { color: #fff; }
+.cta .btn { color: #fff; border-color: #fff; }
+.cta .btn--primary { background: #fff; color: #0b0b0b; }
+.cta .btn--primary:hover { background: #0b0b0b; color: #fff; }
+.cta .btn:not(.btn--primary):hover { background: #fff; color: #0b0b0b; }
+
+/* ---------- investors: logos in black ---------- */
+.backers { border-top: 3px solid var(--k); }
+.marquee-wrap { border: 0 !important; }
+.marquee-track li { border-left: 0 !important; }
+.marquee-track img { filter: brightness(0); opacity: .8; }
+.marquee-track li a:hover img { opacity: 1; }
+
+/* ---------- forms, careers, drawer ---------- */
+.modal-panel, .job-filters { background: var(--w); border: 2px solid var(--k); }
+.drawer-panel { background: var(--w); }
+.f-row input, .f-row select, .f-row textarea, .job-filters input, .job-filters select { background: var(--w); border-color: var(--k-3); }
+
+@media (max-width: 900px) {
+  .pin-fig { background: var(--w); box-shadow: 0 10px 20px -14px rgba(0, 0, 0, .3); }
+  .steps li + li { border-left: 0; border-top: 1px solid var(--k); }
+}
+@media (max-width: 860px) { .svc-card + .svc-card { border-left: 0; } }
+@media (max-width: 760px) { .phases-list li + li { border-top: 1px solid var(--k); } }
