@@ -6,13 +6,17 @@
  3. Adds assets/css/concrete.css (from themes/concrete-site.css): white page, black ink, Concrete's heavy Archivo type,
     Swiss rules and grid, no background grid lines or boxes, black closing band, black panels for the figures and map.
 Words, sections, pictures and scripts are not touched.
-Run from the repository root:  python3 themes/make_concrete.py <downloaded-site-folder> [--report]"""
+With --mono it builds mono/ instead: the same edits on a mostly black ground (themes/mono-site.css), white bands on a
+few sections, the investors' logos in their original files, and the original's column bars and table lines.
+Run from the repository root:  python3 themes/make_concrete.py <downloaded-site-folder> [--mono] [--report]"""
 import colorsys, pathlib, re, shutil, sys
 from PIL import Image, ImageEnhance
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 SRC = pathlib.Path(sys.argv[1]).resolve()
-OUT = REPO / "concrete"
+MONO = "--mono" in sys.argv
+OUT = REPO / ("mono" if MONO else "concrete")
+CSS_SRC = REPO / "themes" / ("mono-site.css" if MONO else "concrete-site.css")
 REPORT = "--report" in sys.argv
 GREY_H = 0  # greys are neutral: black and white, nothing tinted
 
@@ -109,7 +113,7 @@ for p in sorted(OUT.rglob("*")):
     if p.suffix == ".html" and "assets/css/design.css" in n:
         n = n.replace('<link rel="stylesheet" href="assets/kit/motion/motion.css">',
                       '<link rel="stylesheet" href="assets/kit/motion/motion.css">\n<link rel="stylesheet" href="assets/css/concrete.css">', 1)
-        n = re.sub(r'<meta name="theme-color" content="[^"]*">', '<meta name="theme-color" content="#ffffff">', n)
+        n = re.sub(r'<meta name="theme-color" content="[^"]*">', '<meta name="theme-color" content="' + ('#0a0a0a' if MONO else '#ffffff') + '">', n)
     if n != t: p.write_text(n)
 
 # Home: wording asked for by the owner
@@ -139,7 +143,7 @@ for name in ("rack-1280", "rack"):
 
 # Investors' logos for a light ground: the files are made for a dark ground (white lettering), so only their white and
 # pale-grey parts are turned dark; every coloured part keeps its own colour. Microsoft's pale wordmark takes its usual grey.
-for f in sorted((OUT / "assets/img/backers").glob("*.webp")):
+for f in ([] if MONO else sorted((OUT / "assets/img/backers").glob("*.webp"))):
     im = Image.open(f).convert("RGBA"); px = im.load()
     x0 = im.size[1] + 4 if f.stem == "heartland-generation" else 0  # Heartland's round emblem keeps its white centre
     for y in range(im.size[1]):
@@ -152,7 +156,7 @@ for f in sorted((OUT / "assets/img/backers").glob("*.webp")):
                 px[x, y] = (v, v, v, a)
     im.save(f, "WEBP", lossless=True)
 ms = OUT / "assets/img/backers/microsoft.svg"
-ms.write_text(ms.read_text().replace('fill="#e8f8fb"', 'fill="#737373"'))
+if not MONO: ms.write_text(ms.read_text().replace('fill="#e8f8fb"', 'fill="#737373"'))
 
 # Platform: the sections from "The industry is already rebuilding around locality" to "Built for machines" are removed
 pf = OUT / "platform.html"; t = pf.read_text()
@@ -167,7 +171,17 @@ nj = OUT / "assets/js/network.js"; t = nj.read_text()
 assert "shadow: cv('--map-shadow', 'rgba(34,34,34,.18)'), dark: true };" in t
 nj.write_text(t.replace("dark: true };", "dark: cv('--map-dark', '1') !== '0' };"))
 
-shutil.copy(REPO / "themes" / "concrete-site.css", OUT / "assets" / "css" / "concrete.css")
+# mono: a few sections become white bands (class band-w) on the otherwise black site
+if MONO:
+    BANDS = {"index.html": ["Compute without giving up control<span", "How it works<span"], "foundation.html": ["About the site"],
+             "workloads.html": ["What every workload gets"], "platform.html": ["Two different physical problems"]}
+    for page, heads in BANDS.items():
+        f = OUT / page; t = f.read_text()
+        for h in heads:
+            i = t.index(h); j = t.rindex('<section class="', 0, i) + len('<section class="')
+            t = t[:j] + "band-w " + t[j:]
+        f.write_text(t)
+shutil.copy(CSS_SRC, OUT / "assets" / "css" / "concrete.css")
 if REPORT:
     for k, v in sorted(changes.items()): print(f"{k:32} -> {v}")
-print(f"concrete/ built: {len(changes)} distinct colours changed")
+print(f"{OUT.name}/ built: {len(changes)} distinct colours changed")
