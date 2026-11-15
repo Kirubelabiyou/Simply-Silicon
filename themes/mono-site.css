@@ -24,7 +24,6 @@
 }
 :root { color-scheme: dark; }
 html, body { background: var(--g); }
-.sec--light { background-color: var(--g); }
 ::selection { background: var(--k); color: var(--g); }
 
 /* ---------- white bands ---------- */
@@ -36,15 +35,23 @@ html, body { background: var(--g); }
   background: #ffffff !important; color: var(--k-2);
 }
 
-/* ---------- the original's column bars, on every black section ---------- */
-.sec:not(.band-w), .sec--light:not(.band-w), .cta, .hx {
-  background-image: linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px) !important;
-  background-size: calc((min(100vw, var(--col)) - 2 * var(--gut)) / 12) 100%;
-  background-position: calc((100vw - min(100vw, var(--col))) / 2 + var(--gut)) 0;
-  background-repeat: repeat-x;
+/* ---------- separating sections without lines: two shades of black, taken in turn, and a soft light at the top
+   of each section; the original's column bars run behind them, a little brighter than before ---------- */
+:root { --bars: linear-gradient(90deg, rgba(255, 255, 255, .085) 1px, transparent 1px);
+  --bars-size: calc((min(100vw, var(--col)) - 2 * var(--gut)) / 12) 100%;
+  --bars-pos: calc((100vw - min(100vw, var(--col))) / 2 + var(--gut)) 0;
+  --glow: linear-gradient(180deg, rgba(255, 255, 255, .045) 0, rgba(255, 255, 255, 0) 200px); }
+@media (max-width: 700px) { :root { --bars-size: calc((100vw - 2 * var(--gut)) / 4) 100%; --bars-pos: var(--gut) 0; } }
+main > section { background-color: var(--g); }
+main > section:nth-of-type(even) { background-color: #121212; }
+.sec, .sec--light, .cta, .hx {
+  background-image: var(--glow), var(--bars) !important;
+  background-size: 100% 100%, var(--bars-size) !important;
+  background-position: 0 0, var(--bars-pos) !important;
+  background-repeat: no-repeat, repeat-x !important;
 }
-@media (max-width: 700px) { .sec:not(.band-w), .sec--light:not(.band-w), .cta, .hx { background-size: calc((100vw - 2 * var(--gut)) / 4) 100%; background-position: var(--gut) 0; } }
-.band-w { background-image: none !important; }
+.hx { background-image: var(--bars) !important; background-size: var(--bars-size) !important; background-position: var(--bars-pos) !important; background-repeat: repeat-x !important; }
+main > section:nth-of-type(even) .bar-row .bt, main > section:nth-of-type(even) .phases-list li::before { background-color: #2e2e2e; }
 
 /* ---------- spacing on an 8px rhythm; no section rules, no boxes ---------- */
 .sec { padding-block: var(--sec-pad); }
@@ -71,7 +78,7 @@ h1, h2, .hx-h1, .page-head h1, .cta h2, .backers-h, .feature-copy .feature-h { f
 h2 { font-size: var(--t-h2); line-height: .98; }
 .page-head h1 { font-size: clamp(58px, 9.4vw, 156px); line-height: .86; }
 .hx-h1 { font-size: clamp(46px, 7vw, 116px); line-height: .9; }
-.hx-h1 .hx-l2, .hx-h1 .hx-l2 .stop { color: var(--k-3); }
+.hx-h1 .hx-l2, .hx-h1 .hx-l2 .stop { color: var(--k); }
 .cta h2 { font-size: clamp(56px, 8vw, 128px); line-height: .9; max-width: 12ch; }
 .stop, h2 .stop, h3 .stop { color: inherit; }
 h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side h3, .pin-step h3 { font-family: var(--display); font-weight: 700; letter-spacing: -.025em; }
@@ -165,7 +172,7 @@ h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side
 .pin-step .lead, .arch-copy .arch-lead { color: var(--k); }
 .duo-side { background: none; border-radius: 0; }
 .duo-side:not(.duo-side--inf) { padding-inline: 0; }
-.duo-side--inf { background: #0a0a0a; border: 0; --text: #f5f5f5; --text-2: #c9c9c9; --text-3: #a3a3a3; --line: rgba(255, 255, 255, .12); }
+.duo-side--inf { background: #1c1c1c; border: 0; --text: #f5f5f5; --text-2: #c9c9c9; --text-3: #a3a3a3; --line: rgba(255, 255, 255, .12); }
 .duo-side--inf h3 { color: #f5f5f5; }
 .duo-side--inf dt { color: #a3a3a3; } .duo-side--inf dd { color: #f5f5f5; }
 .duo-vs { color: var(--k-3); background: var(--bg); }
@@ -173,7 +180,7 @@ h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side
 .doc-ico { background: var(--k); color: var(--g) !important; border-color: var(--k); }
 
 /* ---------- investors: a wide band a step lighter than black; the logos in their own colours ---------- */
-.backers { background: #161616; padding-bottom: clamp(48px, 5vw, 72px) !important; }
+.backers { background: #181818; padding-bottom: clamp(48px, 5vw, 72px) !important; }
 .backers-h { color: var(--k) !important; }
 .marquee-track img { filter: none; opacity: 1; }
 

@@ -173,8 +173,7 @@ nj.write_text(t.replace("dark: true };", "dark: cv('--map-dark', '1') !== '0' };
 
 # mono: a few sections become white bands (class band-w) on the otherwise black site
 if MONO:
-    BANDS = {"index.html": ["Compute without giving up control<span", "How it works<span"], "foundation.html": ["About the site"],
-             "workloads.html": ["What every workload gets"], "platform.html": ["Two different physical problems"]}
+    BANDS = {}  # the owner chose an all-black site: no white bands (add {"page.html": ["heading text"]} to bring one back)
     for page, heads in BANDS.items():
         f = OUT / page; t = f.read_text()
         for h in heads:
