@@ -181,6 +181,11 @@ if MONO:
             t = t[:j] + "band-w " + t[j:]
         f.write_text(t)
 shutil.copy(CSS_SRC, OUT / "assets" / "css" / "concrete.css")
+if MONO:  # the twinkling dot field behind the black pages
+    shutil.copy(REPO / "themes" / "mono-dots.js", OUT / "assets" / "js" / "dots.js")
+    for f in ("index.html", "foundation.html", "workloads.html", "platform.html"):
+        page = OUT / f; t = page.read_text()
+        page.write_text(t.replace("</body>", '<script src="assets/js/dots.js"></script>\n</body>', 1))
 if REPORT:
     for k, v in sorted(changes.items()): print(f"{k:32} -> {v}")
 print(f"{OUT.name}/ built: {len(changes)} distinct colours changed")

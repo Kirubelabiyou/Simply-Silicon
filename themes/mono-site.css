@@ -35,23 +35,16 @@ html, body { background: var(--g); }
   background: #ffffff !important; color: var(--k-2);
 }
 
-/* ---------- separating sections without lines: two shades of black, taken in turn, and a soft light at the top
-   of each section; the original's column bars run behind them, a little brighter than before ---------- */
-:root { --bars: linear-gradient(90deg, rgba(255, 255, 255, .085) 1px, transparent 1px);
-  --bars-size: calc((min(100vw, var(--col)) - 2 * var(--gut)) / 12) 100%;
-  --bars-pos: calc((100vw - min(100vw, var(--col))) / 2 + var(--gut)) 0;
-  --glow: linear-gradient(180deg, rgba(255, 255, 255, .045) 0, rgba(255, 255, 255, 0) 200px); }
-@media (max-width: 700px) { :root { --bars-size: calc((100vw - 2 * var(--gut)) / 4) 100%; --bars-pos: var(--gut) 0; } }
-main > section { background-color: var(--g); }
-main > section:nth-of-type(even) { background-color: #121212; }
-.sec, .sec--light, .cta, .hx {
-  background-image: var(--glow), var(--bars) !important;
-  background-size: 100% 100%, var(--bars-size) !important;
-  background-position: 0 0, var(--bars-pos) !important;
-  background-repeat: no-repeat, repeat-x !important;
-}
-.hx { background-image: var(--bars) !important; background-size: var(--bars-size) !important; background-position: var(--bars-pos) !important; background-repeat: repeat-x !important; }
-main > section:nth-of-type(even) .bar-row .bt, main > section:nth-of-type(even) .phases-list li::before { background-color: #2e2e2e; }
+/* ---------- background: a field of small dim dots that slowly light and fade (assets/js/dots.js), on black.
+   Sections are told apart by two shades of black taken in turn and a soft light at the top of each. ---------- */
+.dot-field { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+main, .ftr { position: relative; z-index: 1; }
+:root { --glow: linear-gradient(180deg, rgba(255, 255, 255, .045) 0, rgba(255, 255, 255, 0) 200px); }
+.sec, .sec--light, .cta, .hx, .map-top, .page-head, main > section, .ftr { background-color: transparent !important; }
+main > section:nth-of-type(even) { background-color: rgba(255, 255, 255, .03) !important; }
+.sec, .sec--light, .cta { background-image: var(--glow) !important; background-size: 100% 200px !important; background-position: 0 0 !important; background-repeat: no-repeat !important; }
+.hx { background-image: none !important; }
+main > section:nth-of-type(even) .phases-list li::before { background-color: #2e2e2e; }
 
 /* ---------- spacing on an 8px rhythm; no section rules, no boxes ---------- */
 .sec { padding-block: var(--sec-pad); }
@@ -62,7 +55,7 @@ main > section:nth-of-type(even) .bar-row .bt, main > section:nth-of-type(even) 
 .svc-card, .feature, .sec--light .feature { background: none; }
 .svc-body { padding: 28px 0 0; }
 .steps li + li { padding-left: clamp(16px, 2vw, 32px); }
-.hdr { background: rgba(10, 10, 10, .92); }
+.hdr { background: rgba(10, 10, 10, .86); }
 .ftr { background: var(--g); }
 
 /* ---------- table and list lines (kept, as on the original) ---------- */
@@ -105,7 +98,7 @@ h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side
 .link { color: var(--k); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; }
 
 /* ---------- header: the wordmark keeps its blue ---------- */
-.logo, .ftr .logo { color: #4db2ef; }
+.logo, .ftr .logo { color: #ffffff; }
 .menu a { color: var(--k-2); font-weight: 500; }
 .menu a:hover, .menu a[aria-current="page"] { color: var(--k); }
 .menu a[aria-current="page"]::after { background: var(--k); height: 2px; }
@@ -180,7 +173,7 @@ h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side
 .doc-ico { background: var(--k); color: var(--g) !important; border-color: var(--k); }
 
 /* ---------- investors: a wide band a step lighter than black; the logos in their own colours ---------- */
-.backers { background: #181818; padding-bottom: clamp(48px, 5vw, 72px) !important; }
+.backers { background: rgba(255, 255, 255, .06) !important; padding-bottom: clamp(48px, 5vw, 72px) !important; }
 .backers-h { color: var(--k) !important; }
 .marquee-track img { filter: none; opacity: 1; }
 
