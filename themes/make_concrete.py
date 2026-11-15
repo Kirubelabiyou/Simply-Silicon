@@ -111,6 +111,19 @@ for p in sorted(OUT.rglob("*")):
         n = re.sub(r'<meta name="theme-color" content="[^"]*">', '<meta name="theme-color" content="#ffffff">', n)
     if n != t: p.write_text(n)
 
+# Platform: the sections from "The industry is already rebuilding around locality" to "Built for machines" are removed
+pf = OUT / "platform.html"; t = pf.read_text()
+a = t.index('  <section class="sec">\n    <div class="wrap">\n      <div class="sec-intro">\n        <h2 data-rv>The industry is already rebuilding')
+b = t.index('  <section class="sec sec--light">\n    <div class="wrap">\n      <blockquote')
+t = t[:a] + t[b:]
+a = t.index("<script>\n  (function () {\n    var rows = [[1, 50]"); b = t.index("</script>", a) + len("</script>\n")
+t = t[:a] + t[b:]
+pf.write_text(t)
+# the map can be drawn light: it reads --map-dark from CSS instead of always lighting the land as a night map
+nj = OUT / "assets/js/network.js"; t = nj.read_text()
+assert "shadow: cv('--map-shadow', 'rgba(34,34,34,.18)'), dark: true };" in t
+nj.write_text(t.replace("dark: true };", "dark: cv('--map-dark', '1') !== '0' };"))
+
 shutil.copy(REPO / "themes" / "concrete-site.css", OUT / "assets" / "css" / "concrete.css")
 if REPORT:
     for k, v in sorted(changes.items()): print(f"{k:32} -> {v}")

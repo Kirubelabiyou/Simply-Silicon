@@ -62,7 +62,7 @@
   var sel = null;
   // map colours come from CSS, so the dark Platform theme can restyle the map
   var cs = getComputedStyle(stage), cv = function (n, d) { var v = cs.getPropertyValue(n).trim(); return v || d; };
-  var MAP = { land: cv('--map-land', '#fbfdff'), border: cv('--map-border', '#f7f7f7'), coast: cv('--map-coast', '#f3f3f3'), grat: cv('--map-grat', 'rgba(106,106,106,.10)'), shadow: cv('--map-shadow', 'rgba(34,34,34,.18)'), dark: true };
+  var MAP = { land: cv('--map-land', '#fbfdff'), border: cv('--map-border', '#f7f7f7'), coast: cv('--map-coast', '#f3f3f3'), grat: cv('--map-grat', 'rgba(106,106,106,.10)'), shadow: cv('--map-shadow', 'rgba(34,34,34,.18)'), dark: cv('--map-dark', '1') !== '0' };
   var WORLD = window.SS_WORLD, LAND = new Path2D(WORLD.land), BORD = new Path2D(WORLD.borders), GRAT = new Path2D(WORLD.grat), SPH = new Path2D(WORLD.sphere);
   function draw() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
