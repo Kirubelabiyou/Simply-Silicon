@@ -143,7 +143,7 @@
     ftr.innerHTML =
       '<div class="wrap">' +
       '<div class="ftr-top">' +
-      '<div class="ftr-brand"><a class="logo" href="./">' + LOGO + '</a><p>Secure, localized compute at scale.</p>' +
+      '<div class="ftr-brand"><a class="logo" href="./">' + LOGO + '</a><p>Secure, localized inference at scale.</p>' +
       '<div class="social"><a href="' + LINKEDIN + '" target="_blank" rel="noopener" aria-label="Simply Silicon on LinkedIn">' + LI + '</a></div></div>' +
       '<div class="ftr-cols">' +
       '<div><h3>Company</h3><ul><li><a href="./">Home</a></li><li><a href="./#how">Getting started</a></li><li><a href="./#careers">Careers</a></li></ul></div>' +
