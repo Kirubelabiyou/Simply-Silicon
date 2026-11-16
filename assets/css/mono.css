@@ -212,3 +212,29 @@ h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side
   .compare thead th { padding-bottom: 12px; }
   .compare tbody th { padding-top: 28px !important; padding-bottom: 6px; }
 }
+
+/* ---------- Workloads: the containment figure, lit so it reads at a glance ---------- */
+.wl-fig { overflow: visible; }
+.wl-bound { fill: none; stroke: rgba(255, 255, 255, .55); stroke-width: 1.4; stroke-dasharray: 4 6; filter: drop-shadow(0 0 6px rgba(255, 255, 255, .35)); animation: wl-spin 60s linear infinite; transform-origin: 230px 160px; }
+.wl-inner { fill: none; stroke: rgba(255, 255, 255, .22); }
+.wl-server { fill: #1a1a1a; stroke: #ffffff; stroke-width: 1.4; filter: drop-shadow(0 0 10px rgba(255, 255, 255, .35)); }
+.wl-slot { fill: rgba(255, 255, 255, .22); }
+.wl-led { fill: var(--live); filter: drop-shadow(0 0 4px rgba(43, 182, 115, .9)); animation: wl-blink 2.4s ease-in-out infinite; }
+.wl-cut { fill: none; stroke: rgba(255, 255, 255, .32); stroke-width: 1.4; }
+.wl-x { stroke: rgba(255, 255, 255, .6); stroke-width: 1.8; stroke-linecap: round; }
+.wl-fiber { fill: none; stroke: var(--live); stroke-width: 2; stroke-dasharray: 6 6; animation: wl-flow 1.2s linear infinite; }
+.wl-fiber-glow { fill: none; stroke: rgba(43, 182, 115, .35); stroke-width: 6; filter: blur(3px); }
+.wl-end { fill: rgba(43, 182, 115, .18); stroke: var(--live); stroke-width: 1.4; filter: drop-shadow(0 0 6px rgba(43, 182, 115, .7)); }
+.wl-t { font: 600 15px var(--body); fill: #ffffff; }
+.wl-s { font: 400 13px var(--body); fill: #b5b5b5; }
+.wl-s--hi { fill: #ffffff; }
+.wl-s--live { fill: var(--live); font-weight: 600; }
+@keyframes wl-spin { to { transform: rotate(360deg); } }
+@keyframes wl-blink { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@keyframes wl-flow { to { stroke-dashoffset: -12; } }
+@media (prefers-reduced-motion: reduce) { .wl-bound, .wl-led, .wl-fiber { animation: none; } }
+
+/* ---------- Getting started: every step starts on the same edge (phones and desktop) ---------- */
+.steps { column-gap: clamp(16px, 2vw, 32px); }
+.steps li + li { padding-left: 0 !important; }
+@media (max-width: 700px) { .wl-s { font-size: 15px; } .wl-t { font-size: 16px; } }

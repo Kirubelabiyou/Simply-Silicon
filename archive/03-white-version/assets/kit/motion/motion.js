@@ -290,9 +290,9 @@ function maskWords(h1) {
     if (n.nodeType === 1) return walk(n);
     if (n.nodeType !== 3) return;
     const frag = document.createDocumentFragment();
-    n.textContent.split(/(\s+)/).forEach(part => {
+    n.textContent.split(/([^\S\u00a0]+)/).forEach(part => {
       if (!part) return;
-      if (/^\s+$/.test(part)) { frag.append(part); return; }
+      if (/^[^\S\u00a0]+$/.test(part)) { frag.append(part); return; }
       const w = document.createElement('span'), i = document.createElement('span');
       w.className = 'm-w'; i.className = 'm-w__in'; i.textContent = part;
       w.append(i); frag.append(w); words.push(w);

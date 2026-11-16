@@ -54,18 +54,25 @@
         </div>
       </div>
       <figure class="fig" data-rv="2">
-        <svg viewBox="0 0 420 300" role="img" aria-label="A model runs on bare metal inside an air-gapped boundary. Private fiber connects out. The public network is cut off.">
-          <circle cx="210" cy="150" r="118" class="f-box f-box--ghost" style="stroke:rgba(221,221,221,.45)"/>
-          <circle cx="210" cy="150" r="80" class="f-line"/>
-          <rect x="166" y="112" width="88" height="76" rx="8" class="f-box f-box--on"/>
-          <rect x="178" y="124" width="52" height="9" rx="2" class="f-slot"/><rect x="178" y="140" width="52" height="9" rx="2" class="f-slot"/><rect x="178" y="156" width="52" height="9" rx="2" class="f-slot"/>
-          <circle cx="240" cy="128.5" r="2.4" class="f-led"/><circle cx="240" cy="144.5" r="2.4" class="f-led"/><circle cx="240" cy="160.5" r="2.4" class="f-led"/>
-          <text x="210" y="210" text-anchor="middle" class="f-t">Model on bare metal</text>
-          <text x="210" y="22" text-anchor="middle" class="f-s f-acc">Air-gapped boundary</text>
-          <path class="f-warn" d="M22 150 h40"/><path class="f-warn" d="M70 143 l12 14 M82 143 l-12 14"/>
-          <text x="42" y="180" text-anchor="middle" class="f-s f-red">Public</text><text x="42" y="194" text-anchor="middle" class="f-s f-red">network</text>
-          <path class="f-flow" d="M328 150 h56"/><rect x="386" y="138" width="24" height="24" rx="4" class="f-box f-box--solid"/>
-          <text x="384" y="184" text-anchor="middle" class="f-s f-acc">Private fiber</text>
+        <svg class="wl-fig" viewBox="0 0 460 320" role="img" aria-label="A model runs on bare metal inside an air-gapped boundary. Private fiber connects out. The public network is cut off.">
+          <defs>
+            <radialGradient id="wlHalo"><stop offset="0" stop-color="#ffffff" stop-opacity=".16"/><stop offset=".55" stop-color="#ffffff" stop-opacity=".05"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+            <radialGradient id="wlGreen"><stop offset="0" stop-color="#2bb673" stop-opacity=".5"/><stop offset="1" stop-color="#2bb673" stop-opacity="0"/></radialGradient>
+          </defs>
+          <circle cx="230" cy="160" r="128" fill="url(#wlHalo)"/>
+          <circle cx="230" cy="160" r="118" class="wl-bound"/>
+          <circle cx="230" cy="160" r="90" class="wl-inner"/>
+          <rect x="186" y="106" width="88" height="70" rx="8" class="wl-server"/>
+          <rect x="198" y="118" width="48" height="9" rx="2" class="wl-slot"/><rect x="198" y="134" width="48" height="9" rx="2" class="wl-slot"/><rect x="198" y="150" width="48" height="9" rx="2" class="wl-slot"/>
+          <circle cx="259" cy="122.5" r="2.6" class="wl-led"/><circle cx="259" cy="138.5" r="2.6" class="wl-led" style="animation-delay:.6s"/><circle cx="259" cy="154.5" r="2.6" class="wl-led" style="animation-delay:1.2s"/>
+          <text x="230" y="204" text-anchor="middle" class="wl-t">Model on bare metal</text>
+          <text x="230" y="24" text-anchor="middle" class="wl-s wl-s--hi">Air-gapped boundary</text>
+          <path class="wl-cut" d="M18 160 h50"/><path class="wl-cut wl-x" d="M74 152 l14 16 M88 152 l-14 16"/>
+          <text x="46" y="192" text-anchor="middle" class="wl-s">Public</text><text x="46" y="207" text-anchor="middle" class="wl-s">network</text>
+          <path class="wl-fiber-glow" d="M348 160 h62"/><path class="wl-fiber" d="M348 160 h62"/>
+          <circle cx="422" cy="160" r="26" fill="url(#wlGreen)"/>
+          <rect x="410" y="148" width="24" height="24" rx="5" class="wl-end"/>
+          <text x="452" y="200" text-anchor="end" class="wl-s wl-s--live">Private fiber</text>
         </svg>
         <figcaption>High assurance containment: the model runs on bare metal inside an air-gapped boundary, off the public network.</figcaption>
       </figure>
