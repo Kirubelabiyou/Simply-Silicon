@@ -243,3 +243,31 @@ h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side
 .photo { margin: 0; }
 .photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; background: #121212; }
 .photo figcaption { margin-top: 16px; color: #c9c9c9; font-size: 15px; }
+
+/* ---------- Home hero: a brighter light follows the cursor, and the drawing's lines glow where it passes ---------- */
+.hx-stage.mo-cs > .mo-cs__light {
+  background:
+    radial-gradient(calc(var(--mo-r) * .32) circle at var(--mo-x) var(--mo-y), rgba(120, 200, 255, .22), transparent 70%),
+    radial-gradient(var(--mo-r) circle at var(--mo-x) var(--mo-y), rgba(77, 178, 239, .2), transparent 72%);
+}
+.hx-stage.mo-cs > .mo-cs__light::after { background-image: radial-gradient(circle, rgba(170, 215, 250, .5) 1px, transparent 1.6px); }
+.hx-stage.mo-cs::after {
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; mix-blend-mode: screen;
+  background: radial-gradient(calc(var(--mo-r) * .45) circle at var(--mo-x) var(--mo-y), rgba(140, 210, 255, .28), rgba(77, 178, 239, .08) 45%, transparent 72%);
+}
+
+/* ---------- Home services: on wide screens both cards share rows, so the two tick lists start level ---------- */
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 861px) {
+    .svc { row-gap: 0; grid-template-rows: repeat(5, auto); }
+    .svc-card { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; }
+    .svc-card > .svc-img { grid-row: 1; }
+    .svc-card > .svc-body { display: grid; grid-row: 2 / span 4; grid-template-rows: subgrid; row-gap: 14px; align-content: start; }
+    .svc-body > .ticks { align-self: start; }
+  }
+}
+
+/* ---------- Platform stats: one line only, right above the Foundation note ---------- */
+.netstats { border-top: 0 !important; border-bottom: 1px solid var(--line-2) !important; }
+.netstat + .netstat { border-left: 0 !important; border-top: 0 !important; }
+.nw { white-space: nowrap; }
