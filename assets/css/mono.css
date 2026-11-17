@@ -238,3 +238,8 @@ h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side
 .steps { column-gap: clamp(16px, 2vw, 32px); }
 .steps li + li { padding-left: 0 !important; }
 @media (max-width: 700px) { .wl-s { font-size: 15px; } .wl-t { font-size: 16px; } }
+
+/* ---------- Workloads: a real photo in place of the drawing ---------- */
+.photo { margin: 0; }
+.photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; background: #121212; }
+.photo figcaption { margin-top: 16px; color: #c9c9c9; font-size: 15px; }

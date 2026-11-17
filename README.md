@@ -18,7 +18,7 @@ python3 -m http.server 8000      # then visit http://localhost:8000
 | `index.html` | Home: hero drawing of the plant, comparison, the two services, getting started, who it's for, the Foundation 3D loop, investors. Careers lives at `index.html#careers`. |
 | `foundation.html` | Foundation: the 3D model of downtown Calgary, key numbers, the three phases, the site. |
 | `workloads.html` | Workloads: who it serves and what every workload gets. |
-| `platform.html` | Platform: the world map (tap Calgary for 3D), one physical platform, the internet vs inference, the paper. |
+| `platform.html` | Platform: the world map (tap Calgary for 3D), the internet vs inference, the paper. |
 | `404.html` | Page-not-found page. |
 
 ### Look
