@@ -20,7 +20,7 @@ python3 -m http.server 8000      # then visit http://localhost:8000
 | `workloads.html` | Workloads: who it serves and what every workload gets. |
 | `platform.html` | Platform: the world map (tap Calgary for 3D), the internet vs inference, the paper. |
 | `404.html` | Page-not-found page. |
-| `trailer/` | The Simply Silicon short video, not linked from the site. Its QR code is `deploy/qr-trailer.png`. To change the video, replace `trailer/trailer.mp4` and push to `main`; printed QR codes keep working. |
+| `trailer/` | The Simply Silicon short video, not linked from the site. Its QR code is `deploy/qr-trailer.png`. To change the video, run `python3 tools/update-video.py new-video.mp4` and push to `main`; printed QR codes play the new video a few minutes later. |
 
 ### Look
 
