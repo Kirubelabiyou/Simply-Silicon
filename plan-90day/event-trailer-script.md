@@ -1,25 +1,26 @@
-# Trailer script: "What is a data center?"
+# Trailer: "What is a data center?"
 
-38 seconds, vertical (1080 × 1920). The video has no sound yet, so you can record the voiceover over it on your phone (CapCut, Instagram or TikTok all work).
+38 seconds, vertical (1080 × 1920) for Reels, TikTok, Shorts and LinkedIn.
+The voice and music are already mixed in. The voice is an AI voice (Kokoro, Apache-2.0 license), and the music is an original track made for this video, so it's free to post.
+If you'd rather it be your own voice, record the lines below over the video in CapCut or Instagram and mute the original voice.
 
-Talk like you're explaining it to a friend. Slow is fine.
-
-| Time | On screen | Say |
+| Time | On screen | Voice |
 |---|---|---|
-| 0:00 | What is a data center? | "What actually is a data center?" |
-| 0:03 | A building full of computers that never turn off. | "It's a building full of computers that never turn off." |
-| 0:07 | Every text, map, payment and AI answer runs in one. | "Every text you send, every map, every payment, every AI answer runs in one somewhere." |
-| 0:11 | How does it work? | "So how does it work? Four things." |
-| 0:13 | 1 Power comes in. | "Power comes in." |
-| 0:16 | 2 Computers do the work. | "Computers do the work." |
-| 0:19 | 3 Cooling moves the heat out. | "Cooling moves the heat out." |
-| 0:21 | 4 Fiber connects it to the world. | "And fiber connects it to the rest of the world." |
-| 0:25 | Did you know there's one right here in downtown Calgary? | "And did you know there's a pretty cool one right here in downtown Calgary?" |
-| 0:29 | Want to know more? | "Want to know more? Come ask us anything." |
-| 0:32 | Let's talk about data centers. Jan 28, 6:30 pm, Calgary, free | "Let's Talk About Data Centers. January 28th, here in Calgary. It's free. Link's below." |
+| 0:00 | Quick question. What is a **data center?** | "Quick question. What actually is a data center?" |
+| 0:03 | Server hall photo. *A building full of computers that never sleep.* | "It's a building full of computers that never sleep." |
+| 0:06 | Messages, Maps, Payments, Video, AI answers… | "Every text, every map, every payment, every AI answer you get, runs through one." |
+| 0:12 | So how does it work? **4** things. | "So how does it work? Four things." |
+| 0:14 | Power · Computers · Cooling · Fiber (one card at a time) | "Power comes in. Computers do the work. Cooling moves the heat out. And fiber connects it all to the world." |
+| 0:21 | Calgary skyline. *There's one right here, in downtown Calgary.* Pin drops on Foundation. | "And here's the cool part. There's one right here, in downtown Calgary." |
+| 0:26 | Got questions? Concerns? **Good. Bring them.** | "Got questions? Concerns? Good. Bring them." |
+| 0:29 | End card: Let's talk about data centers. Jan 28, 6:30 pm. Free. RSVP. | "Let's Talk About Data Centers. January twenty-eighth, in Calgary. It's free. See you there." |
 
 ## Caption for the post
 
-> What is a data center, and why is there one in downtown Calgary? Come find out. Let's Talk About Data Centers: a short talk and an open Q&A with the Simply Silicon team. Thursday, Jan 28, 6:30 pm. Free. RSVP at the link.
+> What actually is a data center, and why is there one in downtown Calgary? 🏙️
+> Come find out at **Let's Talk About Data Centers**: a short talk and an open Q&A with the Simply Silicon team.
+> 📅 Thu, Jan 28 · 6:30 pm · Calgary · Free
+> RSVP at the link in bio.
 
-Before posting, confirm the venue and update the RSVP link if it changes.
+Photos are from Pexels (free to use, no credit required): server hall (4508751), Calgary skyline (9623137), community meeting (30712158), aerial Calgary (19456900), server close-ups (1148820, 17489150).
+Before posting, confirm the venue and the RSVP link.
