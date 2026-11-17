@@ -15,7 +15,7 @@ python3 -m http.server 8000      # then visit http://localhost:8000
 
 | Page | What's on it |
 |---|---|
-| `index.html` | Home: hero drawing of the plant, control, the two services, getting started, who it's for, the Foundation 3D loop, investors. Careers lives at `index.html#careers`. |
+| `index.html` | Home: hero drawing of the plant, the two services, getting started, who it's for, the Foundation 3D loop, investors. Careers lives at `index.html#careers`. |
 | `foundation.html` | Foundation: the 3D model of downtown Calgary, key numbers, the three phases, the site. |
 | `workloads.html` | Workloads: who it serves and what every workload gets. |
 | `platform.html` | Platform: the world map (tap Calgary for 3D), the internet vs inference, the paper. |
@@ -57,6 +57,11 @@ archive/                          every earlier version of the site, kept for re
 - **Words and numbers:** edit them in the `.html` files.
 - **Open roles:** add them to `assets/data/positions.json`. See `DEPLOY.md` for the format.
 - **After any change:** run `python3 tools/package.py` to refresh the deploy zip and QR code.
+
+## Photos
+
+- `assets/img/racks.webp`: the company's own photo of a rack room.
+- `assets/img/fiber.webp`: fiber patch cords, a free photo from Pexels (pexels.com/photo/5073493; the Pexels licence needs no credit).
 
 ## Facts used on the site
 
