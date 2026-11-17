@@ -6,6 +6,7 @@
 Writes:
   deploy/simply-silicon-site.zip   the whole website (pages + assets) and DEPLOY.md: the one file to send a web team
   deploy/qr-code.png, qr-code.svg  a QR code that opens the site (default: the GitHub Pages address)
+  deploy/qr-trailer.png, .svg      a QR code that opens the trailer page (trailer/); replace trailer/trailer.mp4 to change the video
 Needs: pip install qrcode"""
 import pathlib, sys, zipfile
 import qrcode, qrcode.image.svg
@@ -30,3 +31,10 @@ qr.add_data(URL); qr.make(fit=True)
 qr.make_image(fill_color="black", back_color="white").save(OUT / "qr-code.png")
 qrcode.make(URL, image_factory=qrcode.image.svg.SvgPathImage).save(OUT / "qr-code.svg")
 print(f"wrote deploy/qr-code.png and deploy/qr-code.svg for {URL}")
+
+TRAILER = URL.rstrip("/") + "/trailer/"
+qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_M, box_size=16, border=4)
+qr.add_data(TRAILER); qr.make(fit=True)
+qr.make_image(fill_color="black", back_color="white").save(OUT / "qr-trailer.png")
+qrcode.make(TRAILER, image_factory=qrcode.image.svg.SvgPathImage).save(OUT / "qr-trailer.svg")
+print(f"wrote deploy/qr-trailer.png and deploy/qr-trailer.svg for {TRAILER}")
