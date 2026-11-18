@@ -344,10 +344,39 @@ main > section.map-top, main > section.map-top:nth-of-type(even) { background: t
 
 .phases-list .when em { font-style: normal; }
 /* arrow links ("See workloads", "Explore Foundation in 3D"): no underline, a small arrow */
-html:not([data-motion="off"]) .link, html:not([data-motion="off"]) .link:is(:hover, :focus-visible) { background-image: none !important; padding-bottom: 0; }
-.link .arrow { font-size: .7em; }
+html:not([data-motion="off"]) .link, html:not([data-motion="off"]) .link:is(:hover, :focus-visible) { background-image: none !important; padding-bottom: 8px; }
+/* a short line centred under the words (the arrow is left out of the measurement) */
+.link { position: relative; }
+.link::after { content: ""; position: absolute; bottom: 0; height: 1px; background: currentColor; opacity: .85;
+  width: calc((100% - .55em - 6px) * .4); left: calc((100% - .55em - 6px) * .3); transition: width .3s, left .3s; }
+.link:hover::after { width: calc(100% - .55em - 6px); left: 0; }
+.link .arrow { font-size: .55em; }
 .link:hover { opacity: .8; }
 .phases-list .when em .sep { font-style: normal; }
 @media (max-width: 700px) { .phases-list .when em .sep { display: none; } }
 /* the "Map" button over the 3D view stays readable */
 .net-back .btn { color: #f5f5f5 !important; background: rgba(10, 10, 10, .72) !important; border-color: rgba(255, 255, 255, .55) !important; }
+
+/* Home: the Foundation card's "Online" sits to the right of its title */
+.feature-copy { justify-content: center; }
+.feature-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.feature-head .status { flex: none; margin-top: .5em; }
+
+@media (max-width: 700px) {
+  /* Platform 3D: the Map button and the Foundation label share one top line and one height */
+  .net-back { top: 10px !important; left: 10px !important; }
+  .net-back .btn { height: 38px; min-height: 0; padding: 0 14px; display: inline-flex; align-items: center; }
+  .net-3d .scene-card { top: 10px !important; right: 10px !important; height: 38px; padding: 0 12px !important; display: flex; align-items: center; box-sizing: border-box; }
+
+  /* number rows: each item centred in an equal share of the width, so the gaps are even */
+  .netstats { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .netstat, .netstat + .netstat { text-align: center !important; padding: 18px 4px !important; }
+  .netstat span { text-align: center !important; }
+  .metrics > div, .metrics > div + div, .metrics > div:nth-child(3), .metrics > div:nth-child(n + 3) { text-align: center; padding: 18px 6px !important; }
+  .metrics span { margin-inline: auto; }
+
+  /* phases: each phase centred over its own equal stretch of the track, its tick above it */
+  .phases-list li, .phases-list li + li { text-align: center; padding: 44px 4px 0 !important; }
+  .phases-list li::after { left: 50% !important; transform: translateX(-1px); }
+  .phases-list li.is-dev::before { background: linear-gradient(90deg, var(--k) 60%, #2a2a2a 60%) !important; }
+}
