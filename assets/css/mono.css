@@ -265,3 +265,82 @@ h3, .svc-body h3, .tile h3, .steps h3, .rows h2, .rows h3, .prose2 h3, .duo-side
 .link .arrow { display: inline-block; font-size: .8em; line-height: 1; }
 html:not([data-motion="off"]) .link { background-size: 0% 1px, calc(100% - .8em - 6px) 1px !important; }
 html:not([data-motion="off"]) .link:is(:hover, :focus-visible) { background-size: calc(100% - .8em - 6px) 1px, calc(100% - .8em - 6px) 1px !important; }
+
+/* ---------- Platform: the map sits on the same black as the headline above it, so it reads as one piece ---------- */
+main > section.map-top, main > section.map-top:nth-of-type(even) { background: transparent !important; box-shadow: none !important; }
+.net-stage { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+
+/* =====================================================================================
+   PHONES: keep the laptop's side-by-side layouts instead of stacking everything,
+   with smaller type so it fits.
+   ===================================================================================== */
+@media (max-width: 700px) {
+  /* Home hero: the data centre drawing whole, centred, nothing cut off */
+  .hx-stage .plant svg { width: 100% !important; max-width: 100% !important; max-height: none !important; margin: 0 auto !important; transform: translateX(5.5%) !important; }
+  .hx-stage { overflow: hidden; }
+  /* buttons side by side, in every hero and closing section */
+  .hero-ctas, .hx-copy .hero-ctas { flex-wrap: nowrap; gap: 10px; }
+  .hero-ctas .btn, .hx-copy .hero-ctas .btn { flex: 1 1 0 !important; min-width: 0 !important; padding-inline: 12px; font-size: 14px; white-space: nowrap; justify-content: center; }
+
+  /* Home services: shorter photos */
+  .svc-img { aspect-ratio: 16 / 10 !important; }
+
+  /* Home "Getting started": the four steps as a 2 x 2 grid */
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; column-gap: 16px; row-gap: 28px; }
+  .steps li, .steps li + li { display: block !important; padding: 0 !important; border: 0 !important; }
+  .step-n, .step-n.is-end, .sec--light .step-n, .sec--light .step-n.is-end { font-size: 64px !important; }
+  .steps h3 { margin-top: 14px !important; font-size: 18px !important; }
+  .steps p { margin-top: 6px; font-size: 14px; line-height: 1.45; }
+
+  /* Home "Built for every kind of team": 2 x 2 */
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; column-gap: 16px !important; row-gap: 28px !important; }
+  .tile { padding: 0 !important; }
+  .tile h3 { margin-top: 12px !important; font-size: 15px; }
+  .tile p { font-size: 13.5px; line-height: 1.45; }
+  .tile svg.ico { width: 22px; height: 22px; }
+
+  /* Foundation: the four numbers in one row */
+  .metrics { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+  .metrics > div, .metrics > div + div, .metrics > div:nth-child(3), .metrics > div:nth-child(n + 3) { padding: 20px 6px 20px 0 !important; border: 0 !important; }
+  .metrics b { font-size: 30px !important; }
+  .metrics b small { font-size: .45em; }
+  .metrics span { margin-top: 8px; font-size: 11.5px; line-height: 1.35; }
+
+  /* Foundation: the three phases side by side on one track */
+  .phases-list { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .phases-list li, .phases-list li + li { padding: 44px 10px 0 0 !important; }
+  .phases-list .when, .phases-list li.is-live .when, .phases-list li.is-dev .when { font-size: 12px; min-height: 2.7em; }
+  .phases-list b { margin-top: 10px; font-size: 30px !important; }
+
+  /* Foundation 3D: a small label instead of the big card, so the model can be seen */
+  .scene-card { top: 8px !important; right: auto !important; left: 8px; width: auto !important; max-width: calc(100% - 16px); padding: 8px 12px !important; }
+  .scene-card p, .scene-card .sub, .scene-card .kv { display: none !important; }
+  .scene-card b { font-size: 15px; }
+  .scene-card .t { align-items: center; gap: 12px; }
+
+  /* Platform map: no box, less empty space; it sits on the page */
+  .net-stage { height: 340px !important; background: transparent !important; border: 0 !important; }
+  .net-legend { left: 0; right: auto; bottom: 8px; font-size: 11.5px; padding: 6px 10px; }
+  .net-stage .zoom { left: auto; right: 0; bottom: 8px; flex-direction: row; }
+  .net-stage .zoom button + button { border-top: 0; border-left: 1px solid var(--line); }
+  .net-stage .zoom button { width: 36px; height: 36px; font-size: 18px; }
+
+  /* Platform: the three numbers in one row */
+  .netstats { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .netstat, .netstat + .netstat { display: block !important; padding: 18px 8px 18px 0 !important; }
+  .netstat b { font-size: 34px !important; }
+  .netstat span { margin-top: 8px; text-align: left !important; max-width: none !important; font-size: 12.5px; }
+
+  /* Workloads "What every workload gets": a two-column grid, smaller type */
+  .spec-statement { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 16px; font: 500 15px/1.4 var(--body) !important; letter-spacing: 0 !important; }
+  .spec-statement span { display: block; }
+  .spec-statement span + span::before { content: none; }
+  .spec-statement em { display: block; margin-bottom: 4px; font: 700 17px/1.2 var(--display); letter-spacing: -.02em; }
+
+  /* closing headings small enough to stay inside the screen */
+  .cta h2 { font-size: clamp(38px, 11.5vw, 48px) !important; }
+}
+@media (max-width: 380px) {
+  .metrics b, .phases-list b { font-size: 26px !important; }
+  .netstat b { font-size: 30px !important; }
+}
