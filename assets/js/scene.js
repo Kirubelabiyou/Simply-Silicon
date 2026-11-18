@@ -183,7 +183,7 @@ export function mountScene(host, opts = {}) {
   }
   if (RC.length) {
     const band = (ka, kb) => { const s = new THREE.Shape(); RC.forEach((c, i) => i ? s.lineTo(c[0], -c[ka]) : s.moveTo(c[0], -c[ka])); RC.slice().reverse().forEach(c => s.lineTo(c[0], -c[kb])); return new THREE.ShapeGeometry(s).rotateX(-Math.PI / 2); };
-    const grass = new THREE.Mesh(planarUV(band(3, 4), 14), mat('grass', COL.grass, { roughness: 1, map: TEX.grass })); grass.position.y = .06; grass.receiveShadow = true; city.add(grass);
+    const grass = new THREE.Mesh(planarUV(band(3, 4), 14), mat('grass', COL.grass, { roughness: 1, map: TEX.grass })); grass.position.y = .06; grass.material.polygonOffset = true; grass.material.polygonOffsetFactor = -1; grass.material.polygonOffsetUnits = -2; grass.receiveShadow = true; city.add(grass);
     const water = new THREE.Mesh(band(1, 2), mat('water', COL.water, { roughness: .1, metalness: .15, envMapIntensity: 1.1 })); water.position.y = .12; water.receiveShadow = true; city.add(water);
   }
   const inWater = (x, z) => { const r = riverAt(x); return r && z > r[0] - 2 && z < r[1] + 2; };
@@ -260,9 +260,10 @@ export function mountScene(host, opts = {}) {
   if (PARKS.length) {
     const green = [], paved = [];
     PARKS.forEach(k => { const shp = new THREE.Shape(k.p.map(([x, z]) => new THREE.Vector2(x, -z))); const g = new THREE.ShapeGeometry(shp).rotateX(-Math.PI / 2); (k.paved ? paved : green).push([g, null]); });
-    const lay = (list, m, y) => { if (!list.length) return; const g = planarUV(mergeGeos(list), 14); const mesh = new THREE.Mesh(g, m); mesh.position.y = y; mesh.receiveShadow = true; city.add(mesh); };
-    lay(green, mat('parkGrass', 0x6f9a4e, { roughness: 1, map: TEX.grass }), .13); // above the water, so Prince's and St. Patrick's islands show
-    lay(paved, mat('plaza', 0xc9c3b8, { roughness: .9, map: TEX.slab }), .13);
+    // each layer gets its own height and a depth offset, so overlapping flat layers never flicker against each other
+    const lay = (list, m, y, k) => { if (!list.length) return; m.polygonOffset = true; m.polygonOffsetFactor = -k; m.polygonOffsetUnits = -k * 2; const g = planarUV(mergeGeos(list), 14); const mesh = new THREE.Mesh(g, m); mesh.position.y = y; mesh.renderOrder = k; mesh.receiveShadow = true; city.add(mesh); };
+    lay(green, mat('parkGrass', 0x6f9a4e, { roughness: 1, map: TEX.grass }), .2, 2); // above the water, so Prince's and St. Patrick's islands show
+    lay(paved, mat('plaza', 0xc9c3b8, { roughness: .9, map: TEX.slab }), .26, 3);
   }
   const C = { lawn: [[.4, .52, .27], [.46, .57, .3], [.36, .48, .25], [.5, .55, .33]], park: [.36, .53, .25], conc: [.6, .59, .56], plaza: [.67, .65, .61], asph: [.33, .34, .36] };
   // where the City's building data has no buildings at all, open ground is unknown rather than parking
